@@ -1,0 +1,13 @@
+#Passphoto
+{
+	border: 1px solid #ccc;
+	-moz-border-radius: 3px;
+	width: <?= $this->PassphotoWidth ?>px;
+	height: <?= $this->PassphotoHeight ?>px;
+	margin: 5px 0 5px 0;
+}
+#ExtraFields
+{
+	padding: 0px;
+	margin: 0;
+}

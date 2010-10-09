@@ -1,0 +1,10 @@
+#gal_preview img
+{
+	display: block;
+	float: left;
+	margin: 0 4px 4px 0;
+}
+#gal_preview br
+{
+	clear: both;
+}

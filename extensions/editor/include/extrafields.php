@@ -1,0 +1,189 @@
+<?
+
+/*******************************************************************************
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is (C) 2004-2010 Blest AS.
+
+The Initial Developer of the Original Code is Blest AS.
+Portions created by Blest AS are Copyright (C) 2004-2010
+Blest AS. All Rights Reserved.
+
+Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
+Rune Nilssen
+*******************************************************************************/
+
+// Add the extrafields script
+$document->addResource ( 'javascript', 'lib/plugins/extrafields/javascript/main.js' );
+
+function renderExtraFields ( $obj )
+{
+	global $extdir;
+	if ( $obj && $obj->loadExtraFields ( ) )
+	{
+		$modstr_ = '';
+		if ( !( $groups = explode ( ',', $obj->ContentGroups ) ) )
+			$groups = Array ( 'Default' );
+		$spacerHidden = false;
+		foreach ( Array ( 'visible', 'hidden' ) as $mode )
+		{
+			foreach ( $groups as $group )
+			{
+				$group = trim ( $group );
+				foreach ( $obj as $k=>$v )
+				{
+					$tpl = new cPTemplate ( );
+					if ( substr ( $k, 0, 7 ) == '_extra_' )
+					{
+						$field =& $obj->{'_field_' . substr ( $k, 7, strlen ( $k ) - 7 )};
+						if ( $field->ContentGroup != $group ) 
+							continue;
+						if ( $field->ContentID != $obj->ID ) 
+							continue;
+							
+						if ( $field->AdminVisibility && $mode == 'visible' )
+						{
+							switch ( $field->Type )
+							{
+								case 'contentmodule':
+									$tpl->load ( $extdir . '/templates/ext/contentmodule.php' );
+									if ( file_exists ( 'skeleton/modules/' . $field->DataString . '/adminmodule.php' ) )
+									{
+										$content =& $obj;
+										$fieldObject = new dbObject ( "ContentData{$field->DataTable}" );
+										if ( $fieldObject->load ( $field->ID ) )
+										{
+											$dataTable = $field->DataTable;
+											$field =& $fieldObject;
+											$field->DataTable = $dataTable;
+										}
+										require ( 'skeleton/modules/' . $field->DataString . '/adminmodule.php' );
+										$tpl->gui = $module;
+										$dataField = 'DataString';
+									}
+									else $tpl->gui = '<p>Modulen finnes ikke. Vennligst kontakt Blest Interaktiv for mer informasjon.</p>';
+									break;
+								case 'text':
+									$tpl->load ( $extdir . '/templates/ext/text.php' );
+									$dataField = 'DataText';
+									break;
+								case 'script':
+									$tpl->load ( $extdir . '/templates/ext/javascript.php' );
+									$dataField = 'DataString';
+									break;
+								case 'style':
+									$tpl->load ( $extdir . '/templates/ext/stylesheet.php' );
+									$dataField = 'DataString';
+									break;
+								case 'image':
+									$tpl->load ( $extdir . '/templates/ext/image.php' );
+									$dataField = 'DataInt';
+									break;
+								case 'leadin':
+									$tpl->load ( $extdir . '/templates/ext/leadin.php' );
+									$dataField = 'DataText';
+									break;
+								case 'newscategory':
+									$tpl->load ( $extdir . '/templates/ext/newscategory.php' );
+									$dataField = 'DataInt';
+									break;
+								case 'objectconnection':
+									$tpl->load ( $extdir . '/templates/ext/objectconnection.php' );
+									$dataField = 'DataInt';
+									break;
+								case 'varchar':
+									$tpl->load ( $extdir . '/templates/ext/varchar.php' );
+									$dataField = 'DataString';
+									break;
+								// TODO: Let extensions work
+								/*case 'extension':
+									$tpl->load ( $extdir . '/templates/ext/extension.php' );
+									if ( file_exists ( 'extensions/' . $field->DataString . '/templates/websnippetconfig.php' ) )
+									{
+										$cnt = new dbContent ( $field->ContentID );
+										$tpl->extension = new cPTemplate ( 'extensions/' . $field->DataString . '/templates/websnippetconfig.php' );
+										$tpl->extension->page =& $cnt;
+										$tpl->extension->content =& $cnt;
+										$tpl->extension->data =& $field;
+										$tpl->extension = $tpl->extension->render ( );
+									}
+									else $tpl->extension = '<div class="Container">Denne utvidelsen har ingen innstillinger.</div>';
+									break;*/
+								case 'pagelisting':
+									$tpl = new cPTemplate ( "$extdir/templates/ext/pagelisting.php" );
+									$dataField = 'DataInt';
+									break;
+								case 'extension':
+									$tpl = new cPTemplate ( "$extdir/templates/ext/extension.php" );
+									$extension = '';
+									if ( file_exists ( 'extensions/' . $field->DataString . '/adminmodule.php' ) )
+										include ( 'extensions/' . $field->DataString . '/adminmodule.php' );
+									else if ( file_exists ( 'extensions/' . $field->DataString . '/templates/websnippetconfig.php' ) )
+									{
+										$extension = new cPTemplate ( 'extensions/' . $field->DataString . '/templates/websnippetconfig.php' );
+										$extension->data =& $field;
+										$extension->content =& $obj;
+										$extension = '<div class="Container" style="padding: 4px">' . $extension->render ( ) .'</div>';
+									}
+									else $extension .= '<p>Denne utvidelsen har ingen innstillinger.</p>';
+									$tpl->extension =& $extension;
+									$dataField = 'DataMixed';
+									break;
+								default:
+									$tpl->load ( $extdir . '/templates/ext/unknown.php' );
+									$dataField = 'DataString';
+									break;
+							}
+						}
+						else if ( !$field->AdminVisibility && $mode == 'hidden' )
+						{
+							if ( !$spacerHidden )
+							{
+								$spacerHidden = true;
+								$modstr_ .= '<div class="SpacerSmallColored"></div>';
+							}
+							$tpl->load ( $extdir . '/templates/ext/hidden.php' );
+						}
+					}
+					if ( !$tpl->_template ) continue;
+					
+					$tabletype = $field->DataTable;
+					$tpl->fieldType = 'ContentData' . $field->DataTable;
+					$tpl->field =& $field;
+					$tpl->content =& $obj;
+					$tpl->fieldID = "Extra_{$field->ID}_{$tabletype}_{$dataField}";
+					switch ( $field->ContentGroup )
+					{
+						case 'Topp':
+							$tpl->fieldGroup = 'toppfeltet';
+							break;
+						case 'Felt1':
+							$tpl->fieldGroup = 'hovedfeltet';
+							break;
+						case 'Felt2':
+							$tpl->fieldGroup = 'supplerende felt';
+							break;
+						case 'Bunn':
+							$tpl->fieldGroup = 'bunnfeltet';
+							break;
+						default:
+							$tpl->fieldGroup = $field->ContentGroup;
+							break;
+					}
+					$modstr_ .= '<div class="ExtraFieldDiv">' . $tpl->render ( ) . '</div>';
+				}
+			}
+		}
+		return $modstr_;
+	}
+	else return '<p>Intet innhold er finnes på denne siden.</p>';
+}
+?>

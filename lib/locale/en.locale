@@ -1,0 +1,21 @@
+#####################################################################
+#                                                                   #
+# English locale                                                    #
+#                                                                   #
+#####################################################################
+
+
+# Modules #############################################################################
+
+module_news								: News
+module_users							: Users and groups
+module_contents							: Site content
+module_library							: Library
+module_extensions						: Extensions
+module_settings							: Information
+
+# Main translations ###################################################################
+
+Hide workbench							: Hide workbench
+Show workbench							: Show workbench
+

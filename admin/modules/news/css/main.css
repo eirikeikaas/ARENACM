@@ -1,0 +1,44 @@
+
+	.NewsLeftSide
+	{
+		width: 48%;
+		float: left;
+	}
+	.NewsRightSide
+	{
+		width: 48%;
+		float: right;
+	}
+	.NewsRightSide table
+	{
+		border-collapse: collapse;
+		border-spacing: 0;
+		border: 0;
+		border-left: 1px solid #eeeeee;
+	}
+	.NewsRightSide table td
+	{
+		padding: 2px 8px 0 8px;
+		vertical-align: middle;
+	}
+	.NewsRightSide span
+	{
+		display: block;
+		clear: both;
+	}
+	.NewsRightSide label
+	{
+		width: 60px;
+		display: block;
+		float: left;
+		font-weight: bold;
+	}
+	.Weak
+	{
+		color: #555;
+	}
+	.Container .Event
+	{
+		border: 1px solid #cc7;
+		background: #ffffe8;
+	}

@@ -1,0 +1,194 @@
+<?
+
+/*******************************************************************************
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is (C) 2004-2010 Blest AS.
+
+The Initial Developer of the Original Code is Blest AS.
+Portions created by Blest AS are Copyright (C) 2004-2010
+Blest AS. All Rights Reserved.
+
+Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
+Rune Nilssen
+*******************************************************************************/
+/**
+ * Blog engine output
+**/
+$bid = 0;
+$lim = $fieldObject->DataInt ? $fieldObject->DataInt : 10;
+$pos = $_REQUEST[ 'blogpos' ] > 0 ? $_REQUEST[ 'blogpos' ] : '0';
+
+// Add language
+i18nAddLocalePath ( 'skeleton/modules/mod_blog/locale' );
+
+// Check captcha
+if ( $_REQUEST[ 'checkcaptcha' ] )
+{
+	if ( $_REQUEST[ 'c' ] == $_SESSION[ 'captcha_value' ] )
+	{
+		ob_clean ( );
+		die ( 'ok' );
+	}
+}
+
+// Some other config vars
+$cfg = explode ( "\t", $fieldObject->DataMixed );
+$cfgComments = $cfg[0];
+$cfgShowAuthor = $cfg[1];
+$cfgTaxbox = $cfg[2];
+$cfgTaxboxPlacement = $cfg[3];
+$cfgSearchbox = $cfg[4];
+$cfgDetailpage = $cfg[5];
+$cfgSourcepage = $cfg[6];
+$cfgLeadinlength = $cfg[7];
+$cfgTitlelength = $cfg[8];
+$cfgSizeX = $cfg[9];
+$cfgSizeY = $cfg[10];
+$cfgHeaderText = $cfg[11];
+$cfgHideDetails = $cfg[12];
+
+// Source and detailpages
+$sourcepage = new dbContent ( );
+if ( $cfgSourcepage ) $sourcepage->load ( $cfgSourcepage );
+else $sourcepage->load ( $content->MainID );
+$detailpage = false;
+if ( $cfgDetailpage > 0 )
+{
+	$detailpage = new dbContent ( );
+	$detailpage->load ( $cfgDetailpage );	
+}
+
+// Blog details
+if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matches ) && $cfgHideDetails != 1 )
+{
+	$GLOBALS[ 'document' ]->addHeadScript ( 'lib/javascript/arena-lib.js' );
+	$GLOBALS[ 'document' ]->addHeadScript ( 'lib/javascript/bajax.js' );
+	$GLOBALS[ 'document' ]->addHeadScript ( 'skeleton/modules/mod_blog/javascript/web.js' );
+	$bid = $matches[ 1 ];
+	$blog = new dbObject ( 'BlogItem' );
+	$blog->load ( $bid );
+	
+	// If we're using a different page
+	if ( $detailpage && $content->MainID != $detailpage->MainID )
+	{
+		ob_clean ( );
+		header ( 'Location: ' . $detailpage->getRoute ( ) . '/blogitem/' . $matches[1] . '_' . texttourl ( $blog->Title ) . '.html' );
+		die ( );
+	}
+	
+	// Receive post
+	if ( $_POST[ 'Message' ] && $_REQUEST[ 'Captcha' ] == $_SESSION[ 'captcha_value' ] )
+	{
+		$comment = new dbObject ( 'Comment' );
+		$comment->Message = $_POST[ 'Message' ];
+		$comment->Nickname = $_POST[ 'Name' ];
+		$comment->ElementTable = 'BlogItem';
+		$comment->ElementID = $blog->ID;
+		$comment->UserID = $GLOBALS[ 'webuser' ]->ID ? $GLOBALS[ 'webuser' ]->ID : 0;
+		$comment->DateCreated = date ( 'Y-m-d H:i:s' );
+		$comment->DateModified = date ( 'Y-m-d H:i:s' );
+		$comment->Subject = $_POST[ 'Subject' ];
+		$comment->save ( );
+		
+		ob_clean ( );
+		$_SESSION[ 'captcha_value' ] = '';
+		header ( 'Location: ' . $content->getRoute ( ) . '/blogitem/' . $bid . '_' . texttourl ( $blog->Title ) . '.html' );
+		die ( );
+	}
+	
+	$btpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog.php' );
+	$btpl->blog =& $blog;
+	$btpl->cfgComments = $cfgComments;
+	$btpl->cfgShowAuthor = $cfgShowAuthor;
+	$btpl->content =& $content;
+	$btpl->sizeX = $cfgSizeX;
+	$btpl->sizeY = $cfgSizeY;
+	$btpl->comments = '';
+	
+	if ( $cfgComments )
+	{
+		$comment = new dbObject ( 'Comment' );
+		$comment->ElementTable = 'BlogItem';
+		$comment->ElementID = $blog->ID;
+		$comment->addClause ( 'ORDER BY', 'DateCreated ASC, ID ASC' );
+	
+		if ( $comments = $comment->find ( ) )
+		{
+			$ctpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog_comment.php' );
+			$str = '';
+			foreach ( $comments as $comment )
+			{
+				$ctpl->comment =& $comment;
+				$str .= $ctpl->render ( );
+			}
+			$btpl->comments = $str;
+		}
+	}
+	
+	$module = $btpl->render ( );
+	
+}
+// List all blogs
+else
+{
+	$blogs = new dbObject ( 'BlogItem' );
+	$blogs->addClause ( 'WHERE', 'ContentElementID=' . $sourcepage->MainID );
+	$blogs->addClause ( 'WHERE', 'IsPublished AND DatePublish <= NOW()' );
+	$cnt = $blogs->findCount ( );
+	$blogs->addClause ( 'ORDER BY', 'DatePublish DESC, ID DESC' );
+	$blogs->addClause ( 'LIMIT', $pos . ',' . $lim );
+	
+	if ( $blogs = $blogs->find ( ) )
+	{
+		$btpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog_listed.php' );
+		$str = '';
+		if ( trim ( $cfgHeaderText ) )
+			$str .= '<h2 class="BlogListHeader">' . $cfgHeaderText . '</h2>';
+		foreach ( $blogs as $blog )
+		{
+			$btpl->blog =& $blog;
+			$btpl->content =& $content;
+			if ( $cfgComments )
+			{
+				$comment = new dbObject ( 'Comment' );
+				$comment->ElementTable = 'BlogItem';
+				$comment->ElementID = $blog->ID;
+				$btpl->commentcount = $comment->findCount ( );
+			}
+			$btpl->cfgComments = $cfgComments;
+			$btpl->cfgShowAuthor = $cfgShowAuthor;
+			$btpl->detailpage = $detailpage;
+			$btpl->leadinLength = $cfgLeadinlength;
+			$btpl->titleLength = $cfgTitlelength;
+			$btpl->sizeX = $cfgSizeX;
+			$btpl->sizeY = $cfgSizeY;
+			$btpl->hideDetails = $cfgHideDetails;
+			$str .= $btpl->render ( );
+		}
+		$module = $str;
+		unset ( $str );
+		
+		// Navigation
+		$next = $prev = $sep = '';
+		if ( $pos > 0 )
+			$prev = '<a href="' . $content->getUrl ( ) . '?blogpos=' . ( $pos - $lim ) . '" class="Prev"><span>' . i18n ( 'Newer blogs' ) . '</span></a>';
+		if ( $pos + $lim < $cnt )
+			$next = '<a href="' . $content->getUrl ( ) . '?blogpos=' . ( $pos + $lim ) . '" class="Next"><span>' . i18n ( 'Older blogs' ) . '</span></a>';
+		if ( $prev && $next ) 
+			$sep = ' <span class="Separator">&nbsp;</span> ';
+		else $sep = '';
+		if ( $prev || $next )
+			$module .= '<div id="mod_blog_navigation"><hr/><p>' . $prev . $sep . $next . '</p></div>';
+	}
+	else $module = '<p>Ingen blogger finnes.</p>';
+}
+?>

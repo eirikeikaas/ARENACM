@@ -1,0 +1,14 @@
+
+	<div>
+		<div class="SubContainer" style="padding: 2px">
+			<?= $this->blogoversikt ? $this->blogoversikt : 'Du har ingen bloggeroversikter i arkivet.' ?>
+		</div>
+		<div class="SpacerSmallColored"></div>
+		<button type="button" onclick="mod_blogoversikt_new()">
+			<img src="admin/gfx/icons/newspaper.png"> Legg til en blogside
+		</button>
+		<button type="button" onclick="mod_blogoversikt_settings()">
+			<img src="admin/gfx/icons/wrench.png"> Endre innstillingene
+		</button>
+	</div>
+

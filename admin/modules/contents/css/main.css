@@ -1,0 +1,45 @@
+#ContentButtons
+{
+	margin-top: 2px;
+}
+
+table.Buttons button
+{
+	height: 24px;
+	padding: 0;
+	margin: 0;
+}
+
+table.Buttons
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+table.Buttons td
+{
+	padding: 0;
+}
+
+div.Buttons
+{
+	padding: 4px;
+}
+
+.NewPageToplink
+{
+	position: relative; 
+	float: right; 
+	right: -4px; 
+	top: -4px;
+}
+
+.NewPageImage
+{
+	background: url(../../../../admin/gfx/icons/page_add.png) no-repeat;
+	width: 16px;
+	height: 16px;
+	display: block;
+	float: left;
+	margin: -2px 4px 0 0;
+}

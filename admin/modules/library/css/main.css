@@ -1,0 +1,179 @@
+#libaryPagination
+{
+	text-align: left;
+}
+
+#libaryPagination .Container
+{
+	padding:4px;
+}
+
+#levels
+{
+	padding: 16px;
+}
+
+#libContentButtons
+{
+	float:right;
+	text-align:right;
+	width:200px;
+}
+
+.Imagecontainer
+{
+	width:120px;
+	height:120px;
+	overflow:hidden;
+	float:left;
+	margin:0px 8px 8px 0px;
+	padding:4px;
+	background: #eeeeee url('../../../gfx/icons/plugin.png') no-repeat 108px 108px;
+	cursor: pointer;
+}
+* html .Imagecontainer
+{
+	cursor: hand;
+}
+
+.Imagecontainer img
+{
+	padding:0px; margin:0px;
+}
+
+.Imagecontainer h4
+{
+	font-weight:normal;
+	font-size:12px;
+	margin:4px 0px 0px 0px;
+	color:#000;
+}
+.Selected, .Selected h4
+{
+	background-color: #5E8EB4;	
+	color: #ffffff;
+	border: 1px solid #3E719C;
+	font-weight: bold;
+}
+
+.Imagecontainer h5
+{
+	margin:4px 0px 0px 0px;
+}
+
+tr.Selected td
+{
+	background: #4378A2;
+}
+
+td
+{
+	vertical-align:top;
+}
+
+.filelisticon
+{
+	float:right;
+	margin:0px 0px 8px 8px;
+}
+
+.iconcontainer
+{
+	width:20px;
+	height:20px;
+	float:left;
+}
+
+#searchResults a
+{
+	text-decoration:none;
+	color:#000;
+	font-weight:bold;
+}
+
+.ButtonBox
+{
+	margin: 2px;
+}
+
+/** Detailed list *************************************************************/
+
+table.DetailList
+{
+	border-collapse: separate;
+	background: #cccccc;
+	border-spacing: 1px;
+	width: 100%;
+}
+table.DetailList td, table.DetailList th
+{
+	padding: 3px;
+	vertical-align: middle;
+}
+table.DetailList th
+{
+	background: #f8f8f8;
+	font-weight: bold;
+}
+
+table.DetailList td.Icon
+{
+	width: 12px;
+}
+
+table.DetailList tr:hover
+{
+	background: #BAD5EC;
+}
+
+table.DetailList tr:hover td
+{
+	outline: 1px solid #6795BC;
+	cursor: pointer;
+}
+
+/** Library content ***********************************************************/
+#LibraryContent 
+{
+	min-height: 400px;
+	position: relative;
+	padding-bottom: 48px;
+}
+#LibraryContent table
+{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	margin: 0 0 -10px 0;
+}
+#LibraryContent table.DetailList
+{
+	position: relative;
+	top: auto; left: auto; right: auto: bottom: auto;
+	margin: 0;
+}
+
+/** File edit container *******************************************************/
+#FileEditContainer form, #FileEditContainer tbody, #FileEditContainer tr
+{
+	width: 100%;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/** Slice editor **/
+
+#SliceTop, #SliceLeft, #SliceRight, #SliceBottom, #SliceRect
+{
+	position: absolute;
+	opacity: 0.7;
+	background: #000000;
+	z-index: 29;
+}
+#SliceRect
+{
+	position: absolute;
+	border: 1px solid #ffffff;
+	background: none;
+	z-index: 29;
+}

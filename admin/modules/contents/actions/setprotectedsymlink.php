@@ -1,0 +1,47 @@
+<?
+
+
+/*******************************************************************************
+The contents of this file are subject to the Mozilla Public License
+Version 1.1 (the "License"); you may not use this file except in
+compliance with the License. You may obtain a copy of the License at
+http://www.mozilla.org/MPL/
+
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations
+under the License.
+
+The Original Code is (C) 2004-2010 Blest AS.
+
+The Initial Developer of the Original Code is Blest AS.
+Portions created by Blest AS are Copyright (C) 2004-2010
+Blest AS. All Rights Reserved.
+
+Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
+Rune Nilssen
+*******************************************************************************/
+
+
+
+$page = new dbContent ( );
+$page->load ( $Session->contentID );
+
+if ( $GLOBALS[ 'Session' ]->AdminUser->checkPermission ( $page, 'Write', 'admin' ) )
+{
+	$setting = new dbObject ( 'Setting' );
+	$setting->SettingType = 'ContentsProtectedSymlink';
+	$setting->Key = $page->MainID;
+	
+	if ( !$setting->load ( ) )
+		$setting->save ( );
+	
+	$setting->Value = $_REQUEST[ 'pid' ];
+	
+	if ( $setting->ID && $setting->Value == 0 ) $setting->delete ( );
+	else $setting->save ( );
+}
+
+ob_clean ( );
+die ( );
+?>
