@@ -1345,8 +1345,10 @@ function cleanHTMLElement ( $string, $level = 0 )
 	$string = str_replace ( '</form>', '', $string );
 	$string = str_replace ( '="' . BASE_URL, '="', $string );
 	
-	$string = str_replace ( '&nbsp;<table', '<table', $string );
-	$string = str_replace ( '&nbsp;<span', '<span', $string );
+	if ( substr ( $string, 0, 11 ) == '&nbsp;<tabl' )
+		$string = '<tabl' . substr ( $string, 6, strlen ( $string ) - 6 );
+	else if ( substr ( $string, 0, 11 ) == '&nbsp;<span' )
+		$string = '<span' . substr ( $string, 6, strlen ( $string ) - 6 );
 	$string = preg_replace ( '/\<[a|p][^>]*\>[\ ]*\<\/[a|p]\>/', '', $string );
 	
 	// Always use paragraphs
@@ -1356,7 +1358,7 @@ function cleanHTMLElement ( $string, $level = 0 )
 		$string = '<p>' . "\n" . $string . "\n" . '</p>';
 	}
 	
-	$string = preg_replace ( '/([\w\W]*?)\&nbsp\;/i', '$1', $string );
+	$string = preg_replace ( '/([\w\W]*?)\&nbsp\;/i', '$1 ', $string );
 	
 	return $string;
 }
@@ -1370,6 +1372,7 @@ function arenaDebug ( $string = false )
 	return $_SESSION[ '__arenaDebug__' ];
 }
 
+// Take "arena html" from admin and convert to displayable html --------------->
 function decodeArenaHTML_callback_objects ( $matches )
 {
 	if ( strstr ( strtolower ( stripslashes ( $matches[1] ) ), 'type="movie"' ) )
@@ -1394,6 +1397,7 @@ function decodeArenaHTML_callback_objects ( $matches )
 }
 function decodeArenaHTML ( $string )
 {
+	// Remove empty tags
 	$string = preg_replace ( '/\<\!\-\-[\ ]{0,3}arenaform(.*?)\-\-\>/', '<form $1>', $string );
 	$string = preg_replace ( '/\<\!\-\-[\ ]{0,3}\/arenaform(.*?)\-\-\>/', '</form>', $string );
 	$string = str_replace ( array ( '<br>', '<BR>' ), '<br/>', $string );
@@ -1404,7 +1408,6 @@ function decodeArenaHTML ( $string )
 	$string = addslashes ( str_replace ( ' target="_self"', '', stripslashes ( $string ) ) );
 	// Remove empty attributes
 	$string = addslashes ( preg_replace ( '/([a-z|A-Z]*)(\ [a-zA-Z]*?\=\"\")/', '$1', stripslashes ( $string ) ) );
-
 	// Flash divs
 	$string = preg_replace_callback ( '/\<span([^>]*?)\>([\w\W]*?)\<\/span\>/i', 'decodeArenaHTML_callback_objects', $string );
 	
@@ -1414,8 +1417,10 @@ function decodeArenaHTML ( $string )
 	$string = preg_replace ( '/\<b\>/i', '<strong>', $string );
 	$string = preg_replace ( '/\<\/b\>/i', '<\/strong>', $string );
 	
-	return $string;
+	return cleanHTMLElement ( $string );
 }
+// Done "arena html" from admin and convert to displayable html ---------------<
+// Convert TO "arena html" from web html -------------------------------------->
 function encodeArenaHTML_callback_objects ( $matches )
 {
 	$string = '&nbsp;<span arenatype="movie" style="!W!; !H!; display: block; border: 2px dotted #aaa; background: #ccc url(admin/gfx/arenaicons/page_flash_64.png) no-repeat center center"' . $matches[ 1 ] . '>' . $matches[ 2 ] . '</span>&nbsp;';
@@ -1427,25 +1432,35 @@ function encodeArenaHTML_callback_objects ( $matches )
 }
 function encodeArenaHTML ( $string )
 {
+	$elements = array ( 'h', 'span', 'strong', 'b', 'div' );
+	foreach ( $elements as $el )
+	{
+		$preg = "/\<{$el}[^>]*?\>\<\/{$el}[^>]*?\>/i";
+		while ( preg_match ( $preg, $string, $matches ) )
+		{
+			$string = str_replace ( $matches[0], '', $string );
+		}
+	}// Singlequotes
 	$string = str_replace ( '&quot;', '\'', $string );
+	// Form fields
 	$string = preg_replace ( '/\<form([^>]*)\>/i', '<!-- arenaform$1 -->', $string );
 	$string = preg_replace ( '/(\<)textarea([^>]*)(\>)/i', '&lt;textarea$2&gt;', $string );
 	$string = preg_replace ( '/(\<)\/textarea(\>)/i', '&lt;/textarea&gt;', $string );
 	$string = preg_replace ( '/\<\/form[\ ]{0,1}\>/i', '<!-- /arenaform -->', $string );
-	
 	// Strip body and html tags...
 	$string = preg_replace ( '/\<[\/]{0,1}body[^>]*\>/i', '', $string );
 	$string = preg_replace ( '/\<[\/]{0,1}html[^>]*\>/i', '', $string );
 	$string = str_replace ( '  ', ' ', $string );
-	
-	$string = preg_replace ( '/font\-family\:[^;"]*/i', '', $string );
+	// Remove office mso stuff
 	$string = preg_replace ( '/mso\-[^:]*?\:[^;"]*/i', '', $string );
 	$string = str_replace ( '="; ', '="', $string );
+	// Remove empty styles
 	$string = preg_replace ( '/style\=\"\"/i', '', $string );
 	$string = preg_replace ( '/style\=\"[ ;]*\"/i', '', $string );
+	// Remove attributeless span tags
 	$string = preg_replace ( '/\<span\>([\w\W]*?)\<\/span\>/i', '$1', $string );
-	$string = preg_replace ( '/\<o\:p\>([\w\W]*?)\<\/o\:p\>/i', '$1', $string );
-	
+	// Remove office paragraphs
+	$string = preg_replace ( '/\<o\:p\>([\w\W]*?)\<\/o\:p\>/i', '<p>$1</p>', $string );
 	// Flash
 	while ( preg_match ( '/\<object[\w\W]*?\>/i', $string ) )
 	{
@@ -1455,13 +1470,10 @@ function encodeArenaHTML ( $string )
 			$string
 		);
 	}
-	
 	// Strip comments from inside paragraphs with OFFICE CRAP!
 	$string = preg_replace ( '/\<p\>\<!\-[\w\W]*?MsoNormal[\w\W]*?\<\/p\>/i', '<p></p>', $string );
-	
 	// Remove empty paragraphs and replace with br's for easier composition
 	$string = preg_replace ( array ( '/\<p\>\<\/p\>/i', '/\<p\>\<br[^>]*?\>\<\/p\>/i' ), '<br/>', $string );
-	
 	// Get external images
 	$rootfolder = dbImageFolder::getRootFolder ( );
 	if ( $allImages = preg_match_all ( "/\<img.*?src\=\"(.*?)\".*?\>/i", $string, $matches ) )
@@ -1508,10 +1520,9 @@ function encodeArenaHTML ( $string )
 			$i++;
 		}
 	}
-	
 	return trim ( $string );
 }
-
+// Done TO "arena html" from web html --------------------------------------<
 // Creates a object from a newline and tab separated string
 function CreateObjectFromString ( $string, $properties = false )
 {
