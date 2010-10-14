@@ -88,7 +88,7 @@ function abortDeleteLibraryImage()
 function submitImageUpload()
 {
 	// We want to upload multiple images.
-	if ( document.getElementsById ( 'tabMultiple' ) && document.getElementById ( 'tabMultiple' ).className == 'tabActive' )
+	if ( document.getElementById ( 'tabMultiple' ) && document.getElementById ( 'tabMultiple' ).className == 'tabActive' )
 	{
 		var frm = document.getElementById ( 'pageMultiple' ).getElementsByTagName ( 'form' )[0];
 		frm.submit ();
