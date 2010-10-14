@@ -226,6 +226,24 @@
 														</tr>
 													</table>
 												</div>
+												<h1>
+													Språkinnstillinger
+												</h1>
+												<div class="SubContainer">
+													<table>
+														<?
+															$langs = new dbObject ( 'Languages' );
+															if ( $langs = $langs->find () )
+															{
+																foreach ( $langs as $lang )
+																{
+																	$str .= '<tr><td>' . $lang->ShortName . '</td><td>' . $lang->Name . '</td></tr>';
+																}
+															}
+															return $str;
+														?>
+													</table>
+												</div>
 											</td>
 										</tr>
 									</table>
