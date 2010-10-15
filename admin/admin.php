@@ -148,7 +148,7 @@ if (
 	die ( $document->render ( ) );
 }
 $notAuthenticated = true;
-if ( $user->authenticate ( ) )
+if ( $user->authenticate ( ) && !$_REQUEST[ 'logout' ] )
 {
 	if ( $user->IsAdmin || $user->_dataSource == 'core' )
 	{
