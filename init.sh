@@ -44,4 +44,6 @@ ln -s /usr/local/arena2/extensions/editor extensions/editor
 echo "Done."
 echo "Setting up config file"
 echo "<? define ( SITE_ID, 'My site' ); define ( NEWEDITOR, 'true' ); ?>" > config.php
+chmod 777 config.php
+
 
