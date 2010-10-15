@@ -46,7 +46,7 @@ echo "Setting up config file"
 echo "<? define ( SITE_ID, 'My site' ); define ( NEWEDITOR, 'true' ); ?>" > config.php
 chmod 777 config.php
 echo "Making installer available."
-cp /usr/local/arena2/installer.php .
+cp /usr/local/arena2/install.php .
 
 
 
