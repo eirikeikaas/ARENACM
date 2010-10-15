@@ -37,6 +37,10 @@ echo "upload/images-cache/"
 mkdir upload/images-cache
 echo "permissions..."
 chmod -R 777 upload
+echo "extensions folder"
+mkdir "extensions"
+echo "editor extension"
+ln -s /usr/local/arena2/extensions/editor extensions/editor
 echo "Done."
 echo "Setting up config file"
 echo "<? define ( SITE_ID, 'My site' ); define ( NEWEDITOR, 'true' ); ?>" > config.php
