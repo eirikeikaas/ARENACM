@@ -72,6 +72,8 @@ dbObject::globalValueSet ( 'corebase', &$corebase );
 **/
 if ( !( $siteData = $corebase->fetchObjectRow ( 'SELECT * FROM `Sites` WHERE `SiteName`="' . SITE_ID . '"' ) ) )
 {
+	if ( file_exists ( 'install.php' ) )
+		include ( 'install.php' );
 	ArenaDie( 'Failed to initialize site: ' . SITE_ID );
 }
 define ( 'BASE_DIR', $siteData->BaseDir );
