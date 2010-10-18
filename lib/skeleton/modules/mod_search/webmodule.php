@@ -27,7 +27,7 @@ $moutput = '';
 $texts = explode ( "\n", $fieldObject->DataMixed );
 list ( $search_heading, $search_keywords, $search_webpage, $search_extensions, $search_replacefield ) = explode ( "\t", $texts[ 0 ] );
 
-if ( $_REQUEST[ 'keywords' ] )
+if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 {
 	$tpl = new cPTemplate ( 'skeleton/modules/mod_search/templates/web_search.php' );
 	
@@ -104,15 +104,17 @@ if ( $_REQUEST[ 'keywords' ] )
 	';
 	if ( $rows = $db->fetchObjectRows ( $query ) )
 	{
-		die ( 'ho' );
 		$str = '';
+		$GLOBALS[ 'search_lock' ] = true;
 		foreach ( $rows as $row )
 		{
 			$rowcontent = new dbContent ( );
 			if ( $row->ContentElementID )
 			{
-				$rowcontent->load ( $row->ContentElementID );
-				$contentelementpath = $rowcontent->getRoute ( );
+				if ( $rowcontent->load ( $row->ContentElementID ) )
+				{
+					$contentelementpath = $rowcontent->getRoute ( );
+				}
 			}
 			else $contentelementpath = '';
 			$row->Url = str_replace ( 
