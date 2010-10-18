@@ -1432,6 +1432,7 @@ function encodeArenaHTML_callback_objects ( $matches )
 }
 function encodeArenaHTML ( $string )
 {
+	// Remove empty tags
 	$elements = array ( 'h', 'span', 'strong', 'b', 'div' );
 	foreach ( $elements as $el )
 	{
@@ -1440,7 +1441,10 @@ function encodeArenaHTML ( $string )
 		{
 			$string = str_replace ( $matches[0], '', $string );
 		}
-	}// Singlequotes
+	}
+	// Remove apple style span
+	$string = preg_replace ( '/\<span.*?class\=\"apple\-style\-span\"[^>]*?\>([\w\W]*?)\<\/span\>/i', '$1', $string );
+	// Singlequotes
 	$string = str_replace ( '&quot;', '\'', $string );
 	// Form fields
 	$string = preg_replace ( '/\<form([^>]*)\>/i', '<!-- arenaform$1 -->', $string );
