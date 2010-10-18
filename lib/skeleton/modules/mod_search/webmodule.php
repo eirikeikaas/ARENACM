@@ -104,6 +104,7 @@ if ( $_REQUEST[ 'keywords' ] )
 	';
 	if ( $rows = $db->fetchObjectRows ( $query ) )
 	{
+		die ( 'ho' );
 		$str = '';
 		foreach ( $rows as $row )
 		{
