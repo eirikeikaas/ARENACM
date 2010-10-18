@@ -25,7 +25,7 @@ $db =& dbObject::globalValue ( 'database' );
 
 $moutput = '';
 $texts = explode ( "\n", $fieldObject->DataMixed );
-list ( $search_heading, $search_keywords, $search_webpage, $search_extensions, $search_replacefield ) = explode ( "\t", $texts[ 0 ] );
+list ( $search_heading, $search_keywords, $search_webpage, $search_extensions, $search_replacefield, $search_outputpage ) = explode ( "\t", $texts[ 0 ] );
 
 if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 {
@@ -179,7 +179,16 @@ if ( !$moutput )
 	$tpl->search_keywords = $search_keywords;
 	$tpl->search_webpage = $search_webpage;
 	$tpl->search_extensions = $search_extensions;
-	$tpl->content =& $content;
+	if ( $search_outputpage > 0 )
+	{
+		$c = new dbContent ( );
+		$c->load ( $search_outputpage );
+		$tpl->content =& $c;
+	}
+	else
+	{
+		$tpl->content =& $content;
+	}
 	$module .= $tpl->render ( );
 }
 

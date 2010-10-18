@@ -62,12 +62,27 @@
 									return '<select style="padding: 0; -moz-box-sizing: border-box; box-sizing: border-box; width: 100%;" id="mod_search_extensions" size="5" multiple="multiple">' . $str . '</select>';
 								return '<p>Ingen av ekstensjonene støtter søk.</p>';
 							?>
-							<p>
-								<strong>List output i felt:</strong>
-							</p>
-							<p>
-								<select id="mod_search_replacefield"><?= $this->search_replacefield ?></select>
-							</p>
+							<table width="100%" cellspacing="0" cellpadding="0">
+								<tr>
+									<td valign="top">
+										<p>
+											<strong>List output i felt:</strong>
+										</p>
+										<p>
+											<select id="mod_search_replacefield"><?= $this->search_replacefield ?></select>
+										</p>
+									</td>
+									<td>&nbsp;&nbsp;</td>
+									<td valign="top">
+										<p>
+											<strong>Målside for søkeresultater:</strong>
+										</p>
+										<p>
+											<select id="mod_search_outputpage"><option value="0">Standard</option><option value="0">===================</option><?= $this->search_outputpage ?></select>
+										</p>
+									</td>
+								</tr>
+							</table>
 						</td>
 					</tr>
 				</table>
@@ -93,6 +108,7 @@
 				sjax.addVar ( 'webpage', document.getElementById ( 'mod_search_webpage' ).value );
 				sjax.addVar ( 'extensions', out.join ( "|" ) );
 				sjax.addVar ( 'replacefield', document.getElementById ( 'mod_search_replacefield' ).value );
+				sjax.addVar ( 'outputpage', document.getElementById ( 'mod_search_outputpage' ).value );
 				sjax.onload = function ( )
 				{
 					document.getElementById ( 'mod_search_content' ).style.background = 'none';

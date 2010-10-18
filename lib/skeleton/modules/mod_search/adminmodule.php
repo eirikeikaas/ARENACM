@@ -26,7 +26,7 @@ $moddir = 'skeleton/modules/mod_search';
 switch ( $_REQUEST[ 'modaction' ] )
 {
 	case 'save':
-		$fieldObject->DataMixed = "{$_REQUEST['heading']}\t{$_REQUEST['keywords']}\t{$_REQUEST['webpage']}\t{$_REQUEST['extensions']}\t{$_REQUEST['replacefield']}\n";
+		$fieldObject->DataMixed = "{$_REQUEST['heading']}\t{$_REQUEST['keywords']}\t{$_REQUEST['webpage']}\t{$_REQUEST['extensions']}\t{$_REQUEST['replacefield']}\t{$_REQUEST['outputpage']}\n";
 		$fieldObject->save ( );
 		die ( 'ok' );
 		break;
@@ -35,7 +35,10 @@ switch ( $_REQUEST[ 'modaction' ] )
 		
 		$texts = explode ( "\n", $fieldObject->DataMixed );
 		
-		list ( $search_heading, $search_keywords, $search_webpage, $search_extensions, $search_replacefield ) = explode ( "\t", $texts[ 0 ] );
+		list ( 
+			$search_heading, $search_keywords, $search_webpage, $search_extensions, 
+			$search_replacefield, $search_outputpage
+		) = explode ( "\t", $texts[ 0 ] );
 		if ( !$search_heading ) $search_heading = 'Søk';
 		if ( !$search_keywords ) $search_keywords = 'Søkeord';
 		if ( !$search_webpage ) $search_webpage = 'Søk i nettsiden';
@@ -43,7 +46,7 @@ switch ( $_REQUEST[ 'modaction' ] )
 		$mtpl->search_keywords = $search_keywords;
 		$mtpl->search_webpage = $search_webpage;
 		$mtpl->search_extensions = $search_extensions;
-		
+
 		// Fields
 		$db =& dbObject::globalValue ( 'database' );
 		$options = '<option value="">Standard</option>';
@@ -60,6 +63,7 @@ switch ( $_REQUEST[ 'modaction' ] )
 			}
 		}
 		$mtpl->search_replacefield = $options;
+		$mtpl->search_outputpage = getSiteStructureOptions ( $search_outputpage, 0 );
 		
 		$module = $mtpl->render ( );
 		break;
