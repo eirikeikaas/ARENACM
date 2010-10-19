@@ -1344,6 +1344,7 @@ function cleanHTMLElement ( $string, $level = 0 )
 	$string = str_replace ( '</font>', '', $string );
 	$string = str_replace ( '</form>', '', $string );
 	$string = str_replace ( '="' . BASE_URL, '="', $string );
+	$string = preg_replace ( '/(\<span.*?apple\-[^"]*\"[^>]*?\>)(.*?)(\<\/span\>)/i', '$2', $string );
 	
 	if ( substr ( $string, 0, 11 ) == '&nbsp;<tabl' )
 		$string = '<tabl' . substr ( $string, 6, strlen ( $string ) - 6 );
