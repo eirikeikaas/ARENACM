@@ -36,8 +36,12 @@ if ( $p->load ( $_REQUEST[ 'pid' ] ) )
 			$p->save ();
 		}
 		$pr = new dbObject ( 'ContentElement' );
-		if ( $pr->load ( $p->Parent ) )
+		$pr->MainID = $p->Parent;
+		$pr->addClause ( 'WHERE', 'MainID != ID' );
+		if ( $pr = $pr->findSingle () )
+		{
 			$pid = $pr->MainID;
+		}
 	}
 }
 ob_clean ( );
