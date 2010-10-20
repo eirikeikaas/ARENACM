@@ -1,0 +1,3 @@
+<?if ( !$GLOBALS[ "webuser" ]->ID ) { ?>
+
+<?}?>
