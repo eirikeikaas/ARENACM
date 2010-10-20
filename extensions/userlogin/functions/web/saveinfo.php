@@ -39,6 +39,6 @@ if ( $_REQUEST[ 'Password' ] != '********' )
 $GLOBALS[ 'webuser' ]->sendUpdateMail ( );
 if ( $_REQUEST[ 'gohome' ] )
 	header ( 'Location:' . $GLOBALS[ 'page' ]->getUrl ( ) );
-else header ( 'Location: ' . $GLOBALS[ 'page' ]->getUrl ( ) . '?ue=login&function=editprofile' );
+else header ( 'Location: ' . $GLOBALS[ 'page' ]->getUrl ( ) . '?ue=userlogin&function=editprofile' );
 die ( );
 ?>

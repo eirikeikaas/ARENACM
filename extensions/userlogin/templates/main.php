@@ -223,7 +223,7 @@
 		function saveRegisterText ( )
 		{
 			var jax = new bajax ( );
-			jax.openUrl ( 'admin.php?module=extensions&extension=login&action=savetext', 'post', true );
+			jax.openUrl ( 'admin.php?module=extensions&extension=userlogin&action=savetext', 'post', true );
 			jax.addVar ( 'text', document.getElementById ( 'RegisterText' ).value );
 			jax.onload = function ( )
 			{

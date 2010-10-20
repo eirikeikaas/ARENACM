@@ -21,7 +21,7 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-$tpl = new cPTemplate ( 'extensions/login/webtemplates/editprofile.php' );
+$tpl = new cPTemplate ( 'extensions/userlogin/webtemplates/editprofile.php' );
 $GLOBALS[ 'webuser' ]->loadExtraFields ( );
 if ( $_REQUEST[ 'die' ] )
 {

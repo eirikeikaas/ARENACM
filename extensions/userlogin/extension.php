@@ -24,8 +24,8 @@ Rune Nilssen
 /**
  * Prerequisites
 **/
-$tplDir = "extensions/login/templates";
-$extDir = 'extensions/login';
+$tplDir = "extensions/userlogin/templates";
+$extDir = 'extensions/userlogin';
 $db =& dbObject::globalValue ( 'database' );
 	
 /**

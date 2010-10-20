@@ -25,7 +25,7 @@
 		<?}?>
 		<?if ( $GLOBALS[ 'webuser' ]->ID ) { ?>
 			<p class="LoginEdit">
-				<button id="LoginEdit" class="Edit" type="button" onclick="document.location='<?= BASE_URL . $this->content->getRoute ( ) ?>?ue=login&function=editprofile'">
+				<button id="LoginEdit" class="Edit" type="button" onclick="document.location='<?= BASE_URL . $this->content->getRoute ( ) ?>?ue=userlogin&function=editprofile'">
 					<span><?= i18n ( 'Edit your profile' ) ?></span>
 				</button>
 			</p>
@@ -35,7 +35,7 @@
 				{
 					return '
 			<p>
-				<button id="LoginProfile" class="ShoppingLog" type="button" onclick="document.location=\\\\\'' . BASE_URL . $this->content->getRoute ( ) . '?ue=login&function=shoppinglog\\\\\'">
+				<button id="LoginProfile" class="ShoppingLog" type="button" onclick="document.location=\\\\\'' . BASE_URL . $this->content->getRoute ( ) . '?ue=userlogin&function=shoppinglog\\\\\'">
 					<span>' . i18n ( 'Show shopping log' ) . '</span>
 				</button>
 			</p>
@@ -56,7 +56,7 @@
 					LoginEdit.onclick = function ( )
 					{
 					
-						this.urlLocation = '<?= getLocalizedBaseUrl ( ) ?>?ue=login&function=editprofile&die=true';
+						this.urlLocation = '<?= getLocalizedBaseUrl ( ) ?>?ue=userlogin&function=editprofile&die=true';
 						BlestBoxLaunchElement ( this );
 					}
 				}
@@ -66,7 +66,7 @@
 					LoginLog.onclick = function ( )
 					{
 					
-						this.urlLocation = '<?= getLocalizedBaseUrl ( ) ?>?ue=login&function=shoppinglog&die=true';
+						this.urlLocation = '<?= getLocalizedBaseUrl ( ) ?>?ue=userlogin&function=shoppinglog&die=true';
 						BlestBoxLaunchElement ( this );
 					}
 				}
@@ -99,7 +99,7 @@
 		<?}?>
 		
 		<?
-			$GLOBALS[ 'document' ]->addHeadScript ( BASE_URL . 'extensions/login/javascript/login.js' );
+			$GLOBALS[ 'document' ]->addHeadScript ( BASE_URL . 'extensions/userlogin/javascript/login.js' );
 		?>
 		
 		<? i18n ( 'Are you sure?' ); ?>

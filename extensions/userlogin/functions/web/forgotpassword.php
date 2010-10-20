@@ -21,6 +21,6 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-$tpl = new cPTemplate ( 'extensions/login/webtemplates/forgotpassword.php' );
+$tpl = new cPTemplate ( 'extensions/userlogin/webtemplates/forgotpassword.php' );
 die ( $tpl->render ( ) );
 ?>

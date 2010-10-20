@@ -61,6 +61,6 @@ SetSetting ( 'Login_Extension', 'usenickname', $_POST[ 'usenickname' ] );
 
 
 ob_clean ( );
-header ( "Location: admin.php?module=extensions&extension=login" );
+header ( "Location: admin.php?module=extensions&extension=userlogin" );
 die ( );
 ?>

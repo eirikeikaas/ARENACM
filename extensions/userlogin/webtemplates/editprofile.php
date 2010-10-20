@@ -8,7 +8,7 @@
 		
 		<hr/>
 		
-		<form method="post" action="<?= $this->content->getUrl ( ) ?>?ue=login&function=saveinfo<?= ( $_REQUEST[ 'die' ] ? '&gohome=true' : '' ) ?>" name="infoform">
+		<form method="post" action="<?= $this->content->getUrl ( ) ?>?ue=userlogin&function=saveinfo<?= ( $_REQUEST[ 'die' ] ? '&gohome=true' : '' ) ?>" name="infoform">
 		
 			<table>
 				<tr>

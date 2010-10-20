@@ -21,39 +21,40 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-i18nAddLocalePath ( 'extensions/login/locale' );
+i18nAddLocalePath ( 'extensions/userlogin/locale' );
+$extdir = 'extensions/userlogin';
 
 switch ( $_REQUEST[ 'function' ] )
 {
 	case 'register':
-		$tpl = new cPTemplate ( 'extensions/login/webtemplates/register.php' );
+		$tpl = new cPTemplate ( $extdir.'/webtemplates/register.php' );
 		$db =& dbObject::globalValue ( 'database' );
 		if ( $row = $db->fetchObjectRow ( 'SELECT ID FROM ContentDataSmall WHERE Name="Nickname" AND ContentTable="Users" LIMIT 1' ) )
 			$tpl->hasNickname = true;
 		break;
 	case 'verify':
-		include_once ( 'extensions/login/functions/web/verify.php' );
+		include_once ( $extdir.'/functions/web/verify.php' );
 		break;
 	case 'forgotpassword':
-		include_once ( 'extensions/login/functions/web/forgotpassword.php' );
+		include_once ( $extdir.'/functions/web/forgotpassword.php' );
 		break;
 	case 'createpassword':
-		include_once ( 'extensions/login/functions/web/createpassword.php' );
+		include_once ( $extdir.'/functions/web/createpassword.php' );
 		break;
 	case 'editprofile':
-		include_once ( 'extensions/login/functions/web/editprofile.php' );
+		include_once ( $extdir.'/functions/web/editprofile.php' );
 		break;
 	case 'saveinfo':
-		include_once ( 'extensions/login/functions/web/saveinfo.php' );
+		include_once ( $extdir.'/functions/web/saveinfo.php' );
 		break;
 	case 'shoppinglog':
-		include_once ( 'extensions/login/functions/web/shoppinglog.php' );
+		include_once ( $extdir.'/functions/web/shoppinglog.php' );
 		break;
 	case 'showorder':
-		include_once ( 'extensions/login/functions/web/showorder.php' );
+		include_once ( $extdir.'/functions/web/showorder.php' );
 		break;
 	default:
-		$tpl = new cPTemplate ( 'extensions/login/webtemplates/default.php' );
+		$tpl = new cPTemplate ( $extdir.'/webtemplates/default.php' );
 		break;
 }
 $tpl->content =& $content;

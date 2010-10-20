@@ -27,7 +27,7 @@ Rune Nilssen
 if ( $_POST[ "Controlnumber" ] != "verified_and_done" )
 	die ( "SPAM" );
 	
-$tpl = new cPTemplate ( 'extensions/login/webtemplates/verify.php' );	
+$tpl = new cPTemplate ( 'extensions/userlogin/webtemplates/verify.php' );	
 $db =& dbObject::globalValue ( 'database' );
 
 if ( !$_REQUEST[ 'Username' ] ) 

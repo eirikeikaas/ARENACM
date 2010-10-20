@@ -128,14 +128,14 @@ function forgotPassword ( )
 			break;	
 		}
 	}
-	styledDialog ( ex + '?ue=login&function=forgotpassword', 'forgotPasswordPopup' );
+	styledDialog ( ex + '?ue=userlogin&function=forgotpassword', 'forgotPasswordPopup' );
 }
 
 function seeOrder ( oid )
 {
 	var base = document.getElementsByTagName ( 'base' );
 	document.ojax = new bajax ( );
-	document.ojax.openUrl ( base[ 0 ].href + '?ue=login&function=showorder&oid=' + oid, 'get', true );
+	document.ojax.openUrl ( base[ 0 ].href + '?ue=userlogin&function=showorder&oid=' + oid, 'get', true );
 	document.ojax.onload = function ( )
 	{
 		document.getElementById ( 'OrderDetails' + oid ).innerHTML = this.getResponseText ( );
@@ -182,7 +182,7 @@ function receivePassword ( )
 {
 	var base = document.getElementsByTagName ( 'base' );
 	document.passjax = new bajax ( );
-	document.passjax.openUrl ( base[ 0 ].href + '?ue=login&function=createpassword&email=' + document.getElementById ( 'findEmailAddy' ).value, 'get', true );
+	document.passjax.openUrl ( base[ 0 ].href + '?ue=userlogin&function=createpassword&email=' + document.getElementById ( 'findEmailAddy' ).value, 'get', true );
 	document.passjax.onload = function ( )
 	{
 		if ( this.getResponseText ( ) == 'OK' )

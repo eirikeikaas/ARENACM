@@ -22,7 +22,7 @@ Rune Nilssen
 *******************************************************************************/
 
 $db =& dbObject::globalValue ( 'database' );
-i18nAddLocalePath ( 'extensions/login/locale' );
+i18nAddLocalePath ( 'extensions/userlogin/locale' );
 $contentid = GetSettingValue ( 'Login_Extension', 'register_contentid' );
 
 if ( $contentid )
@@ -44,7 +44,7 @@ else
 }
 
 // Snippet template
-$snippet = new cPTemplate ( "extensions/login/templates/websnippet.php" );
+$snippet = new cPTemplate ( "extensions/userlogin/templates/websnippet.php" );
 $snippet->url = $url;
 $snippet->content =& $cnt;
 
@@ -57,12 +57,12 @@ if ( strlen ( $test ) )
 {
 	$regText = i18n ( $regText );
 	$regText = str_replace ( '%forgotpassword%', 'javascript: forgotPassword ( )', $regText );
-	$regText = str_replace ( '%register%', $url . '?ue=login&function=register', $regText );
+	$regText = str_replace ( '%register%', $url . '?ue=userlogin&function=register', $regText );
 	$snippet->registerForm = $regText;
 }
 else
 {
-	$registerform = new cPTemplate ( 'extensions/login/webtemplates/registerform.php' );
+	$registerform = new cPTemplate ( 'extensions/userlogin/webtemplates/registerform.php' );
 	$registerform->content =& $cnt;
 	$registerform->url = $url;
 	$snippet->registerForm = $registerform->render ( );
