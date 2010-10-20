@@ -749,7 +749,7 @@ function executeWebModule ( $content, $forceModule = false )
 {
 	i18nAddLocalePath ( 'lib/locale/' );
 	// Add downloads automagically to Felt1
-	if ( strstr ( $content->ContentGroups, 'Felt1' ) )
+	if ( file_exists ( 'extensions/easyeditor' ) )
 	{
 		if ( $rows = $GLOBALS[ 'database' ]->fetchObjectRows ( '
 			SELECT f.* FROM ObjectConnection o, File f 
@@ -785,7 +785,13 @@ function executeWebModule ( $content, $forceModule = false )
 			$dummy->ID = '1';
 			$dummy->Type = 'text';
 			$dummy->DataText = $str;
-			$dummy->ContentGroup = 'Felt1';
+			if ( defined ( 'MAIN_CONTENTGROUP' ) )
+				$dummy->ContentGroup = MAIN_CONTENTGROUP;
+			else 
+			{
+				$g = explode ( ',', $content->ContentGroups );
+				$dummy->ContentGroup = trim($g[0]);
+			}
 			$dummy->IsVisible = true;
 			$content->_extra_Downloads = $dummy;
 			$content->_field_Downloads = $dummy;
@@ -1558,4 +1564,4 @@ function CreateStringFromObject ( $object )
 	return implode ( "\n", $s );
 }
 
-?>
+?>7
