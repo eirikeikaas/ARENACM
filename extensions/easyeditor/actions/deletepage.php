@@ -40,7 +40,7 @@ if ( $p->load ( $_REQUEST[ 'pid' ] ) )
 		$pr->addClause ( 'WHERE', 'MainID != ID' );
 		if ( $pr = $pr->findSingle () )
 		{
-			$pid = $pr->MainID;
+			$pid = $pr->ID;
 		}
 	}
 }
