@@ -69,3 +69,34 @@ function RemovePageAttachment ( oid )
 	}
 }
 
+function SubPage ()
+{
+	initModalDialogue ( 'newpage', 480, 166, 'admin.php?module=extensions&extension=easyeditor&action=newpage' );
+}
+
+function _addPage ()
+{
+	if ( document.getElementById ( 'npTitle' ).value.length < 1 )
+	{
+		alert ( i18n ( 'You forgot the page title.' ) );
+		document.getElementById ( 'npTitle' ).focus();
+		return false;
+	}
+	if ( document.getElementById ( 'npMenuTitle' ).value.length < 1 )
+		document.getElementById ( 'npMenuTitle' ).value = document.getElementById ( 'npTitle' ).value;
+	var pid = document.getElementById ( 'pageID' ).value;
+	var options = '&';
+	options += 'title='+escape(document.getElementById ( 'npTitle' ).value)+'&';
+	options += 'menutitle='+escape(document.getElementById ( 'npMenuTitle' ).value);
+	document.location='admin.php?module=extensions&extension=easyeditor&action=addpage&pid=' + pid + options;
+}
+
+function DeletePage ( pid )
+{
+	if ( confirm ( i18n ( 'Are you sure?' ) ) )
+	{
+		var pid = document.getElementById ( 'pageID' ).value;
+		document.location='admin.php?module=extensions&extension=easyeditor&action=deletepage&pid=' + pid;
+	}
+}
+

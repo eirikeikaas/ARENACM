@@ -21,6 +21,8 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
+i18nAddLocalePath ( 'extensions/easyeditor/locale' );
+
 $function = $_REQUEST[ 'function' ] ? 
 	"functions/{$_REQUEST['function']}.php" : 'functions/main.php';
 $action = $_REQUEST[ 'action' ] ? 

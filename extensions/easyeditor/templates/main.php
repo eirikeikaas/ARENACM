@@ -217,10 +217,20 @@
 						<tr>
 							<td>
 								<button type="button" onclick="savePage()">
-									<img src="admin/gfx/icons/disk.png"/> Lagre
+									<img src="admin/gfx/icons/disk.png"/> <?= i18n ( 'Save page' ) ?>
 								</button>
+								<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) && $this->page->Parent > 0 ) { ?>
+								<button type="button" onclick="DeletePage()">
+									<img src="admin/gfx/icons/page_white_delete.png"/> <?= i18n ( 'Delete page' ) ?>
+								</button>
+								<?}?>
 							</td>
 							<td align="right">
+								<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) ) { ?>
+								<button type="button" onclick="SubPage()">
+									<img src="admin/gfx/icons/page_white_add.png"/> Ny underside
+								</button>
+								<?}?>
 								<button type="button" onclick="UploadFile()">
 									<img src="admin/gfx/icons/attach.png"/> Last opp en fil
 								</button>
