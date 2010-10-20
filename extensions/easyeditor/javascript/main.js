@@ -71,7 +71,7 @@ function RemovePageAttachment ( oid )
 
 function SubPage ()
 {
-	initModalDialogue ( 'newpage', 480, 166, 'admin.php?module=extensions&extension=easyeditor&action=newpage' );
+	initModalDialogue ( 'newpage', 480, 146, 'admin.php?module=extensions&extension=easyeditor&action=newpage' );
 }
 
 function _addPage ()
@@ -82,12 +82,10 @@ function _addPage ()
 		document.getElementById ( 'npTitle' ).focus();
 		return false;
 	}
-	if ( document.getElementById ( 'npMenuTitle' ).value.length < 1 )
-		document.getElementById ( 'npMenuTitle' ).value = document.getElementById ( 'npTitle' ).value;
 	var pid = document.getElementById ( 'pageID' ).value;
 	var options = '&';
 	options += 'title='+escape(document.getElementById ( 'npTitle' ).value)+'&';
-	options += 'menutitle='+escape(document.getElementById ( 'npMenuTitle' ).value);
+	options += 'menutitle='+escape(document.getElementById ( 'npTitle' ).value);
 	document.location='admin.php?module=extensions&extension=easyeditor&action=addpage&pid=' + pid + options;
 }
 

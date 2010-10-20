@@ -5,12 +5,8 @@
 	<div class="SubContainer">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0">
 			<tr>
-				<td><strong>Søkbar tittel:</strong></td>
+				<td><strong>Sidetittel:</strong></td>
 				<td><input type="text" value="" id="npTitle" size="40"/></td>
-			</tr>
-			<tr>
-				<td><strong>Menytittel:</strong></td>
-				<td><input type="text" value="" id="npMenuTitle" size="40"/></td>
 			</tr>
 		</table>
 	</div>
