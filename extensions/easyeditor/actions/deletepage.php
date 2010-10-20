@@ -23,6 +23,7 @@ Rune Nilssen
 
 include ( 'lib/classes/dbObjects/dbContent.php' );
 $p = new dbContent ( 'ContentElement' );
+$pid = $_REQUEST[ 'pid' ];
 if ( $p->load ( $_REQUEST[ 'pid' ] ) )
 {
 	if ( $GLOBALS[ 'Session' ]->AdminUser->checkPermission ( $p, 'Write', 'admin' ) )
@@ -34,9 +35,12 @@ if ( $p->load ( $_REQUEST[ 'pid' ] ) )
 			$p->IsDeleted = '1';
 			$p->save ();
 		}
+		$pr = new dbObject ( 'ContentElement' );
+		if ( $pr->load ( $p->Parent ) )
+			$pid = $pr->MainID;
 	}
 }
 ob_clean ( );
-header ( 'Location: admin.php?module=extensions&extension=easyeditor' );
+header ( 'Location: admin.php?module=extensions&extension=easyeditor&cid=' . $pid );
 die ();
 ?>
