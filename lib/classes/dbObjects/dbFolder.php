@@ -69,15 +69,15 @@ class dbFolder extends dbObject
 			SELECT * FROM 
 			(
 				(
-					SELECT ID, \"Image\" AS `Type`, Filename, Title, Filesize, ImageFolder as Folder FROM `Image` 
-					WHERE ImageFolder='{$this->ID}' 
+					SELECT ID, \"Image\" AS `Type`, Filename, Title, Filesize, ImageFolder as Folder, DateModified FROM `Image` 
+					WHERE ImageFolder='{$this->ID}'
 				)
 				UNION
 				(
-					SELECT ID, \"File\" AS `Type`, Filename, Title, Filesize, FileFolder AS Folder FROM `File` 
+					SELECT ID, \"File\" AS `Type`, Filename, Title, Filesize, FileFolder AS Folder, DateModified FROM `File` 
 					WHERE FileFolder='{$this->ID}'
 				)
-			) AS z;
+			) AS z ORDER BY z.DateModified DESC;
 		" ) )
 		{
 			$this->_files = Array ( );
