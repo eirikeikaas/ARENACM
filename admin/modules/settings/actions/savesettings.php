@@ -44,6 +44,7 @@ if ( $_POST[ 'SiteTitle' ] )
 	$mail_hostname = false;
 	$date_format = false;
 	$topmenu_contentgroup = false;
+	$topmenu_levels = false;
 	$main_contentgroup = false;
 	$site_title = false;
 	
@@ -85,6 +86,11 @@ if ( $_POST[ 'SiteTitle' ] )
 			$out[] = "\tdefine ( 'TOPMENU_CONTENTGROUP', '{$_POST['MenuContentGroup']}' );";
 			$topmenu_contentgroup = true;
 		}
+		else if ( strstr ( $line, 'NAVIGATION_LEVELS' ) )
+		{
+			$out[] = "\tdefine ( 'NAVIGATION_LEVELS', '{$_POST['MenuLevels']}' );";
+			$topmenu_levels = true;
+		}
 		else if ( strstr ( $line, 'MAIN_CONTENTGROUP' ) )
 		{
 			$out[] = "\tdefine ( 'MAIN_CONTENTGROUP', '{$_POST['MainContentGroup']}' );";
@@ -114,6 +120,8 @@ if ( $_POST[ 'SiteTitle' ] )
 		$out[] = "\tdefine ( 'MAIL_SMTP_HOST', '{$_POST['Email_SMTP']}' );";
 	if ( !$topmenu_contentgroup )
 		$out[] = "\tdefine ( 'TOPMENU_CONTENTGROUP', '{$_POST['MenuContentGroup']}' );";
+	if ( !$topmenu_levels )
+		$out[] = "\tdefine ( 'NAVIGATION_LEVELS', '{$_POST['MenuLevels']}' );";
 	if ( !$main_contentgroup )
 		$out[] = "\tdefine ( 'MAIN_CONTENTGROUP', '{$_POST['MainContentGroup']}' );";
 	if ( !$date_format )

@@ -156,6 +156,21 @@
 															?></select></td>
 														</tr>
 														<tr>
+															<td width="160px"><strong>Utlistede nivåer for meny:</strong></td>
+															<td><select name="MenuLevels"><?
+																$options = array ( 'ALL','1','2','3','4','5','10','20','40','99999' );
+																$str = '';
+																foreach ( $options as $opt )
+																{
+																	if ( $opt == 'ALL' ) $key = 'Standard';
+																	else $key = $opt;
+																	$s = $opt == NAVIGATION_LEVELS ? ' selected="selected"' : '';
+																	$str .= '<option value="' . $opt . '"' . $s . '>' . $key . '</option>';
+																}
+																return $str;
+															?></select></td>
+														</tr>
+														<tr>
 															<td width="160px"><strong>Hoved innholdsgruppe:</strong></td>
 															<td><select name="MainContentGroup"><?
 																$db =& dbObject::globalValue ( 'database' );
