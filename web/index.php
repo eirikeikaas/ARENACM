@@ -421,6 +421,7 @@ switch ( $_REQUEST[ 'mode' ] )
 			{
 				// Flashmode only outputs content in XML
 				case 'flash':
+				case 'xml':
 					if ( $_REQUEST[ 'encoding' ] )
 						$document->_encoding = $_REQUEST[ 'encoding' ];
 					echo $document->renderFlashXML ();
