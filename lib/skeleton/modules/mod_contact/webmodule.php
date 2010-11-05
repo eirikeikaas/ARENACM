@@ -40,7 +40,10 @@ if ( $_POST[ 'action' ] && $_SESSION[ 'last_contact_mailkey' ] != $_POST[ 'actio
 			if ( $k == 'action' )continue;
 			$str .= "$k: $v\n";
 		}
-		mail_ ( $settings->Receivers, i18n ( 'Contact form' ), $str, 'Content-type: text/plain' );
+		if ( !@mail_ ( $settings->Receivers, i18n ( 'Contact form' ), $str, 'Content-type: text/plain' ) )
+		{
+			mail ( $settings->Receivers, i18n ( 'Contact form' ), $str, 'Content-type: text/plain' );
+		}
 		$_SESSION[ 'last_contact_mailkey' ] = $_POST[ 'action' ];
 		$module .= $settings->SendMessage;
 	}
