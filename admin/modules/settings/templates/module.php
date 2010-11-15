@@ -158,7 +158,7 @@
 														<tr>
 															<td width="160px"><strong>Utlistede nivåer for meny:</strong></td>
 															<td><select name="MenuLevels"><?
-																$options = array ( 'ALL','1','2','3','4','5','10','20','40','99999' );
+																$options = array ( '0','1','2','3','4','5','10','20','40','99999' );
 																$str = '';
 																foreach ( $options as $opt )
 																{
@@ -166,6 +166,19 @@
 																	else $key = $opt;
 																	$s = $opt == NAVIGATION_LEVELS ? ' selected="selected"' : '';
 																	$str .= '<option value="' . $opt . '"' . $s . '>' . $key . '</option>';
+																}
+																return $str;
+															?></select></td>
+														</tr>
+														<tr>
+															<td width="160px"><strong>Utlistingsmetode for meny:</strong></td>
+															<td><select name="MenuMode"><?
+																$options = array ( 'FOLLOW'=>'Ett undernivå', 'ALL'=>'Vis alle' );
+																$str = '';
+																foreach ( $options as $value=>$key )
+																{
+																	$s = $value == NAVIGATION_MODE ? ' selected="selected"' : '';
+																	$str .= '<option value="' . $value . '"' . $s . '>' . $key . '</option>';
 																}
 																return $str;
 															?></select></td>

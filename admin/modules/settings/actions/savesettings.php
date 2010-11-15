@@ -45,6 +45,7 @@ if ( $_POST[ 'SiteTitle' ] )
 	$date_format = false;
 	$topmenu_contentgroup = false;
 	$topmenu_levels = false;
+	$topmenu_mode = false;
 	$main_contentgroup = false;
 	$site_title = false;
 	
@@ -91,6 +92,11 @@ if ( $_POST[ 'SiteTitle' ] )
 			$out[] = "\tdefine ( 'NAVIGATION_LEVELS', '{$_POST['MenuLevels']}' );";
 			$topmenu_levels = true;
 		}
+		else if ( strstr ( $line, 'NAVIGATION_MODE' ) )
+		{
+			$out [] = "\tdefine ( 'NAVIGATION_MODE', '{$_POST['MenuMode']}' );";
+			$topmenu_mode = true;
+		}
 		else if ( strstr ( $line, 'MAIN_CONTENTGROUP' ) )
 		{
 			$out[] = "\tdefine ( 'MAIN_CONTENTGROUP', '{$_POST['MainContentGroup']}' );";
@@ -122,6 +128,8 @@ if ( $_POST[ 'SiteTitle' ] )
 		$out[] = "\tdefine ( 'TOPMENU_CONTENTGROUP', '{$_POST['MenuContentGroup']}' );";
 	if ( !$topmenu_levels )
 		$out[] = "\tdefine ( 'NAVIGATION_LEVELS', '{$_POST['MenuLevels']}' );";
+	if ( !$topmenu_mode )
+		$out[] = "\tdefine ( 'NAVIGATION_MODE', '{$_POST['MenuMode']}' );";
 	if ( !$main_contentgroup )
 		$out[] = "\tdefine ( 'MAIN_CONTENTGROUP', '{$_POST['MainContentGroup']}' );";
 	if ( !$date_format )
