@@ -93,12 +93,15 @@
 		<script type="text/javascript">
 			AddSaveFunction ( function ( )
 			{
-				var sels = document.getElementById ( 'mod_search_extensions' ).options;
 				var out = new Array ( );
-				for ( var a = 0; a < sels.length; a++ )
+				if ( document.getElementById ( 'mod_search_extensions' ).options )
 				{
-					if ( sels[ a ].selected )
-						out.push ( sels[ a ].value );
+					var sels = document.getElementById ( 'mod_search_extensions' ).options;
+					for ( var a = 0; a < sels.length; a++ )
+					{
+						if ( sels[ a ].selected )
+							out.push ( sels[ a ].value );
+					}
 				}
 			
 				var sjax = new bajax ( );
