@@ -46,8 +46,34 @@ if ($field->DataMixed)
 	    if ( $headings = explode ( "\t\t", $headings ) )
 	        foreach ( $headings as $k=>$v ) $headings[$k] = str_replace ( "%hash%", "#", $v );
 	        
+    	// Full listmode
+		if ( $listmode == 'full' )
+		{
+			$len = count ( $pages );
+			for ( $a = 0; $a < $len; $a++ )
+			{
+				$page = new dbContent ();
+				if ( !$page->load ( $pages[$a] ) )
+					continue;
+				
+				if ( $blogs = $database->fetchObjectRows ( '
+					SELECT * FROM BlogItem WHERE ContentElementID=\'' . $pages[$a] . '\' 
+					ORDER BY DateUpdated DESC, ID DESC
+					LIMIT ' . $amounts[$a] . '
+				' ) )
+				{
+					$btpl = new cPTemplate ( $mtpldir . 'web_blog_w_ingress.php' );
+					foreach ( $blogs as $blog )
+					{
+						$btpl->blog = $blog;
+						$btpl->link = $page->getRoute () . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
+						$module .= $btpl->render ();
+					}
+				}
+			}
+		}
     	// List only titles and date
-    	if ( $listmode == 'titles' )
+    	else 
     	{
 		    $blogcontents = array();
 		    $hc = count ( $headings ) && $headings[0];
@@ -125,32 +151,6 @@ if ($field->DataMixed)
 						$str .= '<div id="mod_blog_navigation"><hr/><p>' . $prev . $sep . $next . '</p></div>';
 		        }
 		    }
-		}
-		// Full listmode
-		else if ( $listmode == 'full' )
-		{
-			$len = count ( $pages );
-			for ( $a = 0; $a < $len; $a++ )
-			{
-				$page = new dbContent ();
-				if ( !$page->load ( $pages[$a] ) )
-					continue;
-				
-				if ( $blogs = $database->fetchObjectRows ( '
-					SELECT * FROM BlogItem WHERE ContentElementID=\'' . $pages[$a] . '\' 
-					ORDER BY DateUpdated DESC, ID DESC
-					LIMIT ' . $amounts[$a] . '
-				' ) )
-				{
-					$btpl = new cPTemplate ( $mtpldir . 'web_blog_w_ingress.php' );
-					foreach ( $blogs as $blog )
-					{
-						$btpl->blog = $blog;
-						$btpl->link = $page->getRoute () . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
-						$module .= $btpl->render ();
-					}
-				}
-			}
 		}
     }
 }
