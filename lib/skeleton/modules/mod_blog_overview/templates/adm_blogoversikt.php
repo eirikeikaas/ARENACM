@@ -30,6 +30,7 @@
     $blogids = array();
     $noOfArticles = array();
     $navigation = array();
+    
     if ($this->datamixed)
     {
         $blogdata = explode('#', $this->datamixed);
@@ -45,6 +46,7 @@
         
         if (strstr($blogdata[3], "\t\t")) $titles = explode ( "\t\t", $blogdata[ 3 ] );
         else if ( $blogdata[3] ) $titles = Array ( $blogdata[ 3 ] );
+        
     }
 
     $q = 'SELECT c.* from ContentDataSmall e, ContentElement c WHERE e.DataString = "mod_blog" AND c.ID = c.mainID AND e.ContentID = c.mainID';
@@ -95,6 +97,27 @@
     return $str;
 ?>
 			</table>
+		</div>
+		<div class="SpacerSmallColored"></div>
+		<div class="Container" style="padding: <?= MarginSize ?>px">
+			<h2>
+				<?= i18n ( 'blogoverview_List_mode' ) ?>:
+			</h2>
+		</div>
+		<div class="SpacerSmall"></div>
+		<div class="SubContainer">
+			<select id="mod_blog_listmode">
+				<?
+					list ( , , , ,$listmode ) = explode ( '#', $this->datamixed );
+					$str = '';
+					foreach ( array ( 'titles', 'full' ) as $mode )
+					{
+						$sel = $mode == $listmode ? ' selected="selected"' : '';
+						$str .= '<option value="' . $mode . '"' . $sel . '>' . i18n ( 'blogoverview_mode' . $mode ) . '</option>';
+					}
+					return $str;
+				?>
+			</select>
 		</div>
 		<div class="SpacerSmallColored"></div>
 		<button type="button" onclick="mod_blog_overview_save()">

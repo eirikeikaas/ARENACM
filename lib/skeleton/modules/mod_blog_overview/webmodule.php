@@ -22,7 +22,7 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-global $document;
+global $document, $database;
 $document->addResource ( 'javascript', 'lib/javascript/arena-lib.js' );
 $document->addResource ( 'javascript', 'lib/javascript/bajax.js' );
 $document->addResource ( 'javascript', 'lib/javascript/blestbox.js' );
@@ -38,88 +38,120 @@ if ($_REQUEST['bpos'])
 
 if ($field->DataMixed)
 {
-    if (list($pages, $amounts, $navigations, $headings ) = explode('#', $field->DataMixed))
+    if (list($pages, $amounts, $navigations, $headings, $listmode ) = explode('#', $field->DataMixed))
     {
-        $pages = explode('_', $pages);
-        $amounts = explode('_', $amounts);
-        if ( $headings = explode ( "\t\t", $headings ) )
-            foreach ( $headings as $k=>$v ) $headings[$k] = str_replace ( "%hash%", "#", $v );
-        $blogcontents = array();
-        $hc = count ( $headings ) && $headings[0];
+    	if ( !$listmode ) $listmode == 'titles';
+    	$pages = explode('_', $pages);
+	    $amounts = explode('_', $amounts);
+	    if ( $headings = explode ( "\t\t", $headings ) )
+	        foreach ( $headings as $k=>$v ) $headings[$k] = str_replace ( "%hash%", "#", $v );
+	        
+    	// List only titles and date
+    	if ( $listmode == 'titles' )
+    	{
+		    $blogcontents = array();
+		    $hc = count ( $headings ) && $headings[0];
 
-		if (!$posAr)
-		{
-			for ($k = 0; $k < count($pages); $k++ )
+			if (!$posAr)
 			{
-				$posAr[$k] = 0;
+				for ($k = 0; $k < count($pages); $k++ )
+				{
+					$posAr[$k] = 0;
+				}
+			}
+		
+		    for ($k = 0; $k < count($pages); $k++)
+		    {
+				$pos = $posAr[$k];
+		        $blogs = new dbObject ('BlogItem');
+		        $blogs->addClause('SELECT', 'ContentElementID, Title');
+		        
+		        // Add search
+		        if ( $_REQUEST[ 'keywords' ] )
+		        {
+		        	$keys = explode ( ',', $_REQUEST[ 'keywords' ] );
+		        	foreach ( $keys as $key )
+		        	{
+		        		if ( !trim ( $key ) ) continue;
+		        		$wheres[] = "(Title LIKE \"%$key%\" OR Leadin LIKE \"%$key%\" OR Body LIKE \"%$key%\" OR Tags LIKE \"%$key%\")";
+		        	}
+		        	if ( count ( $wheres ) )
+		        		$blogs->addClause ( 'WHERE', '( ' . implode ( ' OR ', $wheres ) . ' )' );
+		        }
+		        
+		        $blogs->addClause('WHERE', 'IsPublished AND DatePublish <= NOW() AND ContentElementID=' . $pages[$k]);
+		        $cnt = $blogs->findCount();
+				$amount = $amounts[$k];
+				$lim = $amount;
+		        $blogs->addClause('ORDER BY', 'DateUpdated DESC, ID DESC');
+				$blogs->addClause ( 'LIMIT', $pos . ',' . $lim );
+
+		        if ($blogs = $blogs->find())
+		        {
+		            $page = new dbObject('ContentElement');
+		            $page->load($pages[$k]);
+
+				
+		            $str .= '<div class="Bold BlogListTitle">' . i18n ( $hc ? $headings[$k] : 'Blogarticles from the page' ) . ( $hc ? '' : $page->Title ) . ':</div>';
+		            foreach($blogs as $blog)
+		            {
+		                if ( !$blogcontents[$blog->ContentElementID] )
+		                    $blogcontents[$blog->ContentElementID] = new dbContent ( $blog->ContentElementID );
+		                $botpl = new cpTemplate($mtpldir . 'web_blogoversiktlist.php');
+		                $botpl->cnt =& $blogcontents[$blog->ContentElementID];
+		                $botpl->blog =& $blog;
+		                $botpl->date = ArenaDate ( DATE_FORMAT, $blog->DatePublish );
+		                $str .= $botpl->render();
+		            }
+				
+					// navigation
+					$nextPos = $prevPos = $posAr;
+					if ($pos > 0) $prevPos[$k] = $pos - $lim;
+					$prevPos = join('_', $prevPos);
+					if ($pos + $lim < $cnt) $nextPos[$k] = $pos + $lim;
+					$nextPos = join('_', $nextPos);
+				
+					$keys = $_REQUEST[ 'keywords' ] ? ( '&keywords=' . $_REQUEST[ 'keywords' ] ) : '';
+					$next = $prev = $sep = '';
+
+					if ($pos > 0)
+						$prev = '<a href="javascript:blog_navigate(\'' . $prevPos . $keys . '\')" class="Prev"><span>' . i18n ('Newer blogs') . '</span></a>';
+					if ($pos + $lim < $cnt)
+						$next = '<a href="javascript:blog_navigate(\'' . $nextPos . $keys . '\')" class="Next"><span>' . i18n ('Older blogs') . '</span></a>';
+					if ($prev && $next) 
+						$sep = ' <span class="Separator">&nbsp;</span> ';
+					else $sep = '';
+					if ($prev || $next)
+						$str .= '<div id="mod_blog_navigation"><hr/><p>' . $prev . $sep . $next . '</p></div>';
+		        }
+		    }
+		}
+		// Full listmode
+		else if ( $listmode == 'full' )
+		{
+			$len = count ( $pages );
+			for ( $a = 0; $a < $len; $a++ )
+			{
+				$page = new dbContent ();
+				if ( !$page->load ( $pages[$a] ) )
+					continue;
+				
+				if ( $blogs = $database->fetchObjectRows ( '
+					SELECT * FROM BlogItem WHERE ContentElementID=\'' . $pages[$a] . '\' 
+					ORDER BY DateUpdated DESC, ID DESC
+					LIMIT ' . $amounts[$a] . '
+				' ) )
+				{
+					$btpl = new cPTemplate ( $mtpldir . 'web_blog_w_ingress.php' );
+					foreach ( $blogs as $blog )
+					{
+						$btpl->blog = $blog;
+						$btpl->link = $page->getRoute () . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
+						$module .= $btpl->render ();
+					}
+				}
 			}
 		}
-		
-        for ($k = 0; $k < count($pages); $k++)
-        {
-			$pos = $posAr[$k];
-            $blogs = new dbObject ('BlogItem');
-            $blogs->addClause('SELECT', 'ContentElementID, Title');
-            
-            // Add search
-            if ( $_REQUEST[ 'keywords' ] )
-            {
-            	$keys = explode ( ',', $_REQUEST[ 'keywords' ] );
-            	foreach ( $keys as $key )
-            	{
-            		if ( !trim ( $key ) ) continue;
-            		$wheres[] = "(Title LIKE \"%$key%\" OR Leadin LIKE \"%$key%\" OR Body LIKE \"%$key%\" OR Tags LIKE \"%$key%\")";
-            	}
-            	if ( count ( $wheres ) )
-            		$blogs->addClause ( 'WHERE', '( ' . implode ( ' OR ', $wheres ) . ' )' );
-            }
-            
-            $blogs->addClause('WHERE', 'IsPublished AND DatePublish <= NOW() AND ContentElementID=' . $pages[$k]);
-            $cnt = $blogs->findCount();
-			$amount = $amounts[$k];
-			$lim = $amount;
-            $blogs->addClause('ORDER BY', 'DateUpdated DESC, ID DESC');
-			$blogs->addClause ( 'LIMIT', $pos . ',' . $lim );
-
-            if ($blogs = $blogs->find())
-            {
-                $page = new dbObject('ContentElement');
-                $page->load($pages[$k]);
-
-				
-                $str .= '<div class="Bold BlogListTitle">' . i18n ( $hc ? $headings[$k] : 'Blogarticles from the page' ) . ( $hc ? '' : $page->Title ) . ':</div>';
-                foreach($blogs as $blog)
-                {
-                    if ( !$blogcontents[$blog->ContentElementID] )
-                        $blogcontents[$blog->ContentElementID] = new dbContent ( $blog->ContentElementID );
-                    $botpl = new cpTemplate($mtpldir . 'web_blogoversiktlist.php');
-                    $botpl->cnt =& $blogcontents[$blog->ContentElementID];
-                    $botpl->blog =& $blog;
-                    $botpl->date = ArenaDate ( DATE_FORMAT, $blog->DatePublish );
-                    $str .= $botpl->render();
-                }
-				
-				// navigation
-				$nextPos = $prevPos = $posAr;
-				if ($pos > 0) $prevPos[$k] = $pos - $lim;
-				$prevPos = join('_', $prevPos);
-				if ($pos + $lim < $cnt) $nextPos[$k] = $pos + $lim;
-				$nextPos = join('_', $nextPos);
-				
-				$keys = $_REQUEST[ 'keywords' ] ? ( '&keywords=' . $_REQUEST[ 'keywords' ] ) : '';
-				$next = $prev = $sep = '';
-
-				if ($pos > 0)
-					$prev = '<a href="javascript:blog_navigate(\'' . $prevPos . $keys . '\')" class="Prev"><span>' . i18n ('Newer blogs') . '</span></a>';
-				if ($pos + $lim < $cnt)
-					$next = '<a href="javascript:blog_navigate(\'' . $nextPos . $keys . '\')" class="Next"><span>' . i18n ('Older blogs') . '</span></a>';
-				if ($prev && $next) 
-					$sep = ' <span class="Separator">&nbsp;</span> ';
-				else $sep = '';
-				if ($prev || $next)
-					$str .= '<div id="mod_blog_navigation"><hr/><p>' . $prev . $sep . $next . '</p></div>';
-            }
-        }
     }
 }
 if ($_REQUEST['bpos'])

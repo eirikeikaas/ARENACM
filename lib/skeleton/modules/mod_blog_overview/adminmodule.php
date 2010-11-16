@@ -22,6 +22,7 @@ Rune Nilssen
 *******************************************************************************/
 
 global $Session;
+i18nAddLocalePath ( 'skeleton/modules/mod_blog_overview/locale/' );
 $mtpldir = 'skeleton/modules/mod_blog_overview/templates/';
 $GLOBALS['document']->addResource('stylesheet', $mtpldir . '../css/admin.css');
 
@@ -34,7 +35,6 @@ switch($_REQUEST['modaction'])
 {
 	case 'new':
 		$mtpl = new cpTemplate($mtpldir . 'adm_blogoversikt.php');
-		//$mtpl->blogs =& $blogs;
 		$mtpl->amounts =& $amounts;
 		$mtpl->datamixed = $field->DataMixed;
 		die ($mtpl->render());
@@ -47,6 +47,7 @@ switch($_REQUEST['modaction'])
 		if ($_POST['page'] && $_POST['amounts'])
 		{
 			$datamixed = $_POST['page'] . '#' . $_POST['amounts'] . '#' . $_POST['nav'] . '#' . $_POST[ 'titles' ];
+			$datamixed .= '#' . $_POST['listmode'];
 		}
 		else $datamixed = 'empty!';
 		$field->DataMixed = $datamixed;
