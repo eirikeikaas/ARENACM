@@ -1468,7 +1468,7 @@ function encodeArenaHTML ( $string )
 	// Remove attributeless span tags
 	$string = preg_replace ( '/\<span\>([\w\W]*?)\<\/span\>/i', '$1', $string );
 	// Remove meta tags
-	$string = preg_replace ( '/\<meta[^>]*?>/i', '', $string );
+	$string = preg_replace ( '/\<meta[^>]*?\>/i', '', $string );
 	// Remove office paragraphs
 	$string = preg_replace ( '/\<o\:p\>([\w\W]*?)\<\/o\:p\>/i', '<p>$1</p>', $string );
 	// Flash
