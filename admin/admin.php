@@ -74,7 +74,7 @@ if ( !( $siteData = $corebase->fetchObjectRow ( 'SELECT * FROM `Sites` WHERE `Si
 	}
 	else
 	{
-		ArenaDie ( 'Failed to initialize site: ' . SITE_ID . '<br /><a style="font-size: 12px" href="admin.php?installer=true">Install this site &raquo;</a>' );
+		ArenaDie ( 'Failed to initialize site: ' . SITE_ID );
 	}
 }
 
