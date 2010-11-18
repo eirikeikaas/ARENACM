@@ -309,7 +309,7 @@ function generateLevelTree ( $content, $currentid, $r = "" )
 			$oStr.='</ul>';			
 		}
 		// Orphans entry (trash)
-		if ( $r == '' )
+		if ( $content->Parent == 0 )
 		{
 			$oStr .= '<li'.($currentid=='orphans'?' id="currentlevel" class="current"><div class="ButtonBox"><b':'><a').' id="levellitrash" href="javascript:setLibraryLevel(\'orphans\')">'. i18n ( 'Unorganized material' ) .($currentid=='orphans'?'</b><div style="clear:both"></div></div>':'</a>').'</li>';
 		}
