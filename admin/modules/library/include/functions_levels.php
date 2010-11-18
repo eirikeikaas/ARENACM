@@ -259,7 +259,7 @@ function generateLevelTree ( $content, $currentid, $r = "" )
 		{
 			$oStr.='<li class="current" id="currentlevel">';
 			$oStr.='<div class="ButtonBox" id="levelButtons' . $content->ID . '">';
-			$oStr .= '	<b id="levelli' . $content->ID . '" onmousedown="dragger.startDrag ( this, { pickup: \'clone\', objectType: \'Folder\', objectID: \'' . $content->ID . '\' } ); return false">'. $content->Name .'</b>';
+			$oStr .= '	<b id="levelli' . $content->ID . '" onmousedown="dragger.startDrag ( this, { pickup: \'clone\', objectType: \'Folder\', objectID: \'' . $content->ID . '\' } ); return false">'. trim ( $content->Name ) .'</b>';
 			
 			$oStr.='	<div class="ButtonBoxButtons">';
 			$structure = $Session->AdminUser->checkPermission ( $content, 'Structure', 'admin' );
@@ -286,20 +286,12 @@ function generateLevelTree ( $content, $currentid, $r = "" )
 		else
 		{
 			$oStr .= '<li>';
-			$oStr .= '	<a id="levelli' . $content->ID . '" href="javascript:setLibraryLevel(\'' . $content->ID . '\')" onmousedown="dragger.startDrag ( this, { pickup: \'clone\', objectType: \'Folder\', objectID: \'' . $content->ID . '\' } ); return false">'. ( $content->Name != '' ? $content->Name : '<i>Ingen tittel</i>' )  .'</a>';			
+			$oStr .= '	<a id="levelli' . $content->ID . '" href="javascript:setLibraryLevel(\'' . $content->ID . '\')" onmousedown="dragger.startDrag ( this, { pickup: \'clone\', objectType: \'Folder\', objectID: \'' . $content->ID . '\' } ); return false">'. ( $content->Name != '' ? trim ( $content->Name ) : '<i>Ingen tittel</i>' )  .'</a>';			
 
 		}
-		if ( !$content->_folders && $content->Type != 'meta' ) 
+		if ( !$content->_folders ) 
 		{
 			$content->getFolders ( );
-		}
-		if ( $content->_folders && $content->Parent == 0 )
-		{
-			$metaobject = new Dummy ( );
-			$metaobject->ID = 'orphans';
-			$metaobject->Name = 'Uorganisert materiale';
-			$metaobject->Type = 'meta';
-			$content->_folders[] = $metaobject;
 		}
 		
 		$len = count ( $content->_folders );
@@ -315,6 +307,11 @@ function generateLevelTree ( $content, $currentid, $r = "" )
 				}
 			}
 			$oStr.='</ul>';			
+		}
+		// Orphans entry (trash)
+		if ( $r == '' )
+		{
+			$oStr .= '<li'.($currentid=='orphans'?' id="currentlevel" class="current"><div class="ButtonBox"><b':'><a').' id="levellitrash" href="javascript:setLibraryLevel(\'orphans\')">'. i18n ( 'Unorganized material' ) .($currentid=='orphans'?'</b><div style="clear:both"></div></div>':'</a>').'</li>';
 		}
 		
 		// check if description to level is given.... initialize toolto then..
@@ -349,7 +346,7 @@ function generateLevelOptions( $content, $currentid = false, $excludeid = false,
 	
 	for ( $i = $level; $i > 0; $i-- ) $oStr .= '&nbsp; &nbsp;';
 	
-	$oStr .= $content->Name . '</option>';
+	$oStr .= trim ( $content->Name ) . '</option>';
 
 	if ( !$content->_folders ) $content->getFolders ( );
 	

@@ -296,7 +296,8 @@ function setLibraryLevel ( varlev )
 			document.getElementById ( 'libraryParent' ).value = varlev;
 	}
 	currentLibraryLevel = varlev;
-	if( document.getElementById( "newlibrarylevelparentlevel" ) ) document.getElementById( "newlibrarylevelparentlevel" ).value = varlev;
+	if( document.getElementById( "newlibrarylevelparentlevel" ) ) 
+		document.getElementById( "newlibrarylevelparentlevel" ).value = varlev;
 	updjax.send ( );
 } // end of setLibraryLevel
 

@@ -27,6 +27,7 @@ Rune Nilssen
 
 $root = dbFolder::getRootFolder ( );
 $db = &dbObject::globalValue ( 'database' );	 
+i18nAddLocalePath ( 'admin/modules/library/locale' );
 
 if( !defined( 'LIBRARY_ITEMSPERPAGE' ) ) define( 'LIBRARY_ITEMSPERPAGE', 15 );
 
