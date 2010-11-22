@@ -48,6 +48,7 @@ function getLevelContent( $lid )
 			case 'date': $lm = 'DateModified'; break;
 			case 'filename': $lm = 'Filename'; break;
 			case 'filesize': $lm = 'Filesize'; break;
+			case 'sortorder': $lm = 'SortOrder'; break;
 			case 'title':
 			default: $lm = 'Title'; break;
 		}
@@ -83,7 +84,7 @@ function getLevelContent( $lid )
 					$act = 'editLibraryFile( \'' . $row->ID . '\' ); return false;';
 					$drag = 'dragger.startDrag ( this, { pickup: \'clone\', objectType: \'File\', objectID: \'' . $row->ID . '\' } ); return false';
 				}
-				$click = 'toggleSelectedImage ( this )';
+				
 				$ext = explode ( '.', $row->Filename ); $ext = $ext[ count ( $ext ) - 1 ];
 				if ( !$icon )
 				{
@@ -159,8 +160,13 @@ function getLevelContent( $lid )
 					else $db->query ( 'UPDATE `File` SET `Filesize`=\''.$rlFilesize.'\' WHERE ID=\''.$row->ID.'\'' );
 					$row->Filesize = (int)$rlFilesize;
 				}
+				
+				$onc = 'setSortOrder(\''.$row->ID.'\',\''.$row->Type.'\',this.value)';
+				$click = 'toggleSelectedImage ( this )';
+				
 				$str .= '
-					<tr id="' . ( $row->Type == 'Image' ? 'imagecontainer' : 'tfilecontainer' ) . $row->ID . '" onmousedown="' . $drag . '" onclick="' . $click . '" ondblclick="' . $act . '" class="sw' . ( $sw = ( $sw == 2 ? 1 : 2 ) ) . ' Listedcontainer">
+					<tr id="' . ( $row->Type == 'Image' ? 'imagecontainer' : 'tfilecontainer' ) . $row->ID . '" onmouseup="' . $drag . '" onclick="' . $click . '" ondblclick="' . $act . '" class="sw' . ( $sw = ( $sw == 2 ? 1 : 2 ) ) . ' Listedcontainer">
+						<td style="text-align: right"><input type="text" size="2" onchange="'.$onc.'" class="SmallNum" value="' . ($row->SortOrder?$row->SortOrder:'0') . '"/></td>
 						<td class="Icon"><img src="' . $icon . '"></td>
 						<td>' . $row->Title . '</td>
 						<td>' . $row->Filename . '</td>

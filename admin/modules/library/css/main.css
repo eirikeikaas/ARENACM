@@ -176,3 +176,11 @@ table.DetailList tr:hover td
 	background: none;
 	z-index: 29;
 }
+
+input.SmallNum
+{
+	width: 25px;
+	padding: 1px;
+	text-align: right;
+	margin: 0;
+}

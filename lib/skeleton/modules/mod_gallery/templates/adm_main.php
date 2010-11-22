@@ -117,6 +117,23 @@
 											<td><strong>Detalj høyde:</strong></td>
 											<td><input type="text" id="galDetailHeight_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->DetailHeight ?>"/></td>
 										</tr>
+										<tr>
+											<td><strong>Sortering:</strong></td>
+											<td>
+												<select id="galSortMode_<?= $this->field->ID ?>">
+												<?
+													$array = array ( 'listmode_date', 'listmode_sortorder' );
+													$s = '';
+													foreach ( $array as $m )
+													{
+														$s = $m == $this->settings->SortMode ? ' selected="selected"' : '';
+														$str .= '<option value="' . $m . '"'.$s.'>' . i18n ( $m ) . '</option>';
+													}
+													return $str;
+												?>
+											</td>
+											
+										</tr>
 									</table>
 								</div>
 							</div>
@@ -185,6 +202,7 @@
 						j.addVar ( 'key_Pause',  document.getElementById ( 'galPause_<?= $this->field->ID ?>' ).value );
 						j.addVar ( 'key_Height', document.getElementById ( 'galHeight_<?= $this->field->ID ?>' ).value );
 						j.addVar ( 'key_Heading', document.getElementById ( 'galHeading_<?= $this->field->ID ?>' ).value );
+						j.addVar ( 'key_SortMode', document.getElementById ( 'galSortMode_<?= $this->field->ID ?>' ).value );
 						j.onload = function ()
 						{
 							document.getElementById ( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();

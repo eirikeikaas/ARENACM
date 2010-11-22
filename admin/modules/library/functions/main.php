@@ -40,6 +40,9 @@ switch ( $Session->LibraryListmode )
 	case 'filename':
 		$module->listmode = 'filename';
 		break;
+	case 'sortorder':
+		$module->listmode = 'sortorder';
+		break;
 	default:
 		$module->listmode = 'date';
 		break;

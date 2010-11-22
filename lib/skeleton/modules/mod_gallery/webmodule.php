@@ -43,7 +43,9 @@ if ( $settings->currentMode == 'gallery' )
 		{
 			$imgs = new dbImage ();
 			$imgs->addClause ( 'WHERE', 'ImageFolder=\'' . $fld . '\'' );
-			$imgs->addClause ( 'ORDER BY', 'DateModified DESC' );
+			if ( $settings->SortMode == 'listmode_sortorder' )
+				$imgs->addClause ( 'ORDER BY', 'SortOrder ASC' );
+			else $imgs->addClause ( 'ORDER BY', 'DateModified DESC' );
 			
 			if ( $images = $imgs->find ( ) )
 			{

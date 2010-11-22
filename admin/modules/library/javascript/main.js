@@ -926,4 +926,7 @@ function setupSliceUI ()
 	resizeSliceUI ();
 }
 
-
+function setSortOrder ( fid, typ, order )
+{
+	document.location = 'admin.php?module=library&action=setsortorder&t='+typ+'&i='+fid+'&o='+order;
+}

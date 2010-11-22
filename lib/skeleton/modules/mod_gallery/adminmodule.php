@@ -22,7 +22,7 @@ Rune Nilssen
 *******************************************************************************/
 
 global $Session, $document;
-
+i18nAddLocalePath ( 'skeleton/modules/mod_gallery/locale' );
 include_once ( 'skeleton/modules/mod_gallery/include/admfuncs.php' );
 $mtpldir = 'skeleton/modules/mod_gallery/templates/';
 $document->addResource('stylesheet', $mtpldir . '../css/admin.css');
