@@ -9,7 +9,14 @@
 			foreach ( $folders as $fid )
 			{
 				$img = new dbImage ();
-				$img->addClause ( 'ORDER BY', 'DateModified DESC' );
+				if ( $this->settings->SortMode == 'listmode_sortorder' )
+				{
+					$img->addClause ( 'ORDER BY', 'SortOrder ASC' );
+				}
+				else
+				{
+					$img->addClause ( 'ORDER BY', 'DateModified DESC' );
+				}
 				$img->addClause ( 'WHERE', 'ImageFolder=' . $fid );
 				if ( $images = $img->find ( ) )
 				{
