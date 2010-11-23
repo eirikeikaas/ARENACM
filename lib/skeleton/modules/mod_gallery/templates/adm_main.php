@@ -82,6 +82,22 @@
 												<td><strong>Pause (sek.):</strong></td>
 												<td><input type="text" id="galPause_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->Pause >= 1 ? $this->settings->Pause : 2 ?>"/></td>
 											</tr>
+											<tr>
+												<td><strong>Sortering:</strong></td>
+												<td>
+													<select id="galSortMode_<?= $this->field->ID ?>">
+													<?
+														$array = array ( 'listmode_date', 'listmode_sortorder' );
+														$s = '';
+														foreach ( $array as $m )
+														{
+															$s = $m == $this->settings->SortMode ? ' selected="selected"' : '';
+															$str .= '<option value="' . $m . '"'.$s.'>' . i18n ( $m ) . '</option>';
+														}
+														return $str;
+													?>
+												</td>
+											</tr>
 										</table>
 									</div>
 								</div>
@@ -132,7 +148,6 @@
 													return $str;
 												?>
 											</td>
-											
 										</tr>
 									</table>
 								</div>
