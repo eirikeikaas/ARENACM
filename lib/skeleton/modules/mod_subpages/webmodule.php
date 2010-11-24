@@ -31,7 +31,7 @@ if ( $p->load ( $fieldObject->DataInt ) )
 	{
 		foreach ( $subpages as $p )
 		{
-			$str .= '<div class="Block '.$p->Routename . '">';
+			$str .= '<div class="Block '.$p->RouteName . '">';
 			$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
 			$str .= '</div>';
 		}
