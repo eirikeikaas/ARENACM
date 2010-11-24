@@ -1301,31 +1301,38 @@ function string2hex ( $hex )
 	return $number >> 8;
 }
 
-function getSiteStructureOptions ( $current, $parent = '0', $r = '' )
+function getSiteStructureOptions ( $current = 0, $parent = '0', $r = '', $language = 0 )
 {
 	global $Session;
 	$db =& dbObject::globalValue ( 'database' );
 	$oStr = '';
-	$language = $Session->LanguageID;
-	if ( !$language ) $language = 1;
-	if ( $content = $db->fetchObjectRows ( 'SELECT * FROM ContentElement WHERE MainID = ID AND !IsDeleted AND !IsTemplate AND Parent=\'' . $parent . '\' AND `Language`=\'' . $language . '\' ORDER BY SortOrder ASC, ID ASC' ) )
+	if ( !$language ) 
 	{
-		foreach ( $content as $cnt )
+		$language = $Session->LanguageID;
+		if ( !$language )
+		{
+			$language = $db->fetchObjectRow ( 'SELECT DISTINCT(Language) L FROM ContentElement' );
+			$language = $language->L;
+		}
+	}
+	if ( $cnts = $db->fetchObjectRows ( 'SELECT * FROM ContentElement WHERE MainID = ID AND !IsDeleted AND !IsTemplate AND Parent=\'' . $parent . '\' AND `Language`=\'' . $language . '\' ORDER BY SortOrder ASC, ID ASC' ) )
+	{
+		foreach ( $cnts as $cnt )
 		{
 			if ( $cnt->ID )
 			{
 				if ( !$cnt->Title ) $cnt->Title = $cnt->MenuTitle;
 				if ( !$cnt->Title ) $cnt->Title = $cnt->SystemName;
 				if ( !$cnt->Title ) $cnt->Title = $cnt->ID;
-				
 				$s = ( $cnt->ID == $current ) ? $s = ' selected="selected"' : '';
-				
 				$oStr .= "<option value=\"{$cnt->ID}\"$s>$r{$cnt->Title}</option>";
-				$oStr .= getSiteStructureOptions ( $current, $cnt->ID, $r . "&nbsp;&nbsp;&nbsp;&nbsp;" );
+				if ( $iStr = getSiteStructureOptions ( $current, $cnt->ID, $r . "&nbsp;&nbsp;&nbsp;&nbsp;", $language ) )
+					$oStr .= $iStr;
 			}
 		}
+		return $oStr;
 	}
-	return $oStr;
+	return false;
 }
 
 /**
