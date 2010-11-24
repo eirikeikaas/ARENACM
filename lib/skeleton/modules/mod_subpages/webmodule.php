@@ -19,4 +19,25 @@ Blest AS. All Rights Reserved.
 Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
 Rune Nilssen
 *******************************************************************************/
+
+$p = new dbContent ( );
+if ( $p->load ( $fieldObject->DataInt ) )
+{
+	$subpages = new dbContent ();
+	$subpages->Parent = $p->MainID;
+	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
+	$str = '';
+	if ( $subpages = $subpages->find ( ) )
+	{
+		foreach ( $subpages as $p )
+		{
+			$str .= '<div class="Block '.$p->Routename . '">';
+			$str .= $p->renderExtraFields ();
+			$str .= '</div>';
+		}
+	}
+	$module = $str;
+}
+else $module = '';
+
 ?>
