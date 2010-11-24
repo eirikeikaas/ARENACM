@@ -25,7 +25,7 @@ if ( $p->load ( $fieldObject->DataInt ) )
 {
 	$subpages = new dbContent ();
 	$subpages->Parent = $p->MainID;
-	$subpages->addClause ( 'WHERE', 'MainID == ID' );
+	$subpages->addClause ( 'WHERE', 'MainID = ID' );
 	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
 	$str = '';
 	if ( $subpages = $subpages->find ( ) )
