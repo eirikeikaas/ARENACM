@@ -636,16 +636,13 @@ function mulIncreaseImages ( )
 		index++;
 	var td = document.createElement ( 'td' );
 	td.innerHTML = '' +
-		'<td><p>Fil tittel ' + ( index + 1 ) + ':</p>' +
-		'<p>' +
-		'<input type="text" size="20" name="filename_' + index + '"/>' +
-		'</p>';
+		'Bildetittel' + ( index + 1 ) + ': ' +
+		'<input type="text" size="20" name="filename_' + index + '"/>';
 	var td2 = document.createElement ( 'td' );
 	td2.innerHTML = '' +
-		'<p>Fil ' + ( index + 1 ) + ':</p>' +
-		'<p>' +
-		'<input type="file" name="image_' + index + '"/>' +
-		'</p></td>';
+		'Bilde ' + ( index + 1 ) + ':' +
+		'<input type="file" name="image_' + index + '"/>';
+	tr.className = 'sw'+(index % 2 + 1);
 	tr.appendChild ( td ); tr.appendChild ( td2 );
 	var par = document.getElementById ( 'MultipleFilesTable' );
 	if ( par.firstChild.nodeName.toLowerCase ( ) == 'tbody' )
@@ -666,16 +663,13 @@ function mulIncreaseFiles ( )
 		index++;
 	var td = document.createElement ( 'td' );
 	td.innerHTML = '' +
-		'<td><p>Fil tittel ' + ( index + 1 ) + ':</p>' +
-		'<p>' +
-		'<input type="text" size="20" name="filename_' + index + '"/>' +
-		'</p>';
+		'Filtittel ' + ( index + 1 ) + ': ' +
+		'<input type="text" size="20" name="filename_' + index + '"/>';
 	var td2 = document.createElement ( 'td' );
 	td2.innerHTML = '' +
-		'<p>Fil ' + ( index + 1 ) + ':</p>' +
-		'<p>' +
-		'<input type="file" name="file_' + index + '"/>' +
-		'</p></td>';
+		'Fil ' + ( index + 1 ) + ': ' +
+		'<input type="file" name="file_' + index + '"/>';
+	tr.className = 'sw'+(index % 2 + 1);
 	tr.appendChild ( td ); tr.appendChild ( td2 );
 	var par = document.getElementById ( 'MultipleFilesTable' );
 	if ( par.firstChild.nodeName.toLowerCase ( ) == 'tbody' )

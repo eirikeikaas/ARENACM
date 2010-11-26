@@ -150,7 +150,7 @@
 					<button type="button" onclick="submitImageUpload('close')">
 						<img src="admin/gfx/icons/accept.png" /> Lagre & Lukk
 					</button>
-					<button onclick="removeModalDialogue ( 'EditLevel' );">
+					<button type="button" onclick="removeModalDialogue ( 'EditLevel' );">
 						<img src="admin/gfx/icons/cancel.png" /> Lukk
 					</button>
 				</p>
@@ -171,17 +171,15 @@
 				var ostr = '';
 				for ( var a = 0; a < num; a++ )
 				{
-					ostr += '<tr><td><p>Fil tittel ' + ( a + 1 ) + ':</p>';
-					ostr += '<p>';
+					ostr += '<tr class="sw'+(a%2+1)+'"><td>Bildetittel ' + ( a + 1 ) + ': ';
 					ostr += '<input type="text" size="20" name="filename_' + a + '"/>';
-					ostr += '</p></td><td>';
-					ostr += '<p>Fil ' + ( a + 1 ) + ':</p>';
-					ostr += '<p>';
+					ostr += '</td><td>';
+					ostr += 'Bilde ' + ( a + 1 ) + ': ';
 					ostr += '<input type="file" name="image_' + a + '"/>';
-					ostr += '</p></td></tr>';
+					ostr += '</td></tr>';
 				}
 				if ( document.getElementById ( 'multipleImages' ) )
-					document.getElementById ( 'multipleImages' ).innerHTML = '<table id="MultipleFilesTable">' + ostr + '</table>';
+					document.getElementById ( 'multipleImages' ).innerHTML = '<table id="MultipleFilesTable" class="List">' + ostr + '</table>';
 			}
 			
 			<?if ( !$this->file->ID ) { ?>
