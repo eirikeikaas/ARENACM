@@ -38,7 +38,9 @@
 		gal.galleryWidth = <?= $this->settings->Width ?>;
 		gal.galleryHeight = <?= $this->settings->Height - 27 ?>;
 		gal.galleryAnimated = <?= $this->settings->Animated == 1 ? '1' : '0' ?>;
+		gal.galleryShowStyle = '<?= $this->settings->ShowStyle ?>';
 		gal.galleryPause = <?= $this->settings->Pause >= 1 ? $this->settings->Pause : '2' ?>;
+		gal.gallerySpeed = <?= $this->settings->Speed >= 1 ? ($this->settings->Speed*100) : '200' ?>;
 		gal.init ( '<?= $this->field->Name ?>' );
 	</script>
 

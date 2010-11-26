@@ -46,7 +46,7 @@
 .GalleryContainer .Pages a 
 {
 	position: absolute;
-	bottom: 0px;
+	bottom: 1px;
 	display: block;
 	width: 30px;
 	height: 22px;
@@ -59,6 +59,7 @@
 	text-align: center;
 	-moz-transition: all 1.5s;
 	-webkit-transition: all 1.5s;
+	z-index: 5;
 }
 .GalleryContainer .Pages a.Active
 {
@@ -79,8 +80,12 @@
 .GalleryContainer .Pages
 {
 	position: absolute;
-	bottom: 1px;
+	bottom: 0px;
 	left: 0;
+	height: 25px;
+	width: 100%;
+	background: #000000;
+	z-index: 4;
 }
 .GalleryContainer .ArrowPrev 
 {
@@ -89,7 +94,7 @@
 	width: 30px;
 	height: 25px;
 	background: #000 url(arrow.png) no-repeat center center;
-	z-index: 2;
+	z-index: 5;
 	cursor: hand; cursor: pointer;
 }
 .GalleryContainer .ArrowNext
@@ -99,7 +104,7 @@
 	width: 30px;
 	height: 25px;
 	background: #000 url(arrow_flip.png) no-repeat center center;
-	z-index: 2;
+	z-index: 5;
 	cursor: hand; cursor: pointer;
 }
 .GalleryContainer .ArrowNext:hover, .GalleryContainer .ArrowPrev:hover

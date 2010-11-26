@@ -32,7 +32,7 @@ function getPreview ( $settings, $field )
 	if ( !$settings->ThumbColumns ) 
 		$settings->ThumbColumns = 4;
 	
-	$folders = explode ( ',', trim ( $settings->Folders ) );
+	$folders = explode ( ':', trim ( $settings->Folders ) );
 	if ( $settings->currentMode == 'gallery' )
 	{
 		if ( count ( $folders ) )
@@ -84,7 +84,7 @@ function getPreview ( $settings, $field )
 
 function listFolders ( $str, $field )
 {
-	if ( $ids = explode ( ',', trim ( $str ) ) )
+	if ( $ids = explode ( ':', trim ( $str ) ) )
 	{
 		$str = '<table cellspacing="0" cellpadding="0" border="0" width="100%" class="Gui">';
 		foreach ( $ids as $id )
