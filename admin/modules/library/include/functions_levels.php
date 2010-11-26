@@ -165,9 +165,9 @@ function getLevelContent( $lid )
 				$click = 'toggleSelectedImage ( this )';
 				
 				$str .= '
-					<tr id="' . ( $row->Type == 'Image' ? 'imagecontainer' : 'tfilecontainer' ) . $row->ID . '" onmouseup="' . $drag . '" onclick="' . $click . '" ondblclick="' . $act . '" class="sw' . ( $sw = ( $sw == 2 ? 1 : 2 ) ) . ' Listedcontainer">
+					<tr id="' . ( $row->Type == 'Image' ? 'imagecontainer' : 'tfilecontainer' ) . $row->ID . '" onclick="' . $click . '" ondblclick="' . $act . '" class="sw' . ( $sw = ( $sw == 2 ? 1 : 2 ) ) . ' Listedcontainer">
 						<td style="text-align: right"><input type="text" size="2" onchange="'.$onc.'" class="SmallNum" value="' . ($row->SortOrder?$row->SortOrder:'0') . '"/></td>
-						<td class="Icon"><img src="' . $icon . '"></td>
+						<td class="Icon"><div class="Container" style="padding: 3px" onmousedown="' . $drag . '"><img src="' . $icon . '" ></div></td>
 						<td>' . $row->Title . '</td>
 						<td>' . $row->Filename . '</td>
 						<td>' . filesizetohuman ( $row->Filesize ) . '</td>

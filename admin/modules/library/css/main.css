@@ -128,7 +128,6 @@ table.DetailList tr:hover
 table.DetailList tr:hover td
 {
 	outline: 1px solid #6795BC;
-	cursor: pointer;
 }
 
 /** Library content ***********************************************************/
@@ -183,4 +182,11 @@ input.SmallNum
 	padding: 1px;
 	text-align: right;
 	margin: 0;
+}
+
+.Icon:hover .Container
+{
+	background: #6795BC;
+	border-color: #223344;
+	cursor: move;
 }
