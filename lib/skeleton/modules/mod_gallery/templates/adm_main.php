@@ -131,7 +131,7 @@
 															<?
 																for ( $a = 0; $a <= 100; $a++ )
 																{
-																	$s = $m == $this->settings->ShowStyle ? ' selected="selected"' : '';
+																	$s = $m == $this->settings->Speed ? ' selected="selected"' : '';
 																	$str .= '<option value="' . $a . '"'.$s.'>' . ($a*0.1) . ' sekunder</option>';
 																}
 																return $str;
