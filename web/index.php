@@ -81,6 +81,7 @@ define ( 'BASE_DIR', $siteData->BaseDir );
 $database = new cDatabase ( );
 $database->setUsername ( $siteData->SqlUser );
 $database->setPassword ( $siteData->SqlPass );
+$database->setHostname ( $siteData->SqlHost );
 $database->setDb ( $siteData->SqlDatabase );
 $database->Open ( );
 $userbase =& $database; // <- Compatability with ARENA1, userbase is used

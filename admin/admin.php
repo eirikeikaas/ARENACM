@@ -85,6 +85,7 @@ if ( !( $siteData = $corebase->fetchObjectRow ( 'SELECT * FROM `Sites` WHERE `Si
 $database = new cDatabase ( );
 $database->setUsername ( $siteData->SqlUser );
 $database->setPassword ( $siteData->SqlPass );
+$database->setHostname ( $siteData->SqlHost );
 $database->setDb ( $siteData->SqlDatabase );
 $database->Open ( );
 $userbase =& $database;
@@ -155,7 +156,17 @@ if ( $user->authenticate ( ) && !$_REQUEST[ 'logout' ] )
 		$Session->Set ( 'AdminUser', &$user );
 		$document->load ( 'admin/templates/main.php' );
 		$notAuthenticated = false;
-		include_once ( 'system.php' );
+		// If core and database is same, it is a core user
+		if ( 
+			$database->hostname == $corebase->hostname && 
+			$database->username == $corebase->username &&
+			$database->db == $corebase->db
+		)
+		{
+			$user->_dataSource = 'core';
+			$user->_database =& $corebase;
+		}
+		include_once ( 'admin/system.php' );
 	}
 }
 if ( $notAuthenticated || $_REQUEST[ 'logout' ] )
