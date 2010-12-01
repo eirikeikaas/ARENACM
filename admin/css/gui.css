@@ -474,3 +474,35 @@ input[type=text]:focus,input[type=password]:focus
 	outline: 0;
 }
 
+.ClickHeader, .ClickHeaderActive
+{
+	border: 1px solid #56748C;
+	background: #5187B0;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	color: #ffffff;
+	font-weight: bold;
+	cursor: hand;
+	cursor: pointer;
+	padding: 3px;
+}
+.ClickHeaderActive { background: #6688aa; }
+.ClickHeader:hover, .ClickHeaderActive
+{
+	background: #777777;
+	border-color: #555555;
+}
+.ClickHeader p, .ClickHeaderActive p { margin: 0; }
+.ClickContent { border: 1px solid rgba(0,0,0,0); padding: 0 4px; margin: 0; }
+.ClickContentActive
+{
+	border: 1px solid #cccccc;
+	background: #f8f8f8;
+	padding: 4px;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+	margin: 1px 0 1px 0;
+}
+.ClickContent p { margin: 0 0 4px 0; }
