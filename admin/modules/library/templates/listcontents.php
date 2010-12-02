@@ -60,7 +60,7 @@
 			<?= $this->pagination ? ( '<td style="white-space: nowrap; padding-right: 2px">' . $this->pagination . '</td>' ) : '' ?>
 			<td>
 				<div class="SubContainer" style="height: 24px; padding-top: 15px">
-					Mappe "<?= $this->folder->Name ?>" innholder <?= count( $this->contents['images'] )?> bilde(r) og <?= count( $this->contents['files'] )?> fil(er).
+					<?= i18n ( 'Folder' ) ?> "<?= $this->folder->Name ?>" <?= i18n ( 'contains' ) ?> <?= count( $this->contents['images'] )?> bilde(r) og <?= count( $this->contents['files'] )?> fil(er).
 				</div>
 			</td>
 		</tr>

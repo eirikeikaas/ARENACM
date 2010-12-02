@@ -48,6 +48,7 @@ if ( $_POST[ 'SiteTitle' ] )
 	$topmenu_mode = false;
 	$main_contentgroup = false;
 	$site_title = false;
+	$admin_language = false;
 	
 	// Set some options
 	foreach ( $c as $line )
@@ -107,8 +108,15 @@ if ( $_POST[ 'SiteTitle' ] )
 			$out[] = "\tdefine ( 'DATE_FORMAT', '{$_POST['Date_Format']}' );";
 			$date_format = true;
 		}
+		else if ( strstr ( $line, 'ADMIN_LANGUAGE' ) )
+		{
+			$out[] = "\tdefine ( 'ADMIN_LANGUAGE', '{$_POST['Admin_Language']}' );";
+			$admin_language = true;
+		}
 		else if ( trim ( $line ) )
+		{
 			$out[] = $line;
+		}
 	}
 	
 	// Write some settings if not set
@@ -134,7 +142,8 @@ if ( $_POST[ 'SiteTitle' ] )
 		$out[] = "\tdefine ( 'MAIN_CONTENTGROUP', '{$_POST['MainContentGroup']}' );";
 	if ( !$date_format )
 		$out[] = "\tdefine ( 'DATE_FORMAT', '{$_POST['Date_Format']}' );";
-		
+	if ( !$admin_language )
+		$out[] = "\tdefine ( 'ADMIN_LANGUAGE', '{$_POST['Admin_Language']}' );";
 	
 	
 	$str = implode ( "\n", $out );

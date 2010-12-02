@@ -104,7 +104,7 @@ function renderUnitList ( $parent = 0 )
 			{
 				 $str .= '<li class="current" id="currentlevel">
 				 <div class="ButtonBox" id="levelButtons' . $row->ID . '">
-				 	<a href="admin.php?module=users&collectionid=' . $row->ID . '">' . $row->Name . '</a>
+				 	<a href="admin.php?module=users&collectionid=' . $row->ID . '">' . (trim($row->Name)?$row->Name:i18n('Unnamed')) . '</a>
 				 ';
 				 if ( $row->ID > 0 )
 				 {
@@ -126,7 +126,7 @@ function renderUnitList ( $parent = 0 )
 					 <div style="clear: both"></div>
 				 </div>';
 			}
-			else $str .= '<li><span><a href="admin.php?module=users&collectionid=' . $row->ID . '">' . $row->Name . '</a></span>';
+			else $str .= '<li><span><a href="admin.php?module=users&collectionid=' . $row->ID . '">' . (trim($row->Name)?$row->Name:i18n('Unnamed')) . '</a></span>';
 			if ( $row->ID > 0 )
 				$str .= renderUnitList ( $row->ID );
 			if ( $row->ID === $Session->UsersCollectionID )

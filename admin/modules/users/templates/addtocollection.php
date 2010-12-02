@@ -1,6 +1,6 @@
 
 	<h1>
-		Legg brukere til en eller flere kolleksjoner
+		<?= i18n ( 'Add users to collections' ) ?>
 	</h1>
 	<form method="post" action="admin.php?module=users&action=addtocollection&apply=true">
 		<div class="Container" style="padding: 2px">
@@ -12,10 +12,10 @@
 	
 		<div class="SpacerSmallColored"></div>
 		<button type="submit">
-			<img src="admin/gfx/icons/building_go.png"> Lagre
+			<img src="admin/gfx/icons/building_go.png"> <?= i18n ( 'Save' ) ?>
 		</button>
 		<button type="button" onclick="removeModalDialogue ( 'addtocollection' )">
-			<img src="admin/gfx/icons/cancel.png"> Lukk
+			<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Close' ) ?>
 		</button>
 	</form>
 	
@@ -23,3 +23,4 @@
 		var users = getUniqueListEntries ( 'seluserslist' );
 		document.getElementById ( 'hiddenusers' ).value = users;
 	</script>
+

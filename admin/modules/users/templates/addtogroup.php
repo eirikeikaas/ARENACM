@@ -1,6 +1,6 @@
 
 	<h1>
-		Legg brukere til en eller flere grupper
+		<?= i18n ( 'Add users to groups' ) ?>
 	</h1>
 	<form method="post" action="admin.php?module=users&action=addtogroup&apply=true">
 		<div class="Container" style="padding: 2px">
@@ -12,10 +12,10 @@
 	
 		<div class="SpacerSmallColored"></div>
 		<button type="submit">
-			<img src="admin/gfx/icons/group_go.png"> Lagre
+			<img src="admin/gfx/icons/group_go.png"> <?= i18n ( 'Save' ) ?>
 		</button>
 		<button type="button" onclick="removeModalDialogue ( 'addtogroup' )">
-			<img src="admin/gfx/icons/cancel.png"> Lukk
+			<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Close' ) ?>
 		</button>
 	</form>
 	

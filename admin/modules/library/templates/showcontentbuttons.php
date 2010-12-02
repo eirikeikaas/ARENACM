@@ -1,10 +1,10 @@
 						
 					<div>
-						<button onclick="addLibraryImage ()"><img src="admin/gfx/icons/image_add.png"> Nytt bilde</button>
-						<button onclick="addLibraryFile ()"><img src="admin/gfx/icons/page_add.png"> Ny fil</button>
-						<button onclick="createLibraryFile ()"><img src="admin/gfx/icons/star.png"> Lag en fil</button>
-						<button onclick="initModalDialogue ( 'optimizesize', 400, 400, 'admin.php?module=library&function=optimizesize&lid=' + document.lid )"><img src="admin/gfx/icons/folder_image.png"> Optimaliser bildene i mappen</button>
-						<button onclick="deleteSelected ()"><img src="admin/gfx/icons/image_delete.png"> Slett valgte</button>
+						<button onclick="addLibraryImage ()"><img src="admin/gfx/icons/image_add.png"> <?= i18n ( 'Upload image' ) ?></button>
+						<button onclick="addLibraryFile ()"><img src="admin/gfx/icons/page_add.png"> <?= i18n ( 'Upload file' ) ?></button>
+						<button onclick="createLibraryFile ()"><img src="admin/gfx/icons/star.png"> <?= i18n ( 'Create a file' ) ?></button>
+						<button onclick="initModalDialogue ( 'optimizesize', 400, 400, 'admin.php?module=library&function=optimizesize&lid=' + document.lid )"><img src="admin/gfx/icons/folder_image.png"> <?= i18n ( 'Optimize images' ) ?></button>
+						<button onclick="deleteSelected ()"><img src="admin/gfx/icons/image_delete.png"> <?= i18n ( 'Delete selected' ) ?></button>
 					
 					</div>
 					

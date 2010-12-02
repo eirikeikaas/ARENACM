@@ -13,9 +13,17 @@ module_contents							: Site content
 module_library							: Library
 module_extensions						: Extensions
 module_settings							: Information
+Nettsideinnhold							: Site Contents
+Bannere									: Banners
 
 # Main translations ###################################################################
 
 Hide workbench							: Hide workbench
 Show workbench							: Show workbench
+metabuttons_Superuser					: Superuser
+metabuttons_Settings					: Settings
+metabuttons_Help						: Help
+metabuttons_Goto website				: Goto website
+metabuttons_Logout						: Logout
+
 

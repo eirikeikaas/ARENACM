@@ -117,7 +117,7 @@ $oStr = $folders .  '<!--SEPERATOR-->' . $contents;
 
 if ( !$oStr ) 
 {
-	$oStr = '<div class="Info"><small>Fant ingenting på søkestrengen. <br /><br />'. $sql .'</div>';
+	$oStr = '<div class="Info"><small>' . i18n( 'No files or images matched your query.' ) . ' <br /><br /></div>';
 }
 
 if ( isset ( $do_not_die ) )

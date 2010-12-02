@@ -27,6 +27,7 @@ Rune Nilssen
 /**
  * Prerequisites
  */
+i18nAddLocalePath ( 'admin/modules/users/locale' );
 require_once ( "admin/modules/users/include/main_funcs.php" );
  
 /**

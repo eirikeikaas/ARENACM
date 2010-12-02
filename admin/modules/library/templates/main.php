@@ -13,21 +13,18 @@
 <div class="ModuleContainer">
 	<table class="LayoutColumns">
 		<tr style="height: 0px">
-			<th style="width: 23%; padding-right: <?= MarginSize ?>px" id="ColumnLeftTh"></th>
-			<th style="padding: 4px;"></th>
-			<th style="width: 77%; padding-right: <?= MarginSize ?>px; padding-left: <?= MarginSize ?>px" id="ColumnMiddleTh"></th>
+			<th style="width: 240px; padding-right: <?= MarginSize ?>px" id="ColumnLeftTh"></th>
+			<th style="width: 4px"></th>
+			<th style="padding-right: <?= MarginSize ?>px; padding-left: <?= MarginSize ?>px" id="ColumnMiddleTh"></th>
 		</tr>
 		<tr>
 			<td>
 				<div id="ChoicesTabs">
 					<div class="tab" id="tabLibStructure">
-						<img src="admin/gfx/icons/folder.png"/> Mapper
-					</div>
-					<div class="tab" id="tabChoices">
-						<img src="admin/gfx/icons/wrench.png"> Valg
+						<img src="admin/gfx/icons/folder.png"/> <?= i18n ( 'Folders' ) ?>
 					</div>
 					<div class="tab" id="tabAdvanced">
-						<img src="admin/gfx/icons/drive_key.png"> Avansert
+						<img src="admin/gfx/icons/drive_key.png"> <?= i18n ( 'Advanced' ) ?>
 					</div>
 					<div class="page" id="pageLibStructure" style="padding: 0px; margin: 0">
 						<div id="levels">
@@ -38,49 +35,45 @@
 							</div>
 						</div>
 					</div>
-					<div class="page" id="pageChoices" style="padding: 3px; margin: 0">
-						<div id="newLevel" class="Container"></div>
-					</div>
 					<div class="page" id="pageAdvanced" style="padding: 3px; margin: 0">
+						<div id="newLevel" class="Container"></div>
+						<div class="SpacerSmall"></div>
 						<div class="Container">
 							<button type="button" onclick="cleanCache()">
-								<img src="admin/gfx/icons/folder_wrench.png"> Tøm midlertidige filer
+								<img src="admin/gfx/icons/folder_wrench.png"> <?= i18n ( 'Empty temporary files' ) ?>
 							</button>
 							<div class="Spacer"></div>
 							<button type="button" onclick="document.location='admin.php?module=library&action=checkuploadfolder';">
-								<img src="admin/gfx/icons/folder_wrench.png"> Skjekk for manglende filer
+								<img src="admin/gfx/icons/folder_wrench.png"> <?= i18n ( 'Check for missing files' ) ?>
 							</button>
 						</div>
 					</div>
 				</div>
-				<div class="SpacerSmallColored"></div>		
 				<?if ( $this->tags ) { ?>
-				<h1>
+				<h2 class="BlockHead">
 					<img src="admin/gfx/icons/tag_green.png" style="float: left; margin: 0pt 4px 0pt 0pt;"/>
-					Tags
-				</h1>
-				<div class="Container">
+					<?= i18n ( 'Tags' ) ?>
+				</h2>
+				<div class="BlockContainer">
 					<?= $this->tags ?>
 				</div>
-				<div class="SpacerSmallColored"></div>
 				<?}?>
-				<h1>
+				<h2 class="BlockHead">
 					<img src="admin/gfx/icons/magnifier.png" style="float: left; margin: 0pt 4px 0pt 0pt;"/> 
-					Søk i bibliotek
-				</h1>
-				<div class="Container">
-					<p><strong>Søkeord:</strong></p>
+					<?= i18n ( 'Search the library' ) ?>
+				</h2>
+				<div class="BlockContainer">
 					<form id="librarySearch" onsubmit="ModuleLibrarySearch ( ); return false">
 						<p>
-							<input type="text" style="width: 95%" name="libSearchKeywords" id="libSearchKeywords" value="<?= $_REQUEST[ 'libSearchKeywords' ] ?>">
+							<input type="text" style="width: 95%" name="libSearchKeywords" id="libSearchKeywords" value="<?= $_REQUEST[ 'libSearchKeywords' ] ? $_REQUEST[ 'libSearchKeywords' ] : i18n ( 'keywords...' ) ?>" onmouseup="this.select()">
 						</p>
 					</form>
 					<div class="Spacer"></div>
 					<button type="button" onclick="ModuleLibrarySearch()">
-						<img src="admin/gfx/icons/magnifier.png"> Søk
+						<img src="admin/gfx/icons/magnifier.png"> <?= i18n ( 'Search' ) ?>
 					</button>
 					<button type="button" onclick="ModuleResetLibrarySearch()" id="libNullStillSoek" style="position: absolute; visibility: hidden">
-						<img src="admin/gfx/icons/cancel.png"> Nullstill søk
+						<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Reset search' ) ?>
 					</button>
 				</div>
 				<div id="searchResults"></div>
@@ -93,18 +86,18 @@
 					<span id="ContentButtonsSmall">
 					</span>
 					<div style="float: right; margin: -4px 4px 0 0">
-						Vis: <select onchange="document.location = 'admin.php?module=library&viewmode=' + this.value">
-							<option value="thumbnails"<?= $this->viewmode == 'thumbnails' ? 'selected="selected"' : '' ?>>Thumbnails</option>
-							<option value="details"<?= $this->viewmode == 'details' ? 'selected="selected"' : '' ?>>Detaljert liste</option>
+						<?= i18n ( 'Show' ) ?>: <select onchange="document.location = 'admin.php?module=library&viewmode=' + this.value">
+							<option value="thumbnails"<?= $this->viewmode == 'thumbnails' ? 'selected="selected"' : '' ?>><?= i18n ( 'Thumbnails' ) ?></option>
+							<option value="details"<?= $this->viewmode == 'details' ? 'selected="selected"' : '' ?>><?= i18n ( 'Detailed list' ) ?></option>
 						</select>
-						Listet etter: <select onchange="document.location='admin.php?module=library&listmode=' + this.value">
-							<option value="date"<?= $this->listmode == 'date' ? ' selected="selected"' : '' ?>>Dato</option>
-							<option value="filename"<?= $this->listmode == 'filename' ? ' selected="selected"' : '' ?>>Filnavn</option>
-							<option value="title"<?= $this->listmode == 'title' ? ' selected="selected"' : '' ?>>Tittel</option>
-							<option value="filesize"<?= $this->listmode == 'filesize' ? ' selected="selected"' : '' ?>>Filstørrelse</option>
+						<?= i18n ( 'Listed by' ) ?>: <select onchange="document.location='admin.php?module=library&listmode=' + this.value">
+							<option value="date"<?= $this->listmode == 'date' ? ' selected="selected"' : '' ?>><?= i18n ( 'Date' ) ?></option>
+							<option value="filename"<?= $this->listmode == 'filename' ? ' selected="selected"' : '' ?>><?= i18n ( 'Filename' ) ?></option>
+							<option value="title"<?= $this->listmode == 'title' ? ' selected="selected"' : '' ?>><?= i18n ( 'File title' ) ?></option>
+							<option value="filesize"<?= $this->listmode == 'filesize' ? ' selected="selected"' : '' ?>><?= i18n ( 'Filsize' ) ?></option>
 						</select>
 					</div>
-					<div style="font-size: 13px" id="Innholdsheader">Innhold i "<?= $this->folder->Name ?>":</div>
+					<div style="font-size: 13px" id="Innholdsheader"><?= i18n ( 'The contents of' ) ?> "<?= $this->folder->Name ?>":</div>
 				</h1>
 				<div class="Container">
 					

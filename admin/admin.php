@@ -31,14 +31,13 @@ Rune Nilssen
 session_start ( );
 header ( 'Cache-Control: no-cache, must-revalidate, proxy-revalidate, max-age=0' );
 
-//error_reporting(E_ALL);
-if ( !defined ( 'LOCALE' ) ) define ( 'LOCALE', 'en' );
-define ( 'ARENAMODE', 'admin' );
-
 /**
  * Include our config
  */
 require ( 'config.php' );
+if ( !defined ( 'ADMIN_LANGUAGE' ) ) define ( 'ADMIN_LANGUAGE', 'no' );
+if ( !defined ( 'LOCALE' ) ) define ( 'LOCALE', ADMIN_LANGUAGE );
+define ( 'ARENAMODE', 'admin' );
 
 /**
  * Include only the basic classes
@@ -52,6 +51,8 @@ require ( 'lib/classes/template/cDocument.php' );
 require ( 'lib/classes/session/session.php' );
 
 $Session = new Session ( SITE_ID . 'admin' );
+$Session->Set ( 'LanguageCode', LOCALE );
+$GLOBALS[ 'Session' ] =& $Session;
 
 /**
  * Setup the core database

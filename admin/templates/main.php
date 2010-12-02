@@ -34,31 +34,31 @@
 		</div>	
 		<div id="MetaButtons">
 			<div onclick="document.location='admin.php?module=settings&logout=1'">
-				<img src="admin/gfx/icons/lock.png" alt="logg_ut"> Logg ut
+				<img src="admin/gfx/icons/lock.png" alt="logg_ut"> <?= i18n ( 'metabuttons_Logout' ) ?>
 			</div>
 			<div id="showWebsite">
-				<a href="<?= BASE_URL ?>" target="_blank" style="color: #edf5ff"><img src="admin/gfx/icons/house.png" alt="vis_nettsiden" border="0"> Til nettsiden</a>
+				<a href="<?= BASE_URL ?>" target="_blank" style="color: #edf5ff"><img src="admin/gfx/icons/house.png" alt="vis_nettsiden" border="0"> <?= i18n ( 'metabuttons_Goto website' ) ?></a>
 			</div>
 			<div>
-				<a href="lib/help/documentation.pdf" style="color: #EDF5FF" target="_blank"><img src="admin/gfx/icons/help.png" alt="hjelp" border="0"> Hjelp</a>
+				<a href="lib/help/documentation.pdf" style="color: #EDF5FF" target="_blank"><img src="admin/gfx/icons/help.png" alt="hjelp" border="0"> <?= i18n ( 'metabuttons_Help' ) ?></a>
 			</div>
 			<?if ( $GLOBALS['Session']->AdminUser->modulePermission ( 'Access', 'settings' ) ) { ?>
 			<div<? if ( getCurrentModule ( ) == 'settings' ) return ' style="background: url(admin/gfx/background_header.jpg); opacity: 0.9; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;"'; ?>>
 				<a href="admin.php?module=settings" style="color: <? if ( getCurrentModule ( ) == 'settings' ) return '#4B83B3'; return '#EDF5FF'; ?>">
-					<img src="admin/gfx/icons/page_white_edit.png" alt="innstillinger" border="0"> Din side
+					<img src="admin/gfx/icons/page_white_edit.png" alt="innstillinger" border="0"> <?= i18n ( 'metabuttons_Settings' ) ?>
 				</a>
 			</div>
 			<?}?>
 			<?if ( $GLOBALS[ 'Session' ]->AdminUser->_dataSource == 'core' ) { ?>
 			<div id="showCore"<? if ( getCurrentModule ( ) == 'core' ) return ' style="background: url(admin/gfx/background_header.jpg); opacity: 0.9; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;"'; ?>>
-				<a href="<?= BASE_URL ?>admin.php?module=core" style="color:  <? if ( getCurrentModule ( ) == 'core' ) return '#4B83B3'; return '#EDF5FF'; ?>"><img src="admin/gfx/icons/computer_edit.png" alt="superbruker" border="0"> Superbruker</a>
+				<a href="<?= BASE_URL ?>admin.php?module=core" style="color:  <? if ( getCurrentModule ( ) == 'core' ) return '#4B83B3'; return '#EDF5FF'; ?>"><img src="admin/gfx/icons/computer_edit.png" alt="superbruker" border="0"> <?= i18n ( 'metabuttons_Superuser' ) ?></a>
 			</div>
 			<?}?>
 			<div onclick="hideWorkbench()" id="hideWorkbench">
-				<img src="admin/gfx/icons/plugin_delete.png" alt="gjem_arbeidsbenk"> Gjem mellomlager
+				<img src="admin/gfx/icons/plugin_delete.png" alt="gjem_arbeidsbenk"> <?= i18n ( 'Hide workbench' ) ?>
 			</div>
 			<div onclick="showWorkbench()" id="showWorkbench">
-				<img src="admin/gfx/icons/plugin_add.png" alt="vis_arbeidsbenk"> Vis mellomlager
+				<img src="admin/gfx/icons/plugin_add.png" alt="vis_arbeidsbenk"> <?= i18n ( 'Show workbench' ) ?>
 			</div>
 		</div>
 		<div id="BajaxProgressContainer">

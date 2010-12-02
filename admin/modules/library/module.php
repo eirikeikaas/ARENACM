@@ -40,7 +40,7 @@ if ( $_REQUEST[ 'listmode' ] )
 		$Session->Set ( 'LibraryListmodeOrder', $Session->LibraryListmodeOrder == 'ASC' ? 'DESC' : 'ASC' );
 	$Session->Set ( 'LibraryListmode', $_REQUEST[ 'listmode' ] );
 }
-if ( !$Session->LibraryListmode ) $Session->Set ( 'LibraryListmode', 'details' );
+if ( !$Session->LibraryListmode ) $Session->Set ( 'LibraryListmode', 'sortorder' );
 
 if( ( isset( $_REQUEST[ 'lid' ] ) && intval( $_REQUEST[ 'lid' ] ) > 0 ) || $_REQUEST[ 'lid' ] == 'orphans' ) 
 	$Session->set ( 'LibraryCurrentLevel', $_REQUEST[ 'lid' ] );

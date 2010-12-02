@@ -15,34 +15,34 @@
 								<img src="admin/gfx/icons/cancel.png"/>
 							</button>
 						</div>
-						Importer brukere
+						<?= i18n ( 'Import users' ) ?>
 					</h1>
 				
 					<div class="Container">
 						
-						<h2>Felter som skal importeres, med sorteringsindeks:</h2>
+						<h2><?= i18n ( 'Fields to import, including sort index' ) ?>:</h2>
 						<p>
 							<table>
 								<tr>
-									<th>Navn:</th>
-									<th>Indeks:</th>
+									<th><?= i18n ( 'Name' ) ?>:</th>
+									<th><?= i18n ( 'Index' ) ?>:</th>
 									<th>&#x2713;</th>
 								</tr>
 							<?= $this->Fields ?>
 							</table>
 						</p>
 						<h2>
-							Fil for import
+							<?= i18n ( 'File to import from' ) ?>:
 						</h2>
 						<p>
 							<input type="file" name="filestream"/>
 						</p>
 						<h2>
-							Legge til i gruppe?
+							<?= i18n ( 'Add users to this group' ) ?>:
 						</h2>
 						<p>
 							<select name="groupid[]" multiple="multiple" size="4">
-								<option value="0">Ingen gruppe</option>
+								<option value="0"><?= i18n ( 'No group' ) ?></option>
 								<?
 									$obj = new dbObject ( 'Groups' );
 									$obj->addClause ( 'ORDER BY', 'Name ASC' );
@@ -58,37 +58,37 @@
 							</select>
 						</p>
 						<h2>
-							Generere passord?
+							<?= i18n ( 'Generate passwords automatically?' ) ?>
 						</h2>
 						<p>
 							<input type="hidden" name="GeneratePassword" value="0"/>
 							<input type="checkbox" onchange="document.importform.GeneratePassword.value = this.checked ? '1' : '0'"/>
 						</p>
 						<h2>
-							Generere loggfil?
+							<?= i18n ( 'Generate a logfile?' ) ?>
 						</h2>
 						<p>
 							<input type="hidden" name="UseLogfile" value="0"/>
 							<input type="checkbox" onchange="document.importform.UseLogfile.value = this.checked ? '1' : '0'"/>
 						</p>
 						<h2>
-							Hvor skal loggfilen sendes (epost adresse)?
+							<?= i18n ( 'E-mail address to send logfile' ) ?>:
 						</h2>
 						<p>
 							<input type="text" value="" name="Email"/>
 						</p>
 						<h2>
-							Felter separeres med:
+							<?= i18n ( 'Column separation symbol' ) ?>:
 						</h2>
 						<p>
 							<input type="text" value="," name="Separator"/>
 						</p>
 						<p>
 							<button type="submit">
-								<img src="admin/gfx/icons/script_go.png"/> Start importeringsprosessen!
+								<img src="admin/gfx/icons/script_go.png"/> <?= i18n ( 'Start import' ) ?>
 							</button>
 							<button type="button" onclick="document.location='admin.php?module=users'">
-								<img src="admin/gfx/icons/cancel.png"/> Avbryt
+								<img src="admin/gfx/icons/cancel.png"/> <?= i18n ( 'Cancel' ) ?>
 							</button>
 						</p>
 					</div>

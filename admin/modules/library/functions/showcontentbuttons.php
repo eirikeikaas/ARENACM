@@ -28,7 +28,8 @@ $content->_isLoaded = true;
 
 if ( $content->Name && $Session->AdminUser->checkPermission ( $content, 'Write', 'admin' ) )
 {
-	die ( file_get_contents ( 'admin/modules/library/templates/showcontentbuttons.php' ) );
+	$t = new cPTemplate ( 'admin/modules/library/templates/showcontentbuttons.php' );
+	die ( $t->render () );
 }
 die ( '' );
 	

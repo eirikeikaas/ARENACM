@@ -77,7 +77,6 @@ if ( intval ( $Session->CurrentLanguage ) <= 0 )
 		$lang->save ( );
 	}
 	$Session->Set ( 'CurrentLanguage', $lang->ID );
-	$Session->Set ( 'LanguageCode', $lang->Name );
 	$Session->Set ( 'Language', &$lang );
 }
 else
@@ -86,7 +85,6 @@ else
 	if ( $lang->load ( $Session->CurrentLanguage ) )
 	{
 		$Session->Set ( 'CurrentLanguage', $lang->ID );
-		$Session->Set ( 'LanguageCode', $lang->Name );
 		$Session->Set ( 'Language', &$lang );
 	}
 	else
@@ -206,7 +204,7 @@ if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 						else $tpl->image = 'page_white.png';
 					
 						$tpl->module = $extension;
-						$tpl->moduleName = $name;
+						$tpl->moduleName = i18n ( $name );
 						if ( 
 							!$activeModule && $modulename == 'extensions' && 
 							( 
@@ -239,7 +237,7 @@ if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 		}
 
 		$tpl->module = $module->Module;
-		$tpl->moduleName = i18n ( 'module_' . $module->Module, 'no' );
+		$tpl->moduleName = i18n ( 'module_' . $module->Module );
 		$tpl->link = '';
 		if ( $tpl->module == getCurrentModule ( ) )
 		{

@@ -258,19 +258,17 @@
 													Språkinnstillinger
 												</h1>
 												<div class="SubContainer">
-													<table>
+													<select name="Admin_Language">
 														<?
-															$langs = new dbObject ( 'Languages' );
-															if ( $langs = $langs->find () )
+															$langs = array ( 'no'=>'Norsk', 'en'=>'English' );
+															foreach ( $langs as $lang=>$name )
 															{
-																foreach ( $langs as $lang )
-																{
-																	$str .= '<tr><td>' . $lang->ShortName . '</td><td>' . $lang->Name . '</td></tr>';
-																}
+																$s = $lang == ADMIN_LANGUAGE ? ' selected="selected"' : '';
+																$str .= '<option value="' . $lang . '"'.$s.'>' . $name . '</option>';
 															}
 															return $str;
 														?>
-													</table>
+													</select>
 												</div>
 											</td>
 										</tr>

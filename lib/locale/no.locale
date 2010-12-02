@@ -63,10 +63,18 @@ module_library							: Bibliotek
 module_extensions						: Utvidelser
 module_settings							: Innstillinger
 
-# Main translations ###################################################################
+# Top bar  ############################################################################
 
 Hide workbench							: Gjem mellomlager
 Show workbench							: Vis mellomlager
+metabuttons_Superuser					: Superbruker
+metabuttons_Settings					: Din side
+metabuttons_Help						: Hjelp
+metabuttons_Goto website				: Til nettsiden
+metabuttons_Logout						: Logg ut
+
+# Main translations ###################################################################
+
 
 Downloads : Nedlastninger
 

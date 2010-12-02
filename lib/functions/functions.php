@@ -632,14 +632,14 @@ function i18nAddLocalePath ( $path )
 function i18n ( $word, $lang = false, $path = false, $admin = false )
 {
 	global $locale_rescan, $i18n_translation_paths;
-	
+
 	if ( ARENAMODE == 'admin' ) $admin = true;
 	
 	if ( !$lang && is_object ( $GLOBALS[ "Session" ] ) ) 
 		$lang = $GLOBALS[ "Session" ]->LanguageCode;
 	else if ( !$lang ) return $word;
 	if ( is_numeric ( $word ) ) return $word; 
-	
+
 	$trans = Array ( );
 	if ( empty ( $GLOBALS[ "locale_$lang" ] ) || in_array ( 'locale_rescan', $GLOBALS ) )
 	{
