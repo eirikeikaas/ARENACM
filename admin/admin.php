@@ -46,6 +46,7 @@ define ( 'ARENAMODE', 'admin' );
 require ( 'lib/classes/database/cdatabase.php' );
 require ( 'lib/classes/dbObjects/dbObject.php' );
 require ( 'lib/classes/dbObjects/dbUser.php' );
+require ( 'lib/classes/template/ctemplate.php' );
 require ( 'lib/classes/template/cPTemplate.php' );
 require ( 'lib/classes/template/cDocument.php' );
 require ( 'lib/classes/session/session.php' );
