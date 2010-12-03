@@ -5,7 +5,7 @@
 	<div class="SubContainer">
 		<table width="100%" cellspacing="0" cellpadding="0" border="0">
 			<tr>
-				<td><strong>Sidetittel:</strong></td>
+				<td><strong><?= i18n ( 'Page title' ) ?>:</strong></td>
 				<td><input type="text" value="" id="npTitle" size="40"/></td>
 			</tr>
 		</table>

@@ -5,7 +5,7 @@
 #####################################################################
 
 
-# Modules #############################################################################
+# Modules ######################################################################
 
 module_news								: News
 module_users							: Users and groups
@@ -14,9 +14,10 @@ module_library							: Library
 module_extensions						: Extensions
 module_settings							: Information
 Nettsideinnhold							: Site Contents
+Rediger hjemmeside						: Content editor
 Bannere									: Banners
 
-# Main translations ###################################################################
+# Main translations ############################################################
 
 Hide workbench							: Hide workbench
 Show workbench							: Show workbench
@@ -25,5 +26,10 @@ metabuttons_Settings					: Settings
 metabuttons_Help						: Help
 metabuttons_Goto website				: Goto website
 metabuttons_Logout						: Logout
+
+Standardmodul					: Standard text module
+ARENA Blog						: Blog module
+Kontaktskjema					: Contact form
+Bildegalleri					: Image gallery
 
 

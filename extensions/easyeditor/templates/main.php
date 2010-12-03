@@ -28,7 +28,7 @@
 				var result = this.getResponseText ();
 				if ( result == 'fail' )
 				{
-					alert ( 'Kunne ikke lagre siden.' );
+					alert ( '<?= i18n ( 'Could not save the page.' ) ?>' );
 					return false;
 				}
 				document.location.reload();
@@ -45,7 +45,7 @@
 		<tr>
 			<td valign="top" width="240px">
 				<h1>
-					<img src="admin/gfx/icons/book_open.png" style="float: left; margin: 0 4px 0 0" /> Sider
+					<img src="admin/gfx/icons/book_open.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Pages' ) ?>
 				</h1>
 				<div class="Container" id="Structure" style="padding: 3px">
 					<div class="Container" style="padding: 8px 4px 8px 18px">
@@ -75,7 +75,7 @@
 										$c = ($Session->EditorContentID == $row->ID) ? ' class="current"' : '';
 										$str .= '<li class="' . texttourl ( $row->MenuTitle ) . '">';
 										$str .= '<a' . $c . ' href="admin.php?module=extensions&extension=easyeditor&cid=' . $row->ID . '">';
-										if ( !trim ( $row->MenuTitle ) ) $row->MenuTitle = 'Uten navn';
+										if ( !trim ( $row->MenuTitle ) ) $row->MenuTitle = i18n ( 'Unnamed' );
 										$str .= $row->MenuTitle . '</a>';
 										$str .= __listLevels ( $row->MainID );
 										$str .= '</li>';
@@ -92,7 +92,7 @@
 				<?if ( $this->note ) { ?>
 				<div class="SpacerSmallColored"></div>
 				<h1>
-					<img src="admin/gfx/icons/help.png" style="float: left; margin: 0 4px 0 0" /> Hjelpetekst
+					<img src="admin/gfx/icons/help.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Help text' ) ?>
 				</h1>
 				<div class="Container" style="padding: 8px">
 					<?= $this->note ?>
@@ -101,12 +101,12 @@
 				<div class="SpacerSmallColored"></div>
 				<?if ( !defined ( 'EASYEDITOR_HIDEMODULES' ) ) { ?>
 				<h1>
-					<img src="admin/gfx/icons/brick.png" style="float: left; margin: 0 4px 0 0" /> Moduler
+					<img src="admin/gfx/icons/brick.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Modules' ) ?>
 				</h1>
 				<div class="Container" style="padding: 2px">
 					<div class="SubContainer" style="padding: 0">
 						<div style="padding: 8px 8px 0 8px">
-							<p>Velg den modulen du ønsker ved å huke av i listen. Modulen vil aktiveres umiddelbart og vil deaktivere innholdsfeltet.</p>
+							<p><?= i18n ( 'Choose the module you wish to activate from the list. The module will be enabled immediately and the main content will be deactivated' ) ?>.</p>
 						</div>
 					<?
 						if ( $dir = opendir ( 'skeleton/modules' ) )
@@ -130,7 +130,7 @@
 											$script = '<script type="text/javascript">document.currentActiveModule=\\\\'' . $file . '\\\\';</script>';
 										}
 										$str .= '<tr class="sw' . ( $sw = ( $sw == 1 ? 2 : 1 ) ) . '">';
-										$str .= '<td width="16">' . $i . '</td><td>' . $info[0] . '</td>';
+										$str .= '<td width="16">' . $i . '</td><td>' . i18n ( trim ( $info[0] ) ) . '</td>';
 										$str .= '<td width="20">';
 										$str .= '<input type="radio"' . $s . ' name="module" onmouseup="ActivateModule(\\\\'' . $file . '\\\\', event)"/>';
 										$str .= '</td></tr>';
@@ -138,7 +138,7 @@
 								}
 							}
 							closedir ( $dir );
-							$str = '<tr class="sw' . ( $sw = ( $sw == 1 ? 2 : 1 ) ) . '"><td width="16"><img src="admin/gfx/icons/page.png"/></td><td>Standardmodul</td><td width="20"><input type="radio" name="module" onmouseup="NoModule()"' . ( $selected == true ? '' : ' checked="checked"' ) . '/></td></tr>' . $str;
+							$str = '<tr class="sw' . ( $sw = ( $sw == 1 ? 2 : 1 ) ) . '"><td width="16"><img src="admin/gfx/icons/page.png"/></td><td>'.i18n('Standardmodul').'</td><td width="20"><input type="radio" name="module" onmouseup="NoModule()"' . ( $selected == true ? '' : ' checked="checked"' ) . '/></td></tr>' . $str;
 							return '<table class="List">' . $str . '</table>' . $script;
 						}
 					?>
@@ -147,16 +147,15 @@
 				<div class="SpacerSmallColored"></div>
 				<?}?>
 				<h1>
-					<img src="admin/gfx/icons/thumb_up.png" style="float: left; margin: 0 4px 0 0" /> Oppgradere
+					<img src="admin/gfx/icons/thumb_up.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Update' ) ?>
 				</h1>
 				<div class="Container" style="padding: 8px">
 					<p>
-						Ønsker du å oppgradere til pro versjonen? Klikk på knappen under for å 
-						bli kontaktet av en selger.
+						<?= i18n ( 'Do you wish to upgrade to the pro version? Click the button below to be contacted by a sales person' ) ?>
 					</p>
 					<p>
 						<button type="button" onclick="GetSupport()">
-							<img src="admin/gfx/icons/phone.png"/> Kontakt meg
+							<img src="admin/gfx/icons/phone.png"/> <?= i18n ( 'Contact me' ) ?>
 						</button>
 					</p>
 				</div>
@@ -164,20 +163,20 @@
 			<td width="8px"></td>
 			<td valign="top">
 				<h1>
-					<img src="admin/gfx/icons/page_edit.png" style="float: left; margin: 0 4px 0 0" /> Rediger: "<?= $this->page->Title ? $this->page->Title : 'Uten navn' ?>"
+					<img src="admin/gfx/icons/page_edit.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Edit' ) ?>: "<?= $this->page->Title ? $this->page->Title : 'Uten navn' ?>"
 				</h1>
 				<div class="Container">
 					<table cellspacing="0" cellpadding="0" border="0">
 						<tr>
 							<td>
 								<p>
-									<strong>Sidetittel:</strong> <input type="text" size="50" value="<?= $this->page->Title ? $this->page->Title : 'Uten navn' ?>" id="pageTitle"/>
+									<strong><?= i18n ( 'Page title' ) ?>:</strong> <input type="text" size="50" value="<?= $this->page->Title ? $this->page->Title : 'Uten navn' ?>" id="pageTitle"/>
 								</p>
 							</td>
 						</tr>
 					</table>
 					<p>
-						<strong>Innhold:</strong>
+						<strong><?= i18n ( 'Content' ) ?>:</strong>
 					</p>
 					<?if ( !$this->editableField ) { ?>
 					<textarea id="pageBody" class="mceSelector"><?= $this->pageBody ?></textarea>
@@ -189,7 +188,7 @@
 				<?if ( $this->obs = $this->page->getObjects ( 'ObjectType = File' ) ) { ?>
 				<div class="SpacerSmall"></div>
 				<h1>
-					<img src="admin/gfx/icons/attach.png" valign="middle"/> Fil Vedlegg
+					<img src="admin/gfx/icons/attach.png" valign="middle"/> <?= i18n ( 'Attachment' ) ?>
 				</h1>
 				<div class="Container" style="padding: 4px">
 				<?
@@ -228,11 +227,11 @@
 							<td align="right">
 								<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) ) { ?>
 								<button type="button" onclick="SubPage()">
-									<img src="admin/gfx/icons/page_white_add.png"/> Ny underside
+									<img src="admin/gfx/icons/page_white_add.png"/> <?= i18n ( 'Create subpage' ) ?>
 								</button>
 								<?}?>
 								<button type="button" onclick="UploadFile()">
-									<img src="admin/gfx/icons/attach.png"/> Last opp en fil
+									<img src="admin/gfx/icons/attach.png"/> <?= i18n ( 'File upload' ) ?>
 								</button>
 							</td>
 						</tr>
