@@ -1,6 +1,5 @@
 <?
 
-
 /*******************************************************************************
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in
@@ -21,6 +20,8 @@ Blest AS. All Rights Reserved.
 Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
 Rune Nilssen
 *******************************************************************************/
+
+i18nAddLocalePath ( 'admin/modules/settings/locale' );
 
 $Settings = getModuleSettings ( 'settings' );
 

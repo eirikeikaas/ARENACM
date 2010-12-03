@@ -1,6 +1,6 @@
 	
 		<h1>
-			Sett opp moduler på "<?= $this->site->SiteName ?>":
+			<?= i18n ( 'Setup modules on' ) ?> "<?= $this->site->SiteName ?>":
 		</h1>
 		<form name="modulelist" method="post">
 		
@@ -17,37 +17,37 @@
 			<div class="SubContainer">
 				<table>
 					<tr>
-						<td><strong>Innstillinger:</strong></td>
+						<td><strong><?= i18n ( 'Settings' ) ?>:</strong></td>
 						<td><input onchange="seth( 'settings', this )" type="checkbox"<?= $this->modules[ 'settings' ]->ID ? ' checked="checked"' : '' ?>/></td>
 					</tr>
 					<tr>
-						<td><strong>Brukere:</strong></td>
+						<td><strong><?= i18n ( 'Users' ) ?>:</strong></td>
 						<td><input onchange="seth( 'users', this )" type="checkbox"<?= $this->modules[ 'users' ]->ID ? ' checked="checked"' : '' ?>/></td>
 					</tr>
 					<tr>
-						<td><strong>Innhold:</strong></td>
+						<td><strong><?= i18n ( 'Content' ) ?>:</strong></td>
 						<td><input onchange="seth( 'contents', this )" type="checkbox"<?= $this->modules[ 'contents' ]->ID ? ' checked="checked"' : '' ?>/></td>
 					</tr>
 					<tr>
-						<td><strong>Nyheter:</strong></td>
+						<td><strong><?= i18n ( 'News' ) ?>:</strong></td>
 						<td><input onchange="seth( 'news', this )" type="checkbox"<?= $this->modules[ 'news' ]->ID ? ' checked="checked"' : '' ?>/></td>
 					</tr>
 					<tr>
-						<td><strong>Bibliotek:</strong></td>
+						<td><strong><?= i18n ( 'Library' ) ?>:</strong></td>
 						<td><input onchange="seth( 'library', this )" type="checkbox"<?= $this->modules[ 'library' ]->ID ? ' checked="checked"' : '' ?>/></td>
 					</tr>
 					<tr>
-						<td><strong>Utvidelser:</strong></td>
+						<td><strong><?= i18n ( 'Extensions' ) ?>:</strong></td>
 						<td><input onchange="seth( 'extensions', this )" type="checkbox"<?= $this->modules[ 'extensions' ]->ID ? ' checked="checked"' : '' ?>/></td>
 					</tr>
 				</table>
 			</div>
 			<div class="SpacerSmall"></div>
 			<button type="button" onclick="submit ( )">
-				<img src="admin/gfx/icons/disk.png"/> Lagre listen
+				<img src="admin/gfx/icons/disk.png"/> <?= i18n ( 'Save list' ) ?>
 			</button>
 			<button type="button" onclick="removeModalDialogue ( 'modules' )">
-				<img src="admin/gfx/icons/cancel.png"/> Lukk
+				<img src="admin/gfx/icons/cancel.png"/> <?= i18n ( 'Close' ) ?>
 			</button>
 		
 		</form>

@@ -1,3 +1,3 @@
 <h1>
-	Settings
+	<?= i18n ( 'Settings' ) ?>
 </h1>

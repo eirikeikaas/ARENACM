@@ -1,32 +1,32 @@
 		<div class="ModuleContainer">
 			<h1>
-				Om ARENA
+				<?= i18n ( 'About ARENACM' ) ?>
 			</h1>
 			<div class="Container">
 				<div style="width: 500px">
 					<p>
-						ARENA er et Content Management System og en webutvikler platform
-						skrevet i <a href="http://www.php.net/" target="_blank">PHP</a> og Javascript.
+						<?= i18n ( 'ARENACM is a CMS and a webdeveloper platform' ) ?>.
 					</p>
 					<p>
-						I september, 2010, bestemte Blest AS seg for å slippe systemet som Open Source, under lisensen <a href="http://www.mozilla.org/MPL/" target="_blank">MPL</a>. <a href="http://www.blest.no/" target="_blank">Blest AS</a> fortsetter å være en sentral for ARENA utvikling. 
+						<?= i18n ( 'For more information about ARENACM, please visit the website' ) ?>:
 					</p>
-					<p>
-						For mer informasjon om ARENA, vennligst besøk nettstedet til Blest Interaktiv.
-					</p>
-					<p>
-						<a href="http://www.blestinteraktiv.no/" target="_blank">http://www.blestinteraktiv.no/</a>
-					</p>
+					<ul>
+						<li>
+							<a href="http://www.arenacm.org/" target="_blank">http://www.arenacm.org/</a>
+						</li>
+					</ul>
 					<hr/>
 					<p>
-						ARENA benytter seg av Silk ikonene til Mark James (<a href="http://www.famfamfam.com" target="_blank">http://www.famfamfam.com</a>). Disse ikonene er distribuert med lisensen Creative Commons Attribution 2.5 License.
+						<?= i18n ( 'ARENACM is using the Silk icons of Mark James' ) ?>
+						(<a href="http://www.famfamfam.com" target="_blank">http://www.famfamfam.com</a>). 
+						<?= i18n ( 'These icons are distributed with the license Creative Commons Attribution 2.5 License' ) ?>.
 					</p>
 				</div>
 			</div>
 			<div class="SpacerSmallColored"></div>
 			<p>
 				<button onclick="javascript: history.back(-1)">
-					<img src="admin/gfx/icons/arrow_left.png"/> Tilbake
+					<img src="admin/gfx/icons/arrow_left.png"/> <?= i18n ( 'Back' ) ?>
 				</button>
 			</p>
 		</div>
