@@ -120,6 +120,24 @@
 															<td><input type="text" size="30" name="Email_FromName" value="<?= 
 																defined ( 'MAIL_FROMNAME' ) ? MAIL_FROMNAME : '' ?>"/></td>
 														</tr>
+														<tr>
+															<td><strong><?= i18n ( 'E-mail transport' ) ?>:</strong></td>
+															<td>
+																<select name="Email_Transport">
+																<?
+																	$transports = array ( 'PhpMailer', 'PHP Native' );
+																	foreach ( $transports as $t )
+																	{
+																		if ( $t == MAIL_TRANSPORT )
+																			$o = ' selected="selected"';
+																		else $o = '';
+																		$str .= '<option value="' . $t . '"'.$o.'>' . $t . '</option>';
+																	}
+																	return $str;
+																?>
+																</strong>
+															</td>
+														</tr>
 													</table>
 												</div>
 												<div class="SpacerSmallColored"></div>

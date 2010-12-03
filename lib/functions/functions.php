@@ -904,6 +904,11 @@ if ( !defined ( 'PHP_MAILER_INCLUDED' ) )
 	
 function mail_ ( $to, $subject, $message, $headers, $html = true )
 {
+	if ( defined ( 'MAIL_TRANSPORT' ) && MAIL_TRANSPORT == 'PHP Native' )
+	{
+		if ( $html ) $headers .= '; Content-type: text/html';
+		return mail ( $to, $subject, $message, $headers );
+	}
 	list ( , $from ) = explode ( "From:", $headers );
 	list ( $from, ) = explode ( "\n", $from );
 	$from = trim ( strip_tags ( $from ) );

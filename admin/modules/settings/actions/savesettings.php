@@ -42,6 +42,7 @@ if ( $_POST[ 'SiteTitle' ] )
 	$mail_username = false;
 	$mail_password = false;
 	$mail_hostname = false;
+	$mail_transport = false;
 	$date_format = false;
 	$topmenu_contentgroup = false;
 	$topmenu_levels = false;
@@ -82,6 +83,11 @@ if ( $_POST[ 'SiteTitle' ] )
 		{
 			$out[] = "\tdefine ( 'MAIL_FROMNAME', '{$_POST['Email_FromName']}' );";
 			$mail_fromname = true;
+		}
+		else if ( strstr ( $line, 'MAIL_TRANSPORT' ) )
+		{
+			$out[] = "\tdefine ( 'MAIL_TRANSPORT', '{$_POST['Email_Transport']}' );";
+			$mail_transport = true;
 		}
 		else if ( strstr ( $line, 'TOPMENU_CONTENTGROUP' ) )
 		{
@@ -132,6 +138,8 @@ if ( $_POST[ 'SiteTitle' ] )
 		$out[] = "\tdefine ( 'MAIL_PASSWORD', '{$_POST['Email_Password']}' );";
 	if ( !$mail_hostname )
 		$out[] = "\tdefine ( 'MAIL_SMTP_HOST', '{$_POST['Email_SMTP']}' );";
+	if ( !$mail_transport )
+		$out[] = "\tdefine ( 'MAIL_TRANSPORT', '{$_POST['Email_Transport']}' );";
 	if ( !$topmenu_contentgroup )
 		$out[] = "\tdefine ( 'TOPMENU_CONTENTGROUP', '{$_POST['MenuContentGroup']}' );";
 	if ( !$topmenu_levels )
