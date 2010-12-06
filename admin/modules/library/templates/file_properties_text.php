@@ -76,6 +76,13 @@
 									n + this.value.substring ( ep, this.value.length );
 						this.setSelectionRange ( sp + 1 + tabs, sp + 1 + tabs );
 						return false;
+					case 83:
+						if ( e.ctrlKey )
+						{
+							saveFileContents ( '<?= $this->file->ID ?>' );
+							return false;
+						}
+						break;
 				}
 			}
 		}
