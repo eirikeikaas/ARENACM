@@ -1,19 +1,19 @@
 
 	<h1 style="overflow: hidden; white-space: nowrap">
 		<div style="float: right">
-			<button type="button" onclick="executeAddField ( )" title="Lagre">
+			<button type="button" onclick="executeAddField ( )" title="<?= i18n ( 'Add the field' ) ?>">
 				<img src="admin/gfx/icons/accept.png"> 
 			</button>
-			<button type="button" onclick="removeModalDialogue ( 'addfield' )" title="Avbryt">
+			<button type="button" onclick="removeModalDialogue ( 'addfield' )" title="<?= i18n ( 'Cancel' ) ?>">
 				<img src="admin/gfx/icons/cancel.png"> 
 			</button>
 		</div>
-		Legg til felt i: <?= $this->content->MenuTitle ?>
+		<?= i18n ( 'Add a new field in' ) ?>: <?= $this->content->MenuTitle ?>
 	</h1>
 	<div class="Container" style="padding: <?= MarginSize ?>px">
 		<form id="diaform" action="#" method="get">
 			<p>
-				Gi feltet et navn:
+				<?= i18n ( 'Name the field' ) ?>:
 			</p>
 			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
 				<input type="text" value="Navnløst" name="Name" size="30">
@@ -21,7 +21,7 @@
 			<div class="SpacerSmallColored"></div>
 			<div class="Spacer"></div>
 			<p>
-				Hvilken innholdsgruppe ønsker du å legge til feltet i?
+				<?= i18n ( 'In which contentgroup do you wish to add the field?' ) ?>
 			</p>
 			<div class="SubContainer">
 				<?= $this->contentgroups ?>
@@ -29,7 +29,7 @@
 			<div class="SpacerSmallColored"></div>
 			<div class="Spacer"></div>
 			<p>
-				Velg hvilken type felt du ønsker å legge til.
+				<?= i18n ( 'Choose type of field.' ) ?>
 			</p>
 			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
 				<table width="100%">
@@ -38,7 +38,7 @@
 							<input type="radio" name="type" value="text" checked="checked">
 						</td>
 						<td>
-							Et fullt tekst felt med alle redigerings-muligheter
+							<?= i18n ( 'A full article field' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -46,7 +46,7 @@
 							<input type="radio" name="type" value="varchar">
 						</td>
 						<td>
-							Et enkelt tekst felt for ren tekst
+							<?= i18n ( 'A simple text field' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -54,7 +54,7 @@
 							<input type="radio" name="type" value="leadin">
 						</td>
 						<td>
-							Et lite tekst felt med alle redigerings-muligheter
+							<?= i18n ( 'A small article field' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -62,7 +62,7 @@
 							<input type="radio" name="type" value="whitespace">
 						</td>
 						<td>
-							Et stilbart mellomrom
+							<?= i18n ( 'A simple space for styling' ) ?>
 						</td>
 					</tr>
 					<?if ( $GLOBALS[ 'user' ]->_dataSource == 'core' ) { ?>
@@ -79,7 +79,7 @@
 							<input type="radio" name="type" value="style">
 						</td>
 						<td>
-							Et stilark felt
+							<?= i18n ( 'A stylesheet' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +87,7 @@
 							<input type="radio" name="type" value="objectconnection">
 						</td>
 						<td>
-							Et objekttilkoblingsfelt
+							<?= i18n ( 'An object connection field' ) ?>
 						</td>
 					</tr>
 					<?}?>
@@ -101,11 +101,10 @@
 								if ( $f{0} == '.' ) continue;
 								if ( file_exists ( 'extensions/' . $f . '/websnippet.php' ) )
 								{
-									$opts .= '<option value="' . $f . '">' . strtoupper ( $f{0} ) . substr ( $f, 1, strlen ( $f ) - 1 ) . '</option>';
+									$opts .= '<option value="' . $f . '">' . i18n ( strtoupper ( $f{0} ) . substr ( $f, 1, strlen ( $f ) - 1 ) ) . '</option>';
 								}
 							}
-							closedir ( $dir );
-							
+							closedir ( $dir );	
 						}
 						if ( $opts )
 						{
@@ -115,7 +114,7 @@
 							<input type="radio" name="type" value="extension">
 						</td>
 						<td>
-							Utvidelse: <select name="fieldextension">
+							' . i18n ( 'Extension' ) . ': <select name="fieldextension">
 								' . $opts . '
 							</select>
 						</td>
@@ -128,7 +127,7 @@
 			<?if ( $GLOBALS[ 'Session' ]->AdminUser->isSuperUser ( ) ) { ?>
 			<div class="Spacer"></div>
 			<p>
-				Skal feltet vise på alle sidene?
+				<?= i18n ( 'Show field globally?' ) ?>
 			</p>
 			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
 				<table width="100%">
@@ -137,7 +136,7 @@
 							<input type="radio" name="global" value="0" checked="checked">
 						</td>
 						<td>
-							Nei, bare vis feltet på denne siden
+							<?= i18n ( 'No, only on this page' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -145,7 +144,7 @@
 							<input type="radio" name="global" value="1">
 						</td>
 						<td>
-							Ja, vis feltet på alle sidene
+							<?= i18n ( 'Yes, on all pages' ) ?>
 						</td>
 					</tr>
 				</table>
@@ -155,8 +154,8 @@
 	</div>
 	<div class="SpacerSmallColored"></div>
 	<button type="button" onclick="executeAddField ( )">
-		<img src="admin/gfx/icons/accept.png"> Legg til feltet
+		<img src="admin/gfx/icons/accept.png"> <?= i18n ( 'Add the field' ) ?>
 	</button>
 	<button type="button" onclick="removeModalDialogue ( 'addfield' )">
-		<img src="admin/gfx/icons/cancel.png"> Avbryt	
+		<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Cancel' ) ?>
 	</button>

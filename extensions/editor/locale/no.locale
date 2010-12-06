@@ -1,0 +1,23 @@
+Link url							: Lenkeadresse
+Leadin								: Introduksjonstekst
+Bodytext							: Artikkel
+Add a new field in : Legg til felt i : Legg til et nytt felt i
+Name the field 						: Gi feltet et navn
+In which contentgroup do you wish to add the field? : \
+	I hvilken innholdsgruppe ønsker du å legge til feltet?
+Choose type of field. : \
+	Velg hvilken type felt du ønsker å legge til.
+A full article field : \
+	Et fullt tekst felt med alle redigerings-muligheter
+A simple text field : Et enkelt tekst felt for ren tekst
+A small article field : Et lite tekst felt med alle redigerings-muligheter
+A simple space for styling : Et stilbart mellomrom
+A stylesheet : Et stilark felt
+An object connection field : Et objekttilkoblingsfelt
+Extension : Utvidelse
+Show field globally? : Skal feltet vise på alle sidene?
+No, only on this page : Nei, bare vis feltet på denne siden
+Yes, on all pages : Ja, vis feltet på alle sidene
+Cancel : Avbryt
+Add the field : Legg til feltet
+

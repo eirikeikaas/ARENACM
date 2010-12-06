@@ -22,6 +22,7 @@ Rune Nilssen
 *******************************************************************************/
 
 i18nAddLocalePath ( 'extensions/easyeditor/locale' );
+include_once ( 'extensions/easyeditor/include/i18n_javascript.php' );
 
 $function = $_REQUEST[ 'function' ] ? 
 	"functions/{$_REQUEST['function']}.php" : 'functions/main.php';
