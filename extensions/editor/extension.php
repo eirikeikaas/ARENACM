@@ -25,6 +25,7 @@ Rune Nilssen
  * Simple content editor for ARENA2
 **/
 include_once ( 'lib/classes/dbObjects/dbContent.php' );
+i18nAddLocalePath ( 'extensions/editor/locale' );
 if ( strstr ( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE 7' ) )
 	$document->addResource ( 'stylesheet', 'extensions/editor/css/ie7.css' );
 function safeFieldName ( $string )
