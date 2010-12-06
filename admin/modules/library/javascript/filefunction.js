@@ -159,6 +159,7 @@ function texteditFullscreen ( )
 	document.getElementById ( 'tekstFullscreen' ).onclick = function ( ){ texteditNormal ( ); };
 	document.body.style.overflow = 'hidden';
 	var ifr = document.getElementById ( 'pageProperties' ).getElementsByTagName ( 'iframe' )[0];
+	if ( !ifr ) ifr = document.getElementById ( 'pageProperties' ).getElementsByTagName ( 'textarea' )[0];
 	ifr.style.position = 'fixed';
 	ifr.style.top = '36px';
 	ifr.style.left = '0px';
@@ -185,6 +186,7 @@ function texteditNormal ( )
 	document.getElementById ( 'tekstFullscreen' ).onclick = function ( ){ texteditFullscreen ( ); };
 	document.body.style.overflow = 'auto';
 	var ifr = document.getElementById ( 'pageProperties' ).getElementsByTagName ( 'iframe' )[0];
+	if ( !ifr ) ifr = document.getElementById ( 'pageProperties' ).getElementsByTagName ( 'textarea' )[0];
 	ifr.style.position = 'static';
 	ifr.style.top = 'auto';
 	ifr.style.left = 'auto';

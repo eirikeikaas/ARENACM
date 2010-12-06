@@ -195,3 +195,12 @@ input.SmallNum
 	border-color: #223344;
 	cursor: move;
 }
+
+#pageProperties textarea.codepress
+{
+	background: #15191c;
+	color: #eef2ff;
+	font-family: bitstream vera mono, monospace, courier new;
+	font-size: 12px;
+}
+
