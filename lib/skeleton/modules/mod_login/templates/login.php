@@ -6,7 +6,7 @@
 			<input type="text" id="fuser" name="webUsername"/>
 		</p>
 		<p>
-			<label for="fpass"><?= i18n ( 'Username' ) ?>:</label>
+			<label for="fpass"><?= i18n ( 'Password' ) ?>:</label>
 			<input type="password" id="fpass" name="webPassword"/>
 		</p>
 		<p>

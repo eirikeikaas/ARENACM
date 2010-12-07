@@ -22,6 +22,7 @@ Rune Nilssen
 *******************************************************************************/
 
 global $webuser;
+i18nAddLocalePath ( 'lib/skeleton/modules/mod_login/locale' );
 
 if ( !$webuser->ID )
 {
