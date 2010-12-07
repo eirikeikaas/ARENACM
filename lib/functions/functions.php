@@ -1362,9 +1362,9 @@ function cleanHTMLElement ( $string, $level = 0 )
 	$string = preg_replace ( '/(\<span.*?apple\-[^"]*\"[^>]*?\>)(.*?)(\<\/span\>)/i', '$2', $string );
 	
 	if ( substr ( $string, 0, 11 ) == '&nbsp;<tabl' )
-		$string = '<tabl' . substr ( $string, 6, strlen ( $string ) - 6 );
+		$string = '<tabl' . substr ( $string, 11, strlen ( $string ) - 11 );
 	else if ( substr ( $string, 0, 11 ) == '&nbsp;<span' )
-		$string = '<span' . substr ( $string, 6, strlen ( $string ) - 6 );
+		$string = '<span' . substr ( $string, 11, strlen ( $string ) - 11 );
 	$string = preg_replace ( '/\<[a|p][^>]*\>[\ ]*\<\/[a|p]\>/', '', $string );
 	
 	// Always use paragraphs
