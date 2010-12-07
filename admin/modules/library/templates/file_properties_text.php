@@ -30,7 +30,7 @@
 		</button>
 	</div>
 	<script>
-		if ( navigator.userAgent.toLowerCase ( ).indexOf ( 'ebkit' ) < 0 )
+		if ( navigator.userAgent.toLowerCase ( ).indexOf ( 'ebkit' ) < 0 && typeof ( CodePress ) != 'undefined' )
 		{
 			CodePress.run ( );
 			if ( document.getElementById ( 'pageProperties' ).getElementsByTagName ( 'iframe' ).length )
