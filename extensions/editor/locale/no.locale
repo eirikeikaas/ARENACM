@@ -21,3 +21,21 @@ Yes, on all pages : Ja, vis feltet på alle sidene
 Cancel : Avbryt
 Add the field : Legg til feltet
 
+
+
+# Javascript
+You need to fill in page title. : Du må fylle inn søkbar sidetittel.
+You need to fill in a menu title. : Du må fylle inn meny tittel.
+You need to fill in a searchable page title. : Du må fylle inn søkbar sidetittel.
+Are you sure you want to roll back the\npublished version? The current work copy\nwill be erased. : Er du sikker på at du ønsker å gjenopprette den\npubliserte versjonen? Du vil miste nåværende\narbeidskopi for godt.
+Are you sure you want to delete this page? : Er du sikker på at du ønsker å slette denne siden?
+Are you sure you want to add this module?\nYou will be charged on your next invoice\nwith the amount shown. : Er du sikker på at du ønsker å legge til denne modulen?\nDu vil følgelig bli fakturert med beløpet vist i modul feltet.
+You need to choose a content group. : Du må velge innholdsgruppe.
+Are you sure you want to move the field? : Er du sikker på at du ønsker å flytte feltet?
+Are you sure you want to remove the field? : Er du sikker på at du ønsker å fjerne feltet?
+Failed. : Feilet.
+Templatename : Malens navn
+You can not move a page onto itself. : Du kan ikke flytte en side til seg selv.
+Unexpected error. :  Det skjedde en feil.
+
+

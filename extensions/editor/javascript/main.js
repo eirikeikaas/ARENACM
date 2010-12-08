@@ -29,13 +29,13 @@ function savePage ( )
 {
 	if ( document.getElementById ( 'MenuTitle' ).value.length <= 0 )
 	{
-		alert ( 'Du må fylle inn meny tittel.' );
+		alert ( i18n ( 'You need to fill in a menu title.' ) );
 		document.getElementById ( 'MenuTitle' ).focus ( );
 		return false;
 	}
 	if ( document.getElementById ( 'Title' ).value.length <= 0 )
 	{
-		alert ( 'Du må fylle inn søkbar sidetittel.' );
+		alert ( i18n ( 'You need to fill in a searchable page title.' ) );
 		document.getElementById ( 'Title' ).focus ( );
 		return false;
 	}
@@ -169,13 +169,13 @@ function publishPage ( doReload, ignoreUnpublished )
 {
 	if ( document.getElementById ( 'MenuTitle' ).value.length <= 0 )
 	{
-		alert ( 'Du må fylle inn meny tittel.' );
+		alert ( i18n ( 'You need to fill in a menu title.' ) );
 		document.getElementById ( 'MenuTitle' ).focus ( );
 		return false;
 	}
 	if ( document.getElementById ( 'Title' ).value.length <= 0 )
 	{
-		alert ( 'Du må fylle inn søkbar sidetittel.' );
+		alert ( i18n ( 'You need to fill in a searchable page title.' ) );
 		document.getElementById ( 'Title' ).focus ( );
 		return false;
 	}
@@ -227,7 +227,7 @@ function publishPage ( doReload, ignoreUnpublished )
 
 function revertPage ( )
 {
-	if ( confirm ( 'Er du sikker på at du ønsker å gjenopprette den\npubliserte versjonen? Du vil miste nåværende\narbeidskopi for godt.\n' ) )
+	if ( confirm ( i18n ( 'Are you sure you want to roll back the\npublished version? The current work copy\nwill be erased.' ) ) )
 	{
 		var cid = document.getElementById ( 'PageID' ).value;
 		var pjax = new bajax ( );
@@ -250,7 +250,7 @@ function showPublishQueue ( cid )
 
 function deletePage ( )
 {
-	if ( confirm ( 'Er du sikker på at du ønsker å slette denne siden?' ) )
+	if ( confirm ( i18n ( 'Are you sure you want to delete this page?' ) ) )
 	{
 		var cid = document.getElementById ( 'PageID' ).value;
 		var pjax = new bajax ( );
@@ -525,7 +525,7 @@ function executeMove ( )
 	var cid = document.getElementById ( 'PageID' ).value;
 	if ( cid == target )
 	{
-		alert ( 'Du kan ikke flytte en side til seg selv.' );
+		alert ( i18n ( 'You can not move a page onto itself.' ) );
 		return false;
 	}
 	var mjax = new bajax ( );
@@ -671,7 +671,7 @@ function activateModule ( modname )
 		{
 			document.location = 'admin.php?module=extensions&extension=editor&cid=' + document.getElementById ( 'PageID' ).value;
 		}
-		else alert ( 'Det skjedde en feil.' );
+		else alert ( i18n ( 'Unexpected error.' ) );
 	}
 	ajax.send ( );
 }
@@ -690,7 +690,7 @@ function deactivateModule ( modname )
 		{
 			document.location = 'admin.php?module=extensions&extension=editor&cid=' + document.getElementById ( 'PageID' ).value;
 		}
-		else alert ( 'Det skjedde en feil.' );
+		else alert ( i18n ( 'Unexpected error.' ) );
 	}
 	ajax.send ( );
 }
@@ -701,7 +701,7 @@ function deactivateModule ( modname )
 
 function addProModule ( modname )
 {
-	if ( confirm ( 'Er du sikker på at du ønsker å legge til denne modulen?\nDu vil følgelig bli fakturert med beløpet vist i modul feltet.' ) )
+	if ( confirm ( i18n ( 'Are you sure you want to add this module?\nYou will be charged on your next invoice\nwith the amount shown.' ) ) )
 	{
 		var ajax = new bajax ( );
 		ajax.openUrl ( 
@@ -742,7 +742,7 @@ function activateProModule ( modname )
 		{
 			document.location = 'admin.php?module=extensions&extension=editor&cid=' + document.getElementById ( 'PageID' ).value;
 		}
-		else alert ( 'Det skjedde en feil.' );
+		else alert ( i18n ( 'Unexpected error.' ) );
 	}
 	jax.send ( );
 }
@@ -767,7 +767,7 @@ function executeAddField ( )
 	var contentgroup = getRadioValue ( frm.contentgroup );
 	if ( !contentgroup )
 	{
-		alert ( 'Du må velge innholdsgruppe.' );
+		alert ( i18n ( 'You need to choose a content group.' ) );
 		return false;
 	}
 	var aja = new bajax ( );
@@ -797,7 +797,7 @@ function executeAddField ( )
 
 function reorderField ( fid, ft, dir )
 {
-	if ( confirm ( 'Er du sikker på at du ønsker å flytte feltet?' ) )
+	if ( confirm ( i18n ( 'Are you sure you want to move the field?' ) ) )
 	{
 		document.location = 'admin.php?module=extensions&extension=editor&action=reorderfield&dir=' + dir + '&fid=' + fid + '&cid=' + document.getElementById ( 'PageID' ).value + '&ft=' + ft;
 	}
@@ -805,7 +805,7 @@ function reorderField ( fid, ft, dir )
 
 function removeField ( fid, ft, dir )
 {
-	if ( confirm ( 'Er du sikker på at du ønsker å fjerne feltet?' ) )
+	if ( confirm ( i18n ( 'Are you sure you want to remove the field?' ) ) )
 	{
 		document.location = 'admin.php?module=extensions&extension=editor&action=delfield&dir=' + dir + '&fid=' + fid + '&cid=' + document.getElementById ( 'PageID' ).value + '&ft=' + ft;
 	}
@@ -825,7 +825,7 @@ function executeEditField ( )
 	var contentgroup = getRadioValue ( frm.contentgroup );
 	if ( !contentgroup )
 	{
-		alert ( 'Du må velge innholdsgruppe.' );
+		alert ( i18n ( 'You need to choose a content group.' ) );
 		return false;
 	}
 	var aja = new bajax ( );
@@ -895,7 +895,7 @@ function executeAdvanced ( )
 		}
 		else
 		{
-			alert ( 'Feilet.' );
+			alert ( i18n ( 'Failed.' ) );
 		}
 	}
 	jax.send ( );
@@ -903,7 +903,7 @@ function executeAdvanced ( )
 
 function createTemplate ( )
 {
-	var i = prompt ( 'Malens navn:', '' );
+	var i = prompt ( i18n ( 'Templatename' ) + ':', '' );
 	if ( i.length )
 	{
 		var j = new bajax ( );
