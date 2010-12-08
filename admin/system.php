@@ -221,7 +221,7 @@ if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 							$tpl->active = true;
 							$document->extensionsOnTop = true;
 							$Session->set ( 'currentExtension', $extension );
-							$document->Title = $name . ' - Blest ARENA v2';
+							$document->Title = $name . ' - ARENACM v2';
 						}
 						else $tpl->active = false;
 						
@@ -242,7 +242,7 @@ if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 		if ( $tpl->module == getCurrentModule ( ) )
 		{
 			$tpl->active = true;
-			$document->Title = $tpl->moduleName . ' - Blest ARENA v2';
+			$document->Title = $tpl->moduleName . ' - ARENACM v2';
 		}
 		else $tpl->active = false;
 	

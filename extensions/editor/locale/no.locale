@@ -20,7 +20,69 @@ No, only on this page : Nei, bare vis feltet på denne siden
 Yes, on all pages : Ja, vis feltet på alle sidene
 Cancel : Avbryt
 Add the field : Legg til feltet
+Edit the field : Endre feltet
+Advanced settings for : Avanserte innstillinger for
+Page showing? : Viser siden?
+Hidden in the menu : Skjult i menyen
+Yes : Ja
+No : Nei
+Using an extension : Kjører en innholdsmodul
+Pure textpage : Ren tekstside
+Extrafields : Ekstrafelter
+Links to another page : Lenke til en annen side
+System name : Systemnavn
+Content groups : Innholdsgrupper
+Subpages use template : Undersider har mal
+No template is set up : Ingen mal er satt opp
+Programmed template : Programmert mal
+Do not use programmed template : Ikke bruk programmert mal
+Save : Lagre
+Cancel : Avbryt
+Save as template : Lagre som mal
+Do not use template : Ikke bruk mal
+Choose content group : Velg innholdsmodul
+Put in : Plasser i
+Select extension : Velg utvidelse
+Content type : Innholdstype
+Edit field in : Endre felt i
+Edit field name : Endre feltnavn
+Admin visibility : Vis for admin
+Sort order : Sortering
+Which content group do you want to place the field in? : Hvilken innholdsgruppe ønsker du å legge feltet i?
+A Javascript field : Javascript felt
+Extension : Utvidelse
+You are editing a content module. You can not edit the content type. : Du endrer nå på en innholds modul. Du kan ikke endre modul typen.
+This field is of a specified type. You can not edit this field type. : Dette feltet er av en spesifisert type. På grunn av dette kan du ikke endre felt type.
+unknown type : ukjent type
+Visibility : Visibilitet
+This field is showing : Dette feltet viser
+use on all pages : på alle sidene
+only on this page : kun på denne siden
+Edit field : Endre feltet
+Website overview : Nettstedsoversikt
+Notes : Notater
+Close : Lukk
+Move to page : Flytt til under valgte side
+Field modules : Feltmoduler
+Your notes on this page : Dine notater angående denne siden
+Your : Dine
+modules : moduler
+Free modules : Gratismoduler
+Module shop : Modulbutikk
+Edit : Endre
+Menu title : Menytittel
+Searchable page title : Søkbar sidetittel
+Your modules : Dine moduler
 
+Top field : Toppfeltet
+Main field : Hovedfeltet
+Extra field : Det supplerende feltet
+Bottom field : Bunnfeltet
+
+Edit field : Endre felt
+Remove field : Fjern felt
+Move up : Flytt opp
+Move down : Flytt ned
 
 
 # Javascript

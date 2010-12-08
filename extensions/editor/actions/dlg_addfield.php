@@ -33,17 +33,17 @@ if ( $grps = explode ( ',', $content->ContentGroups ) )
 		switch ( trim ( $g ) )
 		{
 			case 'Bunn':
-				$ext = 'Bunnfeltet';
+				$ext = i18n ( 'Bottom field' );
 				break;
 			case 'Topp':
-				$ext = 'Toppfeltet';
+				$ext = i18n ( 'Top field' );
 				break;
 			case 'Felt1':
-				$ext = 'Hovedfeltet';
+				$ext = i18n ( 'Main field' );
 				$ss = true;
 				break;
 			case 'Felt2':
-				$ext = 'Det supplerende feltet';
+				$ext = i18n ( 'Extra field' );
 				break;
 			default:
 				$ext = trim ( $g );

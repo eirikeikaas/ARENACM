@@ -71,7 +71,7 @@
 							<input type="radio" name="type" value="script">
 						</td>
 						<td>
-							Javascript felt
+							<?= i18n ( 'A Javascript field' ) ?>
 						</td>
 					</tr>
 					<tr>

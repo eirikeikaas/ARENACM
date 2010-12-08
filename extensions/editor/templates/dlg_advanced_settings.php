@@ -1,6 +1,6 @@
 	
 	<h1 style="overflow: hidden; white-space: nowrap">
-		Avanserte innstillinger for: <?= $this->content->MenuTitle ?>
+		<?= i18n ( 'Advanced settings for' ) ?>: <?= $this->content->MenuTitle ?>
 	</h1>
 	<div class="Container" style="padding: <?= MarginSize ?>px">
 		<form id="advanced_form" method="post" action="#">
@@ -8,15 +8,15 @@
 				<tr>
 					<td>
 						<p>
-							<strong>Viser siden?</strong>
+							<strong><?= i18n ( 'Page showing?' ) ?></strong>
 						</p>
 					</td>
 					<td>
 						<table class="LayoutVCenter">
 							<tr>
-								<td>Ja</td>
+								<td><?= i18n ( 'Yes' ) ?></td>
 								<td><input type="radio" name="IsPublished" value="1"<?= $this->content->IsPublished ? ' checked="checked"' : '' ?>></td>
-								<td>Nei</td>
+								<td><?= i18n ( 'No' ) ?></td>
 								<td><input type="radio" name="IsPublished" value="0"<?= !$this->content->IsPublished ? ' checked="checked"' : '' ?>></td>
 							</tr>
 						</table>
@@ -25,15 +25,15 @@
 				<tr>
 					<td>
 						<p>
-							<strong>Skjult i menyen:</strong>
+							<strong><?= i18n ( 'Hidden in the menu' ) ?>:</strong>
 						</p>
 					</td>
 					<td>
 						<table class="LayoutVCenter">
 							<tr>
-								<td>Ja</td>
+								<td><?= i18n ( 'Yes' ) ?></td>
 								<td><input type="radio" name="IsSystem" value="1"<?= $this->content->IsSystem ? ' checked="checked"' : '' ?>></td>
-								<td>Nei</td>
+								<td><?= i18n ( 'No' ) ?></td>
 								<td><input type="radio" name="IsSystem" value="0"<?= !$this->content->IsSystem ? ' checked="checked"' : '' ?>></td>
 							</tr>
 						</table>
@@ -41,7 +41,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p><strong>Innholdstype:</strong></p>
+						<p><strong><?= i18n ( 'Content type' ) ?>:</strong></p>
 					</td>
 					<td>
 						<p>
@@ -49,10 +49,10 @@
 							<?
 								$options = '';
 								foreach ( Array ( 
-									'extensions'=>'Kjører en innholdsmodul',
-									'text'=>'Ren tekstside',
-									'extrafields'=>'Ekstrafelter',
-									'link'=>'Lenke til en annen side'
+									'extensions'=>i18n( 'Using an extension' ),
+									'text'=>i18n ( 'Pure textpage' ),
+									'extrafields'=>i18n ( 'Extrafields' ),
+									'link'=>i18n ( 'Links to another page' )
 								) as $k=>$v )
 								{
 									$options .= '<option value="' . $k . '"' . ( $k == $this->content->ContentType ? ' selected="selected"' : '' ) . '>' . $v . '</option>';
@@ -79,7 +79,7 @@
 					}
 					if ( $dir = opendir ( 'extensions' ) )
 					{
-						$ostr = '<option value="">Velg modul</option>';
+						$ostr = '<option value="">' . i18n ( 'Select extension' ) . '</option>';
 						while ( $file = readdir ( $dir ) )
 						{
 							if ( $file{0} == '.' ) continue;
@@ -91,7 +91,7 @@
 							}
 						}
 						closedir ( $dir );
-						$str = '<tr><td><p><strong>Velg innholdsmodul:</strong></p></td><td><p><select name="ModuleName">' . $ostr . '</select></p></td></tr>';
+						$str = '<tr><td><p><strong>' . i18n ( 'Choose content group' ) . ':</strong></p></td><td><p><select name="ModuleName">' . $ostr . '</select></p></td></tr>';
 						if ( $groups = explode ( ',', $this->content->ContentGroups ) )
 						{
 							$ostr = '';
@@ -113,7 +113,7 @@
 									}
 								}
 							}
-							$str .= '<tr><td><p><strong>Modulplassering:</strong></p></td><td><p>Plasser i <select name="ModuleContentGroup">' . $ostr . '</select></p></td></tr>';
+							$str .= '<tr><td><p><strong>Modulplassering:</strong></p></td><td><p>' . i18n ( 'Put in' ) . ' <select name="ModuleContentGroup">' . $ostr . '</select></p></td></tr>';
 						}
 						return $str;
 					}
@@ -121,7 +121,7 @@
 				?>
 				<tr>
 					<td>
-						<p><strong>Systemnavn:</strong></p>
+						<p><strong><?= i18n ( 'System name' ) ?>:</strong></p>
 					</td>
 					<td>
 						<p>
@@ -131,7 +131,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p><strong>Innholdsgrupper:</strong></p>
+						<p><strong><?= i18n ( 'Content groups' ) ?>:</strong></p>
 					</td>
 					<td>
 						<p>
@@ -141,7 +141,7 @@
 				</tr>
 				<tr>
 					<td>
-						<p><strong>Undersider har mal:</strong></p>
+						<p><strong><?= i18n ( 'Subpages use template' ) ?>:</strong></p>
 					</td>
 					<td>
 						<p>
@@ -150,7 +150,7 @@
 									$db =& dbObject::globalValue ( 'database' );
 									if ( $rows = $db->fetchObjectRows ( 'SELECT * FROM ContentElement WHERE IsTemplate AND !IsDeleted AND MainID = ID ORDER BY SortOrder ASC' ) )
 									{
-										$str .= '<option value="0">Ikke bruk mal</option>';
+										$str .= '<option value="0">' . i18n ( 'Do not use template' ) . '</option>';
 										foreach ( $rows as $row )
 										{
 											if ( $row->ID == $this->content->ContentTemplateID )
@@ -160,7 +160,7 @@
 										}
 										return $str;
 									}
-									return '<option value="0">Ingen mal er satt opp</option>';
+									return '<option value="0">' . i18n ( 'No template is set up' ) . '</option>';
 								?>
 							</select>
 						</p>
@@ -169,13 +169,13 @@
 				<?if ( file_exists ( BASE_DIR . '/templates' ) && is_dir ( BASE_DIR . '/templates' ) ) { ?>
 				<tr>
 					<td>
-						<p><strong>Teknisk mal:</strong></p>
+						<p><strong><?= i18n ( 'Programmed template' ) ?>:</strong></p>
 					</td>
 					<td>
 						<p>
 							<select name="Template">
 								<?
-									$str = '<option value="">Ikke bruk teknisk mal.</option>';
+									$str = '<option value="">' . i18n ( 'Do not use programmed template' ) . '.</option>';
 									if ( $dir = opendir ( BASE_DIR . '/templates' ) )
 									{
 										while ( $file = readdir ( $dir ) )
@@ -200,15 +200,15 @@
 		<tr>
 			<td>
 				<button type="button" onclick="executeAdvanced ( )">
-					<img src="admin/gfx/icons/accept.png"> Lagre
+					<img src="admin/gfx/icons/accept.png"> <?= i18n ( 'Save' ) ?>
 				</button>
 				<button type="button" onclick="removeModalDialogue ( 'advanced' )">
-					<img src="admin/gfx/icons/cancel.png"> Avbryt	
+					<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Cancel' ) ?>
 				</button>
 			</td>
 			<td style="text-align: right">
 				<button type="button" onclick="createTemplate ( )">
-					<img src="admin/gfx/icons/page_white_star.png"> Lagre som mal
+					<img src="admin/gfx/icons/page_white_star.png"> <?= i18n ( 'Save as template' ) ?>
 				</button>
 			</td>
 		</tr>

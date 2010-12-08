@@ -8,7 +8,7 @@
 				<img src="admin/gfx/icons/cancel.png">
 			</button>
 		</div>
-		Endre felt i: <?= $this->content->MenuTitle ?>
+		<?= i18n ( 'Edit field in' ) ?>: <?= $this->content->MenuTitle ?>
 	</h1>
 	<div class="Container" style="padding: <?= MarginSize ?>px">
 		<form id="diaform" action="#" method="get">
@@ -18,17 +18,17 @@
 				<tr>
 					<td>
 						<p>
-							Endre feltnavn:
+							<?= i18n ( 'Edit field name' ) ?>:
 						</p>
 					</td>
 					<td style="padding-left: 2px">
 						<p>
-							Full visning:
+							<?= i18n ( 'Admin visibility' ) ?>:
 						</p>
 					</td>
 					<td style="padding-left: 2px">
 						<p>
-							Sortering:
+							<?= i18n ( 'Sort order' ) ?>:
 						</p>
 					</td>
 				</tr>
@@ -53,7 +53,7 @@
 			<div class="SpacerSmallColored"></div>
 			<div class="Spacer"></div>
 			<p>
-				Hvilken innholdsgruppe ønsker du å legge til feltet i?
+				<?= i18n ( 'Which content group do you want to place the field in?' ) ?>
 			</p>
 			<div class="Utvidelse: SubContainer">
 				<?= $this->contentgroups ?>
@@ -62,7 +62,7 @@
 			<div class="Spacer"></div>
 			<?if ( in_array ( $this->field->Type, Array ( 'whitespace', 'text', 'varchar', 'leadin', 'extension', 'objectconnection', 'script', 'style' ) ) ) { ?>
 			<p>
-				Av hvilken type skal feltet være?
+				<?= i18n ( 'Choose type of field.' ) ?>
 			</p>
 			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
 				<table width="100%">
@@ -71,7 +71,7 @@
 							<input type="radio" name="type" value="text"<?= $this->field->Type == 'text' ? ' checked="checked"' : '' ?>
 						</td>
 						<td>
-							Et fullt tekst felt med alle redigerings-muligheter
+							<?= i18n ( 'A full article field' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -79,7 +79,7 @@
 							<input type="radio" name="type" value="varchar"<?= $this->field->Type == 'varchar' ? ' checked="checked"' : '' ?>
 						</td>
 						<td>
-							Et enkelt tekst felt for ren tekst
+							<?= i18n ( 'A simple text field' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -87,7 +87,7 @@
 							<input type="radio" name="type" value="leadin"<?= $this->field->Type == 'leadin' ? ' checked="checked"' : '' ?>
 						</td>
 						<td>
-							Et lite tekst felt med alle redigerings-muligheter
+							<?= i18n ( 'A small article field' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -95,7 +95,7 @@
 							<input type="radio" name="type" value="whitespace"<?= $this->field->Type == 'whitespace' ? ' checked="checked"' : '' ?>
 						</td>
 						<td>
-							Et stilbart mellomrom
+							<?= i18n ( 'A simple space for styling' ) ?>
 						</td>
 					</tr>
 					<?
@@ -104,32 +104,32 @@
 						$checkob = $this->field->Type == 'objectconnection' ? ' checked="checked"' : '';
 						if ( $GLOBALS[ 'user' ]->_dataSource == 'core' ) 
 						{
-							return <<<EOL
+							return '
 					<tr>
 						<td width="12px">
-							<input type="radio" name="type" value="script"{$checkja}>
+							<input type="radio" name="type" value="script"'.$checkja.'>
 						</td>
 						<td>
-							Javascript felt
+							' . i18n ( 'A Javascript field' ) . '
 						</td>
 					</tr>
 					<tr>
 						<td width="12px">
-							<input type="radio" name="type" value="style"{$checksty}>
+							<input type="radio" name="type" value="style"'.$checksty.'>
 						</td>
 						<td>
-							Et stilark felt
+							' . i18n ( 'A stylesheet' ) . '
 						</td>
 					</tr>
 					<tr>
 						<td width="12px">
-							<input type="radio" name="type" value="objectconnection"{$checkob}>
+							<input type="radio" name="type" value="objectconnection"'.$checkob.'>
 						</td>
 						<td>
-							Et objekttilkoblingsfelt
+							' . i18n ( 'An object connection field' ) . '
 						</td>
 					</tr>
-EOL;
+							';
 						}
 					?>
 					<?	
@@ -159,7 +159,7 @@ EOL;
 							<input type="radio" name="type" value="extension"' . ( $this->field->Type == 'extension' ? ' checked="checked"' : '' ) . '">
 						</td>
 						<td>
-							Utvidelse: <select name="fieldextension">
+							' . i18n ( 'Extension' ) . ': <select name="fieldextension">
 								' . $opts . '
 							</select>
 						</td>
@@ -175,7 +175,7 @@ EOL;
 			<p>
 				Du endrer på et spesialfelt (<? 
 					$string = $this->field->DataString;
-					return trim ( $string ? $string : 'ukjent type' );
+					return trim ( $string ? $string : i18n ( 'unknown type' ) );
 				?>):
 			</p>
 			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
@@ -183,11 +183,11 @@ EOL;
 					<?
 						if ( $this->field->Type == 'contentmodule' )
 						{
-							return 'Du endrer nå på en innholds modul. Du kan ikke endre modul typen.';
+							return i18n ( 'You are editing a content module. You can not edit the content type.' );
 						}
 						else
 						{	
-							return 'Dette feltet er av en spesifisert type. På grunn av dette kan du ikke endre felt type.';
+							return i18n ( 'This field is of a specified type. You can not edit this field type.' );
 						}
 					?>
 				</p>
@@ -196,7 +196,7 @@ EOL;
 			<?if ( $GLOBALS[ 'Session' ]->AdminUser->isSuperUser ( ) ) { ?>
 			<div class="Spacer"></div>
 			<p>
-				Skal feltet vise på alle sidene?
+				<?= i18n ( 'Show field globally?' ) ?>
 			</p>
 			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
 				<table width="100%">
@@ -205,7 +205,7 @@ EOL;
 							<input type="radio" name="global" value="0"<?= !$this->field->IsGlobal ? ' checked="checked"' : '' ?>
 						</td>
 						<td>
-							Nei, bare vis feltet på denne siden
+							<?= i18n ( 'No, only on this page' ) ?>
 						</td>
 					</tr>
 					<tr>
@@ -213,7 +213,7 @@ EOL;
 							<input type="radio" name="global" value="1"<?= $this->field->IsGlobal ? ' checked="checked"' : '' ?>>
 						</td>
 						<td>
-							Ja, vis feltet på alle sidene
+							<?= i18n ( 'Yes, on all pages' ) ?>
 						</td>
 					</tr>
 				</table>
@@ -222,18 +222,18 @@ EOL;
 			<?if ( !$GLOBALS[ 'Session' ]->AdminUser->isSuperUser ( ) ) { ?>
 			<div class="Spacer"></div>
 			<p>
-				Visibilitet:
+				<?= i18n ( 'Visibility' ) ?>:
 			</p>
 			<div class="SubContainer">
-				Dette feltet viser <?= $this->field->IsGlobal ? 'på alle sidene' : 'kun på denne siden' ?>.
+				<?= i18n ( 'This field is showing' ) ?> <?= $this->field->IsGlobal ? i18n ( 'use on all pages' ) : i18n ( 'only on this page' ) ?>.
 			</div>
 			<?}?>
 		</form>
 	</div>
 	<div class="SpacerSmallColored"></div>
 	<button type="button" onclick="executeEditField ( )">
-		<img src="admin/gfx/icons/accept.png"> Endre feltet
+		<img src="admin/gfx/icons/accept.png"> <?= i18n ( 'Edit field' ) ?>
 	</button>
 	<button type="button" onclick="removeModalDialogue ( 'editfield' )">
-		<img src="admin/gfx/icons/cancel.png"> Avbryt	
+		<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Cancel' ) ?>
 	</button>
