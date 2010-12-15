@@ -194,7 +194,7 @@ function renderExtraFields ( $obj )
 			while ( substr ( $cgroups, -1, 1 ) == ',' )
 				$cgroups = substr ( $cgroups, 0, strlen ( $cgroups ) -1 );
 		}
-		else $cgroups = "";
+		else $cgroups = '';
 			
 		if ( $rows = $db->fetchObjectRows ( '
 			SELECT * FROM 
