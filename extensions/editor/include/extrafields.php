@@ -27,6 +27,7 @@ $document->addResource ( 'javascript', 'lib/plugins/extrafields/javascript/main.
 function renderExtraFields ( $obj )
 {
 	global $extdir;
+	$db =& dbObject::globalValue ( 'database' );
 	if ( $obj && $obj->loadExtraFields ( ) )
 	{
 		$modstr_ = '';
