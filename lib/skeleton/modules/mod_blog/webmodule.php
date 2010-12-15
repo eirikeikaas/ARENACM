@@ -168,7 +168,7 @@ else
 			$btpl->facebookLike = $cfgFacebookLike;
 			if ( $btpl->facebookLike == 1 )
 			{
-				$btpl->facebookUrl = BASE_URL . $content->getRoute ( ) . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
+				$btpl->facebookUrl = BASE_URL . $sourcepage->getRoute ( ) . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
 			}
 			$btpl->cfgComments = $cfgComments;
 			$btpl->cfgShowAuthor = $cfgShowAuthor;
