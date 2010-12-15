@@ -248,6 +248,17 @@ div.Faded *
 	color: #aaa;
 }
 
+div.Orphan
+{
+	opacity: 0.5;
+	border-left: 8px solid #9ac;
+	padding-left: 8px;
+}
+div.Orphan *
+{
+	color: #69c;
+}
+
 
 #PageNotes
 {

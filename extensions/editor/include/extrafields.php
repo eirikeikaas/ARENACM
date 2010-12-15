@@ -31,7 +31,7 @@ function renderExtraFields ( $obj )
 	{
 		$modstr_ = '';
 		if ( !( $groups = explode ( ',', $obj->ContentGroups ) ) )
-			$groups = Array ( 'Default' );
+			$groups = array ( 'Default' );
 		$spacerHidden = false;
 		foreach ( Array ( 'visible', 'hidden' ) as $mode )
 		{
@@ -44,10 +44,13 @@ function renderExtraFields ( $obj )
 					if ( substr ( $k, 0, 7 ) == '_extra_' )
 					{
 						$field =& $obj->{'_field_' . substr ( $k, 7, strlen ( $k ) - 7 )};
-						if ( $field->ContentGroup != $group ) 
-							continue;
+						
 						if ( $field->ContentID != $obj->ID ) 
 							continue;
+						if ( $field->ContentGroup != $group ) 
+							continue;
+						
+						$field->_NotOrphan = true; // this one is not orphan
 							
 						if ( $field->AdminVisibility && $mode == 'visible' )
 						{
@@ -181,6 +184,47 @@ function renderExtraFields ( $obj )
 					$modstr_ .= '<div class="ExtraFieldDiv">' . $tpl->render ( ) . '</div>';
 				}
 			}
+		}
+		
+		// Show orphan fields that has no valid content group
+		$cgroups = '';
+		foreach ( $groups as $cg ) $cgroups .= '"' . trim ( $cg ) . '",';
+		while ( substr ( $cgroups, -1, 1 ) == ',' )
+			$cgroups = substr ( $cgroups, 0, strlen ( $cgroups ) -1 );
+			
+		if ( $rows = $db->fetchObjectRows ( '
+			SELECT * FROM 
+			(
+				(
+					SELECT ID, `Name`, ContentGroup, SortOrder, `Type`, "ContentDataSmall" AS `Table` 
+					FROM 
+					ContentDataSmall 
+					WHERE 
+						ContentGroup NOT IN (' . $cgroups . ') AND
+						ContentID=\'' . $obj->ID . '\' AND
+						ContentTable=\'ContentElement\'
+				)
+				UNION
+				(
+					SELECT ID, `Name`, ContentGroup, SortOrder, `Type`, "ContentDataBig" AS `Table` 
+					FROM 
+					ContentDataBig 
+					WHERE 
+						ContentGroup NOT IN (' . $cgroups . ') AND
+						ContentID=\'' . $obj->ID . '\' AND
+						ContentTable=\'ContentElement\'
+				)
+			) as z
+		' ) )
+		{
+			$modstr_ .= '<div class="SpacerSmallColored"></div>';
+			$otpl = new cTemplate ( $extdir . '/templates/ext/orphan.php' );
+			foreach ( $rows as $row )
+			{
+				$otpl->field =& $row;
+				$modstr_ .= $otpl->render ();
+			}
+			$modstr_ .= '<div class="SpacerSmall"></div>';
 		}
 		return $modstr_;
 	}
