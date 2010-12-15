@@ -1,4 +1,7 @@
 
+	<h1>
+		<?= i18n ( 'Settings for blog field' ) ?>
+	</h1>
 	<div class="SubContainer" style="padding: <?= MarginSize ?>px">
 		<table>
 			<tr>
@@ -6,7 +9,7 @@
 					<table>
 						<tr>
 							<td>
-								<strong>Antall artikler pr. side:</strong>
+								<strong><?= i18n ( 'Articlecount pr. page' ) ?>:</strong>
 							</td>
 							<td>
 								<input type="text" id="mod_blog_limit" size="10" value="<?= $this->settings->Limit ?>">
@@ -14,7 +17,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Bruker kommentarer:</strong>
+								<strong><?= i18n ( 'Use comments' ) ?>:</strong>
 							</td>
 							<td>
 								<input type="checkbox" id="mod_blog_comments"<?= $this->settings->Comments ? ' checked="checked"' : '' ?>>
@@ -22,7 +25,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Viser forfatter:</strong>
+								<strong><?= i18n ( 'Show author' ) ?>:</strong>
 							</td>
 							<td>
 								<input type="checkbox" id="mod_blog_showauthor"<?= $this->settings->ShowAuthor ? ' checked="checked"' : '' ?>>
@@ -30,7 +33,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Viser tagboks:</strong>
+								<strong><?= i18n ( 'Show tagbox' ) ?>:</strong>
 							</td>
 							<td>
 								<input type="checkbox" id="mod_blog_tagbox"<?= $this->settings->TagBoxEnabled ? ' checked="checked"' : '' ?>>
@@ -38,7 +41,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Tagboks plassering:</strong>
+								<strong><?= i18n ( 'Tagbox placement' ) ?>:</strong>
 							</td>
 							<td>
 								<select id="mod_tagbox_placement">
@@ -75,7 +78,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Viser søkeboks:</strong>
+								<strong><?= i18n ( 'Show searchbox' ) ?>:</strong>
 							</td>
 							<td>
 								<input type="checkbox" id="mod_blog_searchbox"<?= $this->settings->SearchBox ? ' checked="checked"' : '' ?>>
@@ -83,7 +86,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Skjuler detaljer:</strong>
+								<strong><?= i18n ( 'Hide details' ) ?>:</strong>
 							</td>
 							<td>
 								<input type="checkbox" id="mod_blog_hide_details"<?= $this->settings->HideDetails ? ' checked="checked"' : '' ?>>
@@ -95,7 +98,7 @@
 					<table>
 						<tr>
 							<td>
-								<strong>Bruker denne siden for "Les mer":</strong>
+								<strong><?= i18n ( 'Use this page for "Read more"' ) ?>:</strong>
 							</td>
 							<td id="mod_blog_detailpage">
 								<?
@@ -106,7 +109,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Hent blogger fra denne siden:</strong>
+								<strong><?= i18n ( 'Fetch blogs from this page' ) ?>:</strong>
 							</td>
 							<td id="mod_blog_sourcepage">
 								<?
@@ -117,7 +120,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Maks bokstaver i ingress:</strong>
+								<strong><?= i18n ( 'Max amount of letters in leadin' ) ?>:</strong>
 							</td>
 							<td id="mod_blog_sourcepage">
 								<input type="text" id="mod_blog_leadinlength" size="4" value="<?= $this->settings->LeadinLength ?>">
@@ -125,7 +128,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Maks bokstaver i tittel:</strong>
+								<strong><?= i18n ( 'Max amount of letters in title' ) ?>:</strong>
 							</td>
 							<td id="mod_blog_sourcepage">
 								<input type="text" id="mod_blog_titlelength" size="4" value="<?= $this->settings->TitleLength ?>">
@@ -133,7 +136,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Ingressbilde størrelse:</strong>
+								<strong><?= i18n ( 'Leadin imagesize' ) ?>:</strong>
 							</td>
 							<td id="mod_blog_sourcepage">
 								<table cellspacing="0" cellpadding="0" border="0">
@@ -141,7 +144,7 @@
 										<td>
 											<input type="text" id="mod_blog_sizex" style="width: 40px" size="4" value="<?= $this->settings->SizeX ?>">
 										</td>
-										<td> x </td>
+										<td> x&nbsp;</td>
 										<td>
 											<input type="text" id="mod_blog_sizey" style="width: 40px" size="4" value="<?= $this->settings->SizeY ?>">
 										</td>
@@ -151,7 +154,7 @@
 						</tr>
 						<tr>
 							<td>
-								<strong>Header tekst:</strong>
+								<strong><?= i18n ( 'Headertext' ) ?>:</strong>
 							</td>
 							<td id="mod_blog_sourcepage">
 								<table cellspacing="0" cellpadding="0" border="0">
@@ -167,12 +170,26 @@
 				</td>
 			</tr>
 		</table>
+		<div class="SpacerSmallColored"></div>
+		<table>
+			<tr>
+				<td>
+					<strong><?= i18n ( 'Use facebook "Like"' ) ?></strong>
+				</td>
+				<td>
+					<input type="checkbox"<?= $this->settings->FacebookLike ? ' checked="checked"' : '' ?> id="mod_blog_facebooklike"/>
+				</td>
+			</tr>
+		</table>
 	</div>
 	<div class="SpacerSmallColored"></div>
 	<button type="button" onclick="mod_blog_savesettings ( )">
-		<img src="admin/gfx/icons/disk.png"> <span id="mod_blog_savetext">Lagre innstillingene</span>
+		<img src="admin/gfx/icons/disk.png"> <span id="mod_blog_savetext"><?= i18n ( 'Save' ) ?></span>
 	</button>
-	<button type="button" onclick="mod_blog_abortedit ( )">
-		<img src="admin/gfx/icons/newspaper.png"> Vis blog arkivet
+	<button type="button" onclick="mod_blog_savesettings ( ); removeModalDialogue ( 'blogsettings' );">
+		<img src="admin/gfx/icons/accept.png"> <span id="mod_blog_savetext"><?= i18n ( 'Save and close' ) ?></span>
+	</button>
+	<button type="button" onclick="removeModalDialogue ( 'blogsettings' )">
+		<img src="admin/gfx/icons/cancel.png"> <?= i18n ( 'Close' ) ?>
 	</button>
 

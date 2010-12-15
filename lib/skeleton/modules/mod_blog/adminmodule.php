@@ -22,6 +22,9 @@ Rune Nilssen
 *******************************************************************************/
 
 global $Session;
+i18nAddLocalePath ( 'lib/skeleton/modules/mod_blog/locale/' );
+include_once ( 'lib/skeleton/modules/mod_blog/translations.php' );
+
 $mtpldir = 'skeleton/modules/mod_blog/templates/';
 $GLOBALS[ 'document' ]->addResource ( 'stylesheet', $mtpldir . '../css/admin.css' );
 
@@ -155,33 +158,11 @@ switch ( $_REQUEST[ 'modaction' ] )
 							$_POST[ 'sizex' ] . "\t" .
 							$_POST[ 'sizey' ] . "\t" . 
 							$_POST[ 'headertext' ] . "\t" . 
-							$_POST[ 'hidedetails' ];
+							$_POST[ 'hidedetails' ] . "\t" .
+							$_POST[ 'facebooklike' ];
 		$fld->save ( );
 		die ( 'ok' );
 		
-	case 'settings':
-		$tpl = new cPTemplate ( $mtpldir . 'adm_settings.php' );
-		$settings = new Dummy ( );
-		$settings->Limit = $fieldObject->DataInt ? $fieldObject->DataInt : 10;
-		$tpl->settings =& $settings;
-		$test = explode ( "\t", $fieldObject->DataMixed );
-		$tpl->settings->Comments = $test[0];
-		$tpl->settings->ShowAuthor = $test[1];
-		$tpl->settings->TagBoxEnabled = $test[2];
-		$tpl->settings->TagBoxPosition = $test[3];
-		$tpl->settings->SearchBox = $test[4];
-		$tpl->settings->Detailpage = $test[5];
-		$tpl->settings->Sourcepage = $test[6];
-		$tpl->settings->LeadinLength = $test[7];
-		$tpl->settings->TitleLength = $test[8];
-		$tpl->settings->SizeX = $test[9];
-		$tpl->settings->SizeY = $test[10];
-		$tpl->settings->HeaderText = $test[11];
-		$tpl->settings->HideDetails = $test[12];
-		$tpl->content =& $content;
-		$tpl->field =& $fieldObject;
-		die ( $tpl->render ( ) );
-	
 	case 'delete':
 		$blog = new dbObject ( 'BlogItem' );
 		if ( $blog->load ( $_REQUEST[ 'bid' ] ) )
@@ -304,29 +285,37 @@ switch ( $_REQUEST[ 'modaction' ] )
 		
 	case 'standard':
 	default:	
-		$settings = new Dummy ( );
-		$test = explode ( "\t", $fieldObject->DataMixed );
-		$settings->Comments = $test[0];
-		$settings->ShowAuthor = $test[1];
-		$settings->TagBoxEnabled = $test[2];
-		$settings->TagBoxPosition = $test[3];
-		$settings->SearchBox = $test[4];
-		$settings->Detailpage = $test[5];
-		$settings->Sourcepage = $test[6];
+		$act = 'lib/skeleton/modules/mod_blog/actions/' . $_REQUEST[ 'modaction' ] . '.php';
+		if ( file_exists ( $act ) )
+		{
+			include_once ( $act );
+		}
+		else
+		{
+			$settings = new Dummy ( );
+			$test = explode ( "\t", $fieldObject->DataMixed );
+			$settings->Comments = $test[0];
+			$settings->ShowAuthor = $test[1];
+			$settings->TagBoxEnabled = $test[2];
+			$settings->TagBoxPosition = $test[3];
+			$settings->SearchBox = $test[4];
+			$settings->Detailpage = $test[5];
+			$settings->Sourcepage = $test[6];
 	
-		$cnt = new dbContent ( );
-		if ( $settings->Sourcepage )
-			$cnt->load ( $settings->Sourcepage );
-		else $cnt->load ( $Session->EditorContentID );
+			$cnt = new dbContent ( );
+			if ( $settings->Sourcepage )
+				$cnt->load ( $settings->Sourcepage );
+			else $cnt->load ( $Session->EditorContentID );
 	
-		$mtpl = new cPTemplate ( $mtpldir . 'adm_main.php' );
-		$std = new cPTemplate ( $mtpldir . 'adm_std.php' );
-		$std->settings =& $settings;
-		$std->blogs = listBlogs ( $cnt->ID, $_REQUEST[ 'bpos' ], $fieldObject->DataInt ? $fieldObject->DataInt : 10 );
-		$mtpl->standard = $std->render ( );
-		if ( $_REQUEST[ 'modaction' ] == 'standard' )
-			die ( $std->render ( ) );
-		break;
+			$mtpl = new cPTemplate ( $mtpldir . 'adm_main.php' );
+			$std = new cPTemplate ( $mtpldir . 'adm_std.php' );
+			$std->settings =& $settings;
+			$std->blogs = listBlogs ( $cnt->ID, $_REQUEST[ 'bpos' ], $fieldObject->DataInt ? $fieldObject->DataInt : 10 );
+			$mtpl->standard = $std->render ( );
+			if ( $_REQUEST[ 'modaction' ] == 'standard' )
+				die ( $std->render ( ) );
+			break;
+		}
 }
 if ( $mtpl )
 	$module = $mtpl->render ( );

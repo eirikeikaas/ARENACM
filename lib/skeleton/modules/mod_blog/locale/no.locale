@@ -27,5 +27,31 @@ Anonymous						: Anonym
 comment by						: kommentar skrevet av
 Comments						: Kommentarer
 
+#Admin translations
+
+Save							: Lagre
+Save and close					: Lagre og lukk
+Close							: Lukk
+Settings for blog field			: Innstillinger for bloggfeltet
+saved							: lagret
+
+Articlecount pr. page 			: Antall artikler pr. side
+Use comments 					: Bruker kommentarer
+Show author 					: Viser forfatter
+Show tagbox 					: Viser tagboks
+Tagbox placement 				: Tagboks plassering
+Show searchbox 					: Viser søkeboks
+Hide details 					: Skjuler detaljer
+Use this page for "Read more" 	: Bruker denne siden for "Les mer"
+Fetch blogs from this page 		: Hent blogger fra denne siden
+Max amount of letters in leadin : Maks bokstaver i ingress
+Max amount of letters in title 	: Maks bokstaver i tittel
+Leadin imagesize 				: Ingressbilde størrelse
+Headertext 						: Header tekst
+Edit settings 					: Endre innstillingene
+Authenticate incoming articles  : Godkjenn innkommende artikler
+Add article 					: Legg til en artikkel
+Use facebook "Like"				: Bruk facebook "Like"
+Facebook "Like" url				: Facebook "Like" lenke
 
 

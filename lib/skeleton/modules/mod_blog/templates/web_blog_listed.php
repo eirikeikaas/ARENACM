@@ -31,6 +31,9 @@
 						: i18n('no comments') ?>)
 				</a>
 				<?}?>
+				<?if ( $this->facebookLike ) { ?>
+				<iframe src="http://www.facebook.com/plugins/like.php?href=<?= $this->facebookUrl ?>&amp;layout=standard&amp;show_faces=false&amp;width=200&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:35px;" allowTransparency="true"></iframe>
+				<?}?>
 				<div class="ClearBoth"></div>
 			</p>
 		</div>

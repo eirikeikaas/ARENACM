@@ -55,6 +55,7 @@ $cfgSizeX = $cfg[9];
 $cfgSizeY = $cfg[10];
 $cfgHeaderText = $cfg[11];
 $cfgHideDetails = $cfg[12];
+$cfgFacebookLike = $cfg[13];
 
 // Source and detailpages
 $sourcepage = new dbContent ( );
@@ -163,6 +164,11 @@ else
 				$comment->ElementTable = 'BlogItem';
 				$comment->ElementID = $blog->ID;
 				$btpl->commentcount = $comment->findCount ( );
+			}
+			$btpl->facebookLike = $cfgFacebookLike;
+			if ( $btpl->facebookLike == 1 )
+			{
+				$btpl->facebookUrl = BASE_URL . $content->getRoute ( ) . '/blogitem/' . $bid . '_' . texttourl ( $blog->Title ) . '.html';
 			}
 			$btpl->cfgComments = $cfgComments;
 			$btpl->cfgShowAuthor = $cfgShowAuthor;
