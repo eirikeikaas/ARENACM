@@ -34,7 +34,7 @@ function renderExtraFields ( $obj )
 		if ( !( $groups = explode ( ',', $obj->ContentGroups ) ) )
 			$groups = array ( 'Default' );
 		$spacerHidden = false;
-		foreach ( Array ( 'visible', 'hidden' ) as $mode )
+		foreach ( array ( 'visible', 'hidden' ) as $mode )
 		{
 			foreach ( $groups as $group )
 			{
