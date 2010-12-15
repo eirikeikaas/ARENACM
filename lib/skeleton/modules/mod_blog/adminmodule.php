@@ -159,7 +159,8 @@ switch ( $_REQUEST[ 'modaction' ] )
 							$_POST[ 'sizey' ] . "\t" . 
 							$_POST[ 'headertext' ] . "\t" . 
 							$_POST[ 'hidedetails' ] . "\t" .
-							$_POST[ 'facebooklike' ];
+							$_POST[ 'facebooklike' ] . "\t" .
+							$_POST[ 'facebooklikedimensions' ];
 		$fld->save ( );
 		die ( 'ok' );
 		

@@ -174,10 +174,19 @@
 		<table>
 			<tr>
 				<td>
-					<strong><?= i18n ( 'Use facebook "Like"' ) ?></strong>
+					<strong><?= i18n ( 'Use facebook "Like"' ) ?>:</strong>
 				</td>
 				<td>
 					<input type="checkbox"<?= $this->settings->FacebookLike ? ' checked="checked"' : '' ?> id="mod_blog_facebooklike"/>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<strong><?= i18n ( 'Facebook "Like" dimensions' ) ?>:</strong>
+				</td>
+				<td>
+					<?= i18n ( 'Width' ) ?>: <input type="text" value="<?= $this->settings->FacebookLikeWidth ?>" size="5" id="mod_blog_facebooklikewidth"/>
+					<?= i18n ( 'Height' ) ?>: <input type="text" value="<?= $this->settings->FacebookLikeHeight ?>" size="5" id="mod_blog_facebooklikeheight"/>
 				</td>
 			</tr>
 		</table>

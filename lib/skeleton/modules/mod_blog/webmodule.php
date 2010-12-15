@@ -56,7 +56,7 @@ $cfgSizeY = $cfg[10];
 $cfgHeaderText = $cfg[11];
 $cfgHideDetails = $cfg[12];
 $cfgFacebookLike = $cfg[13];
-
+list ( $cfgFacebookLikeWidth, $cfgFacebookLikeHeight, ) = explode ( ':', $cfg[14] );
 // Source and detailpages
 $sourcepage = new dbContent ( );
 if ( $cfgSourcepage ) $sourcepage->load ( $cfgSourcepage );
@@ -168,7 +168,9 @@ else
 			$btpl->facebookLike = $cfgFacebookLike;
 			if ( $btpl->facebookLike == 1 )
 			{
-				$btpl->facebookUrl = BASE_URL . $sourcepage->getRoute ( ) . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
+				$btpl->facebookLikeUrl = BASE_URL . $sourcepage->getRoute ( ) . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
+				$btpl->facebookLikeWidth = $cfgFacebookLikeWidth;
+				$btpl->facebookLikeHeight = $cfgFacebookLikeHeight;
 			}
 			$btpl->cfgComments = $cfgComments;
 			$btpl->cfgShowAuthor = $cfgShowAuthor;

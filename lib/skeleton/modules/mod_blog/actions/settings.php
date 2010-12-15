@@ -40,6 +40,7 @@ $tpl->settings->SizeY = $test[10];
 $tpl->settings->HeaderText = $test[11];
 $tpl->settings->HideDetails = $test[12];
 $tpl->settings->FacebookLike = $test[13];
+list ( $tpl->settings->FacebookLikeWidth, $tpl->settings->FacebookLikeHeight ) = explode ( ":", $test[14] );
 $tpl->content =& $content;
 $tpl->field =& $fieldObject;
 die ( $tpl->render ( ) );
