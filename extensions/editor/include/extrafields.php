@@ -187,10 +187,14 @@ function renderExtraFields ( $obj )
 		}
 		
 		// Show orphan fields that has no valid content group
-		$cgroups = '';
-		foreach ( $groups as $cg ) $cgroups .= '"' . trim ( $cg ) . '",';
-		while ( substr ( $cgroups, -1, 1 ) == ',' )
-			$cgroups = substr ( $cgroups, 0, strlen ( $cgroups ) -1 );
+		if ( $groups )
+		{
+			$cgroups = '';
+			foreach ( $groups as $cg ) $cgroups .= '"' . trim ( $cg ) . '",';
+			while ( substr ( $cgroups, -1, 1 ) == ',' )
+				$cgroups = substr ( $cgroups, 0, strlen ( $cgroups ) -1 );
+		}
+		else $cgroups = "";
 			
 		if ( $rows = $db->fetchObjectRows ( '
 			SELECT * FROM 
