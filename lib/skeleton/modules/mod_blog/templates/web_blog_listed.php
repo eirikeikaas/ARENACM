@@ -43,7 +43,7 @@
 						';
 					}
 				?>
-				<div class="ClearBoth"></div>
+				<span class="ClearBoth"></span>
 			</p>
 			<?}?>
 			<?if ( $this->facebookLike ) { ?>
