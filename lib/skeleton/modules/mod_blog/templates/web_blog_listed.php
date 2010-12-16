@@ -15,7 +15,7 @@
 			<p class="Block ReadMore">
 				<?if ( trim ( $this->blog->Body ) ) { ?>
 				<a class="FloatLeft Small" href="<?= ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) ?>.html">
-				<?= i18n ( 'Read more' ) ?>
+					<?= i18n ( 'Read more' ) ?>
 				</a>
 				<?}?>
 				<?if ( $this->cfgComments ) { ?>
@@ -31,11 +31,11 @@
 						: i18n('no comments') ?>)
 				</a>
 				<?}?>
-				<?if ( $this->facebookLike ) { ?>
-				<span class="FacebookLike">
-					<iframe src="http://www.facebook.com/plugins/like.php?href=<?= $this->facebookLikeUrl ?>&amp;layout=standard&amp;show_faces=false&amp;width=<?= $this->facebookLikeWidth ?>&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?= $this->facebookLikeWidth ?>px; height:<?= $this->facebookLikeHeight ?>px;" allowTransparency="true"></iframe>
-				</span>
-				<?}?>
 				<div class="ClearBoth"></div>
 			</p>
+			<?if ( $this->facebookLike ) { ?>
+			<p class="FacebookLike">
+				<iframe src="http://www.facebook.com/plugins/like.php?href=<?= $this->facebookLikeUrl ?>&amp;layout=standard&amp;show_faces=false&amp;width=<?= $this->facebookLikeWidth ?>&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?= $this->facebookLikeWidth ?>px; height:<?= $this->facebookLikeHeight ?>px;" allowTransparency="true"></iframe>
+			</p>
+			<?}?>
 		</div>
