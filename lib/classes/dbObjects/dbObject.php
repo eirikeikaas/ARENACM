@@ -2342,14 +2342,24 @@ class dbObject
 			// Get working copy
 			if ( $this->MainID != $this->ID )
 			{
-				$contentoptions2a = ' AND el1.MainID != el1.ID AND el1.ID = b.ContentID AND el1.isTemplate = 0';
-				$contentoptions2b = ' AND el2.MainID != el2.ID AND el2.ID = c.ContentID AND el2.isTemplate = 0';
+				$contentoptions2a = ' AND el1.MainID != el1.ID AND el1.ID = b.ContentID';
+				$contentoptions2b = ' AND el2.MainID != el2.ID AND el2.ID = c.ContentID';
+				if ( $this->isTemplate <= 0 )
+				{
+					$contentoptions2a .= ' AND el1.isTemplate = 0';
+					$contentoptions2b .= ' AND el2.isTemplate = 0';
+				}
 			}
 			// Get published version
 			else
 			{
-				$contentoptions2a = ' AND el1.MainID = el1.ID AND el1.ID = b.ContentID AND el1.isTemplate = 0';
-				$contentoptions2b = ' AND el2.MainID = el2.ID AND el2.ID = c.ContentID AND el2.isTemplate = 0';
+				$contentoptions2a = ' AND el1.MainID = el1.ID AND el1.ID = b.ContentID';
+				$contentoptions2b = ' AND el2.MainID = el2.ID AND el2.ID = c.ContentID';
+				if ( $this->isTemplate <= 0 )
+				{
+					$contentoptions2a .= ' AND el1.isTemplate = 0';
+					$contentoptions2b .= ' AND el2.isTemplate = 0';
+				}
 			}
 		}
 	
