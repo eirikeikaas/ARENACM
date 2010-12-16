@@ -918,6 +918,34 @@ function createTemplate ( )
 	}
 }
 
+function deleteTemplates ()
+{
+	var inps = document.getElementsByTagName ( 'input' );
+	var checks = new Array ();
+	for ( var a = 0; a < inps.length; a++ )
+	{
+		if ( inps[a].type.toLowerCase() != 'checkbox' ) continue;
+		var id = inps[a].id ? inps[a].id.split('_') : false;
+		if ( id && inps[a].checked )
+		{
+			checks.push ( id[1] );
+		}
+	}
+	if ( checks.length )
+	{
+		if ( confirm ( i18n ( 'Are you sure?' ) ) )
+		{
+			var tj = new bajax ();
+			tj.openUrl ( 'admin.php?module=extensions&extension=editor&action=deletetemplates&ids=' + checks.join ( ',' ), 'get', true );
+			tj.onload = function () 
+			{
+				document.getElementById ( 'pageTemplates' ).innerHTML = this.getResponseText ();
+			}
+			tj.send ();
+		}
+	}
+}
+
 var savefuncs = new Array ( );
 function AddSaveFunction ( func )
 {

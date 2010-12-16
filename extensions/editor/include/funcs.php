@@ -450,4 +450,36 @@ function contentButtons ( $contentid, $short = false )
 	return $str;
 }
 
+function showPageTemplates ( )
+{
+	$str = '';
+	$db =& dbOBject::globalValue ( 'database' );
+	if ( $rows = $db->fetchObjectRows ( '
+		SELECT * FROM ContentElement WHERE isTemplate ORDER BY MenuTitle ASC
+	' ) )
+	{
+		$str = '<table class="List"><tr><th width="16">#</th><th>Navn:</th></tr>';
+		foreach ( $rows as $row )
+		{
+			$str .= '
+		<tr class="sw'. ($sw = ($sw == 1 ? 2 : 1) ) . '">
+			<td>
+				<input type="checkbox" id="templateCh_' . $row->ID . '"/>
+			</td>
+			<td>
+				' . $row->MenuTitle . '
+			</td>
+		</tr>
+			';
+		}
+		$str .= '</table>';
+		$str .= '<div class="SpacerSmallColored"></div>';
+		$str .= '<p><button type="button" onclick="deleteTemplates()">';
+		$str .= '<img src="admin/gfx/icons/page_white_delete.png"/>';
+		$str .= ' ' . i18n ( 'Delete templates' ) . '</button></p>';
+	}
+	else { $str .= '<p>'. i18n ( 'No templates defined' ) . '.</p>'; }
+	return $str;
+}
+
 ?>

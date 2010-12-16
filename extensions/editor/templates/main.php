@@ -26,6 +26,9 @@
 					<div id="tabModuleShop" class="tab">
 						<img src="admin/gfx/icons/brick_edit.png"> <?= i18n ( 'Field modules' ) ?>
 					</div>
+					<div id="tabTemplates" class="tab">
+						<img src="admin/gfx/icons/page_white.png"> <?= i18n ( 'Templates' ) ?>
+					</div>
 					<div id="pageNotes" class="page" style="padding: 8px">
 						<h2><?= i18n ( 'Your notes on this page' ) ?>:</h2>
 						<textarea id="PageNotes"><?= $this->Notes ?></textarea>
@@ -56,6 +59,9 @@
 							</div>-->
 							<?}?>
 						</div>
+					</div>
+					<div id="pageTemplates" class="page">
+						<?= showPageTemplates ( ) ?>
 					</div>
 				</div>
 				<script type="text/javascript">
