@@ -6,33 +6,46 @@
 			<div class="Image" style="background-image: url(<?= $this->image->getImageUrl ( $this->sizeX, $this->sizeY, 'proximity' ) ?>)"></div>
 			<?}?>
 			<?if ( $this->cfgShowAuthor ) { ?>
-			<p class="Bold"><?= i18n ( 'written by' ) . ' ' . $this->blog->AuthorName ?></p>
+			<p class="Bold WrittenBy"><?= i18n ( 'written by' ) . ' ' . $this->blog->AuthorName ?></p>
 			<?}?>
-			<p class="Small"><?= i18n ( 'posted date' ) . ' ' . ArenaDate ( DATE_FORMAT, $this->blog->DateUpdated ) ?></p>
+			<p class="Small Date"><?= i18n ( 'posted date' ) . ' ' . ArenaDate ( DATE_FORMAT, $this->blog->DateUpdated ) ?></p>
 			<div class="Block Leadin">
 				<?= ( $this->leadinLength > 0 && strlen ( strip_tags ( $this->blog->Leadin ) ) > $this->leadinLength ) ? ( substr ( strip_tags ( $this->blog->Leadin ), 0, $this->leadinLength - 3 ) . '...' ) : $this->blog->Leadin ?>
 			</div>
+			<?if ( trim ( $this->blog->Body ) || $this->cfgComments ) { ?>
 			<p class="Block ReadMore">
-				<?if ( trim ( $this->blog->Body ) ) { ?>
-				<a class="FloatLeft Small" href="<?= ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) ?>.html">
-					<?= i18n ( 'Read more' ) ?>
+				<?
+					if ( trim ( $this->blog->Body ) ) 
+					{
+						return '
+				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html">
+					'. i18n ( 'Read more' ) .'
 				</a>
-				<?}?>
-				<?if ( $this->cfgComments ) { ?>
+						';
+					}
+				?>
+				<?
+					if ( $this->cfgComments ) 
+					{
+						return '
 				<div class="FloatLeft">
 					&nbsp;|&nbsp;
 				</div>
-				<a class="FloatLeft Small" href="<?= ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) ?>.html#comment">
-				<?= i18n ( 'Add comment' ) ?> (<?= 
+				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html#comment">
+				'. 
+					i18n ( 'Add comment' ) .' ('. 
 					$this->commentcount ? 
 						( $this->commentcount . ' ' .
 							( $this->commentcount == 1 ? i18n ( 'comment' ) : i18n ( 'comments' ) )
 						)
-						: i18n('no comments') ?>)
+						: i18n('no comments') .')
 				</a>
-				<?}?>
+						';
+					}
+				?>
 				<div class="ClearBoth"></div>
 			</p>
+			<?}?>
 			<?if ( $this->facebookLike ) { ?>
 			<p class="FacebookLike">
 				<iframe src="http://www.facebook.com/plugins/like.php?href=<?= $this->facebookLikeUrl ?>&amp;layout=standard&amp;show_faces=false&amp;width=<?= $this->facebookLikeWidth ?>&amp;action=like&amp;font=tahoma&amp;colorscheme=light&amp;height=35" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:<?= $this->facebookLikeWidth ?>px; height:<?= $this->facebookLikeHeight ?>px;" allowTransparency="true"></iframe>
