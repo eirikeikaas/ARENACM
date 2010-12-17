@@ -313,8 +313,9 @@ function generateLevelTree ( $content, $currentid, $r = "" )
 			$structure = $Session->AdminUser->checkPermission ( $content, 'Structure', 'admin' );
 			if ( $structure && $content->ID != 'orphans' )
 			{
-				$oStr .= 		'<button type="button" id="editliblevel" title="Rediger" onclick="if ( this.onmouseout ){ this.onmouseout(); }; editLibraryLevel( ' . $content->ID . ' );"><img src="admin/gfx/icons/folder_edit.png" title="Rediger"></button>';
-				$oStr .= 		'<button type="button" id="editpermissions" title="Rettigheter" onclick="editLevelPermissions( ' . $content->ID . ' );"><img src="admin/gfx/icons/group_edit.png" title="Rettigheter"></button>';
+				$oStr .= 		'<button type="button" id="editliblevel" title="Rediger" onclick="if ( this.onmouseout ){ this.onmouseout(); }; editLibraryLevel( ' . $content->ID . ' );"><img src="admin/gfx/icons/folder_edit.png"></button>';
+				$oStr .=		'<button type="button" id="addlevel" title="' . i18n ( 'Add library level' ) . '" onclick="addLibraryLevel ('.$content->ID.')"><img src="admin/gfx/icons/folder_add.png"/></button>';
+				$oStr .= 		'<button type="button" id="editpermissions" title="Rettigheter" onclick="editLevelPermissions( ' . $content->ID . ' );"><img src="admin/gfx/icons/group_edit.png"></button>';
 			}
 			if ( $currentid != 1 && $content->ID != 'orphans' && $content->Parent > 0 )
 			{

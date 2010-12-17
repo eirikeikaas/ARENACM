@@ -93,7 +93,6 @@ function ModuleResetLibrarySearch ( )
 	showLibraryContent();
 }
 
-
 /** 
  * move item to another folder
 **/
@@ -258,37 +257,33 @@ function abortLibraryLevelEdit( lid )
  * add new library level under currently chosen one
  * update tree and content
 **/
-function addLibraryLevel()
+function addLibraryLevel(cid)
 {
-	
-	if( !document.getElementById( 'newlevelform' ) ) 
-	{ 
-		alert("Siden er ikke helt lastet inn. Vent eller reload siden." ); 
-		return; 
-	}
-	
-	var addjax = new bajax ( );
-	addjax.openUrl ( modulepath + '&action=addlevel', 'POST', true );
-	addjax.onload = function ( )
-	{		
-		var r = this.getResponseText ( ).split( "<!--SEPERATOR-->" );
-		eval( extractScripts( r[0] ).join("\n") );
-		if( r[1] ) 
-		{
-			currentLibraryLevel = r[1];
-			if ( document.getElementById ( 'libraryParent' ) )
-				document.getElementById ( 'libraryParent' ).value = r[ 1 ];
-			document.lid = r[ 1 ];
+	var nm = prompt ( i18n ( 'Name the new folder' ), '' );
+	if ( nm.length )
+	{
+		var addjax = new bajax ( );
+		addjax.openUrl ( modulepath + '&action=addlevel&Name='+nm+'&Parent='+cid, 'POST', true );
+		addjax.onload = function ( )
+		{		
+			var r = this.getResponseText ( ).split( "<!--SEPERATOR-->" );
+			eval( extractScripts( r[0] ).join("\n") );
+			if( r[1] ) 
+			{
+				currentLibraryLevel = r[1];
+				if ( document.getElementById ( 'libraryParent' ) )
+					document.getElementById ( 'libraryParent' ).value = r[ 1 ];
+				document.lid = r[ 1 ];
+			}
+			// reset form field
+			if( document.getElementById( 'libraryNewLevel' ) ) document.getElementById( 'libraryNewLevel' ).value = '';		
+			updateLibraryLevelTree ( r[0] );
+			showLibraryContent();
+			checkLibraryTooltips();
+			document.getElementById ( 'tabLibStructure' ).onclick();
 		}
-		// reset form field
-		if( document.getElementById( 'libraryNewLevel' ) ) document.getElementById( 'libraryNewLevel' ).value = '';		
-		updateLibraryLevelTree ( r[0] );
-		showLibraryContent();
-		checkLibraryTooltips();
-		document.getElementById ( 'tabLibStructure' ).onclick();
-	}
-	addjax.addVarsFromForm( 'newlevelform' );
-	addjax.send ( );	
+		addjax.send ( );
+	}	
 }
 
 /**
@@ -326,7 +321,6 @@ function showLibraryContent ( pos )
 	
 	if( !pos ) pos = 0;
 
-	showNewLevelGUI ( );
 	showContentButtons ( );
 
 	var libjax = new bajax ( );
@@ -368,24 +362,6 @@ function checkLibraryTooltips()
 			addToolTip ( 'Legg til arbeidsbenken', 'Klikk for legge til nivået til arbeidsbenken.', 'libleveltoworkbench' );
 } // end of checkLibraryTooltips
 
-/**
- * Show new level gui
-**/
-function showNewLevelGUI ( )
-{
-	document.lgjax = new bajax ( );
-	document.lgjax.openUrl ( 'admin.php?module=library&function=newlevelgui&lid=' + document.lid, 'get', true );
-	document.lgjax.onload = function ( )
-	{
-		var dv = document.createElement ( 'div' );
-		dv.id = 'newLevel';
-		dv.className = 'Container';
-		dv.innerHTML = this.getResponseText ( );
-		document.getElementById ( 'newLevel' ).parentNode.replaceChild ( dv, document.getElementById ( 'newLevel' ) );
-		document.lgjax = 0;
-	}
-	document.lgjax.send ( );
-}
 
 /**
  * Show buttons for adding images etc
@@ -465,10 +441,6 @@ addEvent ( 'onkeydown', function ( e )
 addEvent ( 'onkeyup', function ( e )
 {
 	document.libraryKey = '';
-} );
-addOnload ( function ( )
-{
-	initTabSystem ( 'ChoicesTabs' );
 } );
 
 function toggleSelectedImage ( ele )
@@ -618,7 +590,6 @@ function deleteSelected ( )
 	}
 }
 	
-	
 function editLevelPermissions ( cid )
 {
 	initModalDialogue ( 'permissions', 640, 570, 'admin.php?module=library&function=levelpermissions&cid=' + cid );
@@ -641,6 +612,8 @@ function cleanCache ( )
 		jax.send ( );
 	}
 }
+
+/** Multiple file upload etc **************************************************/
 
 function mulDecreaseImages ( )
 {
@@ -715,7 +688,7 @@ function submitSwf ( )
 	submitFileUpload ( );
 }
 
-/** Ok here we go with an image cutting feature **/
+/** Ok here we go with an image cutting feature *******************************/
 
 var sliceZoom = 1;
 var sliceOffX = 0;
@@ -944,3 +917,4 @@ function setSortOrder ( fid, typ, order )
 {
 	document.location = 'admin.php?module=library&action=setsortorder&t='+typ+'&i='+fid+'&o='+order;
 }
+

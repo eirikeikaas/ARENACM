@@ -30,7 +30,8 @@ include_once( 'admin/modules/library/include/functions_levels.php' );
 $root = dbFolder::getRootFolder ( );
 
 $level = new dbObject ( 'Folder' );
-$level->receiveForm ( $_POST );
+$level->Name = $_REQUEST[ 'Name' ];
+$level->Parent = $_REQUEST[ 'Parent' ];
 if ( $level->Parent <= 0 )
 {
 	$level->Parent = $root->ID;

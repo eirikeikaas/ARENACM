@@ -20,32 +20,16 @@
 		<tr>
 			<td>
 				<div id="ChoicesTabs">
-					<div class="tab" id="tabLibStructure">
-						<img src="admin/gfx/icons/folder.png"/> <?= i18n ( 'Folders' ) ?>
-					</div>
-					<div class="tab" id="tabAdvanced">
-						<img src="admin/gfx/icons/drive_key.png"> <?= i18n ( 'Advanced' ) ?>
-					</div>
-					<div class="page" id="pageLibStructure" style="padding: 0px; margin: 0">
-						<div id="levels">
+					<h1>
+						<img src="admin/gfx/icons/folder.png" style="float: left; margin: 0pt 4px 0pt 0pt;"/> <?= i18n ( 'Folders' ) ?>
+					</h1>
+					<div class="Container" style="padding: 0px">
+						<div id="levels" style="margin: -1px">
 							<div>
 								<ul id="LibraryLevelTree" class="Collapsable">
 									<?= $this->levels; ?>
 								</ul>
 							</div>
-						</div>
-					</div>
-					<div class="page" id="pageAdvanced" style="padding: 3px; margin: 0">
-						<div id="newLevel" class="Container"></div>
-						<div class="SpacerSmall"></div>
-						<div class="Container">
-							<button type="button" onclick="cleanCache()">
-								<img src="admin/gfx/icons/folder_wrench.png"> <?= i18n ( 'Empty temporary files' ) ?>
-							</button>
-							<div class="Spacer"></div>
-							<button type="button" onclick="document.location='admin.php?module=library&action=checkuploadfolder';">
-								<img src="admin/gfx/icons/folder_wrench.png"> <?= i18n ( 'Check for missing files' ) ?>
-							</button>
 						</div>
 					</div>
 				</div>
@@ -109,6 +93,15 @@
 					<div class="SpacerSmallColored"></div>
 					<div id="ContentButtons">
 					</div>
+					<div class="SpacerSmall"></div>
+					<div>
+						<button type="button" onclick="document.location='admin.php?module=library&action=checkuploadfolder';">
+							<img src="admin/gfx/icons/folder_wrench.png"> <?= i18n ( 'Check for missing files' ) ?>
+						</button>
+						<button type="button" onclick="cleanCache()">
+							<img src="admin/gfx/icons/folder_wrench.png"> <?= i18n ( 'Empty temporary files' ) ?>
+						</button>
+					</div>
 				</div>
 				<iframe name="LibraryUpload" style="position: absolute; width: 1px; height: 1px; visibility: hidden"></iframe>
 				
@@ -120,7 +113,6 @@
 	<script language="JavaScript" type="text/javascript">
 		makeCollapsable ( document.getElementById ( 'LibraryLevelTree' ) );
 		showContentButtons ( );
-		showNewLevelGUI ( );
 		checkLibraryTooltips();
 	</script>
   
