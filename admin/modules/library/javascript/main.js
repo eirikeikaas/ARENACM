@@ -147,7 +147,8 @@ function reloadTags ()
 	t.openUrl ( 'admin.php?module=library&action=gettags', 'get', true );
 	t.onload = function ()
 	{
-		document.getElementById ( 'TagList' ).innerHTML = this.getResponseText ();
+		if ( document.getElementById ( 'TagList' ) )
+			document.getElementById ( 'TagList' ).innerHTML = this.getResponseText ();
 	}
 	t.send ();
 }
