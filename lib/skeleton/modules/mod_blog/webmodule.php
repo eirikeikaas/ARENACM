@@ -82,7 +82,7 @@ if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matc
 	if ( $detailpage && $content->MainID != $detailpage->MainID )
 	{
 		ob_clean ( );
-		header ( 'Location: ' . $detailpage->getRoute ( ) . '/blogitem/' . $matches[1] . '_' . texttourl ( $blog->Title ) . '.html' );
+		header ( 'Location: ' . BASE_URL . $detailpage->getRoute ( ) . '/blogitem/' . $matches[1] . '_' . texttourl ( $blog->Title ) . '.html' );
 		die ( );
 	}
 	
