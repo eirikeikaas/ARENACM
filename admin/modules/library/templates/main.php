@@ -97,7 +97,7 @@
 							<option value="filesize"<?= $this->listmode == 'filesize' ? ' selected="selected"' : '' ?>><?= i18n ( 'Filsize' ) ?></option>
 						</select>
 					</div>
-					<div style="font-size: 13px" id="Innholdsheader"><?= i18n ( 'The contents of' ) ?> "<?= $this->folder->Name ?>":</div>
+					<div style="font-size: 13px" id="Innholdsheader"><?= $_REQUEST[ 'tag' ] ? ( i18n ( 'Files and images matching' ) . ' "' . $_REQUEST[ 'tag' ] . '"' ) : ( i18n ( 'The contents of' ) . ' "' . $this->folder->Name . '"' ) ?>:</div>
 				</h1>
 				<div class="Container">
 					
