@@ -98,8 +98,9 @@ class cDocument extends cPTemplate
 				switch ( $page->ContentType )
 				{
 					case "link":
+						$linkObject = CreateObjectFromString ( $page->LinkData );
 						$link = $page->Link;
-						$t = "";
+						$t = " target=\"{$linkObject->LinkTarget}\"";
 						break;
 					default:
 						$link = $page->getPath ( );

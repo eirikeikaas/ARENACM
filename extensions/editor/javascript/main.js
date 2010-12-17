@@ -60,6 +60,8 @@ function savePage ( )
 		pjax.addVar ( 'Notes', document.getElementById ( 'PageNotes' ).value );
 	if ( document.getElementById ( 'LinkText' ) )
 		pjax.addVar ( 'Link', document.getElementById ( 'LinkText' ).value );
+	if ( ge ( 'LinkTarget' ) )
+		pjax.addVar ( 'LinkTarget', ge ( 'LinkTarget' ).value );
 	
 	// Extra fields
 	var elements = document.getElementById ( 'ContentForm' ).getElementsByTagName ( '*' );

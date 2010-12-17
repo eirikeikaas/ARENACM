@@ -42,7 +42,7 @@ if ( !$info->load ( ) )
 }
 // Oppgrader (liste over versioner)
 $versions = Array (
-	'1.99.1', '1.99.4', '1.99.5', '1.99.6', '1.99.7', '1.99.8', '1.99.9', '2.0.10'
+	'1.99.1', '1.99.4', '1.99.5', '1.99.6', '1.99.7', '1.99.8', '1.99.9', '2.0.10', '2.0.12'
 );
 foreach ( $versions as $version )
 {
@@ -142,6 +142,11 @@ foreach ( $versions as $version )
 					  `Description` text,
 					  PRIMARY KEY  (`ID`)
 					)
+				' );
+				break;
+			case '2.0.12':
+				$db->query ( '
+					ALTER TABLE `ContentElement` CHANGE LinkText LinkData text
 				' );
 				break;
 		}

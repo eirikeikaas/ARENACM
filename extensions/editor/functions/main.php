@@ -115,7 +115,12 @@ if ( $Session->AdminUser->checkPermission ( $cnt, 'Write', 'admin' ) )
 	switch ( $cnt->ContentType )
 	{
 		case 'link':
+			// Extract link data - here we can add things as we go
+			$linkObject = CreateObjectFromString ( $cnt->LinkData );
+			if ( !$linkObject->LinkTarget )
+				$linkObject->LinkTarget = '_self';
 			$form->load ( $extdir . '/templates/contentform_link.php' );
+			$form->linkData =& $linkObject;
 			$form->extrafields = renderExtraFields ( $cnt );
 			break;
 		case 'extrafields':

@@ -159,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `ContentElement` (
   `DatePublish` datetime default NULL,
   `DateArchive` datetime default NULL,
   `Link` varchar(255) default NULL,
-  `LinkText` varchar(128) default NULL,
+  `LinkData` text default NULL,
   `Template` varchar(255) default NULL,
   `TemplateArchived` varchar(255) default NULL,
   `TemplateID` int(11) default '0',

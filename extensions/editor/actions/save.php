@@ -35,6 +35,7 @@ if ( $content->load ( $_POST[ 'cid' ] ) )
 		$content->Title = $_POST[ 'Title' ];
 		$content->MenuTitle = $_POST[ 'MenuTitle' ];
 		$content->Link = $_POST[ 'Link' ];
+		$content->LinkData = "LinkTarget\t" . $_POST[ 'LinkTarget' ];
 		$content->DateModified = date ( 'Y-m-d H:i:s' );
 		if ( strtotime ( $content->DateCreated ) <= 0 )
 			$content->DateCreated = $content->DateModified;
