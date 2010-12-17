@@ -40,4 +40,22 @@ function saveLibraryTags ( $tags, $type )
 	return false;
 }
 
+function getTags ()
+{
+	global $userbase;
+	$str = '';
+	if ( $rows = $userbase->fetchObjectRow ( 'SELECT COUNT(*) FROM ElementTag WHERE `Type` = "Image" OR `Type` = "File"' ) )
+	{
+		if ( $tags = $userbase->fetchObjectRows ( 'SELECT * FROM ElementTag WHERE `Type` = "Image" OR `Type` = "File" ORDER BY Popularity DESC, Name ASC LIMIT 16' ) )
+		{
+			foreach ( $tags as $tag )
+			{
+				$str .= '<button type="button" class="Tag" onclick="getByTag(\''.$tag->Name.'\')">' . $tag->Name . '</button>';
+			}
+			$module->tags = $str;
+		}
+	}
+	return $str;
+}
+
 ?>

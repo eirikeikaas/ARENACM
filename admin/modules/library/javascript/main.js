@@ -129,6 +129,7 @@ function showUploadSuccess()
 	removeModalDialogue ( 'EditLevel' );
 	showLibraryContent();
 	checkLibraryTooltips();
+	reloadTags ();
 }
 
 /** 
@@ -140,6 +141,21 @@ function showUploadError( emsg )
 	else alert( emsg );
 }
 
+function reloadTags ()
+{
+	var t = new bajax ();
+	t.openUrl ( 'admin.php?module=library&action=gettags', 'get', true );
+	t.onload = function ()
+	{
+		document.getElementById ( 'TagList' ).innerHTML = this.getResponseText ();
+	}
+	t.send ();
+}
+
+function getByTag ( t )
+{
+	document.location = 'admin.php?module=library&tag='+t;
+}
 
 
 /**

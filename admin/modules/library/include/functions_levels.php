@@ -53,21 +53,54 @@ function getLevelContent( $lid )
 			default: $lm = 'Title'; break;
 		}
 		
+		// If we list by tag
+		if ( $t = $_REQUEST[ 'tag' ] )
+		{
+			$q = '
+				SELECT * FROM
+				(
+					( 
+						SELECT 
+							Image.ID, Image.Title, Image.Filename, Image.Filesize, Image.Width, 
+							Image.Height, Image.DateModified, Image.SortOrder, \'Image\' AS `Type`,
+							Image.Tags
+						FROM `Image` 
+						WHERE Image.Tags LIKE "%'.$t.'%"
+					)
+					UNION
+					( 
+						SELECT 
+							File.ID, File.Title, File.Filename, File.Filesize, 0 AS `Width`, 
+							0 AS `Height`, File.DateModified, File.SortOrder, \'File\' AS `Type`,
+							File.Tags
+						FROM `File` 
+						WHERE File.Tags LIKE "%'.$t.'%"
+					)
+				) as z
+				ORDER BY `' . $lm . '` ' . $Session->LibraryListmodeOrder . '
+			';
+		}
+		// Else just list out current folder
+		else
+		{
+			$q = '
+				SELECT * FROM (
+				( SELECT 
+					Image.ID, Image.Title, Image.Filename, Image.Filesize, Image.Width, 
+					Image.Height, Image.DateModified, Image.SortOrder, \'Image\' AS `Type`
+				FROM `Image` WHERE `ImageFolder` = \'' . ( $lid == 'orphans' ? '0' : $lid ) . '\' )
+				UNION
+				( SELECT 
+					File.ID, File.Title, File.Filename, File.Filesize, 0 AS `Width`, 
+					0 AS `Height`, File.DateModified, File.SortOrder, \'File\' AS `Type`
+				FROM `File` WHERE `FileFolder` = \'' . ( $lid == 'orphans' ? '0' : $lid ) . '\' )
+				) as z
+				ORDER BY `' . $lm . '` ' . $Session->LibraryListmodeOrder . '
+			';
+		}
+		
 		$tpl = new cPTemplate ( 'admin/modules/library/templates/listcontents_mode_details.php' );
-		if ( $rows = $fld->_table->database->fetchObjectRows ( '
-			SELECT * FROM (
-			( SELECT 
-				Image.ID, Image.Title, Image.Filename, Image.Filesize, Image.Width, 
-				Image.Height, Image.DateModified, Image.SortOrder, \'Image\' AS `Type`
-			FROM `Image` WHERE `ImageFolder` = \'' . ( $lid == 'orphans' ? '0' : $lid ) . '\' )
-			UNION
-			( SELECT 
-				File.ID, File.Title, File.Filename, File.Filesize, 0 AS `Width`, 
-				0 AS `Height`, File.DateModified, File.SortOrder, \'File\' AS `Type`
-			FROM `File` WHERE `FileFolder` = \'' . ( $lid == 'orphans' ? '0' : $lid ) . '\' )
-			) as z
-			ORDER BY `' . $lm . '` ' . $Session->LibraryListmodeOrder . '
-		' ) )
+		if ( $rows = $fld->_table->database->fetchObjectRows ( $q ) )
 		{
 			foreach ( $rows as $row )
 			{
@@ -179,7 +212,7 @@ function getLevelContent( $lid )
 		}
 		else
 		{
-			$tpl->contents = '<tr><td colspan="5">Ingen filer eller bilder finnes i mappen.</td></tr>';
+			$tpl->contents = '<tr><td colspan="5">Ingen filer eller bilder finnes i mappen. ' . mysql_error () . '</td></tr>';
 		}
 		return $tpl->render ( );
 	}
@@ -194,7 +227,12 @@ function getLevelContent( $lid )
 				$folder->load ( $fld->ID );
 			}
 			$image = new dbImage ( );
-			$image->addClause ( 'WHERE', 'ImageFolder=' . ( $folder->ID > 0 ? $folder->ID : "'0'" ) );
+			
+			// List by tag or folder
+			if ( $_REQUEST[ 'tag' ] )
+				$image->addClause ( 'WHERE', '`Tags` LIKE "%' . $_REQUEST[ 'tag' ] . '%"' );
+			else $image->addClause ( 'WHERE', 'ImageFolder=' . ( $folder->ID > 0 ? $folder->ID : "'0'" ) );
+			
 			switch ( $Session->LibraryListmode )
 			{
 				case 'title':
@@ -212,7 +250,11 @@ function getLevelContent( $lid )
 			$images = $image->find ( );
 			
 			$file = new dbFile ();
-			$file->addClause ( 'WHERE', 'FileFolder=' . ( $folder->ID > 0 ? $folder->ID : "'0'" ) );
+			
+			// List by tag or folder
+			if ( $_REQUEST[ 'tag' ] )
+				$file->addClause ( 'WHERE', '`Tags` LIKE "%' . $_REQUEST[ 'tag' ] . '%"' );
+			else $file->addClause ( 'WHERE', 'FileFolder=' . ( $folder->ID > 0 ? $folder->ID : "'0'" ) );
 			
 			switch ( $Session->LibraryListmode )
 			{

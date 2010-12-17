@@ -54,7 +54,7 @@
 					<img src="admin/gfx/icons/tag_green.png" style="float: left; margin: 0pt 4px 0pt 0pt;"/>
 					<?= i18n ( 'Tags' ) ?>
 				</h2>
-				<div class="BlockContainer">
+				<div class="BlockContainer" id="TagList">
 					<?= $this->tags ?>
 				</div>
 				<?}?>

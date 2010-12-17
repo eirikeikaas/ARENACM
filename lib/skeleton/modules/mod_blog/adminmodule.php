@@ -77,6 +77,7 @@ if ( !function_exists ( 'listBlogs' ) )
 		global $Session;
 		if ( !$contentid ) $contentid = $GLOBALS[ 'content' ]->MainID;
 		if ( !$start ) $start = 0;
+		$editorcontent = new dbContent ( $Session->EditorContentID );
 		$content = new dbContent ( $contentid );
 		$blogs = new dbObject ( 'BlogItem' );
 		$blogs->addClause ( 'WHERE', 'ContentElementID=' . $content->MainID );
@@ -95,7 +96,8 @@ if ( !function_exists ( 'listBlogs' ) )
 				$str .= '<td>Vises fra: ' . ArenaDate ( DATE_FORMAT, $blog->DatePublish ) . '</td>';
 				$str .= '</tr>';
 				$str .= '<tr class="' . ( $sw = ( $sw == 'sw2' ? 'sw1' : 'sw2' ) ) . '"><td colspan="5">' . $blog->Leadin . '</td></tr>';
-				if ( $contentid == $Session->EditorContentID )
+				
+				if ( $content->MainID == $editorcontent->MainID )
 				{
 					$str .= '<tr class="' . $sw . '"><td colspan="5">';
 					$str .= '<button type="button" onclick="mod_blog_edit(' . $blog->ID . ')"><img src="admin/gfx/icons/page_white_edit.png"/> Endre</button>';

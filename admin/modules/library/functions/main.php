@@ -23,6 +23,7 @@ Rune Nilssen
 
 include_once ( "lib/classes/dbObjects/dbFolder.php" );
 include_once( 'admin/modules/library/include/functions_levels.php' );
+include_once ( 'admin/modules/library/include/functions.php' );
 
 $module = new cPTemplate ( "$tplDir/main.php" );
 $module->currentLevel = $Session->LibraryCurrentLevel;
@@ -82,17 +83,6 @@ else
 $module->folder = $f;
 
 // Tags
-$module->tags = '';
-if ( $rows = $userbase->fetchObjectRow ( 'SELECT COUNT(*) FROM ElementTag WHERE `Type` = "Image" OR `Type` = "File"' ) )
-{
-	if ( $tags = $userbase->fetchObjectRows ( 'SELECT * FROM ElementTag WHERE `Type` = "Image" OR `Type` = "File" ORDER BY Popularity DESC, Name ASC LIMIT 16' ) )
-	{
-		foreach ( $tags as $tag )
-		{
-			$str .= '<button type="button" class="Tag">' . $tag->Name . '</button>';
-		}
-		$module->tags = $str;
-	}
-}
+$module->tags = getTags ();
 
 ?>
