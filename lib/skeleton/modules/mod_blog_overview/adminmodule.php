@@ -47,7 +47,7 @@ switch($_REQUEST['modaction'])
 		if ($_POST['page'] && $_POST['amounts'])
 		{
 			$datamixed = $_POST['page'] . '#' . $_POST['amounts'] . '#' . $_POST['nav'] . '#' . $_POST[ 'titles' ];
-			$datamixed .= '#' . $_POST['listmode'];
+			$datamixed .= '#' . $_POST['listmode'] . '#' . $_POST[ 'sizex' ] . '#' . $_POST[ 'sizey' ];
 		}
 		else $datamixed = 'empty!';
 		$field->DataMixed = $datamixed;

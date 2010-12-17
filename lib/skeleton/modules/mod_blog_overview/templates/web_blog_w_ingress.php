@@ -1,5 +1,6 @@
 
 	<div class="Block OverviewNewsitem">
+		<?= $this->image ?>
 		<h2 class="Block Title">
 			<?= $this->blog->Title ?>
 		</h2>

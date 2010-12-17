@@ -38,7 +38,7 @@ if ($_REQUEST['bpos'])
 
 if ($field->DataMixed)
 {
-    if (list($pages, $amounts, $navigations, $headings, $listmode ) = explode('#', $field->DataMixed))
+    if (list($pages, $amounts, $navigations, $headings, $listmode, $imagesizex, $imagesizey ) = explode('#', $field->DataMixed))
     {
     	if ( !$listmode ) $listmode == 'titles';
     	$pages = explode('_', $pages);
@@ -57,7 +57,7 @@ if ($field->DataMixed)
 					continue;
 				
 				if ( $blogs = $database->fetchObjectRows ( '
-					SELECT * FROM BlogItem WHERE ContentElementID=\'' . $pages[$a] . '\' 
+					SELECT ID FROM BlogItem WHERE ContentElementID=\'' . $pages[$a] . '\' 
 					ORDER BY DateUpdated DESC, ID DESC
 					LIMIT ' . $amounts[$a] . '
 				' ) )
@@ -65,8 +65,15 @@ if ($field->DataMixed)
 					$btpl = new cPTemplate ( $mtpldir . 'web_blog_w_ingress.php' );
 					foreach ( $blogs as $blog )
 					{
-						$btpl->blog = $blog;
-						$btpl->link = $page->getRoute () . '/blogitem/' . $blog->ID . '_' . texttourl ( $blog->Title ) . '.html';
+						$bo = new dbObject ( 'BlogItem' ); $bo->load ( $blog->ID );
+						if ( $imagesizey > 0 && $imagesizex > 0 && list ( $image, ) = $bo->getObjects ( 'ObjectType = Image' ) )
+						{
+							$i = new dbImage ( $image->ID );
+							$btpl->image = '<div class="OverviewImage">' . $i->getImageHTML ( $imagesizex, $imagesizey, 'framed' ) . '</div>';
+						}
+						else $btpl->image = '';
+						$btpl->blog = $bo;
+						$btpl->link = $page->getRoute () . '/blogitem/' . $bo->ID . '_' . texttourl ( $bo->Title ) . '.html';
 						$module .= $btpl->render ();
 					}
 				}

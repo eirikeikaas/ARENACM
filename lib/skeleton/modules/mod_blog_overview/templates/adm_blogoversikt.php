@@ -108,7 +108,7 @@
 		<div class="SubContainer">
 			<select id="mod_blog_listmode">
 				<?
-					list ( , , , ,$listmode ) = explode ( '#', $this->datamixed );
+					list ( , , , ,$listmode, $this->sizex, $this->sizey ) = explode ( '#', $this->datamixed );
 					$str = '';
 					foreach ( array ( 'titles', 'full' ) as $mode )
 					{
@@ -118,6 +118,25 @@
 					return $str;
 				?>
 			</select>
+		</div>
+		<div class="SpacerSmallColored"></div>
+		<div class="Container" style="padding: <?= MarginSize ?>px">
+			<h2>
+				<?= i18n ( 'blogoverview_Image_sizes' ) ?>:
+			</h2>
+		</div>
+		<div class="SpacerSmall"></div>
+		<div class="SubContainer">
+			<table>
+				<tr>
+					<td>
+						<?= i18n ( 'blogoverview_width' ) ?>: <input type="text" size="6" id="mod_blogo_sizex" value="<?= $this->sizex ? $this->sizex : '0' ?>"/><br/>
+					</td>
+					<td>
+						<?= i18n ( 'blogoverview_height' ) ?>: <input type="text" size="6" id="mod_blogo_sizey" value="<?= $this->sizey ? $this->sizey : '0' ?>"/>
+					</td>
+				</tr>
+			</table>
 		</div>
 		<div class="SpacerSmallColored"></div>
 		<button type="button" onclick="mod_blog_overview_save()">
