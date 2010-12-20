@@ -26,7 +26,7 @@ Rune Nilssen
 **/
 include_once ( 'lib/classes/dbObjects/dbContent.php' );
 i18nAddLocalePath ( 'extensions/editor/locale' );
-include_once ( 'extensions/editor/locale/i18njavascript.php' );
+include_once ( 'extensions/editor/include/i18njavascript.php' );
 
 if ( strstr ( $_SERVER[ 'HTTP_USER_AGENT' ], 'MSIE 7' ) )
 	$document->addResource ( 'stylesheet', 'extensions/editor/css/ie7.css' );

@@ -280,7 +280,6 @@ function addLibraryLevel(cid)
 			updateLibraryLevelTree ( r[0] );
 			showLibraryContent();
 			checkLibraryTooltips();
-			document.getElementById ( 'tabLibStructure' ).onclick();
 		}
 		addjax.send ( );
 	}	
