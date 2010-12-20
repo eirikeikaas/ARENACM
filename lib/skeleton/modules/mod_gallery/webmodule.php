@@ -36,7 +36,7 @@ if ( $settings->currentMode == 'gallery' )
 	if ( !$settings->ThumbWidth ) $settings->ThumbWidth = 80;
 	if ( !$settings->ThumbHeight ) $settings->ThumbHeight = 60;
 	if ( !$settings->ThumbColumns ) $settings->ThumbColumns = 4;
-	$folders = explode ( ',', trim ( $settings->Folders ) );
+	$folders = explode ( ':', trim ( $settings->Folders ) );
 	if ( count ( $folders ) )
 	{
 		foreach ( $folders as $fld )
