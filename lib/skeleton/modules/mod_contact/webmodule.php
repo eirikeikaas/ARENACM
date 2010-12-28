@@ -75,10 +75,12 @@ else
 				case 'undefined':
 					continue;
 				case 'Message':
-					$str .= '<tr><td>' . i18n ( $k ) . ':</td><td><textarea name="' . texttourl(i18n($k)) . '" cols="50" rows="10"></textarea></td></tr>';
+					$str .= '<tr><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
+					$str .= '<td class="' . texttourl ( $k ) . '"><textarea name="' . texttourl(i18n($k)) . '" cols="50" rows="10"></textarea></td></tr>';
 					break;
 				default:
-					$str .= '<tr><td>' . i18n ( $k ) . ':</td><td><input type="text" name="' . texttourl(i18n($k)) . '" value="" size="50"/></td></tr>';
+					$str .= '<tr><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
+					$str .= '<td class="' . texttourl ( $k ) . '"><input type="text" name="' . texttourl(i18n($k)) . '" value="" size="50"/></td></tr>';
 					break;
 			}
 		}
@@ -96,21 +98,30 @@ else
 					continue;
 				case 'Message':
 					if ( $v == 1 )
-						$str .= '<tr><td>' . i18n ( $k ) . ':</td><td><textarea name="' . texttourl(i18n($k)) . '" cols="50" rows="10"></textarea></td></tr>';
+					{
+						$str .= '<tr><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
+						$str .= '<td class="' . texttourl ( $k ) . '"><textarea name="' . texttourl(i18n($k)) . '" cols="50" rows="10"></textarea></td></tr>';
+					}
 					break;
 				default:
 					if ( $v == 1 )
-						$str .= '<tr><td>' . i18n ( $k ) . ':</td><td><input type="text" name="' . texttourl(i18n($k)) . '" value="" size="50"/></td></tr>';
+					{
+						$str .= '<tr><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
+						$str .= '<td class="' . texttourl ( $k ) . '"><input type="text" name="' . texttourl(i18n($k)) . '" value="" size="50"/></td></tr>';
+					}
 					break;
 			}
 		}
 	}
-	$str .= '</table><table><tr><td>' .i18n ( 'Spam control' ) . ' - ' . i18n ( 'What is sum of one plus three' ) . '?</td><td><input type="text" name="spamcontrol" value=""/></td></tr>';
+	$str .= '</table>';
+	$str .= '<table><tr><td class="spam_control">' .i18n ( 'Spam control' ) . ' - ' . i18n ( 'What is sum of one plus three' ) . '?</td>';
+	$str .= '<td class="spam_control"><input type="text" name="spamcontrol" value=""/></td></tr>';
+	
 	$module .= $settings->LeadinMessage;
 	$module .= '<form method="post" name="' . $field->Name . '" action="' . $page->getUrl () . '">';
 	$module .= '<input type="hidden" name="action" value="mail' . ( microtime() . rand(0,99999) ) . '"/>';
 	$module .= '<table>' . $str . '</table>';
-	$module .= '<p><button type="submit">' . i18n ( 'Send form' ) . '</button></p>';
+	$module .= '<p class="submit"><button type="submit">' . i18n ( 'Send form' ) . '</button></p>';
 	$module .= '</form>';
 }	
 
