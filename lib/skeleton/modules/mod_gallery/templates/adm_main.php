@@ -54,7 +54,7 @@
 								<div class="page" id="pageGalleryOptions">
 									<div class="Container">
 									<?
-										$modes = array ( 'slideshow'=>'Slideshow', 'gallery'=>'Bildegalleri' );
+										$modes = array ( 'slideshow'=>'Slideshow', 'gallery'=>'Bildegalleri', 'archive'=>'Bildearkiv' );
 										$i = 0;
 										foreach ( $modes as $mode=>$name )
 										{
@@ -187,6 +187,84 @@
 															}
 															return $str;
 														?>
+														</select>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+									<div id="GalControl_archive">
+										<div class="Container">
+											<table cellspacing="0" cellpadding="0" border="0" width="100%" class="Gui">
+												<tr>
+													<td><strong>Tommebilde bredde:</strong></td>
+													<td><input type="text" id="galThumbWidth_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->ThumbWidth ?>"/></td>
+												</tr>
+												<tr>
+													<td><strong>Tommebilde høyde:</strong></td>
+													<td><input type="text" id="galThumbHeight_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->ThumbHeight ?>"/></td>
+												</tr>
+												<tr>
+													<td><strong>Tommebilde kolonner:</strong></td>
+													<td><input type="text" id="galThumbColumns_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->ThumbColumns ?>"/></td>
+												</tr>
+												<tr>
+													<td><strong>Detalj bredde:</strong></td>
+													<td><input type="text" id="galDetailWidth_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->DetailWidth ?>"/></td>
+												</tr>
+												<tr>
+													<td><strong>Detalj høyde:</strong></td>
+													<td><input type="text" id="galDetailHeight_<?= $this->field->ID ?>" size="4" value="<?= $this->settings->DetailHeight ?>"/></td>
+												</tr>
+												<tr>
+													<td><strong>Sortering:</strong></td>
+													<td>
+														<select id="galSortMode_<?= $this->field->ID ?>">
+														<?
+															$array = array ( 'listmode_date', 'listmode_sortorder' );
+															$s = '';
+															foreach ( $array as $m )
+															{
+																$s = $m == $this->settings->SortMode ? ' selected="selected"' : '';
+																$str .= '<option value="' . $m . '"'.$s.'>' . i18n ( $m ) . '</option>';
+															}
+															return $str;
+														?>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td><strong>Modus:</strong></td>
+													<td>
+														<select id="galArchiveMode_<?= $this->field->ID ?>">
+														<?
+															$array = array ( 'archivemode_thumbs', 'archivemode_list' );
+															$s = '';
+															foreach ( $array as $m )
+															{
+																$s = $m == $this->settings->ArchiveMode ? ' selected="selected"' : '';
+																$str .= '<option value="' . $m . '"'.$s.'>' . i18n ( $m ) . '</option>';
+															}
+															return $str;
+														?>
+														</select>
+													</td>
+												</tr>
+												<tr>
+													<td><strong>Bruke undernivåer:</strong></td>
+													<td>
+														<select id="galRecursion_<?= $this->field->ID ?>">
+														<?
+															$array = array ( '0'=>'no', '1'=>'yes' );
+															$s = '';
+															foreach ( $array as $m=>$literal )
+															{
+																$s = $m === $this->settings->Recursion ? ' selected="selected"' : '';
+																$str .= '<option value="' . $m . '"'.$s.'>' . i18n ( $literal ) . '</option>';
+															}
+															return $str;
+														?>
+														</select>
 													</td>
 												</tr>
 											</table>
@@ -208,12 +286,12 @@
 					initTabSystem ( 'gallerytabs' );
 					
 					// Initialize controls
-					var modes = [ 'slideshow', 'gallery' ];
+					var modes = [ 'slideshow', 'gallery', 'archive' ];
 					for ( var a = 0; a < modes.length; a++ )
 					{
 						if ( ( a == 0 && '<?= $this->currentMode ?>' == '' ) || modes[a] == '<?= $this->currentMode ?>' )
-							document.getElementById ( 'GalControl_' + modes[a] ).style.display = '';
-						else document.getElementById ( 'GalControl_' + modes[a] ).style.display = 'none';
+							ge( 'GalControl_' + modes[a] ).style.display = '';
+						else ge( 'GalControl_' + modes[a] ).style.display = 'none';
 					}
 					
 					// Change gallery mode
@@ -232,7 +310,7 @@
 							j.openUrl ( 'admin.php?module=extensions&extension=<?= $_REQUEST[ 'extension' ] ?>&modaction=addfolder&fid=' + val + '&fieldid=' + <?= $this->field->ID ?>, 'get', true );
 							j.onload = function ()
 							{
-								document.getElementById ( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();
+								ge( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();
 								for ( var a = 0; a < obj.options.length; a++ )
 								{
 									if ( a == 0 ) obj.options[a].selected="selected";
@@ -249,31 +327,39 @@
 						j.openUrl ( 'admin.php?module=extensions&extension=<?= $_REQUEST[ 'extension' ] ?>&modaction=preview', 'post', true );
 						j.onload = function ()
 						{
-							document.getElementById ( 'gal_preview' ).innerHTML = this.getResponseText();
+							ge( 'gal_preview' ).innerHTML = this.getResponseText();
 						}
 						j.send();
 					}
+					
 					AddSaveFunction ( function ( )
 					{
 						var j = new bajax ( );
 						j.openUrl ( 'admin.php?module=extensions&extension=<?= $_REQUEST[ 'extension' ] ?>&modaction=savesettings', 'post', true );
-						j.addVar ( 'key_Width', document.getElementById ( 'galWidth_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_ThumbWidth', document.getElementById ( 'galThumbWidth_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_ThumbHeight', document.getElementById ( 'galThumbHeight_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_ThumbColumns', document.getElementById ( 'galThumbColumns_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_DetailWidth', document.getElementById ( 'galDetailWidth_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_DetailHeight', document.getElementById ( 'galDetailHeight_<?= $this->field->ID ?>' ).value );
+						
+						// Add fields that can have duplicates
+						var dupFields = [ 'ThumbWidth', 'ThumbHeight', 'ThumbColumns', 'DetailWidth', 'DetailHeight', 'SortMode', 'ArchiveMode', 'Recursion' ];
+						var inputs = document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ).getElementsByTagName ( 'input' );
+						var selects = document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ).getElementsByTagName ( 'select' );
+						var fields = new Array ();
+						if ( inputs )
+							for ( var a = 0; a < inputs.length; a++ ) fields.push ( inputs[a] );
+						if ( selects )
+							for ( var a = 0; a < selects.length; a++ ) fields.push ( selects[a] );
+						for ( var a = 0; a < fields.length; a++ )
+							j.addVar ( 'key_' + dupFields[a], fields[ a ].value );
+						
+						j.addVar ( 'key_Width', ge( 'galWidth_<?= $this->field->ID ?>' ).value );
 						j.addVar ( 'fieldid',  <?= $this->field->ID ?> );
-						j.addVar ( 'key_Animated',  document.getElementById ( 'galAnimated_<?= $this->field->ID ?>' ).checked ? '1' : '-1' );
-						j.addVar ( 'key_Pause',  document.getElementById ( 'galPause_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_Height', document.getElementById ( 'galHeight_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_Heading', document.getElementById ( 'galHeading_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_SortMode', document.getElementById ( 'galSortMode_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_ShowStyle', document.getElementById ( 'galShowStyle_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_Speed', document.getElementById ( 'galSpeed_<?= $this->field->ID ?>' ).value );
+						j.addVar ( 'key_Animated',  ge( 'galAnimated_<?= $this->field->ID ?>' ).checked ? '1' : '-1' );
+						j.addVar ( 'key_Pause',  ge( 'galPause_<?= $this->field->ID ?>' ).value );
+						j.addVar ( 'key_Height', ge( 'galHeight_<?= $this->field->ID ?>' ).value );
+						j.addVar ( 'key_Heading', ge( 'galHeading_<?= $this->field->ID ?>' ).value );
+						j.addVar ( 'key_ShowStyle', ge( 'galShowStyle_<?= $this->field->ID ?>' ).value );
+						j.addVar ( 'key_Speed', ge( 'galSpeed_<?= $this->field->ID ?>' ).value );
 						j.onload = function ()
 						{
-							document.getElementById ( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();
+							ge( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();
 						}
 						j.send();
 					}

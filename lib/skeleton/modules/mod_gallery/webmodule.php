@@ -27,15 +27,15 @@ $document->addResource ( 'javascript', 'skeleton/modules/mod_gallery/javascript/
 $mtpldir = 'skeleton/modules/mod_gallery/templates/';
 i18nAddLocalePath ( 'skeleton/modules/mod_gallery/locale');
 $settings = CreateObjectFromString ( $fieldObject->DataMixed );
+if ( !$settings->ThumbWidth ) $settings->ThumbWidth = 80;
+if ( !$settings->ThumbHeight ) $settings->ThumbHeight = 60;
+if ( !$settings->ThumbColumns ) $settings->ThumbColumns = 4;
 if ( $settings->currentMode == 'gallery' )
 {
 	$mtpl = new cPTemplate ( $mtpldir . 'web_gallery.php' );
 	$str = '';
 	if ( trim ( $settings->Heading ) )
 		$str .= '<h1 class="Heading">' . trim ( $settings->Heading ) . '</h1>';
-	if ( !$settings->ThumbWidth ) $settings->ThumbWidth = 80;
-	if ( !$settings->ThumbHeight ) $settings->ThumbHeight = 60;
-	if ( !$settings->ThumbColumns ) $settings->ThumbColumns = 4;
 	$folders = explode ( ':', trim ( $settings->Folders ) );
 	if ( count ( $folders ) )
 	{
@@ -74,6 +74,11 @@ if ( $settings->currentMode == 'gallery' )
 	}
 	if ( !$str ) $str = '<p>Ingen bilder er lagt til.</p>'; 
 	$mtpl->output = $str;
+}
+else if ( $settings->currentMode == 'archive' )
+{
+	$mtpl = new cPTemplate ( $mtpldir . 'web_archive.php' );
+	include_once ( 'lib/skeleton/modules/mod_gallery/include/web_archive.php' );
 }
 else
 {

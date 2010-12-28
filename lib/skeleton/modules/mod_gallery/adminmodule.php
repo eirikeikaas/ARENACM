@@ -76,7 +76,7 @@ switch( $_REQUEST['modaction'] )
 		{
 			foreach ( $_POST as $k=>$v )
 			{
-				if ( !trim ( $v ) ) continue;
+				if ( !trim ( $v ) && !( $v === '0' ) ) continue;
 				if ( substr ( $k, 0, 4 ) == 'key_' )
 				{
 					$z = substr ( $k, 4, strlen ( $k ) - 4 );

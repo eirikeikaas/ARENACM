@@ -5,5 +5,16 @@ showstyle_fade : Gjennomsiktighet
 showstyle_scrollx : Rull horisontalt
 showstyle_scrolly : Rull vertikalt
 
+archivemode_thumbs : Thumbnails
+archivemode_list : Liste
 
+Title : Tittel
+Filesize : Filestørrelse
+Date : Dato
+Image : Bilde
+Filename : Filnavn
+
+no : nei
+yes : ja
+Parent folder : Forrige nivå
 
