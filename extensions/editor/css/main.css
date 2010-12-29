@@ -67,7 +67,7 @@ table.LayoutColumns td.Column td input
 #Structure a.current, #Structure span.current
 {
 	font-weight: bold;
-	background: #007daa;
+	background: #007DAA;
 	border: 1px solid #3E719C;
 	color: #fff;
 }
@@ -113,7 +113,7 @@ table.LayoutColumns td.Column td input
 #Structure li.system a:hover
 {
 	background: #ddd;
-	color: #007daa;
+	color: #007DAA;
 }
 
 #Structure li.Header img

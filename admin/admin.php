@@ -165,8 +165,17 @@ if ( $user->authenticate ( ) && !$_REQUEST[ 'logout' ] )
 			$database->db == $corebase->db
 		)
 		{
-			$user->_dataSource = 'core';
-			$user->_database =& $corebase;
+			if ( $user->isSuperUser () )
+			{
+				$user->_dataSource = 'core';
+				$user->_database =& $corebase;
+			}
+			else
+			{
+				$user->_dataSource = 'site';
+				$user->_database =& $database;
+			}
+			
 		}
 		include_once ( 'admin/system.php' );
 	}

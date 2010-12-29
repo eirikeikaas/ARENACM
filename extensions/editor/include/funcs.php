@@ -226,9 +226,6 @@ function editorStructure ( $currentcontent, $parent = 0, $depth = 0 )
 		$isSystem = false;
 		foreach ( $contents as $content )
 		{	
-			if ( $content->IsSystem && !$user->IsSuperUser () )
-				continue;
-				
 			$main = new dbObject ( 'ContentElement' );
 			$main->load ( $content->MainID );
 			$class = 'content';
