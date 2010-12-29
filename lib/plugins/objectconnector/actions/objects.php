@@ -22,7 +22,7 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-
+i18nAddLocalePath ( 'lib/plugins/objectconnector/locale' );
 
 $o = new dbObject ( $_REQUEST[ 'objecttype' ] );
 if ( $o->load ( $_REQUEST[ 'objectid' ] ) )
@@ -70,5 +70,5 @@ if ( $o->load ( $_REQUEST[ 'objectid' ] ) )
 		die ( $ostr );
 	}
 }
-die ( 'Ingen objekter finnes er koblet til.' );
+die ( i18n ( 'No objects connected.' ) );
 ?>
