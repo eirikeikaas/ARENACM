@@ -19,7 +19,7 @@
 					{
 						return '
 				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html">
-					'. i18n ( 'Read more' ) .'
+					<span>'. i18n ( 'Read more' ) .'</span>
 				</a>
 						';
 					}
@@ -32,14 +32,14 @@
 					&nbsp;|&nbsp;
 				</div>
 				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html#comment">
-				'. 
+				<span>'. 
 					i18n ( 'Add comment' ) .' ('. 
 					$this->commentcount ? 
 						( $this->commentcount . ' ' .
 							( $this->commentcount == 1 ? i18n ( 'comment' ) : i18n ( 'comments' ) )
 						)
 						: i18n('no comments') .')
-				</a>
+				</span></a>
 						';
 					}
 				?>
