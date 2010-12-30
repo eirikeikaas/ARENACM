@@ -40,7 +40,7 @@ function listImages ( $pfolder, $where, $settings )
 	if ( $imgs = $imgs->find ( 'SELECT * FROM `Image` WHERE ImageFolder=\'' . $pfolder->ID . '\'' . $where ) )
 	{
 		// Thumbs
-		if ( $settings->ArchiveMode == 'thumbs' )
+		if ( $settings->ArchiveMode == 'archivemode_thumbs' )
 		{
 			$cstr .= '<table>';
 			$col = 1;
@@ -114,10 +114,23 @@ if ( $folders )
 		$cstr = '';
 		$cstr .= '<div class="Block FolderContainer">';
 		if ( $settings->Recursion == '1' )
+		{
+			// Get first image in folder
+			$i = new dbImage ( );
+			$i->ImageFolder = $f->ID;
+			$i = $i->findSingle ();
+			$cstr .= '<div class="FolderPreview">' . $i->getImageHTML ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' ) . '</div>';
 			$cstr .= '<a href="' . $content->getUrl () . '?fid=' . $f->ID . '">';
+		}
 		$cstr .= '<h3 class="FolderName ' . texttourl ( $f->Name ) . '"><span>' . $f->Name . '</span></h3>';
 		if ( $settings->Recursion == '1' )
 			$cstr .= '</a>';
+		if ( trim ( strip_tags ( $f->Description ) ) )
+		{
+			$cstr .= '<div class="FolderDescription">';
+			$cstr .= $f->Description;
+			$cstr .= '</div>';
+		}
 		$cstr .= '<div class="Block Folder">';
 		
 		// List out selected folder if using recursions
