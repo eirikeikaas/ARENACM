@@ -63,15 +63,15 @@ function showAddedModules ( $cid )
 				
 				if ( $Session->AdminUser->checkPermission ( $content, 'Write', 'admin' ) )
 				{
-					$str .= '<button type="button" onclick="delModule(\'' . $ob->Key . '\')"><img src="admin/gfx/icons/bin.png"> Fjern</button>';
+					$str .= '<button type="button" onclick="delModule(\'' . $ob->Key . '\')"><img src="admin/gfx/icons/bin.png"> ' . i18n ( 'Remove' ) . '</button>';
 				}
 				
 				// Adminmodules do not get activated - they only linger =)
 				if ( $moduletype != 'adminmodule' && $Session->AdminUser->checkPermission ( $content, 'Write', 'admin' ) )
 				{
 					if ( $checked )
-						$str .= '<button type="button" onclick="deactivateModule(\'' . $ob->Key . '\')"><img src="admin/gfx/icons/cancel.png"> Deaktiver</button>';
-					else $str .= '<button type="button" onclick="activateModule(\'' . $ob->Key . '\')"><img src="admin/gfx/icons/accept.png"> Aktiver</button>';
+						$str .= '<button type="button" onclick="deactivateModule(\'' . $ob->Key . '\')"><img src="admin/gfx/icons/cancel.png"> ' . i18n ( 'Deactivate' ) . '</button>';
+					else $str .= '<button type="button" onclick="activateModule(\'' . $ob->Key . '\')"><img src="admin/gfx/icons/accept.png"> ' . i18n ( 'Activate' ) . '</button>';
 				}
 				$str .= '</td></tr></table>';
 				$str .= '</div>';
@@ -84,9 +84,9 @@ function showAddedModules ( $cid )
 	{
 		return '
 					<p>
-						Du har ingen tilgjengelige moduler. For å skaffe deg moduler
-						må du først bla gjennom modulbutikken. Klikk på fanen "Modulbutikk"
-						for å se hvilke moduler vi har å tilby.
+						' . i18n ( 'You have no existing modules. To add a module,' ) . '
+						' . i18n ( 'please add some modules from the "Free modules" tab' ) . '
+						' . i18n ( 'and take a look.' ) . '
 					</p>
 		';
 	}
@@ -362,17 +362,17 @@ function contentButtons ( $contentid, $short = false )
 		if ( $user->checkPermission ( $cnt, 'Write', 'admin' ) )
 		{
 			$str .= '
-		<button type="button" onclick="savePage ( )" title="Lagre innholdet til databasen">
+		<button type="button" onclick="savePage ( )" title="' . i18n ( 'Save content' ) . '">
 			<img src="admin/gfx/icons/page_save.png">
-			' . ( $short ? '' : ' Lagre' ) . '
+			' . ( $short ? '' : ( ' ' . i18n ( 'Save' ) ) . '
 		</button>
 			';
 			if ( $cnt->Parent > 0 )
 			{
 				$delete = '
-		<button type="button" onclick="deletePage ( )" title="Slett den aktive siden">
+		<button type="button" onclick="deletePage ( )" title="' . i18n ( 'Delete the active page' ) . '">
 			<img src="admin/gfx/icons/page_delete.png">
-			' . ( $short ? '' : ' Slett' ) . '
+			' . ( $short ? '' : ' ' . ( i18n ( 'Delete' ) ) . '
 		</button>
 				';
 			}
@@ -381,18 +381,18 @@ function contentButtons ( $contentid, $short = false )
 		if ( $user->checkPermission ( $cnt, 'Publish', 'admin' ) && $org->DateModified != $cnt->DateModified )
 		{
 			$str .= '
-		<button type="button" onclick="publishPage ( )" title="Publiser den aktive siden">
+		<button type="button" onclick="publishPage ( )" title="' . i18n ( 'Publish the active page' ) . '">
 			<img src="admin/gfx/icons/page_go.png">
-			' . ( $short ? '' : 'Publiser' ) . '
+			' . ( $short ? '' : i18n ( 'Publish' ) ) . '
 		</button>
 			';
 		}
 		if ( $user->checkPermission ( $cnt, 'Publish', 'admin' ) && $org->DateModified != $cnt->DateModified && $org->DateCreated )
 		{
 			$str .= '
-		<button type="button" onclick="revertPage ( )" title="Hent publisert versjon til arbeidskopi">
+		<button type="button" onclick="revertPage ( )" title="' . i18n ( 'Roll back the published version as a work copy' ) . '">
 			<img src="admin/gfx/icons/page_error.png">
-			' . ( $short ? '' : 'Gjenopprett' ) . '
+			' . ( $short ? '' : i18n ( 'Roll back' ) ) . '
 		</button>
 			';
 		}
@@ -420,9 +420,9 @@ function contentButtons ( $contentid, $short = false )
 		if ( $Session->AdminUser->checkPermission ( $cnt, 'Write', 'admin' ) )
 		{
 			$str .= '
-			<button type="button" onclick="addField ( )" title="Legg til et innholdsfelt">
+			<button type="button" onclick="addField ( )" title="' . i18n ( 'Add a new content field' ) . '">
 				<img src="admin/gfx/icons/table_row_insert.png">
-				' . ( $short ? '' : ' Nytt felt' ) . '
+				' . ( $short ? '' : ' ' . ( i18n ( 'Add field' ) ) . '
 			</button>
 			';
 		}
@@ -430,20 +430,20 @@ function contentButtons ( $contentid, $short = false )
 		if ( $user->isSuperUser ( ) )
 		{
 			$str .= '
-		<button type="button" onclick="advancedSettings ( )" title="Se avanserte innstillinger">
+		<button type="button" onclick="advancedSettings ( )" title="' . i18n ( 'View advanced settings' ) . '">
 			<img src="admin/gfx/icons/wrench.png">
-			' . ( $short ? '' : ' Avansert' ) . '
+			' . ( $short ? '' : ' ' . i18n ( 'Avansert' ) ) . '
 		</button>
 			';
 		}
 		$str .= '
-		<button type="button" onclick="previewPage ( )" title="Forhåndsvis siden uten å publisere">
+		<button type="button" onclick="previewPage ( )" title="' . i18n ( 'Show page preview' ) . '">
 			<img src="admin/gfx/icons/eye.png">
-			' . ( $short ? '' : 'Forhåndsvis' ) . '
+			' . ( $short ? '' : i18n ( 'Preview' ) ) . '
 		</button>
 		';
 	} 
-	else die ( 'Error loading content: ' . $contentid );
+	else die ( i18n ( 'Error loading content' ) . ': ' . $contentid );
 	return $str;
 }
 
@@ -455,7 +455,7 @@ function showPageTemplates ( )
 		SELECT * FROM ContentElement WHERE isTemplate ORDER BY MenuTitle ASC
 	' ) )
 	{
-		$str = '<table class="List"><tr><th width="16">#</th><th>Navn:</th></tr>';
+		$str = '<table class="List"><tr><th width="16">#</th><th>' . i18n ( 'Name' ) . ':</th></tr>';
 		foreach ( $rows as $row )
 		{
 			$str .= '

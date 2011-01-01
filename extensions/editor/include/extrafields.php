@@ -167,16 +167,16 @@ function renderExtraFields ( $obj )
 					switch ( $field->ContentGroup )
 					{
 						case 'Topp':
-							$tpl->fieldGroup = 'toppfeltet';
+							$tpl->fieldGroup = i18n ( 'the top field' );
 							break;
 						case 'Felt1':
-							$tpl->fieldGroup = 'hovedfeltet';
+							$tpl->fieldGroup = i18n ( 'the main field' );
 							break;
 						case 'Felt2':
-							$tpl->fieldGroup = 'supplerende felt';
+							$tpl->fieldGroup = i18n ( 'the extra field' );
 							break;
 						case 'Bunn':
-							$tpl->fieldGroup = 'bunnfeltet';
+							$tpl->fieldGroup = i18n ( 'the bottom field' );
 							break;
 						default:
 							$tpl->fieldGroup = $field->ContentGroup;

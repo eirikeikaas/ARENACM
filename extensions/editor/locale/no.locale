@@ -89,6 +89,34 @@ Move up : Flytt opp
 Move down : Flytt ned
 
 in : i
+Remove image : Fjern bilde
+the top field : toppfeltet
+the main field : hovedfeltet
+the extra field : supplerende felt
+the bottom field : bunnfeltet
+
+Save content : Lagre innholdet til databasen
+Save : Lagre
+Delete the active page : Slett den aktive siden
+Delete : Slett
+Publish the active page : Publiser den aktive siden
+Publish : Publiser
+Roll back the published version as a work copy : Hent publisert versjon til arbeidskopi
+Roll back : Gjenopprett
+Add a new content field : Legg til et innholdsfelt
+Add field : Nytt felt
+View advanced settings : Se avanserte innstillinger
+Avansert : Advanced
+Show page preview : Forhåndsvis siden uten å publisere
+Preview : Forhåndsvis
+Name : Navn
+Remove : Fjern
+Deactivate : Deaktiver
+Activate : Aktiver
+Error loading content : Problemer med å laste inn innhold
+You have no existing modules. To add a module, : Du har ingen tilgjengelige moduler. For å skaffe deg moduler
+please add some modules from the "Free modules" tab : må du først bla gjennom modulbutikken. Klikk på fanen "Modulbutikk"
+and take a look. : for å se hvilke moduler vi har å tilby.
 
 wrong content group : feil med innholdsgruppe
 

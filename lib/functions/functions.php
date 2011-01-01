@@ -371,7 +371,7 @@ function dateToPulldownOptions ( $date=false )
 	}
 
 	// Year
-	for ( $i = 2010; $i >= 1980; $i-- )
+	for ( $i = ((int)date ( 'Y' ) + 1); $i >= 1980; $i-- )
 	{
 		if ( $i == $year )
 			$selected = " selected=\"selected\"";
