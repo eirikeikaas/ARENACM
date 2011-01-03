@@ -364,7 +364,7 @@ function contentButtons ( $contentid, $short = false )
 			$str .= '
 		<button type="button" onclick="savePage ( )" title="' . i18n ( 'Save content' ) . '">
 			<img src="admin/gfx/icons/page_save.png">
-			' . ( $short ? '' : ( ' ' . i18n ( 'Save' ) ) . '
+			' . ( $short ? '' : ( ' ' . i18n ( 'Save' ) ) ) . '
 		</button>
 			';
 			if ( $cnt->Parent > 0 )
@@ -372,7 +372,7 @@ function contentButtons ( $contentid, $short = false )
 				$delete = '
 		<button type="button" onclick="deletePage ( )" title="' . i18n ( 'Delete the active page' ) . '">
 			<img src="admin/gfx/icons/page_delete.png">
-			' . ( $short ? '' : ' ' . ( i18n ( 'Delete' ) ) . '
+			' . ( $short ? '' : ' ' . ( i18n ( 'Delete' ) ) ) . '
 		</button>
 				';
 			}
@@ -422,7 +422,7 @@ function contentButtons ( $contentid, $short = false )
 			$str .= '
 			<button type="button" onclick="addField ( )" title="' . i18n ( 'Add a new content field' ) . '">
 				<img src="admin/gfx/icons/table_row_insert.png">
-				' . ( $short ? '' : ' ' . ( i18n ( 'Add field' ) ) . '
+				' . ( $short ? '' : ' ' . ( i18n ( 'Add field' ) ) ) . '
 			</button>
 			';
 		}

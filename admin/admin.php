@@ -63,7 +63,7 @@ $corebase = new cDatabase ( );
 include_once ( 'lib/lib.php' );
 include_once ( 'lib/core_config.php' );
 $corebase->Open ( );
-dbObject::globalValueSet ( 'corebase', &$corebase );
+dbObject::globalValueSet ( 'corebase', $corebase );
 
 /**
  * Setup the site database
@@ -91,10 +91,10 @@ $database->setHostname ( $siteData->SqlHost );
 $database->setDb ( $siteData->SqlDatabase );
 $database->Open ( );
 $userbase =& $database;
-dbObject::globalValueSet ( 'sitedata', &$siteData );
+dbObject::globalValueSet ( 'sitedata', $siteData );
 define ( 'BASE_URL', $siteData->BaseUrl );
 define ( 'BASE_DIR', $siteData->BaseDir );
-dbObject::globalValueSet ( 'database', &$database );
+dbObject::globalValueSet ( 'database', $database );
 
 /**
  * Make sure we clean up after ourselves
@@ -155,7 +155,7 @@ if ( $user->authenticate ( ) && !$_REQUEST[ 'logout' ] )
 {
 	if ( $user->IsAdmin || $user->_dataSource == 'core' )
 	{
-		$Session->Set ( 'AdminUser', &$user );
+		$Session->Set ( 'AdminUser', $user );
 		$document->load ( 'admin/templates/main.php' );
 		$notAuthenticated = false;
 		// If core and database is same, it is a core user
