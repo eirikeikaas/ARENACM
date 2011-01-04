@@ -29,7 +29,7 @@ $file = new dbFile ( );
 if ( $file->load ( $_REQUEST[ 'fid' ] ) )
 {
 	$fp = fopen ( 'upload/' . $file->Filename, 'w+' );
-	fwrite ( $fp, stripslashes ( $_REQUEST[ 'contents' ] ) );
+	fwrite ( $fp, $_REQUEST[ 'contents' ] );
 	fclose ( $fp );
 	die ( 'ok' );
 }
