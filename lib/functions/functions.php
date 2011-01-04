@@ -1510,14 +1510,14 @@ function encodeArenaHTML ( $string )
 				$lastbit = explode ( '/', $img );
 				$filename = $lastbit[ count($lastbit)-1 ];
 				$ext = explode ( '.', $filename );
-				switch ( strtolower ( $ext ) )
+				switch ( strtolower ( $ext[ count ( $ext ) - 1 ] ) )
 				{
 					case 'jpg':
 					case 'jpeg':
 						$ext = 'jpg';
 						break;
 					default:
-						$ext = strtolower ( $ext );
+						$ext = strtolower ( $ext[ count ( $ext ) - 1 ] );
 						break;
 				}
 				$f = new dbImage ( );
