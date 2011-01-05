@@ -49,5 +49,6 @@ Default date format 	: Standard datoformat
 Language settings 		: Språkinnstillinger
 Save settings			: Lagre innstillingene
 E-mail					: E-post
-
+Deny					: Ikke tillat
+Allow					: Tillat
 

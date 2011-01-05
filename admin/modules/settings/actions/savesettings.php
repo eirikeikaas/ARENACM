@@ -50,6 +50,7 @@ if ( $_POST[ 'SiteTitle' ] )
 	$main_contentgroup = false;
 	$site_title = false;
 	$admin_language = false;
+	$admin_allowinlinestyle = false;
 	
 	// Set some options
 	foreach ( $c as $line )
@@ -119,6 +120,11 @@ if ( $_POST[ 'SiteTitle' ] )
 			$out[] = "\tdefine ( 'ADMIN_LANGUAGE', '{$_POST['Admin_Language']}' );";
 			$admin_language = true;
 		}
+		else if ( strstr ( $line, 'ADMIN_ALLOWINLINESTYLE' ) )
+		{
+			$out[] = "\tdefine ( 'ADMIN_ALLOWINLINESTYLE', '{$_POST['Admin_AllowInlineStyle']}' );";
+			$admin_allowinlinestyle = true;
+		}
 		else if ( trim ( $line ) )
 		{
 			$out[] = $line;
@@ -152,6 +158,8 @@ if ( $_POST[ 'SiteTitle' ] )
 		$out[] = "\tdefine ( 'DATE_FORMAT', '{$_POST['Date_Format']}' );";
 	if ( !$admin_language )
 		$out[] = "\tdefine ( 'ADMIN_LANGUAGE', '{$_POST['Admin_Language']}' );";
+	if ( !$admin_allowinlinestyle )
+		$out[] = "\tdefine ( 'ADMIN_ALLOWINLINESTYLE', '{$_POST['Admin_AllowInlineStyle']}' );";
 	
 	
 	$str = implode ( "\n", $out );

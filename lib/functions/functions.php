@@ -1346,17 +1346,21 @@ function getSiteStructureOptions ( $current = 0, $parent = '0', $r = '', $langua
 **/
 function cleanHTMLElement ( $string, $level = 0 )
 {
-	$string = preg_replace ( "/\s*line-height:[^;\"]*;?/i", '', $string );
-	$string = preg_replace ( "/\s*font-stretch:[^;\"]*;?/i", '', $string );
-	$string = preg_replace ( "/\s*font-size:[^;\"]*;?/i", "", $string );
-	$string = preg_replace ( "/\s*font-variant:[^;\"]*;?/i", '', $string );
-	$string = preg_replace ( "/\s*font-size-adjust:[^;\"]*;?/i", '', $string );
-	$string = preg_replace ( "/(<font [^>]*>)/i", '', $string );
+	if ( !ADMIN_ALLOWINLINESTYLE )
+	{
+		$string = preg_replace ( "/\s*line-height:[^;\"]*;?/i", '', $string );
+		$string = preg_replace ( "/\s*font-stretch:[^;\"]*;?/i", '', $string );
+		$string = preg_replace ( "/\s*font-size:[^;\"]*;?/i", "", $string );
+		$string = preg_replace ( "/\s*font-variant:[^;\"]*;?/i", '', $string );
+		$string = preg_replace ( "/\s*font-size-adjust:[^;\"]*;?/i", '', $string );
+		$string = preg_replace ( "/(<font [^>]*>)/i", '', $string );
+	}
 	$string = preg_replace ( "/(<form [^>]*>)/i", '', $string );
 	$string = str_replace ( 'style=""', '', $string );
 	$string = str_replace ( '<div', '<p', $string );
 	$string = str_replace ( '</div>', '</p>', $string );
-	$string = str_replace ( '</font>', '', $string );
+	if ( !ADMIN_ALLOWINLINESTYLE )
+		$string = str_replace ( '</font>', '', $string );
 	$string = str_replace ( '</form>', '', $string );
 	$string = str_replace ( '="' . BASE_URL, '="', $string );
 	$string = preg_replace ( '/(\<span.*?apple\-[^"]*\"[^>]*?\>)(.*?)(\<\/span\>)/i', '$2', $string );
@@ -1395,7 +1399,8 @@ function decodeArenaHTML_callback_objects ( $matches )
 	{
 		$string = stripslashes ( $matches[1] );
 		$string = preg_replace ( '/arenatype\=\"[^"]*?\"/i', '', $string );
-		$string = preg_replace ( '/style\=\"[^"]*?\"/i', '', $string );
+		if ( !ADMIN_ALLOWINLINESTYLE )
+			$string = preg_replace ( '/style\=\"[^"]*?\"/i', '', $string );
 		if ( !preg_match ( '/\<param/i', $string ) )
 		{
 			preg_match ( '/width\=\"([^"]*)\"/i', $string, $width );

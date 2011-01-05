@@ -230,6 +230,19 @@
 																}
 															?></select></td>
 														</tr>
+														<tr>
+															<td width="160px"><strong><?= i18n ( 'Allow inline textstyles' ) ?>:</strong></td>
+															<td><select name="Admin_AllowInlineStyle"><?
+																$options = array ( '1'=>i18n ( 'Allow' ), '0'=>i18n( 'Deny' ) );
+																$str = '';
+																foreach ( $options as $value=>$key )
+																{
+																	$s = $value == ADMIN_ALLOWINLINESTYLE ? ' selected="selected"' : '';
+																	$str .= '<option value="' . $value . '"' . $s . '>' . $key . '</option>';
+																}
+																return $str;
+															?></select></td>
+														</tr>
 													</table>
 												</div>
 												<!--<div class="SpacerSmallColored"></div>
