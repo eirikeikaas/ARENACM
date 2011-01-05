@@ -1433,6 +1433,9 @@ function decodeArenaHTML ( $string )
 	$string = preg_replace ( '/\<b\>/i', '<strong>', $string );
 	$string = preg_replace ( '/\<\/b\>/i', '<\/strong>', $string );
 	
+	// Finally, remove empty o:p tags
+	$string = str_replace ( '<o:p></o:p>', '<span class="OfficeNamespace"></span>', $string );
+	
 	return cleanHTMLElement ( $string );
 }
 // Done "arena html" from admin and convert to displayable html ---------------<
