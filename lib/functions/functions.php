@@ -1434,7 +1434,7 @@ function decodeArenaHTML ( $string )
 	$string = preg_replace ( '/\<\/b\>/i', '<\/strong>', $string );
 	
 	// Finally, remove empty o:p tags
-	$string = str_replace ( '<o:p></o:p>', '', $string );
+	$string = str_replace ( '<o:p></o:p>', '<p class="OfficeNamespace"></p>', $string );
 	
 	return cleanHTMLElement ( $string );
 }
