@@ -298,14 +298,14 @@ function structureButtons ( $contentid )
 			$str .= '
 		<button type="button" onclick="subPage ( )" title="Lag ny underside under aktiv side">
 			<img src="admin/gfx/icons/page_add.png">
-			Lag ny underside
+			' . i18n ( 'New subpage' ) . '
 		</button>';
 		}
 		if ( $user->checkPermission ( $cnt, 'Structure', 'admin' ) && $user->checkPermission ( $cnt, 'Write', 'admin' ) )
 		{
 			$str .= '
 		<button type="button" onclick="reorderPage ()" title="Endre plassering av menypunktet">
-			<img src="admin/gfx/icons/arrow_switch.png"> Sortering
+			<img src="admin/gfx/icons/arrow_switch.png"> ' . i18n ( 'Sort pages' ) . '
 		</button>
 			';
 		}
@@ -313,7 +313,7 @@ function structureButtons ( $contentid )
 		{
 			$str .= '
 		<button type="button" onclick="movePage ()" title="Flytt siden inn under en annen">
-			<img src="admin/gfx/icons/folder_page_white.png"> Flytt
+			<img src="admin/gfx/icons/folder_page_white.png"> ' . i18n ( 'Move page' ) . '
 		</button>
 			';
 		}
@@ -432,7 +432,7 @@ function contentButtons ( $contentid, $short = false )
 			$str .= '
 		<button type="button" onclick="advancedSettings ( )" title="' . i18n ( 'View advanced settings' ) . '">
 			<img src="admin/gfx/icons/wrench.png">
-			' . ( $short ? '' : ' ' . i18n ( 'Avansert' ) ) . '
+			' . ( $short ? '' : ' ' . i18n ( 'Advanced' ) ) . '
 		</button>
 			';
 		}
