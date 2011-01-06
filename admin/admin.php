@@ -141,8 +141,8 @@ $document = new cDocument ( );
 // Browser test (Only login with compatible browsers)
 $uagent =  $_SERVER[ 'HTTP_USER_AGENT' ];
 if ( 
-	strstr ( $uagent, 'MSIE 6' ) ||
-	strstr ( $uagent, 'Opera' ) 
+	(strstr ( $uagent, 'MSIE 6' ) ||
+	strstr ( $uagent, 'Opera' ) )
 )
 {
 	header ( 'Content-type: text/html; charset=UTF-8' );

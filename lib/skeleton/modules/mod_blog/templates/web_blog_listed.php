@@ -3,7 +3,14 @@
 				<?= ( $this->titleLength > 0 && strlen ( strip_tags ( $this->blog->Title ) ) > $this->titleLength ) ? ( substr ( strip_tags ( $this->blog->Title ), 0, $this->titleLength - 3 ) . '...' ) : $this->blog->Title ?>
 			</h2>
 			<?if ( list ( $this->image, ) = $this->blog->getObjects ( 'ObjectType = Image' ) ) { ?>
-			<div class="Image" style="background-image: url(<?= $this->image->getImageUrl ( $this->sizeX, $this->sizeY, 'proximity' ) ?>)"></div>
+			<div class="Image" style="<? if ( trim ( strip_tags ( $this->blog->Body ) ) ) { return 'cursor: hand; cursor: pointer; '; } ?>background-image: url(<?= $this->image->getImageUrl ( $this->sizeX, $this->sizeY, 'proximity' ) ?>)"<?
+				if ( trim ( strip_tags ( $this->blog->Body ) ) )
+				{
+					return ' onclick="document.location=`' . 
+						( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . 
+						'/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html`;"';
+				}
+			?>></div>
 			<?}?>
 			<?if ( $this->cfgShowAuthor ) { ?>
 			<p class="Bold WrittenBy"><?= i18n ( 'written by' ) . ' ' . $this->blog->AuthorName ?></p>
@@ -15,7 +22,7 @@
 			<?if ( trim ( $this->blog->Body ) || $this->cfgComments ) { ?>
 			<p class="Block ReadMore">
 				<?
-					if ( trim ( $this->blog->Body ) ) 
+					if ( trim ( strip_tags ( $this->blog->Body ) ) )
 					{
 						return '
 				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html">
