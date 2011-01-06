@@ -81,19 +81,6 @@ span.Group span, span.GroupActive span
 	cursor: pointer;
 }
 
-
-.Container .List th
-{
-	background: #f8f8f8;
-	font-weight: bold;
-}
-
-.Container .List
-{
-	border: 1px solid #ccc;
-	margin: 0 0 -9px 0;
-}
-
 #GroupList
 {
 	padding: 2px;

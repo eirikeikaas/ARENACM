@@ -54,6 +54,7 @@ require ( 'lib/classes/session/session.php' );
 $Session = new Session ( SITE_ID . 'admin' );
 $Session->Set ( 'LanguageCode', LOCALE );
 $GLOBALS[ 'Session' ] =& $Session;
+i18nAddLocalePath ( 'admin/locale' );
 
 /**
  * Setup the core database

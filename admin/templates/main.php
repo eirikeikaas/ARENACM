@@ -88,7 +88,7 @@
 			<?= $this->moduleOutput ?>
 			<br style="clear: both">
 			<div id="Footer">
-				ARENA CM (v<?= ARENA_VERSION ?>) | &copy; 2004-2010 Blest AS | <a href="admin.php?module=settings&function=about">Om ARENA CM</a>
+				ARENA CM (v<?= ARENA_VERSION ?>) | &copy; 2004-2010 Blest AS | <a href="admin.php?module=settings&function=about"><?= i18n ( 'About ARENACM' ) ?></a>
 			</div>
 		</div>
 	</body>
