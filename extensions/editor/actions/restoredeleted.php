@@ -21,20 +21,38 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-i18n ( 'You need to fill in page title.' );
-i18n ( 'You need to fill in a menu title.' );
-i18n ( 'You need to fill in a searchable page title.' );
-i18n ( 'Are you sure you want to roll back the\npublished version? The current work copy\nwill be erased.' );
-i18n ( 'Are you sure you want to delete this page?' );
-i18n ( 'Are you sure you want to add this module?\nYou will be charged on your next invoice\nwith the amount shown.' );
-i18n ( 'You need to choose a content group.' );
-i18n ( 'Are you sure you want to move the field?' );
-i18n ( 'Are you sure you want to remove the field?' );
-i18n ( 'Failed.' );
-i18n ( 'Templatename : Malens navn' );
-i18n ( 'You can not move a page onto itself.' );
-i18n ( 'Unexpected error.' );
-i18n ( 'You need to select some items.' );
-i18n ( 'Do you really want to erase the selected items?' );
+if ( $list = explode ( ',', $_REQUEST[ 'ids' ] ) )
+{
+	$parent = 0;
+	foreach ( $list as $id )
+	{
+		$cnt = new dbContent ( );
+		if ( $cnt->load ( $id ) )
+		{
+			$cnt->IsDeleted = '0';
+			$cnt->IsPublished = '0';
+			if ( $cnt->ID == $cnt->MainID )
+			{
+				$db =& dbObject::globalValue ( 'database' );
+				$other = $db->fetchObjectRow ( 'SELECT * FROM ContentElement WHERE MainID = ' . $cnt->MainID . ' AND MainID != ID' );
+				$other = $other->ID;
+			}
+			else if ( $cnt->ID != $cnt->MainID )
+			{
+				$other = $cnt->MainID;
+			}
+			$main = new dbContent ( );
+			if ( $main->load ( $other ) )
+			{
+				$main->IsDeleted = '0';
+				$main->IsPublished = '0';
+				$main->save ();
+			}
+			$cnt->save ();
+		}
+	}
+}
+ob_clean ();
+header ( 'Location: admin.php?module=extensions&extension=editor' );
 
 ?>

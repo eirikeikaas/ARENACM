@@ -948,6 +948,46 @@ function deleteTemplates ()
 	}
 }
 
+function eraseSelected ()
+{
+	
+	var ids = new Array ();
+	var eles = document.getElementsByTagName ( 'input' );
+	for ( var a = 0; a < eles.length; a++ )
+	{
+		if ( eles[a].id.substr ( 0, 6 ) == 'trash_' && eles[a].checked )
+		{
+			ids.push ( eles[a].id.split ( '_' )[1] );
+		}
+	}
+	if ( ids.length )
+	{
+		if ( confirm ( i18n ( 'Do you really want to erase the selected items?' ) ) )
+		{
+			document.location = 'admin.php?module=extensions&extension=editor&action=erase&ids=' + ids.join ( ',' );
+		}
+	}
+	else alert ( i18n ( 'You need to select some items.' ) );
+}
+
+function restoreSelected ()
+{
+	var ids = new Array ();
+	var eles = document.getElementsByTagName ( 'input' );
+	for ( var a = 0; a < eles.length; a++ )
+	{
+		if ( eles[a].id.substr ( 0, 6 ) == 'trash_' && eles[a].checked )
+		{
+			ids.push ( eles[a].id.split ( '_' )[1] );
+		}
+	}
+	if ( ids.length )
+	{
+		document.location = 'admin.php?module=extensions&extension=editor&action=restoredeleted&ids=' + ids.join ( ',' );
+	}
+	else alert ( i18n ( 'You need to select some items.' ) );
+}
+
 var savefuncs = new Array ( );
 function AddSaveFunction ( func )
 {

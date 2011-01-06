@@ -29,6 +29,9 @@
 					<div id="tabTemplates" class="tab">
 						<img src="admin/gfx/icons/page_white.png"> <?= i18n ( 'Templates' ) ?>
 					</div>
+					<div id="tabTrash" class="tab">
+						<img src="admin/gfx/icons/bin.png"> <?= i18n ( 'Trash' ) ?>
+					</div>
 					<div id="pageNotes" class="page" style="padding: 8px">
 						<h2><?= i18n ( 'Your notes on this page' ) ?>:</h2>
 						<textarea id="PageNotes"><?= $this->Notes ?></textarea>
@@ -62,6 +65,9 @@
 					</div>
 					<div id="pageTemplates" class="page">
 						<?= showPageTemplates ( ) ?>
+					</div>
+					<div id="pageTrash" class="page">
+						<?= showTrashcan () ?>
 					</div>
 				</div>
 				<script type="text/javascript">

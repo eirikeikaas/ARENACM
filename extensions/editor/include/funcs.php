@@ -479,4 +479,33 @@ function showPageTemplates ( )
 	return $str;
 }
 
+// Shows deleted items
+function showTrashcan ()
+{
+	$str = '';
+	$db =& dbOBject::globalValue ( 'database' );
+	if ( $rows = $db->fetchObjectRows ( '
+		SELECT * FROM ContentElement WHERE IsDeleted AND MainID = ID
+	' ) )
+	{
+		foreach ( $rows as $row )
+		{
+			$str .= '<tr class="sw' . ( $sw = ( $sw == 1 ? 2 : 1 ) ) . '">';
+			$str .= '<td>' . ( $row->MenuTitle ? $row->MenuTitle : 'Unnamed' ) . '</td>';
+			$str .= '<td>' . ArenaDate ( 'm.d. Y', strtotime ( $row->DateCreated ) ) . '</td>';
+			$str .= '<td><input type="checkbox" id="trash_' . $row->ID . '"/></td>';
+			$str .= '</tr>';
+		}
+		$str = '<table class="List"><tr><th>' . i18n ( 'Menu title' ) . ':</th><th width="100">' . i18n ( 'Date created' ) . ':</th><th width="24">#</th></tr>' . $str . '</table>';
+		$str = '<p>' . i18n ( 'Contents of trash' ) . ':</p>' . $str;
+		$str .= '<div class="SpacerSmallColored"></div>';
+		$str .= '<p>';
+		$str .= '<button type="button" onclick="restoreSelected()"><img src="admin/gfx/icons/accept.png"/> ' . i18n ( 'Restore selected' ) . '</button>';
+		$str .= '<button type="button" onclick="eraseSelected()" class="Red"><img src="admin/gfx/icons/bin.png"/> ' . i18n ( 'Erase selected' ) . '</button>';
+		$str .= '</p>';
+	}
+	return $str;
+}
+
+
 ?>

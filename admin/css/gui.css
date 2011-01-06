@@ -184,12 +184,15 @@ table.List td, table.List th
 {
 	vertical-align: middle;
 	padding: 4px;
+	border-left: 1px dotted #cccccc;
 }
 
 table.List th
 {
-	background: #fff;
-	border-bottom: 1px dotted #ddd;
+	background: #7D7D7D;
+	color: #ffffff;
+	border-left: 1px dotted #dddddd;
+	border-bottom: 1px dotted #dddddd;
 }
 
 table.Gui
@@ -233,6 +236,17 @@ button
 	-webkit-transition: 0.2s all;
 }
 * html button  { cursor: hand;  }
+
+button.Red:hover
+{
+	background: #f00030;
+	color: #ffffff;
+	font-weight: bold;
+	border-top-color: #ff33cc;
+	border-left-color: #ff33cc;
+	border-right-color: #aa0000;
+	border-bottom-color: #aa0000;
+}
 
 h1 button 
 {
