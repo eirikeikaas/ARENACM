@@ -1,5 +1,5 @@
 
-	<table class="DetailList">
+	<table class="List">
 		<tr>
 			<th colspan="2"<?= $GLOBALS['Session']->LibraryListmode=='sortorder'?' class="Active"' : '' ?>><a href="admin.php?module=library&listmode=sortorder"><?= i18n ( 'Sortorder' ) ?>:</a></th>
 			<th<?= $GLOBALS['Session']->LibraryListmode=='title'?' class="Active"' : '' ?>><a href="admin.php?module=library&listmode=title"><?= i18n ( 'Title' ) ?>:</a></th>
