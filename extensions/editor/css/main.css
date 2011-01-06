@@ -109,7 +109,10 @@ table.LayoutColumns td.Column td input
 	background: #007daa;
 	color: #fff;
 }
-
+#Structure li.hidden.system.current a.current, #Structure li.hidden.system.current span.current
+{
+	color: #777;
+}
 #Structure li.system a:hover
 {
 	background: #ddd;
