@@ -51,7 +51,7 @@ table.LayoutColumns td.Column td input
 	-webkit-border-radius: 3px;
 	padding: 5px;
 }
-#Structure li.hidden a, #Structure li.hidden span
+#Structure li.hidden > a, #Structure li.hidden > span
 {
 	color: #555;
 }
