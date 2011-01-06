@@ -359,7 +359,7 @@ function contentButtons ( $contentid, $short = false )
 		$org->load ( $cnt->MainID );
 		$str = '';
 	
-		if ( $user->checkPermission ( $cnt, 'Write', 'admin' ) )
+		if ( $user->checkPermission ( $cnt, 'Write', 'admin' ) && $user->checkPermission ( $cnt, 'Structure', 'admin' ) )
 		{
 			$str .= '
 		<button type="button" onclick="savePage ( )" title="' . i18n ( 'Save content' ) . '">
