@@ -504,6 +504,7 @@ function showTrashcan ()
 		$str .= '<button type="button" onclick="eraseSelected()" class="Red"><img src="admin/gfx/icons/bin.png"/> ' . i18n ( 'Erase selected' ) . '</button>';
 		$str .= '</p>';
 	}
+	else $str .= '<p>' . i18n ( 'The trashcan is empty.' ) . '</p>';
 	return $str;
 }
 
