@@ -71,7 +71,7 @@ table.LayoutColumns td.Column td input
 	border: 1px solid #3E719C;
 	color: #fff;
 }
-#Structure li.hidden a.current, #Structure li.hidden span.current
+#Structure li.hidden > a.current, #Structure li.hidden > span.current
 {
 	color: #666;
 }
