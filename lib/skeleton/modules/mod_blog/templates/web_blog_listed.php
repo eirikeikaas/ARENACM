@@ -3,8 +3,8 @@
 				<?= ( $this->titleLength > 0 && strlen ( strip_tags ( $this->blog->Title ) ) > $this->titleLength ) ? ( substr ( strip_tags ( $this->blog->Title ), 0, $this->titleLength - 3 ) . '...' ) : $this->blog->Title ?>
 			</h2>
 			<?if ( list ( $this->image, ) = $this->blog->getObjects ( 'ObjectType = Image' ) ) { ?>
-			<div class="Image" style="<? if ( trim ( strip_tags ( $this->blog->Body ) ) ) { return 'cursor: hand; cursor: pointer; '; } ?>background-image: url(<?= $this->image->getImageUrl ( $this->sizeX, $this->sizeY, 'proximity' ) ?>)"<?
-				if ( trim ( strip_tags ( $this->blog->Body ) ) || $this->cfgComments )
+			<div class="Image" style="<? if ( trim ( $this->blog->Body ) ) { return 'cursor: hand; cursor: pointer; '; } ?>background-image: url(<?= $this->image->getImageUrl ( $this->sizeX, $this->sizeY, 'proximity' ) ?>)"<?
+				if ( trim ( $this->blog->Body ) || $this->cfgComments )
 				{
 					$q = '"';
 					return " onclick={$q}document.location='" . 
@@ -20,10 +20,10 @@
 			<div class="Block Leadin">
 				<?= ( $this->leadinLength > 0 && strlen ( strip_tags ( $this->blog->Leadin ) ) > $this->leadinLength ) ? ( substr ( strip_tags ( $this->blog->Leadin ), 0, $this->leadinLength - 3 ) . '...' ) : $this->blog->Leadin ?>
 			</div>
-			<?if ( trim ( strip_tags ( $this->blog->Body ) ) || $this->cfgComments ) { ?>
+			<?if ( trim ( $this->blog->Body ) || $this->cfgComments ) { ?>
 			<p class="Block ReadMore">
 				<?
-					if ( trim ( strip_tags ( $this->blog->Body ) ) )
+					if ( trim ( $this->blog->Body ) )
 					{
 						return '
 				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html">

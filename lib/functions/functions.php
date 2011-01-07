@@ -1410,6 +1410,7 @@ function decodeArenaHTML_callback_objects ( $matches )
 			$matches[2] .= '<param name="height" value="' . trim($height[1]) . '"/>';
 			$matches[2] .= '<param name="wmode" value="transparent"/>';
 			$matches[2] .= '<param name="movie" value="' . trim($data[1]) . '"/>';
+			$matches[2] .= '<param name="autoplay" value="0"/>';
 			if ( $flashvars[1] )
 				$matches[2] .= '<param name="flashvars" value="' . trim($flashvars[1]) . '"/>';
 		}
