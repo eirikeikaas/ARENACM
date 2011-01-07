@@ -1,5 +1,4 @@
-<?
-
+<?php
 
 /*******************************************************************************
 The contents of this file are subject to the Mozilla Public License
@@ -22,37 +21,11 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
+$file = file_get_contents ( $_REQUEST[ 'lnk' ] );
+preg_match ( '/\"http(.*?\.swf)\"/i', $file, $matches );
+preg_match ( '/flashvars\"\ value\=\"([^"]*)\"/i', stripslashes ( $file ), $matches2 );
+$url = stripslashes ( $matches[1] );
+list ( , $url ) = explode ( '//', $url );
+die ( $url . '<!SEPARATE!>' . stripslashes ( $matches2[1] ) );
 
-
-global $pluginTplDir;
-ob_clean ();
-switch ( $_REQUEST[ "pluginaction" ] )
-{
-	case 'showhtml':
-		$tpl = new cPTemplate ( $pluginTplDir . '/showhtml.php' );
-		die ( $tpl->render ( ) );
-		break;
-	case 'generategallery':
-		include ( 'actions/generategallery.php' );
-		break;
-	case 'insertlink':
-		$tpl = new cPTemplate ( $pluginTplDir . '/insertlink.php' );
-		die ( $tpl->render ( ) );
-		break;
-	case 'creategallery':
-		include ( 'lib/plugins/texteditor/actions/creategallery.php' );
-		break;
-	case 'inserttable':
-		include ( 'lib/plugins/texteditor/actions/inserttable.php' );
-		break;
-	case 'getyoutube':
-		include ( 'lib/plugins/texteditor/actions/getyoutube.php' );
-		break;
-	case 'properties':
-		$tpl = new cPTemplate ( $pluginTplDir . '/properties.php' );
-		$tpl->nodeid = $_REQUEST[ 'nodeid' ];
-		die ( $tpl->render ( ) );
-		break;
-	default: die ( '' );
-}
 ?>

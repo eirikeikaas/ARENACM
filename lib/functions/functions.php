@@ -1406,10 +1406,13 @@ function decodeArenaHTML_callback_objects ( $matches )
 			preg_match ( '/width\=\"([^"]*)\"/i', $string, $width );
 			preg_match ( '/height\=\"([^"]*)\"/i', $string, $height );
 			preg_match ( '/data\=\"([^"]*)\"/i', $string, $data );
+			preg_match ( '/flashvars\=\"([^"]*)\"/i', $string, $flashvars );
 			$matches[2] = '<param name="width" value="' . trim($width[1]) . '"/>';
 			$matches[2] .= '<param name="height" value="' . trim($height[1]) . '"/>';
 			$matches[2] .= '<param name="wmode" value="transparent"/>';
 			$matches[2] .= '<param name="movie" value="' . trim($data[1]) . '"/>';
+			if ( $flashvars[1] )
+				$matches[2] .= '<param name="flashvars" value="' . trim($flashvars[1]) . '"/>';
 		}
 		$string = '<object' . $string . '>' . stripslashes ( $matches[2] ) . '</object>';
 		return addslashes ( $string );
