@@ -247,6 +247,8 @@ switch ( $_REQUEST[ 'modaction' ] )
 		$blog->receiveForm ( $_POST );
 		if ( !$blog->UserID && $GLOBALS[ 'user' ]->_dataSource != 'core' ) 
 			$blog->UserID = $GLOBALS[ 'user' ]->ID;
+		$blog->Leadin = decodeArenaHTML ( $blog->Leadin );
+		$blog->Body = decodeArenaHTML ( $blog->Body );
 		$blog->save ( );
 		
 		// Maintain publish queue
@@ -283,6 +285,8 @@ switch ( $_REQUEST[ 'modaction' ] )
 		$mtpl = new cPTemplate ( $mtpldir . 'adm_blog.php' );
 		$blog = new dbObject ( 'BlogItem' );
 		$blog->load ( $_REQUEST[ 'bid' ] );
+		$blog->Leadin = encodeArenaHTML ( $blog->Leadin );
+		$blog->Body = encodeArenaHTML ( $blog->Body );
 		$mtpl->blog =& $blog;
 		die ( $mtpl->render ( ) );
 		
