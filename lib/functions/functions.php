@@ -1399,8 +1399,7 @@ function decodeArenaHTML_callback_objects ( $matches )
 	{
 		$string = stripslashes ( $matches[1] );
 		$string = preg_replace ( '/arenatype\=\"[^"]*?\"/i', '', $string );
-		if ( !ADMIN_ALLOWINLINESTYLE )
-			$string = preg_replace ( '/style\=\"[^"]*?\"/i', '', $string );
+		$string = preg_replace ( '/style\=\"[^"]*?\"/i', '', $string );
 		if ( !preg_match ( '/\<param/i', $string ) )
 		{
 			preg_match ( '/width\=\"([^"]*)\"/i', $string, $width );
