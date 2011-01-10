@@ -28,8 +28,10 @@ include_once ( 'lib/classes/dbObjects/dbFile.php' );
 $file = new dbFile ( );
 if ( $file->load ( $_REQUEST[ 'fid' ] ) )
 {
+	$cnt = $_REQUEST[ 'contents' ];
+	$cnt = strip_slashes ( $_REQUEST[ 'contents' ] );
 	$fp = fopen ( 'upload/' . $file->Filename, 'w+' );
-	fwrite ( $fp, $_REQUEST[ 'contents' ] );
+	fwrite ( $fp, $cnt );
 	fclose ( $fp );
 	die ( 'ok' );
 }
