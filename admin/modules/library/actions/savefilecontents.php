@@ -29,7 +29,6 @@ $file = new dbFile ( );
 if ( $file->load ( $_REQUEST[ 'fid' ] ) )
 {
 	$cnt = $_REQUEST[ 'contents' ];
-	$cnt = strip_slashes ( $_REQUEST[ 'contents' ] );
 	$fp = fopen ( 'upload/' . $file->Filename, 'w+' );
 	fwrite ( $fp, $cnt );
 	fclose ( $fp );
