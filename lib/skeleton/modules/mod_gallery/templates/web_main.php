@@ -24,7 +24,7 @@
 					{
 						$str .= '<a href="' . ( BASE_URL . 'upload/images-master/' . $i->Filename ) . '">';
 						$str .= '<img src="';
-						$str .= $i->getImageUrl ( $this->settings->Width, $this->settings->Height - 27, 'framed' );
+						$str .= $i->getImageUrl ( $this->settings->Width, $this->settings->Height, 'framed' );
 						$str .= '" alt="' . str_replace ( array ( "\\n", "\\r" ), array ( "<br/>", "" ), $i->Description ) . '" title="' . $i->Title . '"/></a>';
 					}
 				}
@@ -36,7 +36,7 @@
 	<script type="text/javascript">
 		var gal = new arenaGallery ();
 		gal.galleryWidth = <?= $this->settings->Width ?>;
-		gal.galleryHeight = <?= $this->settings->Height - 27 ?>;
+		gal.galleryHeight = <?= $this->settings->Height ?>;
 		gal.galleryAnimated = <?= $this->settings->Animated == 1 ? '1' : '0' ?>;
 		gal.galleryShowStyle = '<?= $this->settings->ShowStyle ?>';
 		gal.galleryPause = <?= $this->settings->Pause >= 1 ? $this->settings->Pause : '2' ?>;
