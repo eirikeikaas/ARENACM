@@ -19,6 +19,11 @@
 	?> autocomplete-off" style="width: 100%; height: 340px; -moz-box-sizing: border-box; box-sizing: border-box;"><?= trim ( $this->contents ) ? $this->contents : "/* Tom fil */" ?></textarea>
 	<div class="SpacerSmall"></div>
 	<div id="TexteditToolbar">
+		<div style="float: right; width: 200px;">
+			<div class="Container" id="TxtHud" style="padding: 4px;">
+				&nbsp;
+			</div>
+		</div>
 		<button type="button" id="lagre_text_innhold" onclick="saveFileContents ( <?= $this->file->ID ?> )">
 			<img src="admin/gfx/icons/page_edit.png"/> Lagre innhold
 		</button>

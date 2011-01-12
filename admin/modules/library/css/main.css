@@ -174,7 +174,7 @@ input.SmallNum
 
 #pageProperties textarea.codepress
 {
-	background: #15191c;
+	background: #15191c url(../gfx/codearea.png) top left;
 	color: #eef2ff;
 	font-family: bitstream vera mono, monospace, courier new;
 	font-size: 12px;
