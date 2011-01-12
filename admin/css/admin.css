@@ -72,6 +72,8 @@
 
 .ModuleTab
 {
+	cursor: hand; 
+	cursor: pointer;
 	white-space: nowrap;
 	position: absolute;
 	line-height: 18px;
@@ -102,6 +104,8 @@
 
 .ModuleTabActive
 {
+	cursor: hand; 
+	cursor: pointer;
 	position: absolute;
 	white-space: nowrap;
 	line-height: 18px;
