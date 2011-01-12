@@ -836,8 +836,10 @@ function executeEditField ( )
 	aja.addVar ( 'ft', frm.field_type.value );
 	aja.addVar ( 'Name', frm.Name.value );
 	aja.addVar ( 'SortOrder', frm.SortOrder.value );
-	if ( frm.fieldextension )
+
+	if ( type == 'extension' && frm.fieldextension )
 		aja.addVar ( 'fieldextension', frm.fieldextension.value );
+	
 	aja.addVar ( 'ContentGroup', contentgroup );
 	if ( type.length )
 		aja.addVar ( 'Type', type );
@@ -846,7 +848,8 @@ function executeEditField ( )
 	aja.addVar ( 'cid', document.getElementById ( 'PageID' ).value );
 	aja.onload = function ( )
 	{
-		var r = this.getResponseText ( ).split ( '<!-- separate -->' );
+		alert ( this.getResponseText () );
+		/*var r = this.getResponseText ( ).split ( '<!-- separate -->' );
 		switch ( r[0] )
 		{
 			case 'ok':
@@ -855,7 +858,7 @@ function executeEditField ( )
 			default:
 				if ( r[ 1 ] ) alert ( r[ 1 ] );
 				break;
-		}
+		}*/
 	}
 	aja.send ( );
 }

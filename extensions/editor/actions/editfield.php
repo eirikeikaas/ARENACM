@@ -103,6 +103,7 @@ if ( $content->load ( $_REQUEST[ 'cid' ] ) )
 				$fld->DataString = $_REQUEST[ 'fieldextension' ];
 			$fld->save ( );
 			$content->DateModified = date ( 'Y-m-d H:i:s' );
+			die ( print_r ( $_REQUEST, 1 ) );
 			$content->save ( );
 			die ( 'ok<!-- separate -->Lagret.' );
 		}
