@@ -92,6 +92,11 @@
 	opacity: 0.8;
 	-webkit-transition: 0.2s opacity;
 }
+.ModuleTab a, .ModuleTabActive a
+{
+	padding: 12px;
+	margin: 0 -14px 0 -14px;
+}
 .ModuleTab:hover
 {
 	opacity: 0.9;
