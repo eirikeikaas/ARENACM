@@ -143,6 +143,16 @@ reset ( $modules );
 
 if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 {
+	// Set active extension
+	if ( 
+		$_REQUEST[ 'extension' ] && 
+		file_exists ( 'extensions/' . $_REQUEST[ 'extension' ] . '/extension.php' ) &&
+		$Session->AdminUser->extensionPermission ( 'Access', $_REQUEST[ 'extension' ] )
+	) 
+	{
+		$Session->set ( 'currentExtension', $_REQUEST[ 'extension' ] );
+	}
+	
 	$tpl = new cPTemplate ( 'admin/templates/module_tab.php' );
 	$oStr = '';
 	$extensions = Array ( );
@@ -205,25 +215,20 @@ if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 					
 						$tpl->module = $extension;
 						$tpl->moduleName = i18n ( $name );
-						if ( 
-							!$activeModule && $modulename == 'extensions' && 
-							( 
-								$_REQUEST[ 'extension' ] == $extension || 
-								( 
-									( !$_REQUEST[ 'extension' ] || !in_array ( $_REQUEST[ 'extension' ], $out ) )
-									&& $Session->currentExtension == $extension 
-								)
-								|| !$Session->currentExtension
-							) 
-						)
+						$tpl->active = false;
+						
+						if ( $modulename == 'extensions' )
 						{
-							$activeModule = $extension; // make sure there's no other module also set
-							$tpl->active = true;
-							$document->extensionsOnTop = true;
-							$Session->set ( 'currentExtension', $extension );
-							$document->Title = $name . ' - ARENACM v2';
+							// Activate active extension tab
+							if ( !$Session->currentExtension || $extension == $Session->currentExtension )
+							{
+								$activeModule = $extension;
+								$tpl->active = true;
+								$document->extensionsOnTop = true;
+								$Session->set ( 'currentExtension', $extension );
+								$document->Title = $name . ' - ARENACM v2';
+							}
 						}
-						else $tpl->active = false;
 						
 						$tpl->link = 'module=extensions&extension=' . $extension;
 						// If module brings sub modules of its own
@@ -235,7 +240,6 @@ if ( !isset ( $_REQUEST[ 'bajaxrand' ] ) )
 				}
 			}
 		}
-
 		$tpl->module = $module->Module;
 		$tpl->moduleName = i18n ( 'module_' . $module->Module );
 		$tpl->link = '';

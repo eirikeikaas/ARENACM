@@ -97,6 +97,10 @@
 	padding: 12px;
 	margin: 0 -14px 0 -14px;
 }
+.ModuleTab a img, .ModuleTabActive img 
+{
+	border: 0;
+}
 .ModuleTab:hover
 {
 	opacity: 0.9;
