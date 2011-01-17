@@ -36,7 +36,7 @@
 					if ( $this->cfgComments ) 
 					{
 						if ( $this->commentcount )
-							$commentString = ( $this->commentcount == 1 ? i18n ( 'comment' ) : i18n ( 'comments' ) );
+							$commentString = $this->commentcount . ' ' . ( $this->commentcount == 1 ? i18n ( 'comment' ) : i18n ( 'comments' ) );
 						else $commentString = i18n ( 'no comments' );
 						$link = ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title );
 						
@@ -46,7 +46,7 @@
 				</div>
 				<a class="FloatLeft Small" href="'. $link .'.html#comment">
 				<span>'. 
-					i18n ( 'Add comment' ) .' ('. $this->commentcount . ' ' . $commentString .')
+					i18n ( 'Add comment' ) .' ('. $commentString .')
 				</span></a>
 						';
 					}
