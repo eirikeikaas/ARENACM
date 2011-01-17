@@ -35,24 +35,20 @@
 				<?
 					if ( $this->cfgComments ) 
 					{
+						if ( $this->commentcount )
+							$commentString = ( $this->commentcount == 1 ? i18n ( 'comment' ) : i18n ( 'comments' ) );
+						else $commentString = i18n ( 'no comments' );
+						$link = ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title );
+						
 						return '
 				<div class="FloatLeft">
 					&nbsp;|&nbsp;
 				</div>
-				<a class="FloatLeft Small" href="'. ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title ) .'.html#comment">
+				<a class="FloatLeft Small" href="'. $link .'.html#comment">
 				<span>'. 
-					i18n ( 'Add comment' ) .' ('. 
-					(
-						$this->commentcount ? 
-						( 
-							$this->commentcount . ' ' .
-							( $this->commentcount == 1 ? i18n ( 'comment' ) : i18n ( 'comments' ) )
-						)
-						: i18n('no comments') 
-					) .')
+					i18n ( 'Add comment' ) .' ('. $commentString .')
 				</span></a>
-						'
-					;
+						';
 					}
 				?>
 				<span class="ClearBoth"></span>
