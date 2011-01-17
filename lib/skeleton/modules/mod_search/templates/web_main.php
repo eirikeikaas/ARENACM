@@ -10,7 +10,7 @@
 					</p>
 					<p class="Buttons">
 						<button type="submit" onclick="">
-							<?= i18n ( $this->search_webpage ) ?>
+							<span><?= i18n ( $this->search_webpage ) ?></span>
 						</button>
 						<?if ( $this->search_extensions ) { ?>
 						<select name="search_extension">
