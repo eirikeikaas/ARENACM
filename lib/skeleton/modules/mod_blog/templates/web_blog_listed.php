@@ -46,7 +46,7 @@
 				</div>
 				<a class="FloatLeft Small" href="'. $link .'.html#comment">
 				<span>'. 
-					i18n ( 'Add comment' ) .' ('. $commentString .')
+					i18n ( 'Add comment' ) .' ('. $this->commentcount . ' ' . $commentString .')
 				</span></a>
 						';
 					}
