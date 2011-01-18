@@ -40,15 +40,22 @@
 						else $commentString = i18n ( 'no comments' );
 						$link = ( $this->detailpage ? $this->detailpage->getRoute ( ) : $this->content->getRoute ( ) ) . '/blogitem/' . $this->blog->ID . '_' . texttourl ( $this->blog->Title );
 						
-						return '
+						$ztr = '';
+						if ( trim ( $this->blog->Body ) )
+						{
+							$ztr .= '
 				<div class="FloatLeft">
 					&nbsp;|&nbsp;
 				</div>
+							';
+						}
+						$ztr .= '
 				<a class="FloatLeft Small" href="'. $link .'.html#comment">
 				<span>'. 
 					i18n ( 'Add comment' ) .' ('. $commentString .')
 				</span></a>
 						';
+						return $ztr;
 					}
 				?>
 				<span class="ClearBoth"></span>
