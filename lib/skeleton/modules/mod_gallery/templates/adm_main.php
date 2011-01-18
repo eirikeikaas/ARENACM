@@ -339,29 +339,33 @@
 						
 						// Add fields that can have duplicates
 						var dupFields = [ 'ThumbWidth', 'ThumbHeight', 'ThumbColumns', 'DetailWidth', 'DetailHeight', 'SortMode', 'ArchiveMode', 'Recursion' ];
-						var inputs = document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ).getElementsByTagName ( 'input' );
-						var selects = document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ).getElementsByTagName ( 'select' );
-						var fields = new Array ();
-						if ( inputs )
-							for ( var a = 0; a < inputs.length; a++ ) fields.push ( inputs[a] );
-						if ( selects )
-							for ( var a = 0; a < selects.length; a++ ) fields.push ( selects[a] );
-						for ( var a = 0; a < fields.length; a++ )
-							j.addVar ( 'key_' + dupFields[a], fields[ a ].value );
-						
-						j.addVar ( 'key_Width', ge( 'galWidth_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'fieldid',  <?= $this->field->ID ?> );
-						j.addVar ( 'key_Animated',  ge( 'galAnimated_<?= $this->field->ID ?>' ).checked ? '1' : '-1' );
-						j.addVar ( 'key_Pause',  ge( 'galPause_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_Height', ge( 'galHeight_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_Heading', ge( 'galHeading_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_ShowStyle', ge( 'galShowStyle_<?= $this->field->ID ?>' ).value );
-						j.addVar ( 'key_Speed', ge( 'galSpeed_<?= $this->field->ID ?>' ).value );
-						j.onload = function ()
+						if ( document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ) )
 						{
-							ge( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();
+							var inputs = document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ).getElementsByTagName ( 'input' );
+							var selects = document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ).getElementsByTagName ( 'select' );
+							
+							var fields = new Array ();
+							if ( inputs )
+								for ( var a = 0; a < inputs.length; a++ ) fields.push ( inputs[a] );
+							if ( selects )
+								for ( var a = 0; a < selects.length; a++ ) fields.push ( selects[a] );
+							for ( var a = 0; a < fields.length; a++ )
+								j.addVar ( 'key_' + dupFields[a], fields[ a ].value );
+						
+							j.addVar ( 'key_Width', ge( 'galWidth_<?= $this->field->ID ?>' ).value );
+							j.addVar ( 'fieldid',  <?= $this->field->ID ?> );
+							j.addVar ( 'key_Animated',  ge( 'galAnimated_<?= $this->field->ID ?>' ).checked ? '1' : '-1' );
+							j.addVar ( 'key_Pause',  ge( 'galPause_<?= $this->field->ID ?>' ).value );
+							j.addVar ( 'key_Height', ge( 'galHeight_<?= $this->field->ID ?>' ).value );
+							j.addVar ( 'key_Heading', ge( 'galHeading_<?= $this->field->ID ?>' ).value );
+							j.addVar ( 'key_ShowStyle', ge( 'galShowStyle_<?= $this->field->ID ?>' ).value );
+							j.addVar ( 'key_Speed', ge( 'galSpeed_<?= $this->field->ID ?>' ).value );
+							j.onload = function ()
+							{
+								ge( 'ImageList_<?= $this->field->ID ?>' ).innerHTML = this.getResponseText ();
+							}
+							j.send();
 						}
-						j.send();
 					}
 					);
 				</script>

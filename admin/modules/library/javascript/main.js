@@ -544,8 +544,11 @@ function saveFileContents ( fid )
 	{
 		if ( this.getResponseText ( ) == 'ok' )
 		{
-			document.getElementById ( 'advfileContents' ).style.background = '#ff3333';
-			setTimeout ( "document.getElementById ( 'advfileContents' ).style.background = '#15191c';", 250 );
+			if ( ge ( 'advfileContents' ) )
+			{
+				document.getElementById ( 'advfileContents' ).style.background = '#ff3333';
+				setTimeout ( "document.getElementById ( 'advfileContents' ).style.background = '#15191c';", 250 );
+			}
 		}
 		else alert ( this.getResponseText ( ) );
 	}
