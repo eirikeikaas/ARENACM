@@ -1956,7 +1956,7 @@ class dbObject
 						}
 					}
 				}
-				return $result;
+				return $result ? $result : checkGlobalPermission ( $targetObj, $permission, $permissiontype );
 				break;
 			
 			case 'ContentElement':
@@ -1969,13 +1969,15 @@ class dbObject
 				$obj->AuthType = $this->_tableName;
 				$obj->AuthID = $this->ID;
 				$obj->PermissionType = $permissiontype;
+				$perm = false;
 				
 				if ( $obj->load ( ) )
 				{
 					if ( $permission == '*' )
 						return $obj;
-					return $obj->$permission;
+					$perm = $obj->$permission;
 				}
+				return $perm ? $perm : checkGlobalPermission ( $targetObj, $permission, $permissiontype );
 				
 				break;
 		}
