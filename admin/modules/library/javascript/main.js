@@ -553,7 +553,14 @@ function saveFileContents ( fid )
 				setTimeout ( "ge ( 'advfileContents' ).style.background = ge ( 'advfileContents' ).oldStyle", 250 );
 			}
 		}
-		else alert ( this.getResponseText ( ) );
+		// Failed to save! show red!
+		else 
+		{
+			var afc = ge ( 'advfileContents' );
+			afc.oldStyle = afc.style.background;
+			afc.style.background = '#ff0020';
+			setTimeout ( "ge ( 'advfileContents' ).style.background = ge ( 'advfileContents' ).oldStyle", 250 );
+		}
 	}
 	jax.send ( );
 }
