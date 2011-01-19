@@ -546,8 +546,11 @@ function saveFileContents ( fid )
 		{
 			if ( ge ( 'advfileContents' ) )
 			{
-				document.getElementById ( 'advfileContents' ).style.background = '#ff3333';
-				setTimeout ( "document.getElementById ( 'advfileContents' ).style.background = '#15191c';", 250 );
+				
+				var afc = ge ( 'advfileContents' );
+				afc.oldStyle = afc.style.background;
+				afc.style.background = '#ff3333';
+				setTimeout ( "ge ( 'advfileContents' ).style.background = ge ( 'advfileContents' ).oldStyle", 250 );
 			}
 		}
 		else alert ( this.getResponseText ( ) );
