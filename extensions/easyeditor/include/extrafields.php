@@ -27,7 +27,7 @@ $document->addResource ( 'javascript', 'lib/plugins/extrafields/javascript/main.
 // Render one field
 function renderExtraField ( $field, $obj )
 {
-	$extdir = '/usr/local/arena2/extensions/editor';
+	$extdir = 'extensions/editor';
 	$str = '';
 	$tpl = new cPTemplate ();
 	switch ( $field->Type )
