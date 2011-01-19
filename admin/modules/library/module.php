@@ -28,6 +28,7 @@ Rune Nilssen
 $root = dbFolder::getRootFolder ( );
 $db = &dbObject::globalValue ( 'database' );	 
 i18nAddLocalePath ( 'admin/modules/library/locale' );
+$document->addResource ( 'javascript', 'admin/modules/library/javascript/imageslices.js' );
 
 if( !defined( 'LIBRARY_ITEMSPERPAGE' ) ) define( 'LIBRARY_ITEMSPERPAGE', 15 );
 

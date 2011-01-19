@@ -24,22 +24,36 @@ $i = new dbImage ( $_REQUEST[ 'iid' ] );
 die ( '
 		<div id="SliceUI">
 			<div id="SliceToolbar">
+				<table>
+					<tr>
+						<td>
+							<button type="button" onclick="setTool(\'select\')">
+								<img src="admin/gfx/icons/cursor.png"/>
+							</button>
+						</td>
+						<td>
+							<button type="button" onclick="zoomSlice(\'in\')">
+								<img src="admin/gfx/icons/zoom_in.png"/>
+							</button>
+						</td>
+						<td>
+							<button type="button" onclick="zoomSlice(\'out\')">
+								<img src="admin/gfx/icons/zoom_out.png"/>
+							</button>							
+						</td>
+					</tr>
+					<tr>
+					</tr>
+				</table>
 				<p>
 					<button type="button">
-						<img src="admin/gfx/icons/disk.png"/> Lagre utsnitt
+								<img src="admin/gfx/icons/disk.png"/> Lagre utsnitt
 					</button>
-				</p>
-				<p>
 					<button type="button">
 						<img src="admin/gfx/icons/arrow_refresh.png"/> Nullstill
 					</button>
-				</p>
-				<p>
-					<button type="button" onclick="zoomSlice(\'in\')">
-						<img src="admin/gfx/icons/zoom_in.png"/>
-					</button>
-					<button type="button" onclick="zoomSlice(\'out\')">
-						<img src="admin/gfx/icons/zoom_out.png"/>
+					<button type="button" onclick="removeModalDialogue(\'slice\')">
+						<img src="admin/gfx/icons/cancel.png"/> Avbryt
 					</button>
 				</p>
 			</div>
