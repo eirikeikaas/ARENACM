@@ -363,8 +363,11 @@ switch ( $_REQUEST[ 'mode' ] )
 				$access = true;
 				if ( $page->IsProtected )
 				{
+					// Check global permissions if no user is logged in
 					if ( !( $webuser = dbObject::globalValue ( 'webuser' ) ) )
-						$access = false;
+					{
+						$access = dbUser::checkGlobalPermission ( $page, 'Read' );
+					}
 					else if ( !$webuser->checkPermission ( $page, 'Read' ) )
 						$access = false;
 				}

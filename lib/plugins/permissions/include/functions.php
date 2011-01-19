@@ -36,7 +36,7 @@ function pmGetGroups ( $pluginid = '' )
 		$ostr = '';
 		$tpl = new cPTemplate ( 'lib/plugins/permissions/templates/row_group.php' );
 		
-		$d = new Dummy ( ); $d->ID = '0'; $d->Name = 'Vis alle brukere';
+		$d = new Dummy ( ); $d->ID = '0'; $d->Name = i18n ( 'All users' );
 		$tpl->group = $d;
 		$tpl->switch = $tpl->switch == 'sw1' ? 'sw2' : 'sw1';
 		$tpl->active = true;
@@ -163,6 +163,7 @@ function pmGroupPermissions ( $object, $ptype = 'web', $pluginid = '' )
 {
 	if ( !$object ) return '';  
 	$db =& dbObject::globalValue ( 'database' );
+	$str = '';
 	if ( $permissions = $object->getPermissionRules ( 'Groups', $ptype ) )
 	{
 		foreach ( $permissions as $permission )
@@ -174,7 +175,6 @@ function pmGroupPermissions ( $object, $ptype = 'web', $pluginid = '' )
 		' ) )
 		{
 			$tpl = new cPTemplate ( 'lib/plugins/permissions/templates/row_permission.php' );
-			$str = '';
 			foreach ( $permissions as $permission )
 			{
 				foreach ( $groups as $group )
@@ -191,9 +191,21 @@ function pmGroupPermissions ( $object, $ptype = 'web', $pluginid = '' )
 					}
 				}
 			}
-			return $str;
 		}
 	}
+	if ( $permissions = $object->getPermissionRules ( 'GlobalPermission', $ptype ) )
+	{
+		$tpl = new cPTemplate ( 'lib/plugins/permissions/templates/row_permission.php' );
+		$tpl->obj = 'global';
+		$tpl->permission = $permissions[0];
+		$tpl->Name = i18n ( 'All users' );
+		$tpl->Info = false;
+		$tpl->PluginID = $pluginid;
+		$tpl->switch = $tpl->switch == 'sw1' ? 'sw2' : 'sw1';
+		$str .= $tpl->render ( );
+	}
+	if ( $str )
+		return $str;
 	return 'Ingen grupperettigheter er satt opp.';
 }
 

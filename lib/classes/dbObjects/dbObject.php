@@ -1742,13 +1742,28 @@ class dbObject
 		// We don't need to grant the core users anything, they have all access rights
 		if ( $authObj->_dataSource == 'core' ) return;
 		
-		$obj = new dbObject ( 'ObjectPermission' );
-		$obj->AuthType = $authObj->_tableName;
-		$obj->AuthID = $authObj->ID;
-		$obj->ObjectType = $this->_tableName;
-		$obj->ObjectID = $this->ID;
-		$obj->PermissionType = $permissiontype;
-		$obj->load();
+		// Set global permission (all users and groups and objects)
+		if ( $authObj == 'global' )
+		{
+			$obj = new dbObject ( 'ObjectPermission' );
+			$obj->AuthType = 'GlobalPermission';
+			$obj->AuthID = '0';
+			$obj->ObjectType = $this->_tableName;
+			$obj->ObjectID = $this->ID;
+			$obj->PermissionType = $permissiontype;
+			$obj->load();
+		}
+		// Set permission by object
+		else
+		{
+			$obj = new dbObject ( 'ObjectPermission' );
+			$obj->AuthType = $authObj->_tableName;
+			$obj->AuthID = $authObj->ID;
+			$obj->ObjectType = $this->_tableName;
+			$obj->ObjectID = $this->ID;
+			$obj->PermissionType = $permissiontype;
+			$obj->load();
+		}
 		
 		if ( is_string ( $permission ) )
 		{
@@ -1869,6 +1884,20 @@ class dbObject
 		else return false;
 	}
 	
+	function checkGlobalPermission ( $targetObj, $permission = 'Read', $permissiontype = 'web' )
+	{
+		$p = new dbObject ( 'ObjectPermission' );
+		$p->AuthType = 'GlobalPermission';
+		$p->AuthID = '0';
+		$p->ObjectType = $targetObj->_tableName;
+		$p->ObjectID = $targetObj->ID;
+		if ( $p->load () )
+		{
+			return $p->$permission;
+		}
+		return false;
+	}
+	
 	/**
 	 * Checks this objects permission on target object
 	**/
@@ -1947,6 +1976,7 @@ class dbObject
 						return $obj;
 					return $obj->$permission;
 				}
+				
 				break;
 		}
 		

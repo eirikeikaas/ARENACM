@@ -36,6 +36,10 @@ if ( $object = dbObject::get ( $_REQUEST[ 'objid' ], $_REQUEST[ 'objtype' ] ) )
 			{
 				$object->grantPermission ( $group, 'Read', 1, $_REQUEST[ 'permissiontype' ] );
 			}
+			else if ( $id === '0' )
+			{
+				$object->grantPermission ( 'global', 'Read', 1, $_REQUEST[ 'permissiontype' ] );
+			}
 		}
 	}
 }
