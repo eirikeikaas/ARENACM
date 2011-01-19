@@ -33,7 +33,7 @@
 	<?= $this->comments ?>
 	<hr/>
 	<?}?>
-	<?if ( $this->cfgComments ) { ?>
+	<?if ( $this->cfgComments && $this->canComment ) { ?>
 	<div class="Block">
 		<h3>
 			<?= i18n ( 'Add your comment' ) ?>:

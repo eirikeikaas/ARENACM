@@ -20,6 +20,9 @@ Blest AS. All Rights Reserved.
 Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
 Rune Nilssen
 *******************************************************************************/
+
+global $webuser;
+
 /**
  * Blog engine output
 **/
@@ -57,6 +60,10 @@ $cfgHeaderText = $cfg[11];
 $cfgHideDetails = $cfg[12];
 $cfgFacebookLike = $cfg[13];
 list ( $cfgFacebookLikeWidth, $cfgFacebookLikeHeight, ) = explode ( ':', $cfg[14] );
+
+// Check if a user has permission to comment
+$canComment = $webuser ? $webuser->checkPermission ( $content, 'Write' ) : dbUser::checkGlobalPermission ( $content, 'Write' );
+
 // Source and detailpages
 $sourcepage = new dbContent ( );
 if ( $cfgSourcepage ) $sourcepage->load ( $cfgSourcepage );
@@ -109,6 +116,7 @@ if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matc
 	$btpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog.php' );
 	$btpl->blog =& $blog;
 	$btpl->cfgComments = $cfgComments;
+	$btpl->canComment = $canComment;
 	$btpl->cfgShowAuthor = $cfgShowAuthor;
 	$btpl->content =& $content;
 	$btpl->sizeX = $cfgSizeX;
@@ -173,6 +181,7 @@ else
 				$btpl->facebookLikeHeight = $cfgFacebookLikeHeight;
 			}
 			$btpl->cfgComments = $cfgComments;
+			$btpl->canComment = $canComment;
 			$btpl->cfgShowAuthor = $cfgShowAuthor;
 			$btpl->detailpage = $detailpage;
 			$btpl->leadinLength = $cfgLeadinlength;

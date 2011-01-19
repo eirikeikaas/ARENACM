@@ -49,12 +49,19 @@
 				</div>
 							';
 						}
-						$ztr .= '
+						if ( $this->canComment )
+						{
+							$ztr .= '
 				<a class="FloatLeft Small" href="'. $link .'.html#comment">
 				<span>'. 
 					i18n ( 'Add comment' ) .' ('. $commentString .')
 				</span></a>
-						';
+							';
+						}
+						else
+						{
+							$ztr .= '<div class="FloatLeft Small"><span>' . $commentString . '</span></div>';
+						}
 						return $ztr;
 					}
 				?>
