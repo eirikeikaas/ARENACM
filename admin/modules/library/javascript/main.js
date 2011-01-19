@@ -549,7 +549,7 @@ function saveFileContents ( fid )
 				
 				var afc = ge ( 'advfileContents' );
 				afc.oldStyle = afc.style.background;
-				afc.style.background = '#ff3333';
+				afc.style.background = '#00aa02';
 				setTimeout ( "ge ( 'advfileContents' ).style.background = ge ( 'advfileContents' ).oldStyle", 250 );
 			}
 		}
