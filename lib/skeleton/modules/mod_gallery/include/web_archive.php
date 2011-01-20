@@ -21,14 +21,19 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
+global $document;
+
 // Get sorted list of folders
 $folderList = explode ( ':', $settings->Folders );
 $folderList = implode ( ', ', $folderList );
 $db =& dbObject::globalValue ( 'database' );
+$document->addResource ( 'javascript', 'lib/javascript/arena-lib.js' );
+$document->addResource ( 'javascript', 'lib/javascript/gui.js' );
+$document->addResource ( 'javascript', 'lib/javascript/gui/gallerypopup.js' );
 
 $mstr = '';
 
-function listImages ( $pfolder, $where, $settings )
+function listImages ( $pfolder, $where, $settings, $fieldid )
 {
 	// Fetch images sorted by sortorder and date
 	$cstr = '';
@@ -61,6 +66,7 @@ function listImages ( $pfolder, $where, $settings )
 			}
 			if ( $col != 1 ) $cstr .= '</tr>';
 			$cstr .= '</table>';
+			$cstr .= '<script type="text/javascript"> var g = new GalleryPopup ( \'' . $fieldid . '\' ); </script>';
 		}
 		// List
 		else
@@ -101,7 +107,7 @@ if ( isset ( $_REQUEST[ 'fid' ] ) )
 	$mstr .= '<div class="Block SelectedFolder">';
 	$mstr .= '<h2>' . $pfolder->Name . '</h2>';
 	$mstr .= '<hr class="SelectedFolder">';
-	$mstr .= listImages ( $pfolder, $whgere, &$settings );
+	$mstr .= listImages ( $pfolder, $whgere, &$settings, $field->Name );
 	$mstr .= '</div>';
 	$folders = $db->fetchObjectRows ( 'SELECT * FROM `Folder` WHERE Parent=\'' . $_REQUEST[ 'fid' ] . '\' ORDER BY Name ASC' );
 }
@@ -140,7 +146,7 @@ if ( $folders )
 		else $fid = $_REQUEST[ 'fid' ];
 		
 		if ( !isset ( $_REQUEST[ 'fid' ] ) && $settings->Recursion != '1' )
-			$istr = listImages ( $f, $where, &$settings );
+			$istr = listImages ( $f, $where, &$settings, $field->Name );
 		
 		$cstr .= $istr;
 		$cstr .= '</div>';

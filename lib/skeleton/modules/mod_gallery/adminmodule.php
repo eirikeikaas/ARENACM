@@ -95,6 +95,8 @@ switch( $_REQUEST['modaction'] )
 		$mtpl->settings =& $settings;
 		$mtpl->preview = getPreview ( $settings, $field );
 		$mtpl->folders = listFolders ( $settings->Folders, $field );
+		if ( !$settings->currentMode )
+			$settings->currentMode = 'slideshow';
 		$mtpl->currentMode = $settings->currentMode;
 		$mtpl->Heading = $settings->Heading;
 		break;

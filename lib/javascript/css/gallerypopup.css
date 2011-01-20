@@ -1,0 +1,36 @@
+
+.GalleryPopupImage
+{
+	border: 2px solid #c0c0c0;
+	display: block;
+	-webkit-transition: all 0.25s;
+}
+.GalleryPopupImageOver
+{
+	border: 2px solid #ffffff;
+	display: block;
+}
+.GalleryPopupBox
+{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 10000;
+}
+#GalleryPopupImage
+{
+	outline: 5px solid #ffffff;
+}
+.GalleryPopupBackground
+{
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	background: #000000;
+	z-index: 9999;
+	cursor: hand;
+	cursor: pointer;
+}
+

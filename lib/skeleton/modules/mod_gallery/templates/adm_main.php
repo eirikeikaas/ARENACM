@@ -58,7 +58,7 @@
 										$i = 0;
 										foreach ( $modes as $mode=>$name )
 										{
-											if ( ( $i++ == 0 && !$this->currentMode ) || $this->currentMode == $mode )
+											if ( $this->currentMode == $mode )
 												$s = ' checked="checked"';
 											else $s = '';
 											$str .= '<td width="24px"><input type="radio" name="mode" value="' . $mode . '"' . $s . ' onclick="changeGalMode(this)"/></td>';
