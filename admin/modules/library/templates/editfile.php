@@ -107,6 +107,7 @@
 					case 'txt':
 					case 'locale':
 					case 'js':
+					case 'html':
 						if ( file_exists ( 'upload/' . $this->file->Filename ) )
 						{
 							$properties = new cPTemplate ( 'admin/modules/library/templates/file_properties_text.php' );
