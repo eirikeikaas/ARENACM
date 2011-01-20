@@ -36,7 +36,8 @@ function getLevelContent( $lid )
 	$fld = new dbFolder ( );
 	$fld->load ( $lid );
 	$time = new cTime ( );
-	
+	$limit = 15;
+	$pos = $_REQUEST[ 'pos' ] ? $_REQUEST[ 'pos' ] : '0';
 	$images = $files = false;
 	
 	// If we want the detail view
@@ -78,6 +79,7 @@ function getLevelContent( $lid )
 					)
 				) as z
 				ORDER BY `' . $lm . '` ' . $Session->LibraryListmodeOrder . '
+				LIMIT ' . $pos . ',' . $limit . '
 			';
 		}
 		// Else just list out current folder
@@ -96,12 +98,21 @@ function getLevelContent( $lid )
 				FROM `File` WHERE `FileFolder` = \'' . ( $lid == 'orphans' ? '0' : $lid ) . '\' )
 				) as z
 				ORDER BY `' . $lm . '` ' . $Session->LibraryListmodeOrder . '
+				LIMIT ' . $pos . ',' . $limit . '
 			';
 		}
+		
+		// Get count of all rows
+		$countq = explode ( 'ORDER BY', $q ); $countq = $countq[0];
+		$countq = explode ( 'SELECT * FROM', $countq );
+		$countq = "SELECT COUNT(*) CNT FROM {$countq[1]}";
+		$total = $fld->_table->database->fetchObjectRow ( $countq );
+		$total = $total->CNT;
 		
 		$tpl = new cPTemplate ( 'admin/modules/library/templates/listcontents_mode_details.php' );
 		if ( $rows = $fld->_table->database->fetchObjectRows ( $q ) )
 		{
+			$im = 0;
 			foreach ( $rows as $row )
 			{
 				$icon = false;
@@ -207,12 +218,24 @@ function getLevelContent( $lid )
 						<td style="text-align: center">' . ArenaDate ( $row->DateModified, DATEFORMAT ) . '</td>
 					</tr>
 				';
+				$im++;
 			}
 			$tpl->contents = $str;
+			
+			if ( $total > $limit )
+			{
+				$pagin = new cPagination ();
+				$pagin->Count = $total;
+				$pagin->Limit = $limit;
+				$pagin->Position = $pos;
+				$pagin->UsePages = true;
+				$tpl->nav = '<div class="SpacerSmallColored"></div>' . $pagin->render ();
+			}
 		}
 		else
 		{
 			$tpl->contents = '<tr><td colspan="5">Ingen filer eller bilder finnes i mappen. ' . mysql_error () . '</td></tr>';
+			$tpl->nav = '';
 		}
 		return $tpl->render ( );
 	}

@@ -9,4 +9,5 @@
 		</tr>
 		<?= $this->contents ?>
 	</table>
+	<?= $this->nav ?>
 
