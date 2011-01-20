@@ -74,7 +74,7 @@ if ( !function_exists ( 'listBlogs' ) )
 {
 	function listBlogs ( $contentid, $start = 0, $lim = 10 )
 	{
-		global $Session;
+		global $Session, $content;
 		if ( !$contentid ) $contentid = $GLOBALS[ 'content' ]->MainID;
 		if ( !$start ) $start = 0;
 		$editorcontent = new dbContent ( $Session->EditorContentID );
@@ -316,7 +316,8 @@ switch ( $_REQUEST[ 'modaction' ] )
 	
 			$mtpl = new cPTemplate ( $mtpldir . 'adm_main.php' );
 			$std = new cPTemplate ( $mtpldir . 'adm_std.php' );
-			$std->settings =& $settings;
+			$std->settings = $settings;
+			$std->content = $content;
 			$std->blogs = listBlogs ( $cnt->ID, $_REQUEST[ 'bpos' ], $fieldObject->DataInt ? $fieldObject->DataInt : 10 );
 			$mtpl->standard = $std->render ( );
 			if ( $_REQUEST[ 'modaction' ] == 'standard' )
