@@ -1956,7 +1956,7 @@ class dbObject
 						}
 					}
 				}
-				return $result ? $result : checkGlobalPermission ( $targetObj, $permission, $permissiontype );
+				return $result ? $result : dbObject::checkGlobalPermission ( $targetObj, $permission, $permissiontype );
 				break;
 			
 			case 'ContentElement':
