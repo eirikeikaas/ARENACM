@@ -16,12 +16,12 @@
 	?>
 	<div class="Block">
 		<p class="Title">
-			<a href="<?= $this->data->Url ?>"><?= $this->data->Title ?></a>
+			<a href="<?= $this->data->Url ?>"><span><?= $this->data->Title ?></span></a>
 		</p>
 		<p class="Leadin">
 			<?= $this->data->Leadin ?>
 		</p>
 		<p class="ReadMore">
-			<a href="<?= $this->data->Url ?>"><?= i18n ( 'Read more' ) ?></a>
+			<a href="<?= $this->data->Url ?>"><span><?= i18n ( 'Read more' ) ?></span></a>
 		</p>
 	</div>
