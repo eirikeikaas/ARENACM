@@ -95,6 +95,7 @@ function listImages ( $pfolder, $where, $settings, $fieldid )
 				$cstr .= '</tr>';
 			}
 			$cstr .= '</table>';
+			$cstr .= '<script type="text/javascript"> var g = new GalleryPopup ( \'' . $fieldid . '\' ); </script>';
 		}
 	}
 	return $cstr;
