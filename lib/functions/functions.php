@@ -909,6 +909,10 @@ function mail_ ( $to, $subject, $message, $headers, $html = true )
 		if ( $html ) $headers .= '; Content-type: text/html';
 		return mail ( $to, $subject, $message, $headers );
 	}
+	
+	if ( !defined ( 'MAIL_USERNAME' ) )
+		ArenaDie ( 'No username defined for e-mail. Please check settings!' );
+		
 	list ( , $from ) = explode ( "From:", $headers );
 	list ( $from, ) = explode ( "\n", $from );
 	$from = trim ( strip_tags ( $from ) );
