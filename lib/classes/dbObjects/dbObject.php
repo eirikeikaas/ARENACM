@@ -1977,7 +1977,7 @@ class dbObject
 						return $obj;
 					$perm = $obj->$permission;
 				}
-				return $perm ? $perm : checkGlobalPermission ( $targetObj, $permission, $permissiontype );
+				return $perm ? $perm : dbObject::checkGlobalPermission ( $targetObj, $permission, $permissiontype );
 				
 				break;
 		}
