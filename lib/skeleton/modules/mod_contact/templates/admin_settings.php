@@ -54,10 +54,15 @@
 									$s = key_exists ( $field, $this ) && $this->$field == 1 ? ' checked="checked"' : '';
 									$str .= '
 								<td style="border-bottom: 1px solid #ccc; white-space: nowrap">
-									<img src="admin/gfx/icons/bullet_delete.png" valign="baseline" style="position: relative; top: 3px" onclick="removeContactField(\\'' . $field . '\\')" style="cursor: pointer; cursor: hand"/ > ' . i18n ( $field ) . '
+									<div class="Container" style="cursor: hand; cursor: pointer; margin: 3px 5px -5px 5px; padding: 0; float: left" onclick="removeContactField(\\'' . $field . '\\')">
+										<img src="admin/gfx/icons/bullet_delete.png" valign="baseline"/ >
+									</div>
+									<div style="margin: 5px 0 -5px 0;">
+									' . i18n ( $field ) . '
+									</div>
 								</td>
-								<td style="border-right: 1px solid #ccc; border-bottom: 1px solid #ccc;">
-									<input type="checkbox" id="contact_' . $field . '"' . $s . '/>
+								<td style="border-right: 1px solid #ccc; border-bottom: 1px solid #ccc; width: 30px">
+									<input type="checkbox" id="contact_' . $field . '"' . $s . ' style="position: relative; top: 2px;"/>
 								</td>
 									';
 									if ( $i == 2 )
