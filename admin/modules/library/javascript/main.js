@@ -326,17 +326,20 @@ function showLibraryContent ( pos )
 	libjax.openUrl ( modulepath + '&function=listcontents&position=' + pos + '&lid=' + document.lid, 'get', true );
 	libjax.onload = function ( )
 	{
-		var cn = document.createElement ( 'div' );
-		cn.id = 'LibraryContentDiv';
-		cn.innerHTML = this.getResponseText ( );
-		document.getElementById ( 'LibraryContentDiv' ).parentNode.replaceChild ( cn, document.getElementById ( 'LibraryContentDiv' ) );
-		eval( extractScripts( this.getResponseText ( ) ).join("\n") );
-		initContentDropTarget ( );
-		checkLibraryTooltips ( );
-		var b =  document.getElementById ( 'currentlevel' ).getElementsByTagName ( 'B' );
-		if ( b.length )
-			document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i "' + b[ 0 ].innerHTML + '":';
-		else document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i hovedmappen:';
+		if ( document.getElementById ( 'LibraryContentDiv' ) )
+		{
+			var cn = document.createElement ( 'div' );
+			cn.id = 'LibraryContentDiv';
+			cn.innerHTML = this.getResponseText ( );
+			document.getElementById ( 'LibraryContentDiv' ).parentNode.replaceChild ( cn, document.getElementById ( 'LibraryContentDiv' ) );
+			eval( extractScripts( this.getResponseText ( ) ).join("\n") );
+			initContentDropTarget ( );
+			checkLibraryTooltips ( );
+			var b =  document.getElementById ( 'currentlevel' ).getElementsByTagName ( 'B' );
+			if ( b.length )
+				document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i "' + b[ 0 ].innerHTML + '":';
+			else document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i hovedmappen:';
+		}
 	}
 	
 	if( !document.getElementById ( 'LibraryContentDiv' ) )
