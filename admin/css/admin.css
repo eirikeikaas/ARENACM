@@ -279,7 +279,13 @@ tr.swSub2, .swSub2
 	position: fixed;
 	top: -2px;
 	right: 7px;
+	padding: 0 0 0 2px;
 	width: auto;
+	height: 32px;
+	background: #00516E;
+	background: rgba(0,81,110,0.3);
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
 	z-index: 100;
 }
 #MetaButtons div
