@@ -33,4 +33,31 @@
 	cursor: hand;
 	cursor: pointer;
 }
-
+.GalleryPopupNext, .GalleryPopupPrev, .GalleryPopupClose
+{
+	border: 2px solid white;
+	padding: 5px;
+	position: absolute;
+	background: #222222;
+	background: rgba(0,0,0,0.6);
+	z-index: 10001;
+	margin-top: 3px;
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+}
+.GalleryPopupNext a, .GalleryPopupPrev a, .GalleryPopupClose a
+{
+	color: #eeeeee;
+	font-weight: bold;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-family: trebuchet ms, sans;
+}
+.GalleryPopupNext a:hover, .GalleryPopupPrev a:hover, .GalleryPopupClose a:hover
+{
+	color: #ffffff;
+}
+.GalleryPopupNext span, .GalleryPopupPrev span, .GalleryPopupClose span
+{ 
+	color: #a00; 
+}
