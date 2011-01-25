@@ -34,7 +34,7 @@
 				</p>
 				<p class="Submit">
 					<button type="submit">
-						<?= i18n ( 'Login' ) ?>
+						<span><?= i18n ( 'Login' ) ?></span>
 					</button>
 				</p>
 			</form>
