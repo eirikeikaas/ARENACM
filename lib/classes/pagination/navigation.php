@@ -20,11 +20,14 @@
 					<?if ( $this->PageCount > 1 ) { ?>
 					<div class="SubContainer" style="display: inline">
 						Viser side <?= $this->CurrentPage ?> av <?= $this->PageCount ?>
-					</div>
 					<?}?>
 					
-					<?if ( $this->ShowCount ) { ?>
-					<div style="display: inline">
-						Totalt, <?= ( $this->Count ? ( $this->Count . ' ' ) : '' ) . ( $this->Count == 1 ? $this->ShowCount[0] : $this->ShowCount[1] ) ?>.
+						<?if ( $this->ShowCount ) { ?>
+						<div style="display: inline">
+							med <?= ( $this->Count ? ( $this->Count . ' ' ) : '' ) ?> elementer totalt.
+						</div>
+						<?}?>
+						
+					<?if ( $this->PageCount > 1 ) { ?>
 					</div>
 					<?}?>

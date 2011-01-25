@@ -230,6 +230,7 @@ function getLevelContent( $lid )
 				$pagin->Limit = $limit;
 				$pagin->Position = $pos;
 				$pagin->UsePages = true;
+				$pagin->ShowCount = true;
 				$tpl->nav = '<div class="SpacerSmallColored"></div>' . $pagin->render ();
 			}
 		}
