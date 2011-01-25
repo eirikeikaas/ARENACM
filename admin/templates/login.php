@@ -43,24 +43,24 @@
 							<p>
 								For support, send e-post til: <a href="mailto:support@blest.no">support@blest.no</a>
 							</p>
-							<div class="Box">
+							<div class="Box" class="Username">
 								<p>
 									<strong>
 										Brukernavn:
 									</strong>
 								</p>
 								<p>
-									<input id="inputUsername" type="text" name="loginUsername"" />
+									<input id="inputUsername" type="text" name="loginUsername" class="Username" />
 								</p>
 							</div>
-							<div class="Box">
+							<div class="Box" class="Password">
 								<p>
 									<strong>
 										Passord:
 									</strong>
 								</p>
 								<p>
-									<input id="inputPassword" type="password" name="loginPassword"" />
+									<input id="inputPassword" type="password" name="loginPassword" class="Password" />
 								</p>
 							</div>
 						</div>
@@ -74,10 +74,10 @@
 							</p>
 						</div>
 						<hr/>
-						<button type="button" style="float: right">
+						<button type="button" style="float: right" class="NewPassword">
 							<img src="admin/gfx/icons/email_attach.png" alt="receive" /> <span id="receive_text">Motta nytt passord</span>
 						</button>
-						<button type="button" onclick="this.form.submit()">
+						<button type="button" onclick="this.form.submit()" class="Login">
 							<img src="admin/gfx/icons/key_go.png" alt="login" /> <span id="login_text">Logg deg inn</span>
 						</button>
 						
