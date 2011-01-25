@@ -25,6 +25,6 @@
 					
 					<?if ( $this->ShowCount ) { ?>
 					<div style="display: inline">
-						Totalt, <?= $this->Count . ' ' . ( $this->Count == 1 ? $this->ShowCount[0] : $this->ShowCount[1] ) ?>.
+						Totalt, <?= ( $this->Count ? ( $this->Count . ' ' ) : '' ) . ( $this->Count == 1 ? $this->ShowCount[0] : $this->ShowCount[1] ) ?>.
 					</div>
 					<?}?>
