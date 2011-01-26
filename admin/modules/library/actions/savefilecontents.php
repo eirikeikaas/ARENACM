@@ -1,6 +1,5 @@
 <?
 
-
 /*******************************************************************************
 The contents of this file are subject to the Mozilla Public License
 Version 1.1 (the "License"); you may not use this file except in
@@ -22,15 +21,13 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-
-
 include_once ( 'lib/classes/dbObjects/dbFile.php' );
 $file = new dbFile ( );
 if ( $file->load ( $_REQUEST[ 'fid' ] ) )
 {
 	if ( $fp = fopen ( 'upload/' . $file->Filename, 'w+' ) )
 	{
-		fwrite ( $fp, stripslashes ( $_REQUEST[ 'contents' ] ) );
+		fwrite ( $fp, $_REQUEST[ 'contents' ] );
 		fclose ( $fp );
 		die ( 'ok' );
 	}
