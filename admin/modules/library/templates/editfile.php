@@ -74,6 +74,22 @@
 											<td>Last ned fil: </td>
 											<td><a href="<?= BASE_URL . $this->file->Folder->DiskPath .'/' .$this->file->Filename?>" target="_blank"><?= $this->file->Filename?></a></td>
 										</tr>
+										<?
+											$fn = BASE_DIR . '/' . $this->file->getFolderPath () . '/' . $this->file->BackupFilename;
+											$lfn = BASE_URL . $this->file->getFolderPath () . '/' . $this->file->BackupFilename;
+											if ( file_exists ( $fn ) && trim ( $this->file->BackupFilename ) )
+											{
+												$info = stat ( $fn );
+												$date = date ( 'd/m/Y H:i', $info[ 'mtime' ] );
+												return '
+										<tr>
+											<th>Backup:</th>
+											<td>
+												<a href="' . $lfn . '">' . $this->file->BackupFilename . '</a> (' . $date . ')</a>
+											</td>
+										</tr>';
+											}
+										?>
 									</table>
 								</div>
 							<?}?>

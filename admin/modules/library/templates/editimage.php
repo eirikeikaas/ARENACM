@@ -82,6 +82,22 @@
 												<th>Vis bildet: </th>
 												<td><a href="<?= $this->image->getMasterImage(); ?>" target="_blank"><?= $this->image->Filename?></a></td>
 											</tr>
+											<?
+												$fn = BASE_DIR . '/' . $this->image->getFolderPath () . '/' . $this->image->BackupFilename;
+												$lfn = BASE_URL . $this->image->getFolderPath () . '/' . $this->image->BackupFilename;
+												if ( file_exists ( $fn ) && trim ( $this->image->BackupFilename ) )
+												{
+													$info = stat ( $fn );
+													$date = date ( 'd/m/Y H:i', $info[ 'mtime' ] );
+													return '
+											<tr>
+												<th>Backup:</th>
+												<td>
+													<a href="' . $lfn . '">' . $this->image->BackupFilename . '</a> (' . $date . ')</a>
+												</td>
+											</tr>';
+												}
+											?>
 										</table>
 									</div>
 								<?}?>
