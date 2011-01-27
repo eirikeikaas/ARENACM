@@ -239,7 +239,17 @@ class dbImage extends dbObject
 				imagesavealpha ( $image, true );
 			}
 			imagecopyresampled ( $image2, $image, 0, 0, 0, 0, $w, $h, $this->Width, $this->Height );
-			unlink ( BASE_DIR . '/' . $this->getFolderPath ( ) . '/' . $this->Filename );
+			
+			// Keep backup of old file
+			if ( $this->Filename )
+			{
+				$path = BASE_DIR . '/' . $this->getFolderPath ( );
+				if ( trim ( $this->BackupFilename ) && file_exists ( $this->BackupFilename ) )
+					unlink ( $path . '/' . $this->BackupFilename );
+				rename ( $path . '/' . $this->Filename, $path . '/backup_' . $this->Filename );
+				$this->BackupFilename = 'backup_' . $this->Filename;
+			}
+			
 			switch ( $this->Filetype )
 			{
 				case 'jpg':
@@ -627,9 +637,16 @@ class dbImage extends dbObject
 		{
 			$folder = $this->getFolderPath ( );
 			
-			// delete old file if exists ---------------------------------------------------------------------------
-			if( trim( $this->Filename ) != '' && file_exists( BASE_DIR . "/$folder/{$this->Filename}" ) )
-				unlink( BASE_DIR . "/$folder/{$this->Filename}" );	
+			// Keep backup of old file
+			if ( $this->Filename )
+			{
+				$path = BASE_DIR . '/' . $this->getFolderPath ( );
+				if ( trim ( $this->BackupFilename ) && file_exists ( $this->BackupFilename ) )
+					unlink ( $path . '/' . $this->BackupFilename );
+				rename ( $path . '/' . $this->Filename, $path . '/backup_' . $this->Filename );
+				$this->BackupFilename = 'backup_' . $this->Filename;
+			}
+			
 			$this->cleanCache();				
 			
 			$filename = safeFilename( $file[ "name" ] );
@@ -673,9 +690,12 @@ class dbImage extends dbObject
 	{
 		if ( !$this->ID ) return false;
 		$folder = $this->getFolderPath ( );
-		$fn = BASE_DIR . "/$folder/{$this->Filename}";
-		if ( file_exists ( $fn ) && !is_dir ( $fn ) )
-			unlink ( $fn );
+		foreach ( array ( $this->Filename, $this->BackupFilename ) as $fnm )
+		{
+			$fn = BASE_DIR . "/$folder/{$fnm}";
+			if ( file_exists ( $fn ) && !is_dir ( $fn ) )
+				unlink ( $fn );
+		}
 		$this->cleanCache ( );
 		parent::delete ( );
 	}

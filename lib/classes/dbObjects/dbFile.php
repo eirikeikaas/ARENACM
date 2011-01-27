@@ -197,10 +197,14 @@ class dbFile extends dbObject
 		{
 			$folder = $this->getFolderPath ( );
 
-			// delete old file if exists ---------------------------------------------------------------------------
-			if( trim( $this->Filename ) != '' && file_exists( BASE_DIR . "/$folder/{$this->Filename}" ) )
+			// Keep backup of old file
+			if ( $this->Filename )
 			{
-				unlink( BASE_DIR . "/$folder/{$this->Filename}" );		
+				$path = BASE_DIR . '/' . $this->getFolderPath ( );
+				if ( trim ( $this->BackupFilename ) && file_exists ( $this->BackupFilename ) )
+					unlink ( $path . '/' . $this->BackupFilename );
+				rename ( $path . '/' . $this->Filename, $path . '/backup_' . $this->Filename );
+				$this->BackupFilename = 'backup_' . $this->Filename;
 			}
 			
 			// save new one ----------------------------------------------------------------------------------------
@@ -238,9 +242,12 @@ class dbFile extends dbObject
 	{
 		if ( !$this->ID ) return false;
 		$folder = $this->getFolderPath ( );
-		$fn = BASE_DIR . "/$folder/{$this->Filename}";
-		if ( file_exists ( $fn ) && !is_dir ( $fn ) )
-			unlink ( $fn );
+		foreach ( array ( $this->Filename, $this->BackupFilename ) as $fnm )
+		{
+			$fn = BASE_DIR . "/$folder/{$fnm}";
+			if ( file_exists ( $fn ) && !is_dir ( $fn ) )
+				unlink ( $fn );
+		}
 		parent::delete ( );
 	}
 	
