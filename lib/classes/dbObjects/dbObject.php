@@ -431,7 +431,7 @@ class dbObject
 		// Handle wierd special cases
 		if ( !is_string ( $value ) )
 		{
-			if ( get_class ( $value ) == '_PHP_Incomplete_Class_' );
+			if ( $value && get_class ( $value ) == '_PHP_Incomplete_Class_' );
 			{
 				$value = ( dbObject::analyze ( $value ) );
 			}
