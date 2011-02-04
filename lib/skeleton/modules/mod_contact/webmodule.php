@@ -75,11 +75,11 @@ else
 				case 'undefined':
 					continue;
 				case 'Message':
-					$str .= '<tr><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
+					$str .= '<tr class="tr' . texttourl ( $k ) . '"><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
 					$str .= '<td class="' . texttourl ( $k ) . '"><textarea name="' . texttourl(i18n($k)) . '" cols="50" rows="10"></textarea></td></tr>';
 					break;
 				default:
-					$str .= '<tr><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
+					$str .= '<tr class="tr' . texttourl ( $k ) . '"><td class="' . texttourl ( $k ) . '">' . i18n ( $k ) . ':</td>';
 					$str .= '<td class="' . texttourl ( $k ) . '"><input type="text" name="' . texttourl(i18n($k)) . '" value="" size="50"/></td></tr>';
 					break;
 			}
