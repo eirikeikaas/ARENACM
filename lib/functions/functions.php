@@ -78,7 +78,7 @@ function textToUrl ( $text )
   $text = str_replace ( "ø", "oe", $text );
   $text = str_replace ( "å", "aa", $text );
   $text = strtolower ( $text );
-  //$text = str_replace ( " ", "_", $text );
+  $text = str_replace ( "/", "_", $text );
   $text = preg_replace ( "/[^\w\d\s_-]+/", "", $text );
   $text = preg_replace ( "/[\s+]+/", "_", $text );
   return $text;
