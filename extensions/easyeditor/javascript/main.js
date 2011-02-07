@@ -38,22 +38,19 @@ function NoModule ( )
 	document.location = 'admin.php?module=extensions&extension=easyeditor&action=nomodule&pageid='+document.getElementById('pageID').value;
 }
 
-function GetSupport ()
+function ShowAdvanced ()
 {
-	if ( confirm ( 'Er du sikker?' ) )
-	{
-		var j = new bajax ( );
-		j.openUrl('admin.php?module=extensions&extension=easyeditor&action=sendsalemail', 'get', true );
-		j.onload = function ()
-		{
-			if ( this.getResponseText () == 'OK' )
-			{
-				alert ( 'En selger har blitt notifisert. Takk for din interesse!' );
-			}
-			else alert ( 'Det oppsto en feil.' );
-		} 
-		j.send();
-	}
+	initModalDialogue ( 'advanced', 480, 480, 'admin.php?module=extensions&extension=easyeditor&action=advanceddialog' );
+}
+
+function SaveAdvancedOptions ( close )
+{
+	var j = new bajax ();
+	j.openUrl ( 'admin.php?module=extensions&extension=easyeditor&action=saveadvsettings', 'post', true );
+	j.addVar ( 'cid', ge ( 'pageID' ).value );
+	j.addVar ( 'editfieldcount', ge ( 'adv_extra_count' ).value );
+	j.send ();
+	if ( close ) removeModalDialogue ( 'advanced' );
 }
 
 function UploadFile ()

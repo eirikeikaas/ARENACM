@@ -147,15 +147,15 @@
 				<div class="SpacerSmallColored"></div>
 				<?}?>
 				<h1>
-					<img src="admin/gfx/icons/thumb_up.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Update' ) ?>
+					<img src="admin/gfx/icons/wrench.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Advanced' ) ?>
 				</h1>
 				<div class="Container" style="padding: 8px">
 					<p>
-						<?= i18n ( 'Do you wish to upgrade to the pro version? Click the button below to be contacted by a sales person' ) ?>
+						<?= i18n ( 'Only edit these options if you know what you\\\'re doing. Contact support for more info.' ) ?>
 					</p>
 					<p>
-						<button type="button" onclick="GetSupport()">
-							<img src="admin/gfx/icons/phone.png"/> <?= i18n ( 'Contact me' ) ?>
+						<button type="button" onclick="ShowAdvanced()">
+							<img src="admin/gfx/icons/wrench_orange.png"/> <?= i18n ( 'See advanced options' ) ?>
 						</button>
 					</p>
 				</div>
@@ -175,9 +175,6 @@
 							</td>
 						</tr>
 					</table>
-					<p>
-						<strong><?= i18n ( 'Content' ) ?>:</strong>
-					</p>
 					<?if ( !$this->editableField ) { ?>
 					<textarea id="pageBody" class="mceSelector"><?= $this->pageBody ?></textarea>
 					<?}?>

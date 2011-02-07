@@ -32,6 +32,8 @@ if ( $_REQUEST[ 'cid' ] )
 }
 $page = new dbContent ( );
 $content =& $page;
+$fcount = GetSettingValue ( 'EasyEditor', 'FieldCount_' . $Session->EditorContentID );
+$fcount = $fcount > 1 ? $fcount : 1;
 
 if ( !( $page->load ( $Session->EditorContentID ) ) )
 {
@@ -61,29 +63,40 @@ else $groups = '';
 
 // Find content field
 $db =& dbObject::globalValue ( 'database' );
-if ( $field = $db->fetchObjectRow ( '
-	SELECT *, "Big" AS `DataTable` FROM ContentDataBig 
-	WHERE 
-		ContentID = \'' . $page->ID . '\' AND 
-		ContentTable = "ContentElement" AND 
-		AdminVisibility >= 1
-		' . ( $groups ? ( ' AND ContentGroup IN (' . $groups . ')' ) : '' ) . '
-	ORDER BY SortOrder ASC LIMIT 1
+if ( $field = $db->fetchObjectRows ( '
+	SELECT * FROM 
+	(
+		(
+			SELECT ID, SortOrder, "Big" AS `DataTable` FROM ContentDataBig 
+			WHERE 
+				ContentID = \'' . $page->ID . '\' AND 
+				ContentTable = "ContentElement" AND 
+				AdminVisibility >= 1
+				' . ( $groups ? ( ' AND ContentGroup IN (' . $groups . ')' ) : '' ) . '
+		)
+		UNION
+		(
+			SELECT ID, SortOrder, "Small" AS `DataTable` FROM ContentDataSmall
+			WHERE 
+				ContentID = \'' . $page->ID . '\' AND 
+				ContentTable = "ContentElement" AND 
+				AdminVisibility >= 1
+				' . ( $groups ? ( ' AND ContentGroup IN (' . $groups . ')' ) : '' ) . '
+		)
+	) z
+	ORDER BY SortOrder ASC LIMIT ' . $fcount . '
 ' ) )
 {
-	$etpl->editableField = renderExtraField ( $field, $page );
-}
-else if ( $field = $db->fetchObjectRow ( '
-	SELECT *, "Small" AS `DataTable` FROM ContentDataSmall
-	WHERE 
-		ContentID = \'' . $page->ID . '\' AND 
-		ContentTable = "ContentElement" AND 
-		AdminVisibility >= 1
-		' . ( $groups ? ( ' AND ContentGroup IN (' . $groups . ')' ) : '' ) . '
-	ORDER BY SortOrder ASC LIMIT 1
-' ) )
-{
-	$etpl->editableField = renderExtraField ( $field, $page );
+	$etpl->editableField = '';
+	foreach ( $field as $f )
+	{
+		$obj = $db->fetchObjectRow ( 'SELECT *, "' . $f->DataTable . '" AS `DataTable` FROM ContentData' . $f->DataTable . ' WHERE ID=' . $f->ID . ' LIMIT 1' );
+		$etpl->editableField .= '
+			<p>
+				<strong>' . $obj->Name . ':</strong>
+			</p>';
+		$etpl->editableField .= renderExtraField ( $obj, $page );
+	}
 }
 // Try to find corrupted field
 else if ( $field = $db->fetchObjectRow ( '
