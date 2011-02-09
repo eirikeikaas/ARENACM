@@ -53,7 +53,7 @@
 										$str .= '<tr>';
 									$s = key_exists ( $field, $this ) && $this->$field == 1 ? ' checked="checked"' : '';
 									$str .= '
-								<td style="border-bottom: 1px solid #ccc; white-space: nowrap">
+								<td style="border-bottom: 1px solid #ccc; white-space: nowrap" class="FormButtons">
 									<div title="' . i18n ( 'Remove' ) . '" class="Container" style="cursor: hand; cursor: pointer; margin: 3px 5px -5px 5px; padding: 0; float: left" onclick="removeContactField(\\'' . $field . '\\')">
 										<img src="admin/gfx/icons/bullet_delete.png" valign="baseline"/ >
 									</div>
@@ -231,6 +231,10 @@
 			}
 			order = order.substr ( 0, order.length - 1 );
 			document.location = 'admin.php?module=extensions&extension=<?= $_REQUEST[ 'extension' ] ?>&modaction=sortorder&fields=' + escape ( order );
+		}
+		function propertiesContactField ( field )
+		{
+			initModalDialogue ( 'properties', 320, 320, 'admin.php?module=extensions&extension=<?= $_REQUEST[ 'extension' ] ?>&modaction=properties&field=' + field );
 		}
 		function removeContactField ( field )
 		{

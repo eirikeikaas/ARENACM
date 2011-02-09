@@ -21,11 +21,17 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 	
+global $document;
 i18nAddLocalePath ( 'skeleton/modules/mod_contact/locale/' );
+$document->addResource ( 'stylesheet', 'lib/skeleton/modules/mod_contact/css/admin.css' );
 
 $settings = CreateObjectFromString ( $field->DataMixed );
 
-if ( $_REQUEST[ 'modaction' ] == 'removefield' )
+if ( $_REQUEST[ 'modaction' ] == 'properties' )
+{
+	die ( '<button type="button" onclick="removeModalDialogue ( \'properties\' )">Lukk felt ' . $_REQUEST[ 'field' ] . '</button>' );
+}
+else if ( $_REQUEST[ 'modaction' ] == 'removefield' )
 {
 	$dummy = new Dummy();
 	$fld = utf8_encode ( $_REQUEST[ 'field' ] );
