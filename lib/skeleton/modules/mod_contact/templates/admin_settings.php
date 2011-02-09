@@ -32,7 +32,7 @@
 		<div class="page" id="pageContactFields" style="padding: 4px">
 			<table cellspacing="0" cellpadding="4" border="0" width="100%">
 				<tr>
-					<td valign="top" width="55%">
+					<td valign="top" width="*">
 						<p>
 							Kryss av hvilke felter som skal vises, og fjern med det røde ikonet:
 						</p>
@@ -54,8 +54,11 @@
 									$s = key_exists ( $field, $this ) && $this->$field == 1 ? ' checked="checked"' : '';
 									$str .= '
 								<td style="border-bottom: 1px solid #ccc; white-space: nowrap">
-									<div class="Container" style="cursor: hand; cursor: pointer; margin: 3px 5px -5px 5px; padding: 0; float: left" onclick="removeContactField(\\'' . $field . '\\')">
+									<div title="' . i18n ( 'Remove' ) . '" class="Container" style="cursor: hand; cursor: pointer; margin: 3px 5px -5px 5px; padding: 0; float: left" onclick="removeContactField(\\'' . $field . '\\')">
 										<img src="admin/gfx/icons/bullet_delete.png" valign="baseline"/ >
+									</div>
+									<div title="' . i18n ( 'Properties' ) . '" class="Container" style="cursor: hand; cursor: pointer; margin: 3px 5px -5px 0px; padding: 0; float: left" onclick="propertiesContactField(\\'' . $field . '\\')">
+										<img src="admin/gfx/icons/bullet_wrench.png" valign="baseline"/ >
 									</div>
 									<div style="margin: 5px 0 -5px 0;">
 									' . i18n ( $field ) . '
@@ -65,9 +68,9 @@
 									<input type="checkbox" id="contact_' . $field . '"' . $s . ' style="position: relative; top: 2px;"/>
 								</td>
 									';
-									if ( $i == 2 )
+									if ( $i == 1 )
 										$str .= '</tr>';
-									$i = ( $i + 1 ) % 3;
+									$i = ( $i + 1 ) % 2;
 								}
 								if ( substr ( $str, -5, 5 ) != '</tr>' )
 									$str .= '</tr>';
@@ -86,7 +89,7 @@
 						<br/>
 					</td>
 					<td width="10">&nbsp;</td>
-					<td valign="top" width="45%">
+					<td valign="top" width="250px">
 						<p>
 							Sorter feltene:
 						</p>

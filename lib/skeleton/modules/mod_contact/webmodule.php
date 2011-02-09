@@ -28,9 +28,9 @@ $settings = CreateObjectFromString ( $field->DataMixed );
 
 if ( $_POST[ 'action' ] && $_SESSION[ 'last_contact_mailkey' ] != $_POST[ 'action' ] )
 {
-	if ( $_POST[ 'spamcontrol' ] != '4' )
+	if ( $_POST[ 'spamcontrol' ] != '4' && strtolower ( $_POST[ 'spamcontrol' ] ) != 'fire' )
 	{
-		$module .= '<h1>'.i18n('Spam').'</h1><p>'.i18n('Your message was identified as spam').'.</p><p><a href="' . $page->getUrl () . '">' . i18n ( 'Back' ) . '</a></p>';
+		$module .= '<h1>' . i18n('Spam') . '</h1><p>'.i18n('Your message was identified as spam').'.</p><p><a href="' . $page->getUrl () . '">' . i18n ( 'Back' ) . '</a></p>';
 	} 
 	else if ( $settings->Receivers )
 	{
@@ -123,6 +123,6 @@ else
 	$module .= '<table>' . $str . '</table>';
 	$module .= '<p class="submit"><button type="submit">' . i18n ( 'Send form' ) . '</button></p>';
 	$module .= '</form>';
-}	
+}
 
 ?>
