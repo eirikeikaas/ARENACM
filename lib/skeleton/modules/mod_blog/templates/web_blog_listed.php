@@ -1,4 +1,4 @@
-		<div class="Block Newsitem">
+		<div class="Block Newsitem<?= $this->extraClass ?>">
 			<h2>
 				<?= ( $this->titleLength > 0 && strlen ( strip_tags ( $this->blog->Title ) ) > $this->titleLength ) ? ( substr ( strip_tags ( $this->blog->Title ), 0, $this->titleLength - 3 ) . '...' ) : $this->blog->Title ?>
 			</h2>

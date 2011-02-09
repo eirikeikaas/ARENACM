@@ -162,9 +162,13 @@ else
 		$str = '';
 		if ( trim ( $cfgHeaderText ) )
 			$str .= '<h2 class="BlogListHeader">' . $cfgHeaderText . '</h2>';
+		// Add numbers so one can change the first ten items with extraclass
+		$num = -1;
+		$numbers = Array ( 'first', 'second', 'third', 'fourth', 'fifth', 'sixth', 'seventh', 'eighth', 'ninth', 'tenth' );
 		foreach ( $blogs as $blog )
 		{
 			$btpl->blog =& $blog;
+			$btpl->extraClass = ++$num <= 10 ? ( ' ' . $numbers[ $num ] ) : '';
 			$btpl->content =& $content;
 			if ( $cfgComments )
 			{
