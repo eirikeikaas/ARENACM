@@ -57,6 +57,7 @@ function listImages ( $pfolder, $where, $settings, $fieldid )
 				$cstr .= '<a href="' . $im->getImageUrl ( $settings->DetailWidth, $settings->DetailHeight, 'framed' ) . '">';
 				$cstr .= $im->getImageHTML ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' );
 				$cstr .= '</a>';
+				$cstr .= '<div class="Description">' . $im->Description . '</div>';
 				$cstr .= '</div>';
 				$cstr .= '</td>';
 				if ( $col++ >= $cols )
@@ -87,6 +88,7 @@ function listImages ( $pfolder, $where, $settings, $fieldid )
 				$cstr .= '<a href="' . $im->getImageUrl ( $settings->DetailWidth, $settings->DetailHeight, 'framed' ) . '">';
 				$cstr .= $im->getImageHTML ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' );
 				$cstr .= '</a>';
+				$cstr .= '<div class="Description">' . $im->Description . '</div>';
 				$cstr .= '</td>'; 
 				$cstr .= '<td class="Title">' . $im->Title . '</td>';
 				$cstr .= '<td class="Filename">' . $im->Filename . '</td>';

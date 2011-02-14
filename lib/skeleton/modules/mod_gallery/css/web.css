@@ -134,12 +134,12 @@
 }
 .Imagecenter
 {
-	z-index: 100000;
+	z-index: 10001;
 }
 .Imagebackground
 {
 	background: black;
-	z-index: 99999;
+	z-index: 10000;
 	-webkit-transition: 0.5s all;
 }
 .Imagecontainer
