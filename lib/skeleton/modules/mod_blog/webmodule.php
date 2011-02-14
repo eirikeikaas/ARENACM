@@ -151,7 +151,16 @@ else
 {
 	$blogs = new dbObject ( 'BlogItem' );
 	$blogs->addClause ( 'WHERE', 'ContentElementID=' . $sourcepage->MainID );
-	$blogs->addClause ( 'WHERE', 'IsPublished AND DatePublish <= NOW()' );
+	if ( $_REQUEST[ 'month' ] )
+	{
+		$month = date ( 'Y-m', $_REQUEST[ 'month' ] );
+		$nmonth = date ( 'Y-m', strtotime ( $month . '-01' ) + 2764800 );
+		$blogs->addClause ( 'WHERE', 'IsPublished AND DatePublish <= NOW() AND DatePublish >= \'' . $month . '-01\' AND DatePublish < \'' . $nmonth . '-01\'' ); 
+	}
+	else
+	{
+		$blogs->addClause ( 'WHERE', 'IsPublished AND DatePublish <= NOW()' );
+	}
 	$cnt = $blogs->findCount ( );
 	$blogs->addClause ( 'ORDER BY', 'DatePublish DESC, ID DESC' );
 	$blogs->addClause ( 'LIMIT', $pos . ',' . $lim );

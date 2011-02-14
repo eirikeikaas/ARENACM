@@ -560,11 +560,15 @@ class dbImage extends dbObject
 				{
 					case 'gif':
 						preg_match ( '/(^.*?)(\.[a-zA-Z]*?)$/', $processed, $matches );
+						if ( !trim ( $matches[ 1 ] ) )
+							return false;
 						$processed = $matches[ 1 ] . '.gif';
 						imagegif ( $this->data, BASE_DIR . '/' . $processed );
 						break;
 					case 'png':
 						preg_match ( '/(^.*?)(\.[a-zA-Z]*?)$/', $processed, $matches );
+						if ( !trim ( $matches[ 1 ] ) )
+							return false;
 						$processed = $matches[ 1 ] . '.png';
 						imagealphablending ( $this->data, true );
 						imagesavealpha ( $this->data, true );
@@ -572,6 +576,8 @@ class dbImage extends dbObject
 						break;
 					default:
 						preg_match ( '/(^.*?)(\.[a-zA-Z]*?)$/', $processed, $matches );
+						if ( !trim ( $matches[ 1 ] ) )
+							return false;
 						$processed = $matches[ 1 ] . '.jpg';
 						imagejpeg ( $this->data, BASE_DIR . '/' . $processed, 95 );
 						break;
