@@ -146,4 +146,9 @@
 {
 	-webkit-transition: all 0.5s;
 }
+.Imageviewbase
+{
+	position: relative;
+	z-index: 20000;
+}
 
