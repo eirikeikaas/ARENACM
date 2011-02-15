@@ -1352,15 +1352,40 @@ function cleanHTMLElement ( $string, $level = 0 )
 {
 	if ( !ADMIN_ALLOWINLINESTYLE )
 	{
-		$string = preg_replace ( "/\s*line-height:[^;\"]*;?/i", '', $string );
-		$string = preg_replace ( "/\s*margin[^:]*?:[^;]*?;/i", '$1', $string );
-		$string = preg_replace ( "/\s*padding[^:]*?:[^;]*?;/i", '$1', $string );
-		$string = preg_replace ( "/\s*border[^:]*?:[^;]*?;/i", '$1', $string );
-		$string = preg_replace ( "/\s*-webkit[^:]*?:[^;]*?;/i", '$1', $string );
-		$string = preg_replace ( "/\s*font-stretch:[^;\"]*;?/i", '', $string );
-		$string = preg_replace ( "/\s*font-size:[^;\"]*;?/i", "", $string );
-		$string = preg_replace ( "/\s*font-variant:[^;\"]*;?/i", '', $string );
-		$string = preg_replace ( "/\s*font-size-adjust:[^;\"]*;?/i", '', $string );
+		// Remove dangerous styles!
+		$illegals = array ( 
+			'font-weight', 'font-size', 'margin', 'border', 'padding', '-moz', 
+			'-webkit', '-o', '-khtml', 'line-height', '-apple', 'apple', 'mso',
+			'-mso'
+		);
+		foreach ( $illegals as $illegal )
+		{
+			if ( preg_match_all ( '/style\=\"([^"]*?)\"/i', stripslashes ( $string ), $matches ) )
+			{
+				foreach ( $matches[0] as $k=>$match )
+				{
+					$style = strtolower ( $matches[1][$k] );
+			
+					if ( strstr ( $style, $illegal ) )
+					{
+						$o = array ();
+						if ( $ar = explode ( ";", $style ) )
+						{
+							foreach ( $ar as $a )
+							{
+								$a = trim ( $a );
+								if ( substr ( $a, 0, strlen ( $illegal ) ) == $illegal )
+								{
+									continue;
+								}
+								else $o[] = $a;
+							}
+						}
+						$string = str_replace ( $style, implode ( ';', $o ), $string );
+					}
+				}
+			}			
+		}
 		$string = preg_replace ( "/(<font [^>]*>)/i", '', $string );
 	}
 	$string = preg_replace ( "/(<form [^>]*>)/i", '', $string );
