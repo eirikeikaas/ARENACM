@@ -1353,6 +1353,10 @@ function cleanHTMLElement ( $string, $level = 0 )
 	if ( !ADMIN_ALLOWINLINESTYLE )
 	{
 		$string = preg_replace ( "/\s*line-height:[^;\"]*;?/i", '', $string );
+		$string = preg_replace ( "/\s*margin[^:]*?:[^;]*?;/i", '$1', $string );
+		$string = preg_replace ( "/\s*padding[^:]*?:[^;]*?;/i", '$1', $string );
+		$string = preg_replace ( "/\s*border[^:]*?:[^;]*?;/i", '$1', $string );
+		$string = preg_replace ( "/\s*-webkit[^:]*?:[^;]*?;/i", '$1', $string );
 		$string = preg_replace ( "/\s*font-stretch:[^;\"]*;?/i", '', $string );
 		$string = preg_replace ( "/\s*font-size:[^;\"]*;?/i", "", $string );
 		$string = preg_replace ( "/\s*font-variant:[^;\"]*;?/i", '', $string );
