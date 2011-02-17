@@ -146,6 +146,17 @@ if ( !$errors )
 			$site->BaseDir = $basedir;
 			$site->save ();
 			
+			// Add first content
+			$firstContent = new dbObject ( 'ContentElement', &$cdb );
+			$firstContent->Title = i18n ( 'Welcome to ARENACM' );
+			$firstContent->MenuTitle = i18n ( 'Welcome to ARENACM' );
+			$firstContent->Parent = '0';
+			$firstContent->save ();
+			$firstContent->MainID = $firstContent->ID;
+			$firstContent->save (); // published copy
+			$firstContent->ID = false; 
+			$firstContent->save (); // work copy
+			
 			// Insert standard modules
 			$a = 0; $mods = array ( 'extensions', 'library', 'users', 'settings' );
 			foreach ( $mods as $m )
