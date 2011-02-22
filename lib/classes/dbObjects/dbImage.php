@@ -458,7 +458,7 @@ class dbImage extends dbObject
                 list ( , , $type ) = getimagesize ( $fn );
                 $res = stat ( $fn );
                 $max = defined ( 'MAX_IMAGE_FILESIZE' ) ? MAX_IMAGE_FILESIZE : 2500000;
-                if ( $res > $max ) // temporary maximum allowed byes is 2.5 mb for an image
+                if ( $res[7] > $max ) // temporary maximum allowed byes is 2.5 mb for an image
                     return false;
 
 				switch ( $type )
