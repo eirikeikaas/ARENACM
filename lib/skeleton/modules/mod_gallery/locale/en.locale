@@ -1,0 +1,20 @@
+
+listmode_date : On date
+listmode_sortorder : On sort order
+showstyle_fade : Transparancy
+showstyle_scrollx : Horizontal motion
+showstyle_scrolly : Vertical motion
+
+archivemode_thumbs : Thumbnails
+archivemode_list : List
+
+Title : Title
+Filesize : Filesize
+Date : Date
+Image : Image
+Filename : Filename
+
+no : no
+yes : yes
+Parent folder : Parent folder
+
