@@ -354,7 +354,10 @@
 							{
 								var k = 'gal'+dupFields[a]+'_<?= $this->field->ID ?>';
 								if ( !ge ( k ) ) continue;
-								j.addVar ( 'key_' + dupFields[a], ge ( k ).value );
+								var val = ge ( k ).value;
+								if ( ge ( k ).type == 'checkbox' )
+									val = ge ( k ).checked ? '1' : '0';
+								j.addVar ( 'key_' + dupFields[a], val );
 							}
 							j.addVar ( 'fieldid',  <?= $this->field->ID ?> );
 							j.onload = function ()
