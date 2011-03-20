@@ -725,11 +725,11 @@ class cDocument extends cPTemplate
 			if ( file_exists ( BASE_DIR . "/upload/main.js" ) )
 				$this->sHeadData[] = "\t\t<script type=\"text/javascript\" src=\"" . BASE_URL . "upload/main.js\"></script>";
 			// Others
-			$this->sHeadData[] = "\t\t<meta http-equiv=\"cache-control\" content=\"no-store\"/>";
-			$this->sHeadData[] = "\t\t<meta http-equiv=\"pragma\" content=\"no-cache\"/>";
+			//$this->sHeadData[] = "\t\t<meta http-equiv=\"cache-control\" content=\"no-store\"/>";
+			//$this->sHeadData[] = "\t\t<meta http-equiv=\"pragma\" content=\"no-cache\"/>";
 			$this->sHeadData[] = "\t\t<meta http-equiv=\"content-type\" content=\"text/html; charset=UTF-8\"/>";
-			$this->sHeadData[] = "\t\t<meta http-equiv=\"cache-control\" content=\"no-store\"/>";
-			$this->sHeadData[] = "\t\t<meta http-equiv=\"expires\" content=\"" . date ( 'D, j M Y ' . ( date ( 'H' ) + 1 ) . ':i:s \G\M\T+1' ) . "\"/>";
+			//$this->sHeadData[] = "\t\t<meta http-equiv=\"cache-control\" content=\"no-store\"/>";
+			//$this->sHeadData[] = "\t\t<meta http-equiv=\"expires\" content=\"" . date ( 'D, j M Y ' . ( date ( 'H' ) + 1 ) . ':i:s \G\M\T+1' ) . "\"/>";
 			// Favicon support
             if ( file_exists ( BASE_DIR . '/favicon.ico' ) )
                 $this->sHeadData[] = "\t\t<link rel=\"shortcut icon\" href=\"/favicon.ico\"/>";
