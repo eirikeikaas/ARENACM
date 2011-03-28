@@ -31,7 +31,7 @@
 		<button type="button" id="tekstFullscreen" onclick="texteditFullscreen()">
 			<img src="admin/gfx/icons/arrow_out.png"/> Fullskjerm
 		</button>
-		<button type="button" id="tekstFullscreen" onclick="document.title = txdoctitle; removeModalDialogue ( 'EditLevel' )"">
+		<button type="button" id="tekstFullscreen" onclick="document.title = txdoctitle; editor.removeControl('advfileContents'); removeModalDialogue ( 'EditLevel' )"">
 			<img src="admin/gfx/icons/cancel.png"/> Lukk
 		</button>
 	</div>
@@ -47,58 +47,57 @@
 		}
 		else
 		{
+			var ele = document.getElementById ( 'advfileContents' );
 			if ( '<?= substr ( $this->file->Filename, -5, 5 ) ?>' == '.html' )
 			{
 				ge ( 'advfileContents' ).className = 'mceSelector';
 				texteditor.init ( {classNames : 'mceSelector'} );
+				ele = texteditor.get ( 'advfileContents' ).getDocument().body;
 			}
-			else
+			addEventTo ( ele, 'keydown', function ( e )
 			{
-				document.getElementById ( 'advfileContents' ).onkeydown = function ( e )
+				switch ( e.which )
 				{
-					switch ( e.which )
-					{
-						case 9:
-							var sp = this.selectionStart;
-							var ep = this.selectionEnd;
-							this.value = this.value.substring ( 0, sp ) +
-										"\t" + this.value.substring ( ep, this.value.length );
-							this.setSelectionRange ( sp + 1, sp + 1 );
+					case 9:
+						var sp = this.selectionStart;
+						var ep = this.selectionEnd;
+						this.value = this.value.substring ( 0, sp ) +
+									"\t" + this.value.substring ( ep, this.value.length );
+						this.setSelectionRange ( sp + 1, sp + 1 );
+						return false;
+						break;
+					case 13:
+						var sp = this.selectionStart;
+						var ep = this.selectionEnd;
+						//find tabs
+						var tabs = 0;
+						var tsp = sp;
+						while ( this.value.substr ( tsp, 1 ) == "\n" )
+							tsp--;
+						for ( var a = tsp; a > 0; a-- )
+						{
+							if ( this.value.substr ( a, 1 ) == "\t" )
+								tabs++;
+							else if ( this.value.substr ( a, 1 ) == "\n" || this.value.substr ( a, 1 ) == "\r" )
+								break;
+							else tabs = 0;
+						}
+						var n = '\n';
+						for ( var a = 0; a < tabs; a++ )
+							n += "\t";
+						this.value = this.value.substring ( 0, sp ) +
+									n + this.value.substring ( ep, this.value.length );
+						this.setSelectionRange ( sp + 1 + tabs, sp + 1 + tabs );
+						return false;
+					case 83:
+						if ( e.ctrlKey )
+						{
+							saveFileContents ( '<?= $this->file->ID ?>' );
 							return false;
-							break;
-						case 13:
-							var sp = this.selectionStart;
-							var ep = this.selectionEnd;
-							//find tabs
-							var tabs = 0;
-							var tsp = sp;
-							while ( this.value.substr ( tsp, 1 ) == "\n" )
-								tsp--;
-							for ( var a = tsp; a > 0; a-- )
-							{
-								if ( this.value.substr ( a, 1 ) == "\t" )
-									tabs++;
-								else if ( this.value.substr ( a, 1 ) == "\n" || this.value.substr ( a, 1 ) == "\r" )
-									break;
-								else tabs = 0;
-							}
-							var n = '\n';
-							for ( var a = 0; a < tabs; a++ )
-								n += "\t";
-							this.value = this.value.substring ( 0, sp ) +
-										n + this.value.substring ( ep, this.value.length );
-							this.setSelectionRange ( sp + 1 + tabs, sp + 1 + tabs );
-							return false;
-						case 83:
-							if ( e.ctrlKey )
-							{
-								saveFileContents ( '<?= $this->file->ID ?>' );
-								return false;
-							}
-							break;
-					}
+						}
+						break;
 				}
-			}
+			} );
 		}
 	</script>
 

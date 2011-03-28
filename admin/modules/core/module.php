@@ -24,6 +24,7 @@ Rune Nilssen
 
 // Prerequisites
 global $Session;
+i18nAddLocalePath ( 'admin/modules/core/locale' );
 $tplDir = 'admin/modules/core/templates';
 $module = new cPTemplate ( 'admin/modules/core/templates/main.php' );
 $module->content = '';
