@@ -28,109 +28,112 @@ include_once ( 'lib/classes/dbObjects/dbContent.php' );
 $workcopy = new dbContent ();
 if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 {
-	$workcopy->MenuTitle = stripslashes ( $_POST[ 'pageTitle' ] );
-	$workcopy->Title = stripslashes ( $_POST[ 'pageTitle' ] );
-	$workcopy->DateModified = date ( 'Y-m-d H:i:s' );
-	
-	// Find content field and update it
-	if ( isset ( $_POST[ 'bodyField' ] ) )
+	if ( $Session->AdminUser->checkPermission ( $workcopy, 'Write', 'admin' ) )
 	{
-		$db =& dbObject::globalValue ( 'database' );
-		list ( , $fieldId, $fieldType, ) = explode ( '_', $_POST[ 'bodyField' ] );
-		if ( $field = $db->fetchObjectRow ( '
-			SELECT * FROM ContentData' . $fieldType . '
-			WHERE 
-				ID=\'' . $fieldId . '\' AND 
-				ContentID=\'' . $workcopy->ID . '\' AND 
-				ContentTable="ContentElement" AND 
-				AdminVisibility >= 1
-			ORDER BY SortOrder ASC LIMIT 1
-		' ) )
+		$workcopy->MenuTitle = stripslashes ( $_POST[ 'pageTitle' ] );
+		$workcopy->Title = stripslashes ( $_POST[ 'pageTitle' ] );
+		$workcopy->DateModified = date ( 'Y-m-d H:i:s' );
+	
+		// Find content field and update it
+		if ( isset ( $_POST[ 'bodyField' ] ) )
 		{
-			$of = new dbObject ( 'ContentData' . $fieldType );
-			$of->load ( $field->ID );
-			switch ( $field->Type )
+			$db =& dbObject::globalValue ( 'database' );
+			list ( , $fieldId, $fieldType, ) = explode ( '_', $_POST[ 'bodyField' ] );
+			if ( $field = $db->fetchObjectRow ( '
+				SELECT * FROM ContentData' . $fieldType . '
+				WHERE 
+					ID=\'' . $fieldId . '\' AND 
+					ContentID=\'' . $workcopy->ID . '\' AND 
+					ContentTable="ContentElement" AND 
+					AdminVisibility >= 1
+				ORDER BY SortOrder ASC LIMIT 1
+			' ) )
 			{
-				case 'script':
-					$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'image':
-					$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'style':
-					$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'varchar':
-					$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'text':
-					$of->DataText = encodeArenaHTML ( $_POST[ 'fieldData' ] );
-					break;
-				case 'contentmodule':
-					break;
-				case 'leadin':
-					$of->DataText = encodeArenaHTML ( $_POST[ 'fieldData' ] );
-					break;
-				case 'newscategory':
-					$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'objectconnection':
-					$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'pagelisting':
-					$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
-				case 'extension':
-					$of->DataMixed = $_POST[ 'fieldData' ];
-					break;
-				default:
-					$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
-					break;
+				$of = new dbObject ( 'ContentData' . $fieldType );
+				$of->load ( $field->ID );
+				switch ( $field->Type )
+				{
+					case 'script':
+						$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'image':
+						$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'style':
+						$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'varchar':
+						$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'text':
+						$of->DataText = encodeArenaHTML ( $_POST[ 'fieldData' ] );
+						break;
+					case 'contentmodule':
+						break;
+					case 'leadin':
+						$of->DataText = encodeArenaHTML ( $_POST[ 'fieldData' ] );
+						break;
+					case 'newscategory':
+						$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'objectconnection':
+						$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'pagelisting':
+						$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+					case 'extension':
+						$of->DataMixed = $_POST[ 'fieldData' ];
+						break;
+					default:
+						$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
+						break;
+				}
+				$of->save ( );
 			}
-			$of->save ( );
+			else
+			{
+				$workcopy->Body = encodeArenaHTML ( $_POST[ 'fieldData' ] );
+			}
 		}
-		else
-		{
-			$workcopy->Body = encodeArenaHTML ( $_POST[ 'fieldData' ] );
-		}
-	}
 
-	// Save content
-	$workcopy->IsPublished = '1';
-	$workcopy->save ();
+		// Save content
+		$workcopy->IsPublished = '1';
+		$workcopy->save ();
 	
-	// Publish page
-	if ( $Session->AdminUser->checkPermission ( $workcopy, 'Publish', 'admin' ) )
-	{
-		$published = new dbContent ( );
-		if ( $published->load ( $workcopy->MainID ) )
+		// Publish page
+		if ( $Session->AdminUser->checkPermission ( $workcopy, 'Publish', 'admin' ) )
 		{
-			// Keep original sort order
-			$oldSort = $published->SortOrder;
-			// Update published version from working copy
-			foreach ( $published->_table->getFieldNames() as $field )
-				if ( $field != 'ID' ) $published->$field = $workcopy->$field;
-			// the original, sort order is published somewhere else you see
-			$published->SortOrder = $oldSort; 
-			// Save original
-			$published->save ( );
+			$published = new dbContent ( );
+			if ( $published->load ( $workcopy->MainID ) )
+			{
+				// Keep original sort order
+				$oldSort = $published->SortOrder;
+				// Update published version from working copy
+				foreach ( $published->_table->getFieldNames() as $field )
+					if ( $field != 'ID' ) $published->$field = $workcopy->$field;
+				// the original, sort order is published somewhere else you see
+				$published->SortOrder = $oldSort; 
+				// Save original
+				$published->save ( );
 
-			// Copy from working copy to published version
-			$published->copyExtraFields ( $workcopy->ID );
-			$published->copyObjects ( $workcopy->ID );
-			$published->copyPermissions ( $workcopy->ID, 'web' );
-			$published->copyPermissions ( $workcopy->ID, 'admin' );
+				// Copy from working copy to published version
+				$published->copyExtraFields ( $workcopy->ID );
+				$published->copyObjects ( $workcopy->ID );
+				$published->copyPermissions ( $workcopy->ID, 'web' );
+				$published->copyPermissions ( $workcopy->ID, 'admin' );
 			
-			// Sync dates etc
-			$published->DateModified = date ( 'Y-m-d H:i:s' );
-			$workcopy->DateModified = $published->DateModified;
-			$workcopy->DatePublish = $published->DateModified;
-			$workcopy->save ( );
-			$published->save ( );
+				// Sync dates etc
+				$published->DateModified = date ( 'Y-m-d H:i:s' );
+				$workcopy->DateModified = $published->DateModified;
+				$workcopy->DatePublish = $published->DateModified;
+				$workcopy->save ( );
+				$published->save ( );
+			}
 		}
-	}
 
-	die ( 'ok' );
+		die ( 'ok' );
+	}
 }
 die ( 'fail' );
 
