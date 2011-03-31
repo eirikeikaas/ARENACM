@@ -127,9 +127,16 @@ if ( $folders )
 			// Get first image in folder
 			$i = new dbImage ( );
 			$i->ImageFolder = $f->ID;
-			$i = $i->findSingle ();
-			$cstr .= '<div class="FolderPreview">' . $i->getImageHTML ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' ) . '</div>';
-			$cstr .= '<a href="' . $content->getUrl () . '?fid=' . $f->ID . '">';
+			if ( $i = $i->findSingle () )
+			{
+				$cstr .= '<div class="FolderPreview">' . $i->getImageHTML ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' ) . '</div>';
+				$cstr .= '<a href="' . $content->getUrl () . '?fid=' . $f->ID . '">';
+			}
+			else
+			{
+				$cstr .= '<div class="FolderPreview">&nbsp;</div>';
+				$cstr .= '<a href="' . $content->getUrl () . '?fid=' . $f->ID . '">';
+			}
 		}
 		$cstr .= '<h3 class="FolderName ' . texttourl ( $f->Name ) . '"><span>' . $f->Name . '</span></h3>';
 		if ( $settings->Recursion == '1' )
