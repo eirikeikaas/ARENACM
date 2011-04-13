@@ -37,7 +37,7 @@
 				}
 				else
 				{
-					alert ( result );
+					//alert ( result );
 				}	
 				
 			}

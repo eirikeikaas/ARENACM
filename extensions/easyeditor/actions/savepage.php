@@ -22,12 +22,18 @@ Rune Nilssen
 *******************************************************************************/
 
 global $Session;
+$db =& dbObject::globalValue ( 'database' );
 include_once ( 'lib/classes/dbObjects/dbContent.php' );
 
 // Get content
 $workcopy = new dbContent ();
 if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 {
+	if ( $workcopy->ID == $workcopy->MainID )
+	{
+		$id = $db->fetchObjectRow ( 'SELECT ID FROM ContentElement WHERE MainID != ID AND MainID=' . $workcopy->ID );
+		$workcopy->load ( $id->ID );
+	}
 	$GLOBALS[ 'testing' ] = '1';
 	if ( $Session->AdminUser->checkPermission ( $workcopy, 'Write', 'admin' ) )
 	{
@@ -38,7 +44,6 @@ if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 		// Find content field and update it
 		if ( isset ( $_POST[ 'bodyField' ] ) )
 		{
-			$db =& dbObject::globalValue ( 'database' );
 			list ( , $fieldId, $fieldType, ) = explode ( '_', $_POST[ 'bodyField' ] );
 			if ( $field = $db->fetchObjectRow ( '
 				SELECT * FROM ContentData' . $fieldType . '
@@ -125,17 +130,20 @@ if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 				$published->copyPermissions ( $workcopy->ID, 'admin' );
 			
 				// Sync dates etc
-				$published->DateModified = date ( 'Y-m-d H:i:s' );
-				$workcopy->DateModified = $published->DateModified;
-				$workcopy->DatePublish = $published->DateModified;
-				$workcopy->save ( );
-				$published->save ( );
+				$modDate = $workcopy->DateModified;
+				$published->DateModified 	= $modDate;
+				$published->DatePublish 	= $modDate;
+				$published->save ();
+				$workcopy->DateModified 	= $modDate;
+				$workcopy->DatePublish 		= $modDate;
+				$workcopy->save ();
+				die ( 'ok' );
 			}
 		}
 
-		die ( 'ok' );
+		die ( 'fail' );
 	}
-	die ( 'No permissions on ' . $Session->AdminUser->Username );
+	die ( 'fail' ); // No permissions?
 }
 die ( 'fail' );
 

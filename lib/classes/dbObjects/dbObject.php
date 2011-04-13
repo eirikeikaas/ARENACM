@@ -865,17 +865,6 @@ class dbObject
 		// Ensure that connections are deleted aswell
 		if ( $this->_tableName && $this->{$this->_primaryKey} )
 		{
-			$query = "DELETE FROM ObjectConnection WHERE ObjectType = `{$this->_tableName}` ";
-			
-			$keys = $this->_primaryKey;
-			if ( !is_array( $keys ) ) $keys = array ( $keys );
-			
-			for ( $i = 0; $i < sizeof( $this->_primaryKey ); $i++ )
-			{
-				if ( $i > 0 ) $query .= "AND ";
-				$query .= "`{$keys[$i]}` = " .$this->formatField ( $keys[$i], $this->{$keys[$i]} ) . " ";
-			}
-			
 			/* todo: SUPPORT MULTIPLE PRIMARY KEYS! */
 			$database->query ( "
 				DELETE FROM `ObjectConnection` WHERE 
@@ -898,7 +887,8 @@ class dbObject
 		
 		$this->loadTable ();
 	
-		if ( method_exists ( $this, 'onDelete' ) )       $this->onDelete ();  // Call the onDelete hook
+		if ( method_exists ( $this, 'onDelete' ) )
+			$this->onDelete ();  // Call the onDelete hook
 		
 		$query = "DELETE FROM `{$this->_tableName}` WHERE ";
 		
@@ -2593,34 +2583,40 @@ class dbObject
 		$db =& $this->getDatabase ( );
 		
 		// Delete old fields
-		$db->query ( 'DELETE FROM ContentDataSmall WHERE ContentTable="' . $this->_tableName . '" AND ContentID=\'' . $this->ID . '\'' );
+		$deleteFields = 'DELETE FROM ContentDataSmall WHERE ContentTable="' . $this->_tableName . '" AND ContentID=\'' . $this->ID . '\'';
 			
 		// Add fields from source to self
 		$proto = new dbObject ( 'ContentDataSmall' );
 		if ( $smalls = $proto->find ( 'SELECT * FROM ContentDataSmall WHERE ContentTable="' . $this->_tableName . '" AND ContentID=\'' . $source . '\'' ) )
 		{
+			$db->query ( $deleteFields );
 			foreach ( $smalls as $small )
 			{
-				unset ( $small->ID );
+				$small->ID = 0;
+				$small->_isLoaded = 0;
 				$small->ContentID = $this->ID;
 				$small->save ( );
 			}
 		}
+		else $db->query ( $deleteFields );
 		
 		// Delete old fields
-		$db->query ( 'DELETE FROM ContentDataBig WHERE ContentTable="' . $this->_tableName . '" AND ContentID=\'' . $this->ID . '\'' );
+		$deleteFields = 'DELETE FROM ContentDataBig WHERE ContentTable="' . $this->_tableName . '" AND ContentID=\'' . $this->ID . '\'';
 		
 		// Add fields from source to self
 		$bigs = new dbObject ( 'ContentDataBig' );
 		if ( $bigs = $bigs->find ( 'SELECT * FROM ContentDataBig WHERE ContentTable="' . $this->_tableName . '" AND ContentID=\'' . $source . '\'' ) )
 		{
+			$db->query ( $deleteFields );
 			foreach ( $bigs as $big )
 			{
-				unset ( $big->ID );
+				$big->ID = 0;
+				$big->_isLoaded = 0;
 				$big->ContentID = $this->ID;
 				$big->save ( );
 			}
 		}
+		else $db->query ( $deleteFields );
 	}
 	
 	/**
@@ -2631,13 +2627,14 @@ class dbObject
 		$db =& $this->getDatabase ( );
 		
 		// Delete old objects
-		$db->query ( 'DELETE FROM ObjectConnection WHERE ObjectType="' . $this->_tableName . '" AND ObjectID=' . $this->ID );
+		$deleteObjs = 'DELETE FROM ObjectConnection WHERE ObjectType="' . $this->_tableName . '" AND ObjectID=' . $this->ID;
 		
 		// Add objects from source
 		$objs = new dbObject ( 'ObjectConnection' );
 		$objs->addClause ( 'WHERE', 'ObjectType="' . $this->_tableName . '" AND ObjectID=' . $source );
 		if ( $objs = $objs->find ( ) )
 		{
+			$db->query ( $deleteObjs );
 			foreach ( $objs as $obj )
 			{
 				$obj->ID = 0;
@@ -2646,6 +2643,7 @@ class dbObject
 				$obj->save ( );
 			}
 		}
+		else $db->query ( $deleteObjs );
 	}
 	
 	/**
@@ -2673,10 +2671,7 @@ class dbObject
 			'WHERE', 
 			'ObjectType="' . $this->_tableName . '" AND ObjectID=\'' . $source . '\'' . 
 				( $type ? ' AND PermissionType=\'' . $type . '\'' : '' ) );
-		if ( $objs = $objs->find ( ) )
-		{
-			// Delete old permissions
-			$db->query ( '
+		$deletePerms = '
 				DELETE FROM 
 					ObjectPermission 
 				WHERE 
@@ -2685,7 +2680,11 @@ class dbObject
 					. ( $type ? '
 					AND PermissionType=\'' . $type . '\'
 					'  : '' ) . '
-			' );
+		';
+		if ( $objs = $objs->find ( ) )
+		{
+			// Delete old permissions
+			$db->query ( $deletePerms );
 			foreach ( $objs as $obj )
 			{
 				// Set new
@@ -2695,6 +2694,7 @@ class dbObject
 				$obj->save ( );
 			}
 		}
+		else $db->query ( $deletePerms );
 	}
 	
 	function setPermissionsRecursively ( $parent = false, $type = false )
