@@ -2655,11 +2655,6 @@ class dbObject
 	{
 		$db =& $this->getDatabase ( );
 		
-		// Delete old permissions
-		if ( !$type )
-			$db->query ( 'DELETE FROM ObjectPermission WHERE ObjectType="' . $this->_tableName . '" AND ObjectID=\'' . $this->ID . '\'' );
-		else $db->query ( 'DELETE FROM ObjectPermission WHERE ObjectType="' . $this->_tableName . '" AND ObjectID=\'' . $this->ID . '\' AND PermissionType=\'' . $type . '\'' );
-		
 		// Special case for content element
 		if ( $type == 'web' && $this->_tableName == 'ContentElement' )
 		{
@@ -2680,12 +2675,23 @@ class dbObject
 				( $type ? ' AND PermissionType=\'' . $type . '\'' : '' ) );
 		if ( $objs = $objs->find ( ) )
 		{
+			// Delete old permissions
+			$db->query ( '
+				DELETE FROM 
+					ObjectPermission 
+				WHERE 
+					ObjectType="' . $this->_tableName . '" AND 
+					ObjectID=\'' . $this->ID . '\' '
+					. ( $type ? '
+					AND PermissionType=\'' . $type . '\'
+					'  : '' ) . '
+			' );
 			foreach ( $objs as $obj )
 			{
+				// Set new
 				$obj->ID = 0;
 				$obj->_isLoaded = 0;
 				$obj->ObjectID = $this->ID;
-				$obj->load (); // Try to load existing row
 				$obj->save ( );
 			}
 		}
