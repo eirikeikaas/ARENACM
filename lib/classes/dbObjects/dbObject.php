@@ -1937,12 +1937,13 @@ class dbObject
 				if ( !$result )
 				{
 					$db =& $this->getDatabase ( );
-					if ( $groups = $db->fetchObjectRows ( 'SELECT * FROM UsersGroups WHERE UserID=\'' . $this->ID . '\'' ) )
+					$gproto = new dbObject ( 'Groups' );
+					if ( $groups = $gproto->find ( '
+						SELECT g.* FROM UsersGroups ug, Groups g WHERE ug.UserID = \'' . $this->ID . '\' AND ug.GroupID = g.ID
+					' ) )
 					{	
-						foreach ( $groups as $g )
+						foreach ( $groups as $group )
 						{
-							$group = new dbObject ( 'Groups' );
-							$group->load ( $g->GroupID );
 							// Superadmins get all rights
 							if ( $group->SuperAdmin == 1 )
 							{
@@ -1964,10 +1965,10 @@ class dbObject
 			default:
 				// This is a fallback: checks if the object is connected to the page
 				$obj = new dbObject ( 'ObjectPermission' );
-				$obj->ObjectType = $targetObj->_tableName;
-				$obj->ObjectID = $targetObj->ID;
 				$obj->AuthType = $this->_tableName;
 				$obj->AuthID = $this->ID;
+				$obj->ObjectType = $targetObj->_tableName;
+				$obj->ObjectID = $targetObj->ID;
 				$obj->PermissionType = $permissiontype;
 				$perm = false;
 				
@@ -2673,7 +2674,10 @@ class dbObject
 		
 		// Add permissions from source
 		$objs = new dbObject ( 'ObjectPermission' );
-		$objs->addClause ( 'WHERE', 'ObjectType="' . $this->_tableName . '" AND ObjectID=\'' . $source . '\'' );
+		$objs->addClause ( 
+			'WHERE', 
+			'ObjectType="' . $this->_tableName . '" AND ObjectID=\'' . $source . '\'' . 
+				( $type ? ' AND PermissionType=\'' . $type . '\'' : '' ) );
 		if ( $objs = $objs->find ( ) )
 		{
 			foreach ( $objs as $obj )
@@ -2681,6 +2685,7 @@ class dbObject
 				$obj->ID = 0;
 				$obj->_isLoaded = 0;
 				$obj->ObjectID = $this->ID;
+				$obj->load (); // Try to load existing row
 				$obj->save ( );
 			}
 		}

@@ -28,6 +28,7 @@ include_once ( 'lib/classes/dbObjects/dbContent.php' );
 $workcopy = new dbContent ();
 if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 {
+	$GLOBALS[ 'testing' ] = '1';
 	if ( $Session->AdminUser->checkPermission ( $workcopy, 'Write', 'admin' ) )
 	{
 		$workcopy->MenuTitle = stripslashes ( $_POST[ 'pageTitle' ] );
@@ -134,6 +135,7 @@ if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 
 		die ( 'ok' );
 	}
+	die ( 'No permissions on ' . $Session->AdminUser->Username );
 }
 die ( 'fail' );
 
