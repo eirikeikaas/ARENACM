@@ -26,12 +26,20 @@
 			j.onload = function ()
 			{
 				var result = this.getResponseText ();
-				if ( result == 'fail' )
+				if ( result == 'ok' )
+				{
+					document.location.reload();
+				}
+				else if ( result == 'fail' )
 				{
 					alert ( '<?= i18n ( 'Could not save the page.' ) ?>' );
 					return false;
 				}
-				document.location.reload();
+				else
+				{
+					alert ( result );
+				}	
+				
 			}
 			j.send ();
 		}

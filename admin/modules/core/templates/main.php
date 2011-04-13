@@ -10,6 +10,10 @@
 					<div class="tab" id="tabSites">
 						<img src="admin/gfx/icons/sitemap.png" /> ARENA2 Nettsider
 					</div>
+					
+					<div class="tab" id="tabTools">
+						<img src="admin/gfx/icons/wrench.png"/> <?= i18n ( 'Tools' ) ?>
+					</div>
 				
 					<div class="page" id="pageSettings">
 						<?= $this->pageSettings ?>
@@ -26,12 +30,18 @@
 								</table>
 							</div>
 						</div>
-					
 						<div class="SpacerSmall"></div>
-						
 						<button type="button"  onclick="initModalDialogue ( 'site', 500, 500, 'admin.php?module=core&function=site' )">
 							<img src="admin/gfx/icons/world_go.png" /> Legg til en ny ARENA2 nettside
 						</button>
+					</div>
+					
+					<div class="page" id="pageTools">
+						<?
+							include_once ( 'lib/classes/template/ctemplate.php' );
+							$t = new cTemplate ( 'admin/modules/core/templates/page_tools.php' );
+							return $t->render ();
+						?>
 					</div>
 				
 				</div>
