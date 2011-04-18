@@ -27,13 +27,12 @@
 			<br style="clear: both">
 			<div class="page" id="pageRediger">
 			<?}?>
-				<table style="display: block; border-spacing: 0; border-collapse: collapse;">
-					<tr>
-						<td style="width: <?= $this->image->ID ? '50' : '100' ?>%; padding: 0">
-				
-							<iframe style="visibility: hidden; width: 1px; height: 1px; position: absolute" name="ImageUpload"></iframe>
-							<form method="post" enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="admin.php?module=library&action=saveimage" target="ImageUpload">
-				
+				<iframe style="visibility: hidden; width: 1px; height: 1px; position: absolute" name="ImageUpload"></iframe>
+				<form method="post" enctype="multipart/form-data" id="uploadForm" name="uploadForm" action="admin.php?module=library&action=saveimage" target="ImageUpload">
+					<table style="display: block; border-spacing: 0; border-collapse: collapse;">
+						<tr>
+							<td style="width: <?= $this->image->ID ? '50' : '100' ?>%; padding: 0">
+
 								<div class="SubContainer">		
 								
 									<input type="hidden" name="fileok" id="fileok" value="0" />
@@ -60,7 +59,6 @@
 									<label for="fileDesc">Beskrivelse</label>
 									<textarea id="fileDesc" name="fileDesc" class="w300" rows="5" style="width:300px; -moz-box-sizing: border-box; box-sizing: border-box;"><?= $this->image->Description; ?></textarea>
 								</div>
-							
 							
 								<?if( $this->image->ID ){?>
 									<div class="SpacerSmall"></div>
@@ -101,25 +99,43 @@
 										</table>
 									</div>
 								<?}?>
-							</form>
-						
-						</td>
-						<td style="width: 50%; padding: 0; padding-left: 2px;">
-							<?if( $this->image->ID ){?>
-							<h2 class="BlockHead" style="margin-top: 0">Forhåndsvisning</h2>
-							<div class="BlockContainer" style="height: 307px; text-align: center; vertical-align: center; overflow: hidden">
-								<div style="display: block;">
-									<?= $this->imageHTML ?>
+							
+							</td>
+							<td style="width: 50%; padding: 0; padding-left: 2px;">
+								<?if( $this->image->ID ){?>
+								<h2 class="BlockHead" style="margin-top: 0">Forhåndsvisning</h2>
+								<div class="BlockContainer" style="height: 207px; text-align: center; vertical-align: center; overflow: hidden">
+									<div style="display: block;">
+										<?= $this->imageHTML ?>
+									</div>
 								</div>
-							</div>
-							<div class="SpacerSmallColored"></div>
-							<button type="button" onclick="initializeImageSlice(<?= $this->image->ID ?>)">
-								<img src="admin/gfx/icons/application_view_gallery.png"/> Lag bildeutsnitt
-							</button>
-							<?}?>
-						</td>
-					</tr>
-				</table>
+								<div class="SpacerSmallColored"></div>
+								<table class="Layout">
+									<tr>
+										<td style="vertical-align: middle">
+											<strong>Vises fra:</strong>
+										</td>
+										<td style="vertical-align: middle">
+											<?= dateToPulldowns ( 'DateFrom', $this->image->DateFrom ) ?>
+										</td>
+									</tr>
+									<tr>
+										<td style="vertical-align: middle">
+											<strong>Vises til:</strong>
+										</td>
+										<td style="vertical-align: middle">
+											<?= dateToPulldowns ( 'DateTo', $this->image->DateTo ) ?>
+										</td>
+									</tr>
+								</table>
+								<button type="button" onclick="initializeImageSlice(<?= $this->image->ID ?>)">
+									<img src="admin/gfx/icons/application_view_gallery.png"/> Lag bildeutsnitt
+								</button>
+								<?}?>
+							</td>
+						</tr>
+					</table>
+				</form>
 				
 				<div class="SpacerSmallColored"></div>
 			

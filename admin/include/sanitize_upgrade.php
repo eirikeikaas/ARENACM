@@ -42,7 +42,8 @@ if ( !$info->load ( ) )
 }
 // Oppgrader (liste over versioner)
 $versions = Array (
-	'1.99.1', '1.99.4', '1.99.5', '1.99.6', '1.99.7', '1.99.8', '1.99.9', '2.0.10', '2.0.12', '2.0.13'
+	'1.99.1', '1.99.4', '1.99.5', '1.99.6', '1.99.7', '1.99.8', '1.99.9', 
+	'2.0.10', '2.0.12', '2.0.13', '2.0.14'
 );
 foreach ( $versions as $version )
 {
@@ -155,6 +156,20 @@ foreach ( $versions as $version )
 				' );
 				$db->query ( '
 					ALTER TABLE `File` ADD BackupFilename varchar(255) NOT NULL default ""
+				' );
+				break;
+			case '2.0.14':
+				$db->query ( '
+					ALTER TABLE `Image` ADD DateFrom datetime NOT NULL
+				' );
+				$db->query ( '
+					ALTER TABLE `File` ADD DateFrom datetime NOT NULL 
+				' );
+				$db->query ( '
+					ALTER TABLE `Image` ADD DateTo datetime NOT NULL
+				' );
+				$db->query ( '
+					ALTER TABLE `File` ADD DateTo datetime NOT NULL 
 				' );
 				break;
 		}
