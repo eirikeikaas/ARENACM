@@ -181,8 +181,12 @@
 										while ( $file = readdir ( $dir ) )
 										{
 											if ( $file{0} == '.' ) continue;
+											if ( strtolower ( substr ( $file, 0, 5 ) ) != 'page_' ) continue;
 											$s = ( $file == $this->content->Template ? ' selected="selected"' : '' );
-											$str .= '<option value="' . $file . '"' . $s . '>' . str_replace ( array ( 'page_', '.php' ), '', $file ) . '</option>';
+											$fname = str_replace ( array ( 'page_', '.php' ), '', $file );
+											$fname = strtoupper ( $fname{0} ) . substr ( $fname, 1, strlen ( $fname ) - 1 );
+											$fname = str_replace ( '_', ' ', $fname );
+											$str .= '<option value="' . $file . '"' . $s . '>' . $fname . '</option>';
 										}
 									}
 									return $str;
