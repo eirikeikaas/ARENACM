@@ -196,6 +196,16 @@
 					</td>
 				</tr>
 				<?}?>
+				<tr>
+					<td>
+						<p><strong><?= i18n ( 'Url' ) ?>:</strong></p>
+					</td>
+					<td>
+						<p>
+							<input type="text" value="<?= $this->content->getUrl () ?>" style="width: 100%; -moz-box-sizing: border-box; box-sizing: border-box"/>
+						</p>
+					</td>
+				</tr>
 			</table>
 		</form>
 	</div>
