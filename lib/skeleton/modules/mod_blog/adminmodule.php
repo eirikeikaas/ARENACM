@@ -143,6 +143,18 @@ switch ( $_REQUEST[ 'modaction' ] )
 		$mtpl->bloghtml->cfgComments = $cfgComments;
 		$mtpl->bloghtml = $mtpl->bloghtml->render ( );
 		die ( $mtpl->render ( ) );
+	
+	case 'editimage':
+		$blog = new dbObject ( 'BlogItem' );
+		if ( $blog->load ( $_REQUEST[ 'bid' ] ) )
+		{
+			$db =& dbObject::globalValue ( 'database' );
+			$db->query ( 'DELETE FROM ObjectConnection WHERE ConnectedObjectType="Image" AND ObjectType="BlogItem" AND ObjectID=' . $blog->ID );
+			$img = new dbImage ( );
+			if ( $img->load ( $_REQUEST[ 'imageid' ] ) )
+				$blog->addObject ( $img );
+		}
+		die ( $img->getImageHTML ( 32, 32, 'framed' ) );
 		
 	case 'savesettings':
 		$fld = new dbObject ( 'ContentDataSmall' );
