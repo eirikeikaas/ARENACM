@@ -1,6 +1,7 @@
 
 listmode_date : På dato
 listmode_sortorder : Etter sorteringsorden
+listmode_fromto : I bestemte tidsrom
 showstyle_fade : Gjennomsiktighet
 showstyle_scrollx : Rull horisontalt
 showstyle_scrolly : Rull vertikalt

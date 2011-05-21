@@ -45,6 +45,11 @@ if ( $settings->currentMode == 'gallery' )
 			$imgs->addClause ( 'WHERE', 'ImageFolder=\'' . $fld . '\'' );
 			if ( $settings->SortMode == 'listmode_sortorder' )
 				$imgs->addClause ( 'ORDER BY', 'SortOrder ASC' );
+			else if ( $settings->SortMode == 'listmode_fromto' )
+			{
+				$imgs->addClause ( 'WHERE', 'DateFrom <= NOW() AND DateTo >= NOW()' );
+				$imgs->addClause ( 'ORDER BY', 'SortOrder ASC' );
+			}
 			else $imgs->addClause ( 'ORDER BY', 'DateModified DESC' );
 			
 			if ( $images = $imgs->find ( ) )

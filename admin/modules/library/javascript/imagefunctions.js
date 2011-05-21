@@ -87,6 +87,19 @@ function abortDeleteLibraryImage()
 */
 function submitImageUpload()
 {
+	// Update dates
+	if ( document.getElementById('DateFrom_id') )
+	{
+		document.getElementById('DateFrom_id').value = 
+			( document.getElementById ( 'DateFrom_year' ).value + '-' + 
+			document.getElementById ( 'DateFrom_month' ).value + '-' + 
+			document.getElementById ( 'DateFrom_day' ).value );
+		document.getElementById('DateTo_id').value = 
+			( document.getElementById ( 'DateTo_year' ).value + '-' + 
+			document.getElementById ( 'DateTo_month' ).value + '-' + 
+			document.getElementById ( 'DateTo_day' ).value );
+	}
+		
 	// We want to upload multiple images.
 	if ( document.getElementById ( 'tabMultiple' ) && document.getElementById ( 'tabMultiple' ).className == 'tabActive' )
 	{

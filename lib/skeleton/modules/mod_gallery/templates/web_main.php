@@ -13,6 +13,11 @@
 				{
 					$img->addClause ( 'ORDER BY', 'SortOrder ASC' );
 				}
+				else if ( $this->settings->SortMode == 'listmode_fromto' )
+				{
+					$img->addClause ( 'WHERE', 'DateFrom <= NOW() AND DateTo >= NOW()' );
+					$img->addClause ( 'ORDER BY', 'SortOrder ASC' );
+				}
 				else
 				{
 					$img->addClause ( 'ORDER BY', 'DateModified DESC' );

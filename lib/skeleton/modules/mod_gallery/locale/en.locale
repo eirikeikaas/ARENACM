@@ -1,6 +1,7 @@
 
 listmode_date : On date
 listmode_sortorder : On sort order
+listmode_fromto : At specific timeintervals
 showstyle_fade : Transparancy
 showstyle_scrollx : Horizontal motion
 showstyle_scrolly : Vertical motion

@@ -180,3 +180,18 @@ input.SmallNum
 	font-size: 12px;
 }
 
+#uploadForm table.Layout table
+{
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+#uploadForm table.Layout table td
+{
+	vertical-align: top;
+	padding: 0 0 0 4px;
+}
+#uploadForm table.Layout table td strong
+{
+	display: none;
+}
+

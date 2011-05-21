@@ -49,6 +49,8 @@ if( isset( $_FILES[ 'uploadFile' ] ) )
 	$image->receiveUpload ( $_FILES[ 'uploadFile' ] );
 
 $image->Description = $_REQUEST[ 'fileDesc' ];
+$image->DateTo = $_REQUEST[ 'DateTo' ];
+$image->DateFrom = $_REQUEST[ 'DateFrom' ];
 $image->DateModified = date ( "Y-m-d H:i:s" );
 $image->Title = $_REQUEST[ 'fileTitle' ];
 $image->Tags = trim ( $_REQUEST[ 'fileTags' ] );

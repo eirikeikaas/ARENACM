@@ -94,7 +94,7 @@
 														<td>
 															<select id="galSortMode_<?= $this->field->ID ?>">
 															<?
-																$array = array ( 'listmode_date', 'listmode_sortorder' );
+																$array = array ( 'listmode_date', 'listmode_sortorder', 'listmode_fromto' );
 																$s = '';
 																foreach ( $array as $m )
 																{
@@ -181,7 +181,7 @@
 													<td>
 														<select id="galSortMode_<?= $this->field->ID ?>">
 														<?
-															$array = array ( 'listmode_date', 'listmode_sortorder' );
+															$array = array ( 'listmode_date', 'listmode_sortorder', 'listmode_fromto' );
 															$s = '';
 															foreach ( $array as $m )
 															{

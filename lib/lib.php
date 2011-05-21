@@ -23,7 +23,7 @@ Rune Nilssen
 /**
  * Needed includes
 **/
-define ( 'ARENA_VERSION', '2.0.13' );
+define ( 'ARENA_VERSION', '2.0.14' );
 include_once ( 'classes/debug/cdebug.php' );
 include_once ( 'classes/dbObjects/dbObject.php' );
 ?>
