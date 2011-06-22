@@ -40,6 +40,14 @@ function getCurrentModule ( )
 		$Session->Set ( 'arenaCurrentModule', $_REQUEST[ 'module' ] );
 		return $Session->arenaCurrentModule;
 	}
+	else if ( 
+		array_key_exists ( 'module', $_REQUEST ) && 
+		file_exists ( 'extensions/' . $_REQUEST[ 'module' ] . '/extension.php' ) 
+	)
+	{
+		$Session->Set ( 'arenaCurrentModule', 'extensions' );
+		$_REQUEST[ 'extension' ] = $_REQUEST[ 'module' ];
+	}
 	if ( !$Session->arenaCurrentModule )
 		return false;
 	return $Session->arenaCurrentModule;
