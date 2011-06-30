@@ -164,24 +164,7 @@ function renderExtraFields ( $obj )
 					$tpl->field =& $field;
 					$tpl->content =& $obj;
 					$tpl->fieldID = "Extra_{$field->ID}_{$tabletype}_{$dataField}";
-					switch ( $field->ContentGroup )
-					{
-						case 'Topp':
-							$tpl->fieldGroup = i18n ( 'the top field' );
-							break;
-						case 'Felt1':
-							$tpl->fieldGroup = i18n ( 'the main field' );
-							break;
-						case 'Felt2':
-							$tpl->fieldGroup = i18n ( 'the extra field' );
-							break;
-						case 'Bunn':
-							$tpl->fieldGroup = i18n ( 'the bottom field' );
-							break;
-						default:
-							$tpl->fieldGroup = $field->ContentGroup;
-							break;
-					}
+					$tpl->fieldGroup = $field->ContentGroup;
 					$modstr_ .= '<div class="ExtraFieldDiv">' . $tpl->render ( ) . '</div>';
 				}
 			}
