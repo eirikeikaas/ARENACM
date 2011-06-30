@@ -34,24 +34,7 @@ if ( $field->load ( $_REQUEST[ 'fid' ] ) )
 		foreach ( $grps as $g )
 		{
 			$ss = false;
-			switch ( trim ( $g ) )
-			{
-				case 'Bunn':
-					$ext = i18n ( 'Bottom field' );
-					break;
-				case 'Topp':
-					$ext = i18n ( 'Top field' );
-					break;
-				case 'Felt1':
-					$ext = i18n ( 'Main field' );
-					break;
-				case 'Felt2':
-					$ext = i18n ( 'Extra field' );
-					break;
-				default:
-					$ext = trim ( $g );
-					break;
-			}
+			$ext = trim ( $g );
 			if ( trim ( $field->ContentGroup ) == trim ( $g ) )
 				$ss = true;
 			if ( $tr == 0 )
