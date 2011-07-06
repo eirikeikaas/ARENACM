@@ -26,7 +26,7 @@ $document->addResource ( 'stylesheet', 'skeleton/modules/mod_gallery/css/web.css
 $document->addResource ( 'javascript', 'skeleton/modules/mod_gallery/javascript/web.js' );
 $mtpldir = 'skeleton/modules/mod_gallery/templates/';
 i18nAddLocalePath ( 'skeleton/modules/mod_gallery/locale');
-$settings = CreateObjectFromString ( $fieldObject->DataMixed );
+$settings = CreateObjectFromString ( $field->DataMixed );
 if ( !$settings->ThumbWidth ) $settings->ThumbWidth = 80;
 if ( !$settings->ThumbHeight ) $settings->ThumbHeight = 60;
 if ( !$settings->ThumbColumns ) $settings->ThumbColumns = 4;
@@ -90,6 +90,6 @@ else
 	$mtpl = new cPTemplate ( $mtpldir . 'web_main.php' );
 }
 $mtpl->settings =& $settings;
-$mtpl->field =& $fieldObject;
+$mtpl->field =& $field;
 $module .= $mtpl->render ( );
 ?>

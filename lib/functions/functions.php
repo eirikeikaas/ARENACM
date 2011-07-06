@@ -1444,10 +1444,8 @@ function decodeArenaHTML_callback_objects ( $matches )
 			$matches[2] .= '<param name="height" value="' . trim($height[1]) . '"/>';
 			$matches[2] .= '<param name="wmode" value="transparent"/>';
 			$matches[2] .= '<param name="movie" value="' . trim($data[1]) . '"/>';
-			if ( $allowfullscreen[1] )
-				$matches[2] .= '<param name="allowfullscreen" value="' . $allowfullscreen[1] . '"/>';
-			if ( $allowscriptaccess[1] )
-				$matches[2] .= '<param name="allowscriptaccess" value="' . $allowscriptaccess[1] . '"/>';
+			$matches[2] .= '<param name="allowfullscreen" value="true"/>';
+			$matches[2] .= '<param name="allowscriptaccess" value="always"/>';
 		}
 		$string = '<object' . $string . '>' . stripslashes ( $matches[2] ) . '</object>';
 		return addslashes ( $string );
@@ -1485,7 +1483,10 @@ function decodeArenaHTML ( $string )
 // Convert TO "arena html" from web html -------------------------------------->
 function encodeArenaHTML_callback_objects ( $matches )
 {
-	$string = '&nbsp;<span arenatype="movie" style="!W!; !H!; display: block; border: 2px dotted #aaa; background: #ccc url(admin/gfx/arenaicons/page_flash_64.png) no-repeat center center"' . $matches[ 1 ] . '>' . $matches[ 2 ] . '</span>&nbsp;';
+	if ( !strstr ( $matches[1], 'scriptaccess' ) )
+		$extra = ' allowscriptaccess="always" allowfullscreen="true"';
+	else $extra = '';
+	$string = '&nbsp;<span arenatype="movie" style="!W!; !H!; display: block; border: 2px dotted #aaa; background: #ccc url(admin/gfx/arenaicons/page_flash_64.png) no-repeat center center"' . $matches[ 1 ] . ' ' . $extra . '>' . $matches[ 2 ] . '</span>&nbsp;';
 	preg_match ( '/width\=\"([^"]*)\"/i', $matches[1], $width );
 	preg_match ( '/height\=\"([^"]*)\"/i', $matches[1], $height );
 	$string = str_replace ( array ( '!W!', '!H!' ), array ( 'width:'.$width[1].'px', 'height:'.$height[1].'px' ), $string );
