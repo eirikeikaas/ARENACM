@@ -61,6 +61,7 @@ if ( $parent->load ( $_POST[ 'cid' ] ) )
 			$newPage->Author = $Session->AdminUser->ID;
 			$newPage->ContentGroups = $ctpl ? $ctpl->ContentGroups : ( $parent->ContentGroups ? $parent->ContentGroups : 'Topp, Felt1, Felt2, Bunn' );
 			$newPage->ContentTemplateID = $parent->ContentTemplateID;
+			$newPage->Template = $parent->Template;
 			$newPage->IsSystem = '0';
 			$newPage->save ( );
 			
