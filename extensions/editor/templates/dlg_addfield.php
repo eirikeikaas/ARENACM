@@ -31,7 +31,7 @@
 			<p>
 				<?= i18n ( 'Choose type of field.' ) ?>
 			</p>
-			<div class="SubContainer" style="padding: <?= MarginSize ?>px">
+			<div class="SubContainer" style="padding: <?= MarginSize ?>px; height: 80px; overflow: auto; overflow-x: hidden">
 				<table width="100%">
 					<tr>
 						<td width="12px">

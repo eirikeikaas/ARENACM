@@ -136,9 +136,27 @@ table.LayoutColumns td.Column td input
 #StructureContainer, #StructureButtons { padding: 2px; }
 #StructureButtons button { margin-bottom: 0; }
 #StructureButtons { margin-bottom: 2px; }
+#EditHeadline
+{
+	position: relative;
+}
 #SmallButtons
 {
-	float: right;
+	position: absolute;
+	right: 8px;
+	top: 8px;
+}
+#BottomButtonContainer
+{
+	position: relative;
+	height: 20px;
+}
+#BottomButtons
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 100%;
 }
 
 p.BodyText

@@ -24,6 +24,9 @@ Rune Nilssen
 /**
  * Simple content editor for ARENA2
 **/
+global $document;
+if ( strstr ( strtolower ( $_SERVER[ 'HTTP_USER_AGENT' ] ), 'msie' ) )
+	$document->addResource ( 'stylesheet', 'extensions/editor/css/msie.css' );
 include_once ( 'lib/classes/dbObjects/dbContent.php' );
 i18nAddLocalePath ( 'extensions/editor/locale' );
 include_once ( 'extensions/editor/include/i18njavascript.php' );

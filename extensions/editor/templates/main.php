@@ -105,8 +105,10 @@
 						<?= $this->ContentForm ?>
 					</div>
 					<div class="SpacerSmallColored Bottom"></div>
-					<div id="BottomButtons">
-						<?= contentButtons ( $this->page ) ?>
+					<div id="BottomButtonContainer">
+						<div id="BottomButtons">
+							<?= contentButtons ( $this->page ) ?>
+						</div>
 					</div>
 				</div>
 			</td>
