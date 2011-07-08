@@ -51,9 +51,7 @@ function cfgEditLanguage ( )
 function cfgSaveLanguage ( )
 {
 	var jax = new bajax ( );
-	jax.openUrl ( 'admin.php', 'post', true );
-	jax.addVar ( 'module', 'settings' );
-	jax.addVar ( 'action', 'savelanguage' );
+	jax.openUrl ( 'admin.php?module=core&action=savelanguage', 'post', true );
 	jax.addVarsFromForm ( 'languageform' );
 	jax.onload = function ( )
 	{
