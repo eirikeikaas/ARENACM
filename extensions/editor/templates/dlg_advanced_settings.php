@@ -2,7 +2,7 @@
 	<h1 style="overflow: hidden; white-space: nowrap">
 		<?= i18n ( 'Advanced settings for' ) ?>: <?= $this->content->MenuTitle ?>
 	</h1>
-	<div class="Container" style="padding: <?= MarginSize ?>px">
+	<div class="Container" style="padding: <?= MarginSize ?>px; overflow: hidden">
 		<form id="advanced_form" method="post" action="#">
 			<table class="LayoutColumns">
 				<tr>
@@ -202,7 +202,7 @@
 					</td>
 					<td>
 						<p>
-							<input type="text" value="<?= $this->content->getUrl () ?>" style="width: 100%; -moz-box-sizing: border-box; box-sizing: border-box"/>
+							<input type="text" value="<?= $this->content->getUrl () ?>" style="width: 240px"/>
 						</p>
 					</td>
 				</tr>
