@@ -97,10 +97,13 @@
 				if ( document.getElementById ( 'mod_search_extensions' ).options )
 				{
 					var sels = document.getElementById ( 'mod_search_extensions' ).options;
-					for ( var a = 0; a < sels.length; a++ )
+					if ( sels && sels.length )
 					{
-						if ( sels[ a ].selected )
-							out.push ( sels[ a ].value );
+						for ( var a = 0; a < sels.length; a++ )
+						{
+							if ( sels[ a ].selected )
+								out.push ( sels[ a ].value );
+						}
 					}
 				}
 			
