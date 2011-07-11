@@ -8,7 +8,7 @@
 								<strong>Heading:</strong> 
 							</p>
 							<p>
-								<input type="text" size="50" style="width: 500px" value="<?= $this->Heading ?>" id="galHeading_<?= $this->field->ID ?>"/>
+								<input type="text" size="50" style="width: 300px" value="<?= $this->Heading ?>" id="galHeading_<?= $this->field->ID ?>"/>
 							</p>
 						</td>
 						<td width="4px">
