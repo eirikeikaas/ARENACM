@@ -282,7 +282,10 @@
 					</tr>
 					<tr>
 						<td valign="top" width="*" id="gal_preview">
-							<?= $this->preview ?>
+							<div class="Container" style="background: #222222">
+								<?= $this->preview ?>
+								<br style="clear: both"/>
+							</div>
 						</td>
 						<td width="4px">
 						</td>
