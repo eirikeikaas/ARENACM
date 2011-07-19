@@ -22,7 +22,6 @@
 				<?= i18n ( 'The page you are trying to reach requires user authentication.' ) ?>
 			</p>
 			<?}?>
-		
 			<form method="post">
 				<p class="Username">
 					<strong><?= i18n ( 'Username' ) ?>:</strong>
