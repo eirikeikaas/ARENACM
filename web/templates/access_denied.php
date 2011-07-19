@@ -1,4 +1,4 @@
-<html>
+<?= $this->docinfo . $this->doctype ?><html<?= $this->xmlns ?>>
 	<head>
 		<title>
 			<?= i18n ( 'Please log in' ) ?>
