@@ -94,7 +94,7 @@ function savePage ( )
 		{
 			document.getElementById ( 'PageUrl' ).value = pageUrl;
 			document.getElementById ( 'StructureContainer' ).innerHTML = structure;
-			makeCollapsable ( document.getElementById ( 'Structure' ) );
+			makeCollapsable ( ge ( 'Structure' ) );
 			var as = document.getElementById ( 'Structure' ).getElementsByTagName ( 'a' );
 			for ( var z = 0; z < as.length; z++ )
 			{
@@ -129,7 +129,7 @@ function subPage ( )
 		else
 		{
 			document.getElementById ( 'StructureContainer' ).innerHTML = structure;
-			makeCollapsable ( document.getElementById ( 'Structure' ) );
+			makeCollapsable ( ge ( 'Structure' ) );
 		}
 		updateButtons ( );
 	}
@@ -209,7 +209,7 @@ function publishPage ( doReload, ignoreUnpublished )
 				else
 				{
 					document.getElementById ( 'StructureContainer' ).innerHTML = structure;
-					makeCollapsable ( document.getElementById ( 'Structure' ) );
+					makeCollapsable ( ge ( 'Structure' ) );
 				}
 				if ( doReload )
 				{
@@ -296,7 +296,7 @@ function updateStructure ( )
 		else
 		{
 			document.getElementById ( 'StructureContainer' ).innerHTML = structure;
-			makeCollapsable ( document.getElementById ( 'Structure' ) );
+			makeCollapsable ( ge ( 'Structure' ) );
 		}
 	}
 	pjax.send ( );
@@ -327,9 +327,20 @@ function checkOrderChanged ( )
 	cjax.openUrl ( 'admin.php?module=extensions&extension=editor&action=orderchangedquery', 'get', true );
 	cjax.onload = function ( )
 	{
+		var strd = ge ( 'StructureChangedButton' );
 		var r = this.getResponseText ();
 		if ( r.split ( ' ' ).join ( '' ).length > 1 )
-			document.getElementById ( 'StructureChangedButton' ).innerHTML = r;
+		{
+			strd.innerHTML = r;
+			strd.style.height = 'auto';
+			strd.style.marginBottom = '0';
+		}
+		else 
+		{
+			strd.innerHTML = '';
+			strd.style.height = '1px';
+			strd.style.marginBottom = '-1px';
+		}
 	}
 	cjax.send ( );
 }
@@ -496,7 +507,7 @@ function saveorder ( )
 	orderj.addVar ( 'ids', str );
 	orderj.onload = function ( )
 	{
-		updateStructure ( );	
+		updateStructure ( );
 	}
 	orderj.send ( );
 }

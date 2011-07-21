@@ -3,7 +3,7 @@
 		Sorter sidene
 	</h1>
 	<div class="Container" style="padding: 2px">
-		<div id="Structure">
+		<div id="ReorderStructure">
 			<?= $this->hierarchyOptions ?>
 		</div>
 		<div class="SpacerSmallColored"></div>
