@@ -327,7 +327,9 @@ function checkOrderChanged ( )
 	cjax.openUrl ( 'admin.php?module=extensions&extension=editor&action=orderchangedquery', 'get', true );
 	cjax.onload = function ( )
 	{
-		document.getElementById ( 'StructureChangedButton' ).innerHTML = this.getResponseText ();
+		var r = this.getResponseText ();
+		if ( r.split ( ' ' ).join ( '' ).length > 1 )
+			document.getElementById ( 'StructureChangedButton' ).innerHTML = r;
 	}
 	cjax.send ( );
 }
