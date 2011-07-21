@@ -91,7 +91,7 @@ span.Group span, span.GroupActive span
 {
 	margin: 0;
 }
-
-
-
-
+#groupEditTabs
+{
+	border-top: 1px solid transparent;
+}

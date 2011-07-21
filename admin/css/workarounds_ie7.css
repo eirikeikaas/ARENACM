@@ -15,27 +15,13 @@
 	z-index: 100;
 }
 
-.tab, .tabActive
-{
-	position: relative;
-	z-index: 11;
-	margin: 0;
-}
+/**
+ * Normal tabs
+**/
+
 .tab, .tabActive
 {
 	margin-bottom: -1px;
-	margin-right: 2px;
-}
-
-.pageActive
-{
-	position: relative;
-}
-
-.subTab
-{
-	position: relative;
-	top: 1px;
 }
 
 /**

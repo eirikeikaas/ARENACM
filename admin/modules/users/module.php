@@ -29,6 +29,7 @@ Rune Nilssen
  */
 i18nAddLocalePath ( 'admin/modules/users/locale' );
 require_once ( "admin/modules/users/include/main_funcs.php" );
+$document->addResource ( 'stylesheet', 'admin/modules/users/css/main.css' );
  
 /**
  * Main, default stuff 
