@@ -24,3 +24,8 @@
 {
 	overflow-x: hidden;
 }
+
+#EditorAdvancedPages
+{
+	border-top: 1px solid transparent;
+}
