@@ -400,6 +400,7 @@ function showContentButtons ( )
 		document.lgjax = 0;
 	}
 	document.lgjax.send ( );
+	initContentDropTarget ();
 }
 
 /**
@@ -407,9 +408,8 @@ function showContentButtons ( )
 **/
 function initContentDropTarget ( )
 {
-	var lcd = document.getElementById ( 'LibraryContentDiv' )
-	dragger.addTarget( lcd );
-
+	var lcd = ge ( 'LibraryContentDiv' ).parentNode;
+	dragger.removeTarget ( lcd );
 
 	lcd.onDragDrop = function ( element )
 	{
@@ -432,7 +432,19 @@ function initContentDropTarget ( )
 				document.getElementById( 'LibraryMessage' ).innerHTML = "<p class='error'>Du kan kun flytte mapper, bilder eller filer.</p>";
 			}
 		}
+		this.style.border = this.oldstyle;
 	}
+	lcd.onDragOver = function ()
+	{
+		this.oldstyle = this.style.border;
+		this.style.border = '1px solid #00aa00';
+	}
+	lcd.onDragOut = function ()
+	{
+		this.style.border = this.oldstyle;
+	}
+	
+	dragger.addTarget( lcd );
 }
 
 addEvent ( 'onkeydown', function ( e )
