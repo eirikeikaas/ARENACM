@@ -35,13 +35,13 @@
 						</h2>
 						<p>
 							Logg inn med ditt brukernavn og passord under. Vennligst ta kontakt med
-							<a href="http://www.blestinteraktiv.no" target="_blank">Blest Interaktiv</a> hvis du har mistet passord eller
+							<a href="http://www.ideverket.no" target="_blank">Idéverket</a> hvis du
 							ønsker support.
 						</p>
 						
 						<div id="LoginForm">
 							<p>
-								For support, send e-post til: <a href="mailto:support@blest.no">support@blest.no</a>
+								For support, send e-post til: <a href="mailto:post@ideverket.no">post@ideverket.no</a>
 							</p>
 							<div class="Box" class="Username">
 								<p>
@@ -90,7 +90,7 @@
 				</div>
 				
 				<div class="Footer">
-					ARENA CM v<?= ARENA_VERSION ?> | ARENA CM is available under the <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank">MPL License</a>
+					AARENA CM v<?= ARENA_VERSION ?> | <?= i18n ( 'ARENA CM is available under the' ) ?> <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank"><?= i18n ( 'MPL License' ) ?></a>
 				</div>
 				
 				
