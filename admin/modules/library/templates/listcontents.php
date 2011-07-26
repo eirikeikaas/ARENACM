@@ -67,5 +67,5 @@
 	</table>
 <?}?>
 <?if( !is_array( $this->contents ) ){?>
-	<h1>Teknisk feil. Kontakt Blest!</h1>
+	<h1>Teknisk feil. Kontakt din leverandør!</h1>
 <?}?>
