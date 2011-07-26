@@ -67,13 +67,13 @@ table.LayoutColumns td.Column td input
 #Structure a.current, #Structure span.current
 {
 	font-weight: bold;
-	background: #007DAA;
-	border: 1px solid #3E719C;
+	background: #444444;
+	border: 1px solid #333333;
 	color: #fff;
 }
 #Structure li.hidden > a.current, #Structure li.hidden > span.current
 {
-	color: #666;
+	color: #666666;
 }
 #Structure a small
 {
@@ -101,12 +101,12 @@ table.LayoutColumns td.Column td input
 #Structure li a:hover
 {
 	background: #eee;
-	color: #007daa;
+	color: #aa0000;
 }
 
 #Structure li.current a:hover
 {
-	background: #007daa;
+	background: #777777;
 	color: #fff;
 }
 #Structure li.hidden.system.current a.current, #Structure li.hidden.system.current span.current
@@ -116,7 +116,7 @@ table.LayoutColumns td.Column td input
 #Structure li.system a:hover
 {
 	background: #ddd;
-	color: #007DAA;
+	color: #777777;
 }
 
 #Structure li.Header img
@@ -140,12 +140,7 @@ table.LayoutColumns td.Column td input
 {
 	position: relative;
 }
-#SmallButtons
-{
-	position: absolute;
-	right: 8px;
-	top: 8px;
-}
+
 #BottomButtonContainer
 {
 	position: relative;
@@ -214,7 +209,7 @@ p.BodyText
 	border-left: 1px solid #357;
 	border-right: 1px solid #357;
 	border-bottom: 1px solid #135;
-	background: #007daa;
+	background: #121212;
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 	padding: 2px;
@@ -241,7 +236,7 @@ p.BodyText
 
 h4 a, h4 a:hover
 {
-	color: #315A80;
+	color: #444444;
 	cursor: pointer;
 }
 
@@ -256,6 +251,14 @@ h4 .Buttons button
 	height: 14px;
 	font-size: 10px;
 	padding: 0 0 0 2px;
+	position: relative;
+	top: 2px;
+}
+
+h4 .Buttons button img
+{
+	position: relative;
+	top: 1px;
 }
 
 div.Faded

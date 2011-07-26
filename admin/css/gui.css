@@ -59,8 +59,8 @@ input[type=text]:focus, textarea:focus, input[type=password]:focus
 .SubContainer input[type=text]:focus, .SubContainer textarea:focus,
 .SubContainer input[type=password]:focus
 {
-	border: 1px solid #5A7A93;
-	color: #223344;
+	border: 1px solid #937A5a;
+	color: #443322;
 }
 
 h2.BlockHead
@@ -76,7 +76,7 @@ h2.BlockHead
 	-webkit-border-top-left-radius: 3px;
 	-webkit-border-top-right-radius: 3px;
 	margin: 2px 0 0 0;
-	color: #254461;
+	color: #000000;
 }
 h2.BlockHead img
 {
@@ -257,18 +257,32 @@ button.Red:hover
 	border-bottom-color: #aa0000;
 }
 
-h1 button 
+h1
 {
-	margin-top: -6px;
-	margin-right: -6px;
-	text-transform: none;
-	font-size: 10px;
+	position: relative;
 }
 
 h1 input[type=text] 
 {
 	margin-top: -3px;
 	vertical-align: bottom;
+}
+
+h1 div select
+{
+	position: relative;
+	top: -2px;
+	padding: 2px 0px;
+}
+
+h1 button
+{
+	margin: 0 -4px 0 0;
+}
+
+h1 > div
+{
+	margin: -5px -1px 0 0;
 }
 
 button:hover
@@ -299,6 +313,12 @@ button img
 	margin-right: 2px;
 }
 
+h2 button img, h1 button img
+{
+	position: relative;
+	margin-top: 0;
+}
+
 form
 {
 	margin: 0;
@@ -317,8 +337,8 @@ form
 	height: 1px;
 	display: block;
 	clear: both;
-	border: 1px solid #3E719C;
-	background: #5E8EB4;
+	border: 1px solid #990000;
+	background: #aa0000;
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	margin: 2px 0 2px 0;
@@ -510,7 +530,7 @@ input[type=text]:focus,input[type=password]:focus
 	cursor: pointer;
 	padding: 3px;
 }
-.ClickHeaderActive { background: #6688aa; }
+.ClickHeaderActive { background: #aa8866; }
 .ClickHeader:hover, .ClickHeaderActive
 {
 	background: #777777;
@@ -529,3 +549,4 @@ input[type=text]:focus,input[type=password]:focus
 	margin: 1px 0 1px 0;
 }
 .ClickContent p { margin: 0 0 4px 0; }
+
