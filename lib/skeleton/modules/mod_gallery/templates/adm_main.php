@@ -21,8 +21,8 @@
 						</td>
 						<td width="4px">
 						</td>
-						<td width="240" valign="top">	
-							<div class="tabs Container" id="gallerytabs" style="min-height: 273px; padding: 2px; margin-top: 2px">
+						<td width="240" valign="top">
+							<div class="tabs" id="gallerytabs" style="padding: 2px">
 								<div class="tab" id="tabImageschoice">
 									<img src="admin/gfx/icons/images.png"/> Bildevalg
 								</div>
