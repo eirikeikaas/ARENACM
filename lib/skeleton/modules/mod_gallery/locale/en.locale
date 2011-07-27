@@ -8,6 +8,7 @@ showstyle_scrolly : Vertical motion
 
 archivemode_thumbs : Thumbnails
 archivemode_list : List
+gal_Preview		: Preview
 
 Title : Title
 Filesize : Filesize

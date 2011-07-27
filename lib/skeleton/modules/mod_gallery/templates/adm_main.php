@@ -1,20 +1,28 @@
 
 
-			<div class="Container" style="padding: <?= MarginSize ?>px">
+			<div>
 				<table cellspacing="0" cellpadding="0" border="0" width="100%">
 					<tr>
 						<td>
-							<p>
-								<strong>Heading:</strong> 
-							</p>
-							<p>
-								<input type="text" size="50" style="width: 300px" value="<?= $this->Heading ?>" id="galHeading_<?= $this->field->ID ?>"/>
-							</p>
+							<h2 class="BlockHead">
+								<?= i18n ( 'gal_Preview' ) ?>
+							</h2>
+							<div class="BlockContainer">
+								<p>
+									<strong>Heading:</strong> <input type="text" size="50" style="width: 300px" value="<?= $this->Heading ?>" id="galHeading_<?= $this->field->ID ?>"/>
+								</p>
+								<div id="gal_preview">
+									<div class="Container" style="background: #222222">
+										<?= $this->preview ?>
+										<br style="clear: both"/>
+									</div>
+								</div>
+							</div>
 						</td>
 						<td width="4px">
 						</td>
-						<td width="240" valign="top" rowspan="2">	
-							<div class="tabs" id="gallerytabs">
+						<td width="240" valign="top">	
+							<div class="tabs Container" id="gallerytabs" style="min-height: 273px; padding: 2px; margin-top: 2px">
 								<div class="tab" id="tabImageschoice">
 									<img src="admin/gfx/icons/images.png"/> Bildevalg
 								</div>
@@ -278,16 +286,6 @@
 									</div>
 								</div>
 							</div>
-						</td>
-					</tr>
-					<tr>
-						<td valign="top" width="*" id="gal_preview">
-							<div class="Container" style="background: #222222">
-								<?= $this->preview ?>
-								<br style="clear: both"/>
-							</div>
-						</td>
-						<td width="4px">
 						</td>
 					</tr>
 				</table>
