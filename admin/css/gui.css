@@ -280,11 +280,6 @@ h1 button
 	margin: 0 -4px 0 0;
 }
 
-h1 > div
-{
-	margin: -5px -1px 0 0;
-}
-
 button:hover
 {
 	border: 1px solid #aaa;
@@ -359,11 +354,6 @@ h1 Button
 h1 Button.Small
 {
 	margin: -10px -4px 0 0;
-}
-
-h1 span
-{
-	float: right; margin-top: 4px; margin-right: 2px;
 }
 
 .TableDataHider
@@ -444,7 +434,34 @@ h1 span select
 	-moz-border-radius: 2px;
 	-webkit-border-radius: 2px;
 }
-
+/* Header box for h1s etc ----------------------------------------------------*/
+.HeaderBox
+{
+	float: right;
+	display: block;
+	width: auto;
+	white-space: nowrap;
+	margin: -5px -1px 0 0;
+}
+.HeaderBox label
+{
+	float: left; 
+	display: block;
+}
+.HeaderBox select
+{
+	display: block;
+	float: left;
+}
+.HeaderBox button
+{
+	margin: 0 -6px 0 0;
+	position: relative;
+	top: 0px;
+	padding: 0px 1px 0px 3px;
+	height: 23px;
+}
+/* End Header box for h1s etc ------------------------------------------------*/
 .SmallButtonBox strong,
 .ButtonBox strong
 {

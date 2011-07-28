@@ -77,7 +77,7 @@
 			</td>
 			<td class="Column">
 				<h1 id="EditHeadline">
-					<div id="SmallButtons" style="float: right">
+					<div id="SmallButtons" class="HeaderBox">
 						<?= contentButtons ( $this->page, 1 ) ?>
 					</div>
 					<img src="admin/gfx/icons/page_edit.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Edit' ) ?> "<strong id="EditHeadlineDiv"><?= $this->page->MenuTitle ? $this->page->MenuTitle : $this->page->_oldTitle ?></strong>"

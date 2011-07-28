@@ -10,7 +10,9 @@
 					
 					!!!
 					
-					<button class="Small" onclick="addLibraryImage ()" title="Last opp nytt bilde"><img src="admin/gfx/icons/image_add.png"></button>&nbsp;
-					<button class="Small" onclick="addLibraryFile ()" title="Last opp ny fil"><img src="admin/gfx/icons/page_add.png"></button>&nbsp;
-					<button class="Small" onclick="createLibraryFile ()" title="Lag en ny fil"><img src="admin/gfx/icons/star.png"></button>
+					<div class="HeaderBox">
+						<button onclick="addLibraryImage ()" title="Last opp nytt bilde"><img src="admin/gfx/icons/image_add.png"></button>
+						<button onclick="addLibraryFile ()" title="Last opp ny fil"><img src="admin/gfx/icons/page_add.png"></button>
+						<button onclick="createLibraryFile ()" title="Lag en ny fil"><img src="admin/gfx/icons/star.png"></button>
+					</div>
 				

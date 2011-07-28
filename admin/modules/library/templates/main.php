@@ -66,22 +66,24 @@
 			<td>&nbsp;</td>
 			<td id="libMainCol">
 				<h1>
-					<img src="admin/gfx/icons/server.png" style="float: left; margin: 0pt 4px 0pt 0pt;"/> 
+					<img src="admin/gfx/icons/server.png" alt="server" style="vertical-align: bottom"/> 
 					<span id="ContentButtonsSmall">
 					</span>
-					<div style="float: right; margin: -4px 4px 0 0">
-						<?= i18n ( 'Show' ) ?>: <select onchange="document.location = 'admin.php?module=library&viewmode=' + this.value">
+					<div class="HeaderBox">
+						<label><?= i18n ( 'Show' ) ?>:</label>
+						<select onchange="document.location = 'admin.php?module=library&viewmode=' + this.value">
 							<option value="thumbnails"<?= $this->viewmode == 'thumbnails' ? 'selected="selected"' : '' ?>><?= i18n ( 'Thumbnails' ) ?></option>
 							<option value="details"<?= $this->viewmode == 'details' ? 'selected="selected"' : '' ?>><?= i18n ( 'Detailed list' ) ?></option>
 						</select>
-						<?= i18n ( 'Listed by' ) ?>: <select onchange="document.location='admin.php?module=library&listmode=' + this.value">
+						<label><?= i18n ( 'Listed by' ) ?>:</label> 
+						<select onchange="document.location='admin.php?module=library&listmode=' + this.value">
 							<option value="date"<?= $this->listmode == 'date' ? ' selected="selected"' : '' ?>><?= i18n ( 'Date' ) ?></option>
 							<option value="filename"<?= $this->listmode == 'filename' ? ' selected="selected"' : '' ?>><?= i18n ( 'Filename' ) ?></option>
 							<option value="title"<?= $this->listmode == 'title' ? ' selected="selected"' : '' ?>><?= i18n ( 'File title' ) ?></option>
 							<option value="filesize"<?= $this->listmode == 'filesize' ? ' selected="selected"' : '' ?>><?= i18n ( 'Filsize' ) ?></option>
 						</select>
 					</div>
-					<div style="font-size: 13px" id="Innholdsheader"><?= $_REQUEST[ 'tag' ] ? ( i18n ( 'Files and images matching' ) . ' "' . $_REQUEST[ 'tag' ] . '"' ) : ( i18n ( 'The contents of' ) . ' "' . $this->folder->Name . '"' ) ?>:</div>
+					<strong id="Innholdsheader"><?= $_REQUEST[ 'tag' ] ? ( i18n ( 'Files and images matching' ) . ' "' . $_REQUEST[ 'tag' ] . '"' ) : ( i18n ( 'The contents of' ) . ' "' . $this->folder->Name . '"' ) ?>:</strong>
 				</h1>
 				<div class="Container">
 					
