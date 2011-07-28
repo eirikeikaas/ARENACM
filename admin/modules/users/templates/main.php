@@ -83,8 +83,9 @@
 			<td>
 				<h1>
 					<img src="admin/gfx/icons/user_suit.png" style="float: left; margin: 0pt 4px 0pt 0pt;"/> 
-					<div style="float: right; padding: 1px 1px 1px 3px; margin: -6px -6px 0 0">
-						<?= i18n ( 'Users pr. page' ) ?>: <select onchange="document.location='admin.php?module=users&limit=' + this.value">
+					<div class="HeaderBox">
+						<label><?= i18n ( 'Users pr. page' ) ?>:</label>
+						<select onchange="document.location='admin.php?module=users&limit=' + this.value">
 							<?
 								foreach ( Array ( 20, 50, 100, 500, 1000, 10000 ) as $a )
 								{
