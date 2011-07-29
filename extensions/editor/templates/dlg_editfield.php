@@ -1,6 +1,6 @@
 
 	<h1 style="overflow: hidden; white-space: nowrap">
-		<div style="float: right">
+		<div class="HeaderBox">
 			<button type="button" onclick="executeEditField ( )" title="Lagre">
 				<img src="admin/gfx/icons/accept.png">
 			</button>

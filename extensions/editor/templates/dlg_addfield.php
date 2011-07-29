@@ -1,6 +1,6 @@
 
 	<h1 style="overflow: hidden; white-space: nowrap">
-		<div style="float: right">
+		<div class="HeaderBox">
 			<button type="button" onclick="executeAddField ( )" title="<?= i18n ( 'Add the field' ) ?>">
 				<img src="admin/gfx/icons/accept.png"> 
 			</button>
