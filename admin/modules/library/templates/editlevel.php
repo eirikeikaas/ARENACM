@@ -6,7 +6,7 @@
 		<form id="editLevelForm" target="hiddenlevel" method="post" action="admin.php?module=library&function=editlevel&action=savelevel">
 		<?}?>
 		<h1>
-			<div style="float: right">
+			<div class="HeaderBox">
 				<?if ( $GLOBALS[ 'Session' ]->AdminUser->checkPermission ( $this->folder, 'Write', 'admin' ) ) { ?>
 				<button type="submit">
 					<img src="admin/gfx/icons/disk.png" /> 

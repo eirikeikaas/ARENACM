@@ -9,9 +9,11 @@
 		<?}?>
 		<?if( !$this->image->ID ){?>
 			<h1>
-				<button onclick="removeModalDialogue ( 'EditLevel' );" style="float: right">
-					<img src="admin/gfx/icons/cancel.png">
-				</button>
+				<div class="HeaderBox">
+					<button onclick="removeModalDialogue ( 'EditLevel' );">
+						<img src="admin/gfx/icons/cancel.png">
+					</button>
+				</div>
 				Legg til bilde
 			</h1>
 		<?}?>

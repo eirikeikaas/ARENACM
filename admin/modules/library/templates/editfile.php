@@ -1,9 +1,9 @@
 	<div id="FileEditContainer">
 	<?if( $this->file->ID ){?>
-		<h1><div style="float: right"><button onclick="removeModalDialogue ( 'EditLevel' );"><img src="admin/gfx/icons/cancel.png" /></button></div>Rediger fil</h1>
+		<h1><div class="HeaderBox"><button onclick="removeModalDialogue ( 'EditLevel' );"><img src="admin/gfx/icons/cancel.png" /></button></div>Rediger fil</h1>
 	<?}?>
 	<?if( !$this->file->ID ){?>
-		<h1><div style="float: right"><button onclick="removeModalDialogue ( 'EditLevel' );"><img src="admin/gfx/icons/cancel.png" /></button></div>Legg til fil</h1>
+		<h1><div style class="HeaderBox"><button onclick="removeModalDialogue ( 'EditLevel' );"><img src="admin/gfx/icons/cancel.png" /></button></div>Legg til fil</h1>
 	<?}?>
 
 
