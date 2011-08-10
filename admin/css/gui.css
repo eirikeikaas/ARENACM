@@ -455,11 +455,12 @@ h1 span select
 }
 .HeaderBox button
 {
-	margin: 0 -6px 0 0;
+	margin: 0 -2px 0 0;
 	position: relative;
 	top: 0px;
 	padding: 0px 1px 0px 3px;
 	height: 23px;
+	width: 26px;
 }
 /* End Header box for h1s etc ------------------------------------------------*/
 .SmallButtonBox strong,
