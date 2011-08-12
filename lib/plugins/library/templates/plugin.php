@@ -1,6 +1,6 @@
 				<?if ( $this->ShowHeader ) { ?>
 				<h1>
-					<div style="float: right">
+					<div class="HeaderBox">
 						<a href="javascript:;" onclick="getHelp ( 'no/funksjonsbokser/biblotek/index.html' )"><img src="admin/gfx/icons/help.png" style="border: 0" /></a>
 					</div>
 					Bibliotek - innhold og media 

@@ -1,5 +1,5 @@
 <h1>
-	<div style="float: right">
+	<div class="HeaderBox">
 		<button type="button" onclick="removeModalDialogue ( 'library' )" title="Lukk vinduet">
 			<img src="admin/gfx/icons/cancel.png" />
 		</button>
