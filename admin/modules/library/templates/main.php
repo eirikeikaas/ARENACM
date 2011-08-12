@@ -66,8 +66,7 @@
 			<td>&nbsp;</td>
 			<td id="libMainCol">
 				<h1>
-					<img src="admin/gfx/icons/server.png" alt="server" style="vertical-align: bottom"/> 
-					<span id="ContentButtonsSmall">
+					<span class="HeaderBox" id="ContentButtonsSmall">
 					</span>
 					<div class="HeaderBox">
 						<label><?= i18n ( 'Show' ) ?>:</label>
@@ -83,6 +82,7 @@
 							<option value="filesize"<?= $this->listmode == 'filesize' ? ' selected="selected"' : '' ?>><?= i18n ( 'Filsize' ) ?></option>
 						</select>
 					</div>
+					<img src="admin/gfx/icons/server.png" alt="server" style="vertical-align: bottom"/> 
 					<strong id="Innholdsheader"><?= $_REQUEST[ 'tag' ] ? ( i18n ( 'Files and images matching' ) . ' "' . $_REQUEST[ 'tag' ] . '"' ) : ( i18n ( 'The contents of' ) . ' "' . $this->folder->Name . '"' ) ?>:</strong>
 				</h1>
 				<div class="Container">
