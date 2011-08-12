@@ -1,11 +1,11 @@
 	<div id="ImageEditContainer">
 		<?if( $this->image->ID ){?>
 			<h1>
-				<div class="HeaderBox">
+				<div class="HeaderBox MsieFix">
 					<button onclick="removeModalDialogue ( 'EditLevel' );" style="float: right">
-						<img src="admin/gfx/icons/cancel.png">
+						<img src="admin/gfx/icons/cancel.png" alt="cancel"/>
 					</button>
-				</div>
+				</div> 
 				Rediger bilde
 			</h1>
 		<?}?>
@@ -13,7 +13,7 @@
 			<h1>
 				<div class="HeaderBox">
 					<button onclick="removeModalDialogue ( 'EditLevel' );">
-						<img src="admin/gfx/icons/cancel.png">
+						<img src="admin/gfx/icons/cancel.png" alt="cancel"/>
 					</button>
 				</div>
 				Legg til bilde
