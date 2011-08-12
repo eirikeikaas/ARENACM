@@ -1,7 +1,7 @@
 
 	<table class="LayoutColumns">
 		<tr>
-			<td style="width: 358px; padding-right: 8px" class="Column">
+			<td style="width: 368px; padding-right: 8px" class="Column">
 				<h1>
 					<img src="admin/gfx/icons/book_open.png" style="float: left; margin: 0 4px 0 0" /> <?= $this->languages ?>
 					<?= i18n ( 'Website overview' ) ?>
@@ -19,7 +19,7 @@
 					<?= structureButtons ( $this->page ) ?>
 				</div>
 				<div class="SpacerSmallColored"></div>
-				<div id="EditorAdvancedPages">
+				<div id="EditorAdvancedPages" class="TabPages">
 					<div id="tabNotes" class="tab">
 						<img src="admin/gfx/icons/page_white_edit.png"> <?= i18n ( 'Notes' ) ?>
 					</div>
