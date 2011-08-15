@@ -23,10 +23,18 @@
 				<?= $this->InGroups ?>
 			</td>
 			<td>
-				<? if ( substr ( $this->DateModified, -4, 4 ) <= 1970 ) return $this->DateCreated; return $this->DateModified; ?>
+				<?
+					if ( strstr ( $this->DateModified, '1970' ) ) 
+						return $this->DateCreated; 
+					return $this->DateModified;
+				?>
 			</td>
 			<td>
-				<?= $this->DateLogin ?>
+				<?
+					if ( strstr ( $this->DateLogin, '1970' ) ) 
+						return i18n ( 'Never logged in.' ); 
+					return $this->DateLogin;
+				?>
 			</td>
 			<td style="text-align: center">
 				<?if ( $this->canWrite ) { ?>

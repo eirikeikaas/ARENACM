@@ -323,9 +323,16 @@ if ( $query )
 			 * Time
 			**/
 			$utpl->DateLogin = ( strstr (  $users[ $a ]->DateLogin, '1970' ) || !$users[ $a ]->DateLogin ) ? 
-				'aldri' : ArenaDate ( DATE_FORMAT, $users[ $a ]->DateLogin );
+				i18n ( 'Never logged in.' ) : ArenaDate ( DATE_FORMAT, $users[ $a ]->DateLogin );
 			$utpl->DateCreated = ArenaDate ( DATE_FORMAT, $users[ $a ]->DateCreated );
-		
+			if ( !$users[ $a ]->DateModified )
+			{
+				$date = date ( 'Y-m-d H:i:s' );
+				$db->query ( 'UPDATE Users SET DateModified = NOW() WHERE ID=' . $users[ $a ]->ID );
+				$users[ $a ]->DateModified = $date;
+			}
+			$utpl->DateModified = ArenaDate ( DATE_FORMAT, $users[ $a ]->DateModified );
+			
 			/**
 			 * Add user data object to user row template
 			**/
