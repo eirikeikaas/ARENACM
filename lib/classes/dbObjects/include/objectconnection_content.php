@@ -111,7 +111,7 @@ function rcImage ( $image )
 {
 	$str .= "\n";
 	$str .= '<div class="Image ' . texttourl ( $image->Title ) . '">' . "\n";
-	$str .= '<img src="' . $image->getFolderPath ( ) . $image->Filename . '" id="' . $image->ID . '"/>';
+	$str .= '<img src="' . $image->getFolderPath ( ) . '/' . $image->Filename . '" id="' . $image->ID . '"/>';
 	$str .= '</div>' . "\n";
 	return $str;
 }
