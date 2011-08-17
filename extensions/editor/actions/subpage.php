@@ -63,6 +63,18 @@ if ( $parent->load ( $_POST[ 'cid' ] ) )
 			$newPage->ContentTemplateID = $parent->ContentTemplateID;
 			$newPage->Template = $parent->Template;
 			$newPage->IsSystem = '0';
+			
+			// Check if we're using contenttemplate etc
+			if ( $parent->ContentTemplateID )
+			{
+				$t = new dbObject ( 'ContentElement' );
+				if ( $t->load ( $parent->ContentTemplateID ) )
+				{
+					$newPage->Template = $t->Template;
+				}
+			}
+			
+			// Save the new page
 			$newPage->save ( );
 			
 			// Work copy
