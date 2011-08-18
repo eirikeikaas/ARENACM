@@ -3,7 +3,7 @@
 			onclick="toggleSelectedImage ( this )"
 			ondblclick="editLibraryImage( '<?= $this->image->ID?>' )" 
 			id="imagecontainer<?= $this->image->ID?>"
-			onmousedown="dragger.startDrag ( this, { pickup: 'clone', objectType: 'Image', objectID: '<?= $this->image->ID?>' } ); return false"
+			onmousedown="dragger.startDrag ( this.getElementsByTagName ( 'img' )[0], { pickup: 'clone', objectType: 'Image', objectID: '<?= $this->image->ID?>' } ); return false"
 		>
 			
 				<div style="position: relative; width: 120px; height: 100px; overflow: hidden">
