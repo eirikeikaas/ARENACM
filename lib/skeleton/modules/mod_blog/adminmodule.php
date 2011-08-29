@@ -86,14 +86,16 @@ if ( !function_exists ( 'listBlogs' ) )
 		$blogs->addClause ( 'ORDER BY', 'DatePublish DESC, ID DESC' );
 		if ( $blogs = $blogs->find ( ) )
 		{
-			$str = '<table class="Overview LayoutColumns">';
+			$str = '';
 			foreach ( $blogs as $blog )
 			{
+				$str .= '<table class="Overview LayoutColumns">';
 				$str .= '<tr class="' . ( $sw = ( $sw == 'sw2' ? 'sw1' : 'sw2' ) ) . '">';
-				$str .= '<td><strong>' . $blog->Title . '</strong></td><td>av ' . $blog->AuthorName . '</td>';
-				$str .= '<td>Dato: ' . ArenaDate ( DATE_FORMAT, $blog->DateUpdated ) . '</td>';
-				$str .= '<td>' . ( $blog->IsPublished ? 'Publisert' : 'Arkivert' ) . '</td>';
-				$str .= '<td>Vises fra: ' . ArenaDate ( DATE_FORMAT, $blog->DatePublish ) . '</td>';
+				$str .= '<td><strong>' . $blog->Title . '</strong></td>';
+				$str .= '<td style="width: 130px">av ' . $blog->AuthorName . '</td>';
+				$str .= '<td style="width: 130px">Dato: ' . ArenaDate ( DATE_FORMAT, $blog->DateUpdated ) . '</td>';
+				$str .= '<td style="width: 60px">' . ( $blog->IsPublished ? 'Publisert' : 'Arkivert' ) . '</td>';
+				$str .= '<td style="width: 190px">Vises fra: ' . ArenaDate ( DATE_FORMAT, $blog->DatePublish ) . '</td>';
 				$str .= '</tr>';
 				$str .= '<tr class="' . ( $sw = ( $sw == 'sw2' ? 'sw1' : 'sw2' ) ) . '"><td colspan="5">' . $blog->Leadin . '</td></tr>';
 				
@@ -104,8 +106,10 @@ if ( !function_exists ( 'listBlogs' ) )
 					$str .= '<button type="button" onclick="mod_blog_delete(' . $blog->ID . ')"><img src="admin/gfx/icons/page_white_delete.png"/> Slett</button>';
 					$str .= '</td></tr>';
 				}
+				$str .= '</table><br/>';
 			}
-			$str .= '</table>';
+			if ( substr ( $str, -13, 13 ) != '</table><br/>' )
+				$str .= '</table><br/>';
 			
 			$navigation = '';
 			if ( $start > 0 )
