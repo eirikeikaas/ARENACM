@@ -1622,4 +1622,14 @@ function CreateStringFromObject ( $object )
 	return implode ( "\n", $s );
 }
 
+// Remove sql etc from some posts
+function MakeSafePost ( $str )
+{
+	return str_replace ( 
+		array ( ' OR ', ' AND ', ' && ', ' & ', ' || ', ' = ', ' ' ),
+		'',
+		(string)$str
+	);
+}
+
 ?>

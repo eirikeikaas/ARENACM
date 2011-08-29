@@ -153,6 +153,9 @@ class dbUser extends dbObject
 		{
 			$this->Username = $_POST[ "{$prefix}Username" ];
 			$this->Password_unhash = $_POST[ "{$prefix}Password" ];
+			// Protect against sql injection
+			$this->Username = MakeSafePost ( $this->Username );
+			$this->Password_unhash = MakeSafePost ( $this->Password_unhash );
 			return true;
 		}
 		// Get user data from session (when we have already logged in)
