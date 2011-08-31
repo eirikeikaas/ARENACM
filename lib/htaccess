@@ -8,6 +8,7 @@ AddType 'text/html; charset=UTF-8' html
 	RewriteCond %{REQUEST_FILENAME} !-s 
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^index.html$                         index.php                       [QSA]
+	RewriteRule ^admin/modules/(.*).php$			lib/templates/404.html			 [QSA]
 	RewriteCond %{REQUEST_FILENAME} !-s 
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.+)$                               index.php?route=$1              [QSA]
