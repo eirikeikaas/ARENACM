@@ -1,7 +1,6 @@
 <?php
 
 	include_once ( 'extensions/editor/include/funcs.php' );
-	include_once ( 'lib/dbObject/dbContent.php' );
 		
 	if ( $ids = explode ( ',', $_REQUEST[ 'ids' ] ) )
 	{

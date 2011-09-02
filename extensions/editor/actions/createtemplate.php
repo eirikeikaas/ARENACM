@@ -69,6 +69,8 @@ if ( $_REQUEST[ 'name' ] )
 				{
 					case 'pagelisting':
 					case 'newscategory':
+					case 'contentmodule':
+					case 'extension':
 						break;
 					default:
 						if ( $mode == 'Big' )
