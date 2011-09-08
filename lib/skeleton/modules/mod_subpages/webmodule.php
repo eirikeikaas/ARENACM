@@ -33,6 +33,7 @@ if ( $p->load ( $fieldObject->DataInt ) )
 		foreach ( $subpages as $p )
 		{
 			$str .= '<div class="Block '.$p->RouteName . '">';
+			$p->{"_locked_".$fieldObject->Name} = 'true';
 			$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
 			$str .= '</div>';
 		}
