@@ -43,14 +43,14 @@
 				<a href="lib/help/documentation.pdf" style="color: #EDF5FF" target="_blank"><img src="admin/gfx/icons/help.png" alt="hjelp" border="0"> <?= i18n ( 'metabuttons_Help' ) ?></a>
 			</div>
 			<?if ( $GLOBALS['Session']->AdminUser->modulePermission ( 'Access', 'settings' ) ) { ?>
-			<div<? if ( getCurrentModule ( ) == 'settings' ) return ' style="background: url(admin/gfx/background_header.jpg); opacity: 0.9; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;"'; ?>>
+			<div<? if ( getCurrentModule ( ) == 'settings' ) return ' class="current"'; ?>>
 				<a href="admin.php?module=settings" style="color: <? if ( getCurrentModule ( ) == 'settings' ) return '#4B83B3'; return '#EDF5FF'; ?>">
 					<img src="admin/gfx/icons/page_white_edit.png" alt="innstillinger" border="0"> <?= i18n ( 'metabuttons_Settings' ) ?>
 				</a>
 			</div>
 			<?}?>
 			<?if ( $GLOBALS[ 'Session' ]->AdminUser->_dataSource == 'core' ) { ?>
-			<div id="showCore"<? if ( getCurrentModule ( ) == 'core' ) return ' style="background: url(admin/gfx/background_header.jpg); opacity: 0.9; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;"'; ?>>
+			<div id="showCore"<? if ( getCurrentModule ( ) == 'core' ) return ' class="current"'; ?>>
 				<a href="<?= BASE_URL ?>admin.php?module=core" style="color:  <? if ( getCurrentModule ( ) == 'core' ) return '#4B83B3'; return '#EDF5FF'; ?>"><img src="admin/gfx/icons/computer_edit.png" alt="superbruker" border="0"> <?= i18n ( 'metabuttons_Superuser' ) ?></a>
 			</div>
 			<?}?>
@@ -88,7 +88,7 @@
 			<?= $this->moduleOutput ?>
 			<br style="clear: both">
 			<div id="Footer">
-				ARENA CM v<?= ARENA_VERSION ?> | <?= i18n ( 'ARENA CM is available under the' ) ?> <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank"><?= i18n ( 'MPL License' ) ?></a> | <a href="admin.php?module=settings&function=about"><?= i18n ( 'About ARENA CM' ) ?></a>
+				Basert på ARENA CM v<?= ARENA_VERSION ?> | <?= i18n ( 'ARENA CM is available under the' ) ?> <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank"><?= i18n ( 'MPL License' ) ?></a> | <a href="admin.php?module=settings&function=about">Om ARENA Enterprise</a>
 			</div>
 		</div>
 	</body>
