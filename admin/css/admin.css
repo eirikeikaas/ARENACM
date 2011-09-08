@@ -317,6 +317,15 @@ tr.swSub2, .swSub2
 	vertical-align: top;
 }
 
+#MetaButtons div.current
+{
+	background: url(../gfx/background_header.jpg); 
+	opacity: 0.9; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px; 
+	border-radius: 4px;
+}
+
 /********* Bajax *******/
 #BajaxProgressContainer
 {
