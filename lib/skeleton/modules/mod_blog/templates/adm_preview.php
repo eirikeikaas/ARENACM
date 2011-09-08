@@ -8,6 +8,7 @@
 		<title>
 			<?= $this->blog->Title ?>
 		</title>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
 		<?if ( file_exists ( 'upload/main.css' ) ) { ?>
 		<link rel="stylesheet" href="upload/main.css"/>
 		<?}?>

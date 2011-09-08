@@ -125,7 +125,7 @@ if ( !function_exists ( 'listBlogs' ) )
 			
 			return $str . ( $navigation ? "<hr>$navigation" : '' );
 		}
-		return '<p>Ingen blogger finnes.</p>';
+		return '<p>Ingen artikler finnes.</p>';
 	}
 }	
 switch ( $_REQUEST[ 'modaction' ] )

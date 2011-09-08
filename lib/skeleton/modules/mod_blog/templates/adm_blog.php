@@ -17,7 +17,7 @@
 			Endre: <?= $this->blog->Title ?>
 		<?}?>
 		<?if ( !$this->blog ) { ?>
-			Ny blog artikkel
+			Ny artikkel
 		<?}?>
 	</h3>
 	<iframe class="Hidden" name="hiddenblogiframe"></iframe>
