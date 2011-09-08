@@ -59,6 +59,11 @@
 				switch ( e.which )
 				{
 					case 9:
+						// Make sure the default action is not initiated
+						e.cancelBubble = true;
+						if ( e.stopPropagation ) e.stopPropagation();
+						if ( e.preventDefault ) e.preventDefault ();
+						// insert tab
 						var sp = this.selectionStart;
 						var ep = this.selectionEnd;
 						this.value = this.value.substring ( 0, sp ) +
@@ -67,6 +72,11 @@
 						return false;
 						break;
 					case 13:
+						// Make sure the default action is not initiated
+						e.cancelBubble = true;
+						if ( e.stopPropagation ) e.stopPropagation();
+						if ( e.preventDefault ) e.preventDefault ();
+						// Find selection
 						var sp = this.selectionStart;
 						var ep = this.selectionEnd;
 						//find tabs
@@ -90,8 +100,14 @@
 						this.setSelectionRange ( sp + 1 + tabs, sp + 1 + tabs );
 						return false;
 					case 83:
+						// Do it!
 						if ( e.ctrlKey )
 						{
+							// Make sure the default action is not initiated
+							e.cancelBubble = true;
+							if ( e.stopPropagation ) e.stopPropagation();
+							if ( e.preventDefault ) e.preventDefault ();
+							//
 							saveFileContents ( '<?= $this->file->ID ?>' );
 							return false;
 						}
