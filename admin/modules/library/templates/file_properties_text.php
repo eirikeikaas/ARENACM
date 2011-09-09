@@ -59,6 +59,7 @@
 				switch ( e.which )
 				{
 					case 9:
+						_rememberScrollPoint ();
 						// Make sure the default action is not initiated
 						e.cancelBubble = true;
 						if ( e.stopPropagation ) e.stopPropagation();
@@ -69,9 +70,11 @@
 						this.value = this.value.substring ( 0, sp ) +
 									"\t" + this.value.substring ( ep, this.value.length );
 						this.setSelectionRange ( sp + 1, sp + 1 );
+						_recallScrollPoint ();
 						return false;
 						break;
 					case 13:
+						_rememberScrollPoint ();
 						// Make sure the default action is not initiated
 						e.cancelBubble = true;
 						if ( e.stopPropagation ) e.stopPropagation();
@@ -98,22 +101,34 @@
 						this.value = this.value.substring ( 0, sp ) +
 									n + this.value.substring ( ep, this.value.length );
 						this.setSelectionRange ( sp + 1 + tabs, sp + 1 + tabs );
+						_recallScrollPoint ();
 						return false;
 					case 83:
 						// Do it!
 						if ( e.ctrlKey )
 						{
+							_rememberScrollPoint ();
 							// Make sure the default action is not initiated
 							e.cancelBubble = true;
 							if ( e.stopPropagation ) e.stopPropagation();
 							if ( e.preventDefault ) e.preventDefault ();
 							//
 							saveFileContents ( '<?= $this->file->ID ?>' );
+							_recallScrollPoint ();
 							return false;
 						}
 						break;
 				}
 			} );
+		}
+		var _scrollpoint = 0;
+		function _rememberScrollPoint ()
+		{
+			_scrollpoint = ge ( 'advfileContents' ).scrollTop;
+		}
+		function _recallScrollPoint ()
+		{
+			ge ( 'advfileContents' ).scrollTop = _scrollpoint;
 		}
 	</script>
 

@@ -195,36 +195,35 @@
 			
 			</div>
 			<?}?>
-	
 		</div>
-	
-		<script>
-			<?if( !$this->image->ID ){?>
-			initTabSystem ( 'uploadTabs' );
-			<?}?>
-			function mulImages ( num )
-			{
-				var ostr = '';
-				for ( var a = 0; a < num; a++ )
-				{
-					ostr += '<tr class="sw'+(a%2+1)+'"><td>Bildetittel ' + ( a + 1 ) + ': ';
-					ostr += '<input type="text" size="20" name="filename_' + a + '"/>';
-					ostr += '</td><td>';
-					ostr += 'Bilde ' + ( a + 1 ) + ': ';
-					ostr += '<input type="file" name="image_' + a + '"/>';
-					ostr += '</td></tr>';
-				}
-				if ( document.getElementById ( 'multipleImages' ) )
-					document.getElementById ( 'multipleImages' ).innerHTML = '<table id="MultipleFilesTable" class="List">' + ostr + '</table>';
-			}
-			
-			<?if ( !$this->file->ID ) { ?>
-			mulImages ( 2 );
-			<?}?>
-			if ( document.getElementById ( 'tabRediger' ) )
-				document.getElementById ( 'tabRediger' ).onclick ( );
-		</script>
-	
 	</div>
+	<script>
+		<?if( !$this->image->ID ){?>
+		initTabSystem ( 'uploadTabs' );
+		<?}?>
+		function mulImages ( num )
+		{
+			var ostr = '';
+			for ( var a = 0; a < num; a++ )
+			{
+				ostr += '<tr class="sw'+(a%2+1)+'"><td>Bildetittel ' + ( a + 1 ) + ': ';
+				ostr += '<input type="text" size="20" name="filename_' + a + '"/>';
+				ostr += '</td><td>';
+				ostr += 'Bilde ' + ( a + 1 ) + ': ';
+				ostr += '<input type="file" name="image_' + a + '"/>';
+				ostr += '</td></tr>';
+			}
+			if ( document.getElementById ( 'multipleImages' ) )
+				document.getElementById ( 'multipleImages' ).innerHTML = '<table id="MultipleFilesTable" class="List">' + ostr + '</table>';
+		}
+		
+		<?if ( !$this->file->ID ) { ?>
+		mulImages ( 2 );
+		<?}?>
+		if ( document.getElementById ( 'tabRediger' ) )
+			document.getElementById ( 'tabRediger' ).onclick ( );
+	</script>
+	
+	
 
 	
