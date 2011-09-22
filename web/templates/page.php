@@ -10,6 +10,13 @@
 		else if ( strstr ( $agent, 'gecko' ) )
 			$this->userAgent = 'gecko';
 		else $this->userAgent = 'msie';
+		if ( strstr ( $agent, 'windows' ) )
+			$this->userAgent = 'windows';
+		else if ( strstr ( $agent, 'linux' ) )
+			$this->userAgent = 'linux';
+		else if ( strstr ( $agent, 'mac' ) )
+			$this->userAgent = 'mac';
+		else $this->userAgent = 'otheros';
 	?>
 	<body class="<?= $this->userAgent; ?> <?= $this->LanguageCode . ' ' . $this->page->RouteName ?>">
 		<? $this->__Content =  executeWebModule ( $this->page, $_REQUEST[ 'ue' ] ? 'extensions' : false ); ?>
