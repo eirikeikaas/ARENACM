@@ -30,4 +30,8 @@
 	border-top: 1px solid transparent;
 }
 
+.ExtraFieldDiv > h4
+{
+	position: relative;
+}
 

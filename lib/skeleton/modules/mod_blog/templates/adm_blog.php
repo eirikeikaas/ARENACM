@@ -1,5 +1,5 @@
 
-	<h3>
+	<h3 style="position: relative">
 		<div style="float: right">
 			<button title="Lagre artikkel" type="button" class="Small" onclick="mod_blog_save()">
 				<img src="admin/gfx/icons/disk.png">
