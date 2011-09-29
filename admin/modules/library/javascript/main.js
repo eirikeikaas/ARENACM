@@ -624,7 +624,7 @@ function editLevelPermissions ( cid )
 
 function cleanCache ( )
 {
-	if ( confirm ( 'Are you sure you want to clear the image cache?' ) )
+	if ( confirm ( i18n('Are you sure you want to clear the image cache?') ) )
 	{
 		var jax = new bajax ( );
 		jax.openUrl ( 'admin.php?module=library&action=clearcache', 'get', true );
@@ -632,7 +632,7 @@ function cleanCache ( )
 		{
 			if ( this.getResponseText ( ) == 'ok' )
 			{
-				alert ( 'All done!' );
+				alert ( i18n('All done!') );
 				document.location = 'admin.php?module=library';
 			}
 		}

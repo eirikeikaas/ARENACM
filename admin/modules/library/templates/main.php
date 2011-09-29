@@ -117,5 +117,7 @@
 		showContentButtons ( );
 		checkLibraryTooltips();
 	</script>
+	<?= i18n ( 'Are you sure you want to clear the image cache?' ) ?>
+	<?= i18n ( 'All done!' ) ?>
   
 </div>
