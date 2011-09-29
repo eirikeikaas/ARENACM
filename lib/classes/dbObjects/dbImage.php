@@ -291,7 +291,7 @@ class dbImage extends dbObject
 		$extra = ( $mode || $effects ) ? ( texttourl ( $mode ) . '_' . urlencode ( $effects ) ) : '';
 		
 		if ( !$bgcolor ) $bgcolor = $this->_bgcolor;
-		$bcol = hex2string ( $bgcolor );
+		$bcol = hex2string ( $bgcolor );		
 		$cacheFilename = "upload/images-cache/{$width}x{$height}_{$fn}_{$extra}_0x{$bcol}_{$this->ID}.{$this->Filetype}";
 		$oldimg = new dbObject ( 'ContentRoute' );
 		$oldimg->Route = $cacheFilename;
@@ -610,7 +610,8 @@ class dbImage extends dbObject
 	{
 		if ( !$width ) $width = $this->Width;
 		if ( !$height ) $height = $this->Height;
-		$image = $this->getImageUrl ( $width, $height, $mode, $effects, $bgcolor );
+		if ( $bgcolor ) $this->_bgcolor = $bgcolor;
+		$image = $this->getImageUrl ( $width, $height, $mode, $effects, $this->_bgcolor );
 		if ( !$mode ) $mode = '0';
 		if ( !$effects ) $effects = '0';
 		
