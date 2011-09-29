@@ -278,7 +278,7 @@ class dbImage extends dbObject
 	{
 		list ( $fn, $ex ) = explode ( ".", $this->Filename );
 		$processed = false;
-		
+	
 		// Add effects that are added aposteriori
 		if ( is_array ( $this->_effects ) )
 		{
@@ -524,8 +524,8 @@ class dbImage extends dbObject
 					imagefilledrectangle ( $image2, 0, 0, $width, $height, $color );
 				}
 				imagecopyresampled ( $image2, $image, $ox, $oy, 0, 0, $w, $h, $this->Width, $this->Height );
-				
 				unset ( $image );
+				
 				$processed = $cacheFilename;
 				$this->data =& $image2;
 				$this->currentWidth = $w;
@@ -606,11 +606,11 @@ class dbImage extends dbObject
 		}
 	}
 	
-	function getImageHTML ( $width = false, $height = false, $mode = false, $effects = false )
+	function getImageHTML ( $width = false, $height = false, $mode = false, $effects = false, $bgcolor = '' )
 	{
 		if ( !$width ) $width = $this->Width;
 		if ( !$height ) $height = $this->Height;
-		$image = $this->getImageUrl ( $width, $height, $mode, $effects );
+		$image = $this->getImageUrl ( $width, $height, $mode, $effects, $bgcolor );
 		if ( !$mode ) $mode = '0';
 		if ( !$effects ) $effects = '0';
 		
