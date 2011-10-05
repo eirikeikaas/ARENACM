@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS `Comment` (
   `IsSticky` tinyint(4) default NULL,
   `IsLocked` tinyint(4) default NULL,
   `Moderation` bigint(11) default NULL,
-  `ElementType` bigint(11) default NULL,
+  `ElementType` varchar(255) NOT NULL,
   `ElementID` bigint(11) default NULL,
   `SortOrder` bigint(11) default NULL,
   PRIMARY KEY  (`ID`)
