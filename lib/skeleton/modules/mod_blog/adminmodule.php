@@ -89,6 +89,11 @@ if ( !function_exists ( 'listBlogs' ) )
 			$str = '';
 			foreach ( $blogs as $blog )
 			{
+				if ( list ( $image, ) = $blog->getObjects ( 'ObjectType = Image' ) )
+				{
+					$image = '<div style="float: right">' . $image->getImageHTML ( 100, 100, 'framed' ) . '</div>';
+				}
+				else $image = '';
 				$str .= '<table class="Overview LayoutColumns">';
 				$str .= '<tr class="' . ( $sw = ( $sw == 'sw2' ? 'sw1' : 'sw2' ) ) . '">';
 				$str .= '<td><strong>' . $blog->Title . '</strong></td>';
@@ -97,7 +102,7 @@ if ( !function_exists ( 'listBlogs' ) )
 				$str .= '<td style="width: 60px">' . ( $blog->IsPublished ? 'Publisert' : 'Arkivert' ) . '</td>';
 				$str .= '<td style="width: 190px">Vises fra: ' . ArenaDate ( DATE_FORMAT, $blog->DatePublish ) . '</td>';
 				$str .= '</tr>';
-				$str .= '<tr class="' . ( $sw = ( $sw == 'sw2' ? 'sw1' : 'sw2' ) ) . '"><td colspan="5">' . $blog->Leadin . '</td></tr>';
+				$str .= '<tr class="' . ( $sw = ( $sw == 'sw2' ? 'sw1' : 'sw2' ) ) . '"><td colspan="5">' . $image . $blog->Leadin . '</td></tr>';
 				
 				if ( $content->MainID == $editorcontent->MainID )
 				{
