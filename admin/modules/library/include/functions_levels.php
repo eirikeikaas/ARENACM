@@ -121,12 +121,12 @@ function getLevelContent( $lid )
 					$i = new dbImage ( $row->ID );
 					$icon = $i->getImageUrl ( 12, 12, 'framed' );
 					$act = 'editLibraryImage( \'' . $row->ID . '\' ); return false;';
-					$drag = 'dragger.startDrag ( this.getElementsByTagName ( \'td\' )[1].firstChild, { pickup: \'clone\', objectType: \'Image\', objectID: \'' . $row->ID . '\' } ); return false';
+					$drag = 'dragger.startDrag ( this.parentNode.getElementsByTagName ( \'td\' )[1].firstChild, { pickup: \'clone\', objectType: \'Image\', objectID: \'' . $row->ID . '\' } ); return false';
 				}
 				else 
 				{
 					$act = 'editLibraryFile( \'' . $row->ID . '\' ); return false;';
-					$drag = 'dragger.startDrag ( this.getElementsByTagName ( \'td\' )[1].firstChild, { pickup: \'clone\', objectType: \'File\', objectID: \'' . $row->ID . '\' } ); return false';
+					$drag = 'dragger.startDrag ( this.parentNode.getElementsByTagName ( \'td\' )[1].firstChild, { pickup: \'clone\', objectType: \'File\', objectID: \'' . $row->ID . '\' } ); return false';
 				}
 				
 				$ext = explode ( '.', $row->Filename ); $ext = $ext[ count ( $ext ) - 1 ];
@@ -210,13 +210,13 @@ function getLevelContent( $lid )
 				$drag = ' onclick="return false;" onmousedown="' . $drag . '" onstartdrag="return false;"';
 				
 				$str .= '
-					<tr id="' . ( $row->Type == 'Image' ? 'imagecontainer' : 'tfilecontainer' ) . $row->ID . '" onclick="' . $click . '" ondblclick="' . $act . '" class="sw' . ( $sw = ( $sw == 2 ? 1 : 2 ) ) . ' Listedcontainer"' . $drag . '>
+					<tr id="' . ( $row->Type == 'Image' ? 'imagecontainer' : 'tfilecontainer' ) . $row->ID . '" onclick="' . $click . '" ondblclick="' . $act . '" class="sw' . ( $sw = ( $sw == 2 ? 1 : 2 ) ) . ' Listedcontainer">
 						<td style="text-align: right; width: 24px"><input type="text" size="2" onchange="'.$onc.'" class="SmallNum" value="' . ($row->SortOrder?$row->SortOrder:'0') . '"/></td>
-						<td class="Icon" style="width: 24px"><div class="Container" style="padding: 3px"><img src="' . $icon . '" ></div></td>
-						<td>' . $row->Title . '</td>
-						<td>' . $row->Filename . '</td>
-						<td style="text-align: right">' . filesizetohuman ( $row->Filesize ) . '</td>
-						<td style="text-align: center">' . ArenaDate ( $row->DateModified, DATEFORMAT ) . '</td>
+						<td class="Icon" style="width: 24px"><div class="Container" style="padding: 3px"' . $drag . '><img src="' . $icon . '" ></div></td>
+						<td' . $drag . '>' . $row->Title . '</td>
+						<td' . $drag . '>' . $row->Filename . '</td>
+						<td style="text-align: right"' . $drag . '>' . filesizetohuman ( $row->Filesize ) . '</td>
+						<td style="text-align: center"' . $drag . '>' . ArenaDate ( $row->DateModified, DATEFORMAT ) . '</td>
 					</tr>
 				';
 				$im++;
