@@ -335,7 +335,11 @@ function showLibraryContent ( pos )
 			eval( extractScripts( this.getResponseText ( ) ).join("\n") );
 			initContentDropTarget ( );
 			checkLibraryTooltips ( );
-			var b =  document.getElementById ( 'currentlevel' ).getElementsByTagName ( 'B' );
+			var b = {};
+			if ( ge ( 'currentlevel' ) )
+			{
+				b =  document.getElementById ( 'currentlevel' ).getElementsByTagName ( 'B' );
+			}
 			if ( b.length )
 				document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i "' + b[ 0 ].innerHTML + '":';
 			else document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i hovedmappen:';
