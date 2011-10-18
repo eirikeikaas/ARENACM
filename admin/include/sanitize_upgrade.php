@@ -43,7 +43,7 @@ if ( !$info->load ( ) )
 // Oppgrader (liste over versioner)
 $versions = Array (
 	'1.99.1', '1.99.4', '1.99.5', '1.99.6', '1.99.7', '1.99.8', '1.99.9', 
-	'2.0.10', '2.0.12', '2.0.13', '2.0.14'
+	'2.0.10', '2.0.12', '2.0.13', '2.0.14', '2.0.15'
 );
 foreach ( $versions as $version )
 {
@@ -171,6 +171,40 @@ foreach ( $versions as $version )
 				$db->query ( '
 					ALTER TABLE `File` ADD DateTo datetime NOT NULL 
 				' );
+				break;
+			case '2.0.15':
+				$t = new cDatabaseTable ( 'ObjectConnectionGroup' );
+				$t->load ();
+				$found = false;
+				foreach ( $t->fields as $f )
+				{
+					if ( $f->Key == 'PRI' )
+						$found = true;
+				}
+				if ( !$found )
+				{
+					$db->query ( '
+						ALTER TABLE ObjectConnectionGroup
+						DROP ID
+					' );
+					$db->query ( '
+						ALTER TABLE ObjectConnectionGroup
+						ADD ID bigint(20) PRIMARY KEY auto_increment
+					' );
+				}
+				// Double check
+				$t = new cDatabaseTable ( 'ObjectConnectionGroup' );
+				$t->load ();
+				$found = false;
+				foreach ( $t->fields as $f )
+				{
+					if ( $f->Key == 'PRI' )
+						$found = true;
+				}
+				if ( !$found )
+				{
+					ArenaDir ( 'Still no primary key on ObjectConnectionGroup!' );
+				}
 				break;
 		}
 		$obj->DateUpdated = date ( 'Y-m-d H:i:s' );

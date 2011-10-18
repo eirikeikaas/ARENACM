@@ -16,7 +16,7 @@
 			<?if ( $this->cfgShowAuthor ) { ?>
 			<p class="Bold WrittenBy"><?= i18n ( 'written by' ) . ' ' . $this->blog->AuthorName ?></p>
 			<?}?>
-			<p class="Small Date"><?= i18n ( 'posted date' ) . ' ' . ArenaDate ( DATE_FORMAT, $this->blog->DateUpdated ) ?></p>
+			<p class="Small Date"><span class="Published"><?= i18n ( 'posted date' ) . '</span> <span class="Date">' . ArenaDate ( DATE_FORMAT, $this->blog->DateUpdated ) ?></span></p>
 			<div class="Block Leadin">
 				<?= ( $this->leadinLength > 0 && strlen ( strip_tags ( $this->blog->Leadin ) ) > $this->leadinLength ) ? ( substr ( strip_tags ( $this->blog->Leadin ), 0, $this->leadinLength - 3 ) . '...' ) : $this->blog->Leadin ?>
 			</div>
