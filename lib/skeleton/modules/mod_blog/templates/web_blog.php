@@ -21,12 +21,12 @@
 			<?= $this->blog->Body ?>
 		</div>
 	</div>
-	<hr/>
-	<p class="Block">
+	<hr class="BackUrl"/>
+	<p class="Block BackUrl">
 		<a href="<?= $this->content->getUrl ( ) ?>"><?= i18n ( 'Back to' ) ?> <?= strtolower ( $this->content->MenuTitle ) ?></a>
 	</p>
 	<div class="ClearBoth"></div>
-	<hr/>
+	<hr class="BackUrl"/>
 	<?if ( $this->comments ) { ?>
 	<h3><?= i18n ( 'Comments' ) ?>:</h3>
 	<hr/>
