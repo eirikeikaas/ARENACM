@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<title>
-			<?= $this->Title ? $this->Title : 'Blest ARENA v2' ?>
+			<?= $this->Title ? $this->Title : ( 'ARENACM v' . ARENA_VERSION ) ?>
 		</title>
 		<meta http-equiv="imagetoolbar" content="no" />
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -88,7 +88,7 @@
 			<?= $this->moduleOutput ?>
 			<br style="clear: both">
 			<div id="Footer">
-				Basert på ARENA CM v<?= ARENA_VERSION ?> | <?= i18n ( 'ARENA CM is available under the' ) ?> <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank"><?= i18n ( 'MPL License' ) ?></a> | <a href="admin.php?module=settings&function=about">Om ARENA Enterprise</a>
+				ARENACM v<?= ARENA_VERSION ?> | <?= i18n ( 'ARENA CM is available under the' ) ?> <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank"><?= i18n ( 'MPL License' ) ?></a> | <a href="admin.php?module=settings&function=about">Om ARENA Enterprise</a>
 			</div>
 		</div>
 	</body>
