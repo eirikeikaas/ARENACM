@@ -105,9 +105,37 @@ function savePage ( )
 				}
 			}
 		}
+		updateExtraFields ();
 		updateButtons ( );
 	}
 	pjax.send ( );
+}
+
+function updateExtraFields ()
+{
+	if ( !texteditor )
+		return false;
+	var eds = texteditor.editors;
+	for ( var a = 0; a < eds.length; a++ )
+	{
+		var j = new bajax ();
+		var info = eds[a].area.id.split ( '_' );
+		j.openUrl ( 'admin.php?module=extensions&extension=editor&action=refreshfield', 'post', true );
+		j.addVar ( 'fieldid', info[1] );
+		j.addVar ( 'fieldtype', info[2] );
+		j.addVar ( 'field', info[3] );
+		j.field = eds[a];
+		j.onload = function ()
+		{
+			if ( this.getResponseText () == '<!--fail-->' )
+			{
+				alert ( 'Kunne ikke hente felt informasjon.' );
+				return;
+			}
+			this.field.getDocument ().body.innerHTML = this.getResponseText ();
+		}
+		j.send ();
+	}
 }
 
 function subPage ( )
