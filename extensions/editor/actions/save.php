@@ -29,8 +29,8 @@ if ( $content->load ( $_POST[ 'cid' ] ) )
 	{
 		if ( $content->ContentType == 'text' )
 		{
-			$content->Intro = decodeArenaHTML ( $_POST[ 'Intro' ] );
-			$content->Body = decodeArenaHTML ( $_POST[ 'Body' ] );
+			$content->Intro = decodeArenaHTML ( encodeArenaHTML ( decodeArenaHTML ( $_POST[ 'Intro' ] ) ) );
+			$content->Body = decodeArenaHTML ( encodeArenaHTML ( decodeArenaHTML ( $_POST[ 'Body' ] ) ) );
 		}
 		$content->Title = $_POST[ 'Title' ];
 		$content->MenuTitle = $_POST[ 'MenuTitle' ];

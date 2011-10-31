@@ -72,12 +72,12 @@ if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 						$of->DataString = stripslashes ( $_POST[ 'fieldData' ] );
 						break;
 					case 'text':
-						$of->DataText = encodeArenaHTML ( $_POST[ 'fieldData' ] );
+						$of->DataText = encodeArenaHTML ( decodeArenaHTML ( encodeArenaHTML  ( $_POST[ 'fieldData' ] ) ) );
 						break;
 					case 'contentmodule':
 						break;
 					case 'leadin':
-						$of->DataText = encodeArenaHTML ( $_POST[ 'fieldData' ] );
+						$of->DataText = encodeArenaHTML ( decodeArenaHTML ( encodeArenaHTML ( $_POST[ 'fieldData' ] ) ) );
 						break;
 					case 'newscategory':
 						$of->DataInt = stripslashes ( $_POST[ 'fieldData' ] );
@@ -99,7 +99,7 @@ if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 			}
 			else
 			{
-				$workcopy->Body = encodeArenaHTML ( $_POST[ 'fieldData' ] );
+				$workcopy->Body = encodeArenaHTML ( decodeArenaHTML ( encodeArenaHTML ( $_POST[ 'fieldData' ] ) ) );
 			}
 		}
 

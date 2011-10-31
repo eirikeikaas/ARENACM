@@ -2242,7 +2242,9 @@ class dbObject
 					{
 						case 'leadin':
 						case 'text':
-							$obj->$field = decodeArenaHTML ( $v );
+							// Here we make sure that the encode and decode functions match
+							// explains multiple passes
+							$obj->$field = decodeArenaHTML ( encodeArenaHTML ( decodeArenaHTML ( $v ) ) );
 							break;
 						default:
 							$obj->$field = trim ( $v );
