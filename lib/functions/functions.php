@@ -1356,7 +1356,7 @@ function cleanHTMLElement ( $string, $level = 0 )
 		$illegals = array ( 
 			'font-weight', 'font-size', 'margin', 'border', 'padding', '-moz', 
 			'-webkit', '-o', '-khtml', 'line-height', '-apple', 'apple', 'mso',
-			'-mso'
+			'-mso', 'text-ident', 'line-height'
 		);
 		foreach ( $illegals as $illegal )
 		{
@@ -1388,6 +1388,14 @@ function cleanHTMLElement ( $string, $level = 0 )
 		}
 		$string = preg_replace ( "/(<font [^>]*>)/i", '', $string );
 	}
+	// Office crap
+	$string = preg_replace ( "/\<w[^>]*?\>/i", "", $string );
+	$string = preg_replace ( "/\<m[^>]*?\>/i", "", $string );
+	$string = preg_replace ( "/\<\/m[^>]*?\>/i", "", $string );
+	$string = preg_replace ( "/\<\/w[^>]*?\>/i", "", $string );
+	$string = preg_replace ( "/\<\![\w\W]*\-\-\>/i", "", $string );
+	$string = preg_replace ( "/\<xml[\w\W]*xml\>/i", "", $string );
+	
 	$string = preg_replace ( "/(<form [^>]*>)/i", '', $string );
 	$string = str_replace ( 'style=""', '', $string );
 	$string = str_replace ( '<div', '<p', $string );
