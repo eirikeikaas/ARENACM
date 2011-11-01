@@ -41,7 +41,10 @@ if ( $p->load ( $fieldObject->DataInt ) )
 			$p->{"_locked_".$fieldObject->Name} = 'true';
 			if ( $options->Mode == 'mode_brief' )
 			{
-				$str .= '<li><a href="' . $p->getUrl () . '">' . $p->MenuTitle . '</a></li>';
+				if ( $content->MainID == $p->MainID )
+					$c = ' current';
+				else $c = '';
+				$str .= '<li class="' . $p->RouteName . $c . '"><a href="' . $p->getUrl () . '">' . $p->MenuTitle . '</a></li>';
 			}
 			else
 			{
