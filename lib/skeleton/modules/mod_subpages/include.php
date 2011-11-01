@@ -1,9 +1,9 @@
 <?php
 
-function listSubpageLevels ( $p, $currlev, $maxlevels, $fieldObject, $content )
+function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, $options )
 {
 	$subpages = new dbContent ();
-	$subpages->Parent = $p->MainID;
+	$subpages->Parent = $pp->MainID;
 	$subpages->addClause ( 'WHERE', 'MainID = ID AND !IsDeleted' );
 	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
 	$str = '';
