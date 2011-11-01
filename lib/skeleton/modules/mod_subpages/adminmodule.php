@@ -32,15 +32,15 @@ if ( $_REQUEST[ 'action' ] && $_REQUEST[ 'action' ] == 'subpages_saveoption' )
 
 $options = CreateObjectFromString ( $fieldObject->DataMixed );
 
-$modeOptions = '';
+$mode_Options = '';
 foreach ( 
 	array ( 
 		'mode_full'=>'Vis alt undersideinnhold', 
-		'mode_brief'=>'Vis kun lenker til sidene' ) as $mode=>$val
+		'mode_brief'=>'Vis kun lenker til sidene' ) as $mode_=>$val
 )
 {
-	$s = $options->Mode == $mode ? ' selected="selected"' : '';
-	$modeOptions .= '<option value="' . $mode . '"' . $s . '>' . $val . '</option>';
+	$s = $options->Mode == $mode_ ? ' selected="selected"' : '';
+	$mode_Options .= '<option value="' . $mode_ . '"' . $s . '>' . $val . '</option>';
 }
 
 $module = '
@@ -54,7 +54,7 @@ $module = '
 			</td>
 			<td valign="middle">
 				<select id="subpagesmode_' . $fieldObject->ID . '">
-				' . $modeOptions . '
+				' . $mode_Options . '
 				</select>
 			</td>
 		</tr>
