@@ -25,8 +25,22 @@ i18nAddLocalePath ( 'lib/skeleton/modules/mod_subpages/locale' );
 if ( $_REQUEST[ 'action' ] && $_REQUEST[ 'action' ] == 'subpages_saveoption' )
 {
 	$fieldObject->DataInt = $_REQUEST[ 'sid' ];
+	$fieldObject->DataMixed = $_REQUEST[ 'mixed' ];
 	$fieldObject->save ();
 	die ('ok' );
+}
+
+$options = CreateObjectFromString ( $fieldObject->DataMixed );
+
+$modeOptions = '';
+foreach ( 
+	array ( 
+		'mode_full'=>'Vis alt undersideinnhold', 
+		'mode_brief'=>'Vis kun lenker til sidene' ) as $mode=>$val
+)
+{
+	$s = $options->Mode == $mode ? ' selected="selected"' : '';
+	$modeOptions .= '<option value="' . $mode . '"' . $s . '>' . $val . '</option>';
 }
 
 $module = '
@@ -38,6 +52,11 @@ $module = '
 					' . getSiteStructureOptions ( $fieldObject->DataInt ) . '
 				</select>
 			</td>
+			<td valign="middle">
+				<select id="subpagesmode_' . $fieldObject->ID . '">
+				' . $modeOptions . '
+				</select>
+			</td>
 		</tr>
 	</table>
 	<script type="text/javascript">
@@ -46,6 +65,8 @@ $module = '
 			var j = new bajax ();
 			j.openUrl ( \'admin.php?module='.$_REQUEST['module'].'&extension='.$_REQUEST['extension'].'&action=subpages_saveoption\', \'post\', true );
 			j.addVar ( \'sid\', document.getElementById ( \'subpages_'.$fieldObject->ID.'\' ).value );
+			var s = "Mode\t"+ge(\'subpagesmode_' . $fieldObject->ID . '\').value;
+			j.addVar ( \'mixed\', s );
 			j.onload = function (){};
 			j.send ();
 		}

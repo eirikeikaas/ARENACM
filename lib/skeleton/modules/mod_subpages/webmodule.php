@@ -27,15 +27,31 @@ if ( $p->load ( $fieldObject->DataInt ) )
 	$subpages->Parent = $p->MainID;
 	$subpages->addClause ( 'WHERE', 'MainID = ID' );
 	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
+	$options = CreateObjectFromString ( $fieldObject->DataMixed );
 	$str = '';
 	if ( $subpages = $subpages->find ( ) )
 	{
+		if ( $options->Mode == 'mode_brief' )
+		{
+			$str .= '<ul>';
+		}
 		foreach ( $subpages as $p )
 		{
 			$str .= '<div class="Block '.$p->RouteName . '">';
 			$p->{"_locked_".$fieldObject->Name} = 'true';
-			$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
+			if ( $options->Mode == 'mode_brief' )
+			{
+				$str .= '<li><a href="' . $p->getUrl () . '">' . $p->MenuTitle . '</a></li>';
+			}
+			else
+			{
+				$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
+			}
 			$str .= '</div>';
+		}
+		if ( $options->Mode == 'mode_brief' )
+		{
+			$str .= '</ul>';
 		}
 	}
 	$module = $str;
