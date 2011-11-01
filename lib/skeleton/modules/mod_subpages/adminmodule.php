@@ -43,6 +43,13 @@ foreach (
 	$mode_Options .= '<option value="' . $mode_ . '"' . $s . '>' . $val . '</option>';
 }
 
+$level_Options = '';
+for ( $a = 0; $a < 10; $a++ )
+{
+	$s = $options->Levels == $a ? ' selected="selected"' : '';
+	$level_Options .= '<option value="' . $a . '"' . $s . '>' . $a . '</option>';
+}
+
 $module = '
 	<table>
 		<tr>
@@ -57,6 +64,11 @@ $module = '
 				' . $mode_Options . '
 				</select>
 			</td>
+			<td valign="middle">
+				<select id="subpageslevels_' . $fieldObject->ID . '">
+				' . $level_Options . '
+				</select>
+			</td>
 		</tr>
 	</table>
 	<script type="text/javascript">
@@ -66,6 +78,7 @@ $module = '
 			j.openUrl ( \'admin.php?module='.$_REQUEST['module'].'&extension='.$_REQUEST['extension'].'&action=subpages_saveoption\', \'post\', true );
 			j.addVar ( \'sid\', document.getElementById ( \'subpages_'.$fieldObject->ID.'\' ).value );
 			var s = "Mode\t"+ge(\'subpagesmode_' . $fieldObject->ID . '\').value;
+			s += "\nLevels\t" +ge(\'subpageslevels_' . $fieldObject->ID . '\').value;
 			j.addVar ( \'mixed\', s );
 			j.onload = function (){};
 			j.send ();

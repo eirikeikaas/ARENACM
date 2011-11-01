@@ -21,43 +21,11 @@ Rune Nilssen
 *******************************************************************************/
 
 $p = new dbContent ( );
+include_once ( 'lib/skeleton/modules/mod_subpages/include.php' );
 if ( $p->load ( $fieldObject->DataInt ) )
 {
-	$subpages = new dbContent ();
-	$subpages->Parent = $p->MainID;
-	$subpages->addClause ( 'WHERE', 'MainID = ID AND !IsDeleted' );
-	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
 	$options = CreateObjectFromString ( $fieldObject->DataMixed );
-	$str = '';
-	if ( $subpages = $subpages->find ( ) )
-	{
-		if ( $options->Mode == 'mode_brief' )
-		{
-			$str .= '<ul>';
-		}
-		foreach ( $subpages as $p )
-		{
-			$str .= '<div class="Block '.$p->RouteName . '">';
-			$p->{"_locked_".$fieldObject->Name} = 'true';
-			if ( $options->Mode == 'mode_brief' )
-			{
-				if ( $content->MainID == $p->MainID )
-					$c = ' current';
-				else $c = '';
-				$str .= '<li class="' . $p->RouteName . $c . '"><a href="' . $p->getUrl () . '">' . $p->MenuTitle . '</a></li>';
-			}
-			else
-			{
-				$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
-			}
-			$str .= '</div>';
-		}
-		if ( $options->Mode == 'mode_brief' )
-		{
-			$str .= '</ul>';
-		}
-	}
-	$module = $str;
+	$module = listSubpageLevels ( $p, 0, $options->Levels > 0 ? $options->Levels : 0, $fieldObject, $content );
 }
 else $module = '';
 
