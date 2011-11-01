@@ -7,6 +7,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 	$subpages->addClause ( 'WHERE', 'MainID = ID AND !IsDeleted' );
 	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
 	$str = '';
+	$open = false;
 	if ( $subpages = $subpages->find ( ) )
 	{
 		if ( $options->Mode == 'mode_brief' )
@@ -22,20 +23,31 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 				if ( $content->MainID == $p->MainID )
 					$c = ' current';
 				else $c = '';
-				$str .= '<li class="' . $p->RouteName . $c . '"><a href="' . $p->getUrl () . '">' . $p->MenuTitle . '</a>';
 				$tl = $currlev + 1;
+				$istr = '';
 				if ( $tl < $maxlevels )
 				{
-					$str .= listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content, $options );
+					$a = listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content, $options );
+					if ( $a[0] )
+						$istr = $a[0];
+					if ( $a[1] )
+						$open = $a[1];
 				}
+				$str .= '<li class="' . $p->RouteName . $c . '' . ( $open ? ' open' : '' ) . '"><a href="' . $p->getUrl () . '">' . $p->MenuTitle . '</a>';
+				$str .= $istr;
 				$str .= '</li>';
+				if ( $c ) $open = 1; // subpage is current
 			}
 			else
 			{
 				$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
 				if ( $tl < $maxlevels )
 				{
-					$str .= listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content, $options );
+					$a = listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content, $options );
+					if ( $a[0] )
+						$str .= $a[0];
+					if ( $a[1] )
+						$open = $a[1];
 				}
 			}
 			$str .= '</div>';
@@ -45,7 +57,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 			$str .= '</ul>';
 		}
 	}
-	return $str;
+	return array ( $str, $open );
 }
 
 ?>

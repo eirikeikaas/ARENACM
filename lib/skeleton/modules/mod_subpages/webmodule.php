@@ -25,7 +25,7 @@ include_once ( 'lib/skeleton/modules/mod_subpages/include.php' );
 if ( $p->load ( $fieldObject->DataInt ) )
 {
 	$options = CreateObjectFromString ( $fieldObject->DataMixed );
-	$module = listSubpageLevels ( $p, 0, $options->Levels > 0 ? $options->Levels : 0, $fieldObject, $content, $options );
+	list ( $module, ) = listSubpageLevels ( $p, 0, $options->Levels > 0 ? $options->Levels : 0, $fieldObject, $content, $options );
 }
 else $module = '';
 
