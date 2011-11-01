@@ -26,7 +26,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 				$tl = $currlev + 1;
 				if ( $tl < $maxlevels )
 				{
-					$str .= listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content );
+					$str .= listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content, $options );
 				}
 				$str .= '</li>';
 			}
@@ -35,7 +35,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 				$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
 				if ( $tl < $maxlevels )
 				{
-					$str .= listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content );
+					$str .= listSubpageLevels ( $p, $tl, $maxlevels, $fieldObject, $content, $options );
 				}
 			}
 			$str .= '</div>';
