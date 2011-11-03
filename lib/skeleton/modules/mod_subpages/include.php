@@ -7,7 +7,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 	$subpages->addClause ( 'WHERE', 'MainID = ID AND !IsDeleted' );
 	$subpages->addClause ( 'ORDER BY', 'SortOrder ASC, ID DESC' );
 	$str = '';
-	$open = false;
+	$oneOpen = false;
 	if ( $subpages = $subpages->find ( ) )
 	{
 		if ( $options->Mode == 'mode_brief' )
@@ -16,6 +16,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 		}
 		foreach ( $subpages as $p )
 		{
+			$open = false;
 			$str .= '<div class="Block '.$p->RouteName . '">';
 			$p->{"_locked_".$fieldObject->Name} = 'true';
 			if ( $options->Mode == 'mode_brief' )
@@ -51,13 +52,15 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 				}
 			}
 			$str .= '</div>';
+			if ( $open )
+				$oneOpen = true;
 		}
 		if ( $options->Mode == 'mode_brief' )
 		{
 			$str .= '</ul>';
 		}
 	}
-	return array ( $str, $open );
+	return array ( $str, $oneOpen );
 }
 
 ?>
