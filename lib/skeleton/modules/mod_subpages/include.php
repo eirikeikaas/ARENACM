@@ -17,7 +17,6 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 		foreach ( $subpages as $p )
 		{
 			$open = false;
-			$str .= '<div class="Block '.$p->RouteName . '">';
 			$p->{"_locked_".$fieldObject->Name} = 'true';
 			if ( $options->Mode == 'mode_brief' )
 			{
@@ -41,6 +40,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 			}
 			else
 			{
+				$str .= '<div class="Block '.$p->RouteName . '">';
 				$str .= preg_replace ( '/id\=\"([^"]*?)\"/i', 'class="$1"', $p->renderExtraFields () );
 				if ( $tl < $maxlevels )
 				{
@@ -50,8 +50,8 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 					if ( $a[1] )
 						$open = $a[1];
 				}
+				$str .= '</div>';
 			}
-			$str .= '</div>';
 			if ( $open )
 				$oneOpen = true;
 		}
