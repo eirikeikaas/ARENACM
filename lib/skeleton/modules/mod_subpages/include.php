@@ -12,7 +12,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 	{
 		if ( $options->Mode == 'mode_brief' )
 		{
-			$str .= '<ul>';
+			$str .= '<div class="SubListing"><ul>';
 		}
 		foreach ( $subpages as $p )
 		{
@@ -57,7 +57,7 @@ function listSubpageLevels ( $pp, $currlev, $maxlevels, $fieldObject, $content, 
 		}
 		if ( $options->Mode == 'mode_brief' )
 		{
-			$str .= '</ul>';
+			$str .= '</ul></div>';
 		}
 	}
 	return array ( $str, $oneOpen );
