@@ -386,19 +386,24 @@ function showContentButtons ( )
 			var dv1 = document.createElement ( 'span' );
 			dv1.id = 'ContentButtonsSmall';
 			dv1.innerHTML = r[ 1 ];
-			document.getElementById ( 'ContentButtonsSmall' ).parentNode.replaceChild ( dv1, document.getElementById ( 'ContentButtonsSmall' ) );
+			if ( ge ( 'ContentButtonsSmall' ) )
+				document.getElementById ( 'ContentButtonsSmall' ).parentNode.replaceChild ( dv1, document.getElementById ( 'ContentButtonsSmall' ) );
 		}
 		if ( r[0] )
 		{
 			var dv2 = document.createElement ( 'div' );
 			dv2.id = 'ContentButtons';
 			dv2.innerHTML = r[ 0 ];
-			document.getElementById ( 'ContentButtons' ).parentNode.replaceChild ( dv2, document.getElementById ( 'ContentButtons' ) );
+			if ( ge ( 'ContentButtons' ) )
+				document.getElementById ( 'ContentButtons' ).parentNode.replaceChild ( dv2, document.getElementById ( 'ContentButtons' ) );
 		}
 		else
 		{
-			document.getElementById ( 'ContentButtons' ).innerHTML = '';
-			document.getElementById ( 'ContentButtonsSmall' ).innerHTML = '';
+			if ( ge ( 'ContentButtons' ) && ge ( 'ContentButtonsSmall' ) )
+			{
+				document.getElementById ( 'ContentButtons' ).innerHTML = '';
+				document.getElementById ( 'ContentButtonsSmall' ).innerHTML = '';
+			}
 		}
 		
 		document.lgjax = 0;

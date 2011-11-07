@@ -40,6 +40,7 @@ if ( !( $ocnt = $ocnt->findSingle ( ) ) )
 	$cnt->ContentGroups = 'Topp, Felt1, Felt2, Bunn';
 	$cnt->SystemName = 'root';
 	$cnt->save ( );
+	$cnt->ID = 0;
 	$cnt->copyPermissions ( $ocnt->ID );
 	$cnt->MainID = $cnt->ID;
 	$cnt->save ( );

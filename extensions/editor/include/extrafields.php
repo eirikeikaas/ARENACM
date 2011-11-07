@@ -28,11 +28,11 @@ function renderExtraFields ( $obj )
 {
 	global $extdir;
 	$db =& dbObject::globalValue ( 'database' );
+	if ( !( $groups = explode ( ',', $obj->ContentGroups ) ) )
+		$groups = array ( 'Default' );
+	$modstr_ = '';
 	if ( $obj && $obj->loadExtraFields ( ) )
 	{
-		$modstr_ = '';
-		if ( !( $groups = explode ( ',', $obj->ContentGroups ) ) )
-			$groups = array ( 'Default' );
 		$spacerHidden = false;
 		foreach ( array ( 'visible', 'hidden' ) as $mode )
 		{
@@ -169,53 +169,54 @@ function renderExtraFields ( $obj )
 				}
 			}
 		}
-		
-		// Show orphan fields that has no valid content group
-		if ( $groups )
-		{
-			$cgroups = '';
-			foreach ( $groups as $cg ) $cgroups .= '"' . trim ( $cg ) . '",';
-			while ( substr ( $cgroups, -1, 1 ) == ',' )
-				$cgroups = substr ( $cgroups, 0, strlen ( $cgroups ) -1 );
-		}
-		else $cgroups = '';
-			
-		if ( $rows = $db->fetchObjectRows ( '
-			SELECT * FROM 
-			(
-				(
-					SELECT ID, `Name`, ContentGroup, SortOrder, `Type`, "ContentDataSmall" AS `Table` 
-					FROM 
-					ContentDataSmall 
-					WHERE 
-						ContentGroup NOT IN (' . $cgroups . ') AND
-						ContentID=\'' . $obj->ID . '\' AND
-						ContentTable=\'ContentElement\'
-				)
-				UNION
-				(
-					SELECT ID, `Name`, ContentGroup, SortOrder, `Type`, "ContentDataBig" AS `Table` 
-					FROM 
-					ContentDataBig 
-					WHERE 
-						ContentGroup NOT IN (' . $cgroups . ') AND
-						ContentID=\'' . $obj->ID . '\' AND
-						ContentTable=\'ContentElement\'
-				)
-			) as z
-		' ) )
-		{
-			$modstr_ .= '<div class="SpacerSmallColored"></div>';
-			$otpl = new cTemplate ( $extdir . '/templates/ext/orphan.php' );
-			foreach ( $rows as $row )
-			{
-				$otpl->field =& $row;
-				$modstr_ .= $otpl->render ();
-			}
-			$modstr_ .= '<div class="SpacerSmall"></div>';
-		}
-		return $modstr_;
 	}
-	else return '<p>Intet innhold er finnes på denne siden.</p>';
+	// Show orphan fields that has no valid content group
+	if ( $groups )
+	{
+		$cgroups = '';
+		foreach ( $groups as $cg ) $cgroups .= '"' . trim ( $cg ) . '",';
+		while ( substr ( $cgroups, -1, 1 ) == ',' )
+			$cgroups = substr ( $cgroups, 0, strlen ( $cgroups ) -1 );
+	}
+	else $cgroups = '';
+	if ( $rows = $db->fetchObjectRows ( '
+		SELECT * FROM 
+		(
+			(
+				SELECT ID, `Name`, ContentGroup, SortOrder, `Type`, "ContentDataSmall" AS `Table` 
+				FROM 
+				ContentDataSmall 
+				WHERE 
+					ContentGroup NOT IN (' . $cgroups . ') AND
+					ContentID=\'' . $obj->ID . '\' AND
+					ContentTable=\'ContentElement\'
+			)
+			UNION
+			(
+				SELECT ID, `Name`, ContentGroup, SortOrder, `Type`, "ContentDataBig" AS `Table` 
+				FROM 
+				ContentDataBig 
+				WHERE 
+					ContentGroup NOT IN (' . $cgroups . ') AND
+					ContentID=\'' . $obj->ID . '\' AND
+					ContentTable=\'ContentElement\'
+			)
+		) as z
+	' ) )
+	{
+		$modstr_ .= '<div class="SpacerSmallColored"></div>';
+		$otpl = new cTemplate ( $extdir . '/templates/ext/orphan.php' );
+		foreach ( $rows as $row )
+		{
+			$otpl->field =& $row;
+			$modstr_ .= $otpl->render ();
+		}
+		$modstr_ .= '<div class="SpacerSmall"></div>';
+	}
+	if ( !$modstr_ )
+	{
+		return '<p>Intet innhold er finnes på denne siden.</p>';
+	}
+	return $modstr_;
 }
 ?>
