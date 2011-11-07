@@ -34,8 +34,11 @@ function updateLibraryLevelTree ( html )
 	tree.innerHTML = html;
 		
 	if ( !isIE ) makeCollapsable ( tree );
-	document.getElementById ( 'LibraryLevelTree' ).parentNode.replaceChild ( tree, document.getElementById ( 'LibraryLevelTree' ) );
-	if ( isIE ) makeCollapsable ( tree );
+	if ( ge ( 'LibraryLevelTree' ) )
+	{
+		document.getElementById ( 'LibraryLevelTree' ).parentNode.replaceChild ( tree, document.getElementById ( 'LibraryLevelTree' ) );
+		if ( isIE ) makeCollapsable ( tree );
+	}
 }
 
 /** 
@@ -317,7 +320,6 @@ function setLibraryLevel ( varlev )
 **/
 function showLibraryContent ( pos )
 {
-	
 	if( !pos ) pos = 0;
 
 	showContentButtons ( );
@@ -345,7 +347,6 @@ function showLibraryContent ( pos )
 			else document.getElementById ( 'Innholdsheader' ).innerHTML = 'Innhold i hovedmappen:';
 		}
 	}
-	
 	if( !document.getElementById ( 'LibraryContentDiv' ) )
 		document.getElementById ( 'libMainCol' ).innerHTML = defaultMainCol;
 	
@@ -387,7 +388,9 @@ function showContentButtons ( )
 			dv1.id = 'ContentButtonsSmall';
 			dv1.innerHTML = r[ 1 ];
 			if ( ge ( 'ContentButtonsSmall' ) )
+			{
 				document.getElementById ( 'ContentButtonsSmall' ).parentNode.replaceChild ( dv1, document.getElementById ( 'ContentButtonsSmall' ) );
+			}
 		}
 		if ( r[0] )
 		{
@@ -395,7 +398,9 @@ function showContentButtons ( )
 			dv2.id = 'ContentButtons';
 			dv2.innerHTML = r[ 0 ];
 			if ( ge ( 'ContentButtons' ) )
+			{
 				document.getElementById ( 'ContentButtons' ).parentNode.replaceChild ( dv2, document.getElementById ( 'ContentButtons' ) );
+			}
 		}
 		else
 		{
@@ -417,43 +422,44 @@ function showContentButtons ( )
 **/
 function initContentDropTarget ( )
 {
-	var lcd = ge ( 'LibraryContentDiv' ).parentNode;
-	dragger.removeTarget ( lcd );
-
-	lcd.onDragDrop = function ( element )
+	if ( ge ( 'LibraryContentDiv' ) )
 	{
-		if ( 
-			typeof ( dragger.config.objectType ) != "undefined" && 
-			typeof ( dragger.config.objectID ) != "undefined"
-		)
+		var lcd = ge ( 'LibraryContentDiv' ).parentNode;
+		dragger.removeTarget ( lcd );
+		lcd.onDragDrop = function ( element )
 		{
 			if ( 
-				( dragger.config.objectType == "Image"	) || ( dragger.config.objectType == "File" ) || ( dragger.config.objectType == "Folder" )
+				typeof ( dragger.config.objectType ) != "undefined" && 
+				typeof ( dragger.config.objectID ) != "undefined"
 			)
 			{
-				moveItem( 
-					dragger.config.objectType, dragger.config.objectID, 
-					'Folder', currentLibraryLevel // currentLibraryLevel is global variable
-				);
+				if ( 
+					( dragger.config.objectType == "Image"	) || ( dragger.config.objectType == "File" ) || ( dragger.config.objectType == "Folder" )
+				)
+				{
+					moveItem( 
+						dragger.config.objectType, dragger.config.objectID, 
+						'Folder', currentLibraryLevel // currentLibraryLevel is global variable
+					);
+				}
+				else
+				{
+					document.getElementById( 'LibraryMessage' ).innerHTML = "<p class='error'>Du kan kun flytte mapper, bilder eller filer.</p>";
+				}
 			}
-			else
-			{
-				document.getElementById( 'LibraryMessage' ).innerHTML = "<p class='error'>Du kan kun flytte mapper, bilder eller filer.</p>";
-			}
+			this.style.border = this.oldstyle;
 		}
-		this.style.border = this.oldstyle;
+		lcd.onDragOver = function ()
+		{
+			this.oldstyle = this.style.border;
+			this.style.border = '1px solid #00aa00';
+		}
+		lcd.onDragOut = function ()
+		{
+			this.style.border = this.oldstyle;
+		}
+		dragger.addTarget( lcd );
 	}
-	lcd.onDragOver = function ()
-	{
-		this.oldstyle = this.style.border;
-		this.style.border = '1px solid #00aa00';
-	}
-	lcd.onDragOut = function ()
-	{
-		this.style.border = this.oldstyle;
-	}
-	
-	dragger.addTarget( lcd );
 }
 
 addEvent ( 'onkeydown', function ( e )
