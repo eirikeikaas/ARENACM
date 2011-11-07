@@ -631,15 +631,12 @@ function i18nAddLocalePath ( $path )
 
 function i18n ( $word, $lang = false, $path = false, $admin = false )
 {
-	global $locale_rescan, $i18n_translation_paths;
-
+	global $locale_rescan, $i18n_translation_paths, $Session;
 	if ( ARENAMODE == 'admin' ) $admin = true;
-	
 	if ( !$lang && is_object ( $GLOBALS[ "Session" ] ) ) 
-		$lang = $GLOBALS[ "Session" ]->LanguageCode;
+		$lang = $admin ? $Session->AdminLanguageCode : $Session->LanguageCode;
 	else if ( !$lang ) return $word;
 	if ( is_numeric ( $word ) ) return $word; 
-
 	$trans = Array ( );
 	if ( empty ( $GLOBALS[ "locale_$lang" ] ) || in_array ( 'locale_rescan', $GLOBALS ) )
 	{
@@ -1356,7 +1353,7 @@ function cleanHTMLElement ( $string, $level = 0 )
 		$illegals = array ( 
 			'font-weight', 'font-size', 'margin', 'border', 'padding', '-moz', 
 			'-webkit', '-o', '-khtml', 'line-height', '-apple', 'apple', 'mso',
-			'-mso', 'text-ident', 'line-height'
+			'-mso'
 		);
 		foreach ( $illegals as $illegal )
 		{
@@ -1388,14 +1385,6 @@ function cleanHTMLElement ( $string, $level = 0 )
 		}
 		$string = preg_replace ( "/(<font [^>]*>)/i", '', $string );
 	}
-	// Office crap
-	$string = preg_replace ( "/\<w[^>]*?\>/i", "", $string );
-	$string = preg_replace ( "/\<m[^>]*?\>/i", "", $string );
-	$string = preg_replace ( "/\<\/m[^>]*?\>/i", "", $string );
-	$string = preg_replace ( "/\<\/w[^>]*?\>/i", "", $string );
-	$string = preg_replace ( "/\<\![\w\W]*\-\-\>/i", "", $string );
-	$string = preg_replace ( "/\<xml[\w\W]*xml\>/i", "", $string );
-	
 	$string = preg_replace ( "/(<form [^>]*>)/i", '', $string );
 	$string = str_replace ( 'style=""', '', $string );
 	$string = str_replace ( '<div', '<p', $string );
