@@ -93,7 +93,7 @@ function listFolders ( $str, $field )
 			if ( $fld->load ( $id ) )
 			{
 				$str .= '<tr class="sw' . ( $sw = ( $sw == 1 ? 2 : 1 ) ) . '">';
-				$str .= '<td width="100%">' . $fld->Name . '</td>';
+				$str .= '<td width="100%"><a href="admin.php?module=library&lid=' . $fld->ID . '">' . $fld->Name . '</a></td>';
 				$str .= '<td><a onclick="agalRemoveBrick(' . $fld->ID . ', ' . $field->ID . ')" href="javascript:void(0)"><img src="admin/gfx/icons/brick_delete.png" border="0"/></a></td>';
 				$str .= '</tr>';
 			}
