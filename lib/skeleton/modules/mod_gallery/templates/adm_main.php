@@ -7,13 +7,9 @@
 							<h2 class="BlockHead">
 								<?= i18n ( 'gal_Preview' ) ?>
 							</h2>
-							<div class="BlockContainer">
-								<p>
-									<strong>Heading:</strong> <input type="text" size="50" style="width: 300px" value="<?= $this->Heading ?>" id="galHeading_<?= $this->field->ID ?>"/>
-								</p>
+							<div class="BlockContainer" style="padding: 2px">
 								<div id="gal_preview">
-									<div class="Container" style="background: #222222">
-										<?= $this->preview ?>
+									<div class="Container" style="background: url(<?= $this->preview ?>); padding: 2px">
 										<br style="clear: both"/>
 									</div>
 								</div>
@@ -30,6 +26,9 @@
 									<img src="admin/gfx/icons/wrench.png"/> Innstillinger
 								</div>
 								<div class="page" id="pageImageschoice">
+									<p>
+										<strong>Heading:</strong> <input type="text" size="50" style="width: 300px" value="<?= $this->Heading ?>" id="galHeading_<?= $this->field->ID ?>"/>
+									</p>
 									<div class="Container">
 										<select onchange="addSlideshowFolder(this)">
 											<option>Legg til slideshow mappe:</option>

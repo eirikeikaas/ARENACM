@@ -75,7 +75,7 @@ function getPreview ( $settings, $field )
 			$i = new dbImage ( );
 			$i->addClause ( 'WHERE', 'ImageFolder=\'' . $folders[0] . '\'' );
 			if ( $i = $i->findSingle () )
-				$str = $i->getImageHTML ( 400, 140, 'framed' );
+				$str = $i->getImageUrl ( 400, 200, 'proximity' );
 		}
 		if ( !$str ) $str = '<p>Ingen bilder er lagt til.</p>'; 
 	}

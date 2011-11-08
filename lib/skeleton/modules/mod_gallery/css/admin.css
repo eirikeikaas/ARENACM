@@ -1,6 +1,10 @@
-#gal_preview img
+#gal_preview .Container
 {
-	display: block;
+	height: 200px;
+	background-position: center center !important;
+	background-repeat: no-repeat !important;
+	background-size: auto 100% !important;
+	background-color: black !important;
 }
 #gal_preview br
 {
