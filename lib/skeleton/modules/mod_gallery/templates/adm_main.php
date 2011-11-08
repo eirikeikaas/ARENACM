@@ -333,7 +333,7 @@
 						j.openUrl ( 'admin.php?module=extensions&extension=<?= $_REQUEST[ 'extension' ] ?>&modaction=preview', 'post', true );
 						j.onload = function ()
 						{
-							ge( 'gal_preview' ).style.backgroundImage = this.getResponseText();
+							ge( 'gal_preview' ).getElementsByTagName ( 'div' )[0].style.backgroundImage = 'url(' + this.getResponseText() + ')';
 						}
 						j.send();
 					}
