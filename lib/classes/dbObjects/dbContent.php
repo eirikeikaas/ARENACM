@@ -75,7 +75,12 @@ class dbContent extends dbObject
 				$this->_contentGroups[] = trim ( $g );
 			}
 		}
-		if ( $this->ID ) return true;
+		if ( $this->ID ) 
+		{
+			if ( $this->Language != $this->_language )
+				$this->_language = $this->Language;
+			return true;
+		}
 		return false;
 	}
 	
