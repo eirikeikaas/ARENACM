@@ -3,6 +3,7 @@
 		<title>
 			<?= ( defined ( 'SITE_TITLE' ) ? SITE_TITLE : SITE_ID ) . ' - ' . $this->page->Title . $this->page->ExtraTitle ?>
 		</title>
+		<meta name="viewport" content="initial-scale=1"/>
 	</head><?
 		$agent = strtolower ( $_SERVER[ 'HTTP_USER_AGENT' ] );
 		if ( strstr ( $agent, 'webkit' ) )
