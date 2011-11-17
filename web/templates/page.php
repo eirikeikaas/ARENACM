@@ -20,6 +20,8 @@
 		else $this->userAgent .= ' otheros';
 		if ( strstr ( $agent, 'ipad' ) )
 			$this->userAgent .= ' ipad';
+		else if ( strstr ( $agent, 'android' ) )
+			$this->userAgent .= ' android';
 	?>
 	<body class="<?= $this->userAgent; ?> <?= $this->LanguageCode . ' ' . $this->page->RouteName ?>">
 		<? $this->__Content =  executeWebModule ( $this->page, $_REQUEST[ 'ue' ] ? 'extensions' : false ); ?>
