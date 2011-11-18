@@ -53,6 +53,17 @@ if ( $workcopy->load ( $_REQUEST[ 'cid' ] ) )
 			$workcopy->DatePublish = $published->DateModified;
 			$workcopy->save ( );
 			$published->save ( );
+			
+			// Go through publishhooks
+			if ( count ( $PublishHook ) > 0 )
+			{
+				foreach ( $PublishHook as $ph )
+				{
+					if ( !trim ( $ph ) ) continue;
+					if ( file_exists ( $ph ) )
+						include_once ( $ph );
+				}
+			}
 			die ( editorStructure ( $workcopy ) );
 		}
 	}
