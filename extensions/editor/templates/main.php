@@ -21,7 +21,7 @@
 				<div class="SpacerSmallColored"></div>
 				<div id="EditorAdvancedPages" class="TabPages">
 					<div id="tabNotes" class="tab">
-						<img src="admin/gfx/icons/page_white_edit.png"> <?= i18n ( 'Notes' ) ?>
+						<img src="admin/gfx/icons/application_view_icons.png"> <?= i18n ( 'Tools' ) ?>
 					</div>
 					<div id="tabModuleShop" class="tab">
 						<img src="admin/gfx/icons/brick_edit.png"> <?= i18n ( 'Field modules' ) ?>
@@ -35,6 +35,7 @@
 					<div id="pageNotes" class="page" style="padding: 8px">
 						<h2><?= i18n ( 'Your notes on this page' ) ?>:</h2>
 						<textarea id="PageNotes"><?= $this->Notes ?></textarea>
+						<?= isset ( $this->tools ) ? $this->tools : '' ?>
 					</div>
 					<div id="pageModuleShop" class="page" style="padding: 4px">
 						<div id="EditorModuleTabs">

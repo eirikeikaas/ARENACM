@@ -130,7 +130,7 @@ table.LayoutColumns td.Column td input
 	padding-bottom: 4px;
 	padding-left: 18px;
 	border-bottom: 1px solid #aaa;
-	color: #3E719C;
+	color: #6C090C;
 }
 
 #StructureContainer, #StructureButtons { padding: 2px; }
@@ -258,7 +258,7 @@ h4 .Buttons button
 h4 .Buttons button img
 {
 	position: relative;
-	top: 1px;
+	top: -3px;
 }
 
 div.Faded
@@ -290,7 +290,7 @@ div.Orphan *
 	-moz-box-sizing: border-box; 
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box; 
-	height: 170px;
+	height: 100px;
 }
 
 #ContentFields
