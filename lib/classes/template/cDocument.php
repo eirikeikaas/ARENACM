@@ -53,7 +53,7 @@ class cDocument extends cPTemplate
 		$this->_encoding = $encoding;
 	}
 	
-	function renderNavigation ( $parent = 0, $levels = 0, $mode = 'FOLLOW', $firstcall = false )
+	function renderNavigation ( $parent = 0, $levels = 0, $mode = 'FOLLOW', $firstcall = false, $depth = 0 )
 	{
 		global $TopMenuExtension;
 		
@@ -93,8 +93,11 @@ class cDocument extends cPTemplate
 			else
 				$oStr .= "<ul>";
 			
+			$openReturn = false;
+			$depth++; // Inc depth before loop
 			foreach ( $pages as $page )
 			{
+				$openInLoop = false;
 				switch ( $page->ContentType )
 				{
 					case "link":
@@ -108,28 +111,46 @@ class cDocument extends cPTemplate
 						break;
 				}
 				if ( $page->ID == $this->page->ID || ( $_REQUEST[ 'route' ] && $_REQUEST[ 'route' ] == $page->Route ) )
-					$s = " class=\"current\"";
-				else $s = "";
-				
-				$oStr .= "<li class=\"li_{$page->RouteName}\"><a href=\"" . $link . "\"$s$t><span>" . $page->MenuTitle . "</span></a>";
-				
+				{
+					$class = " class=\"current\"";
+					$openReturn = true;
+				}
+				else 
+				{
+					$class = "";
+				}
 				if ( $mode == 'ALL' && $levels > 0 )
 				{
-					if ( $s = $this->renderNavigation ( $page->ID, $levels - 1, $mode ) ) $oStr .= $s;
+					list ( $openInLoop, $s ) = $this->renderNavigation ( $page->ID, $levels - 1, $mode, false, $depth );
+					if ( $openInLoop ) 
+					{
+						$ex = ' menuopen'; 
+						$openReturn = true;
+					}
+					else $ex = '';
+					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
+					if ( trim ( $s ) ) $oStr .= $s;
 				}
 				else if( $mode == 'FOLLOW' && $this->isUnderPage ( $page, $this->page ) )
 				{
-					if ( $s = $this->renderNavigation ( $page->ID, $levels - 1, $mode ) ) 
+					list ( $openInLoop, $s ) = $this->renderNavigation ( $page->ID, $levels - 1, $mode, false, $depth );
+					if ( $openInLoop ) 
 					{
-						$oStr .= $s;
+						$ex = ' menuopen'; 
+						$openReturn = true;
 					}
+					else $ex = '';
+					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
+					if ( trim ( $s ) ) $oStr .= $s;
 				}
 				$oStr .= "</li>";
 			}
-			
 			$oStr .= "</ul>";
+			$depth--; // Dec depth after loop
 			
-			return $oStr;
+			if ( $depth == 0 )
+				return $oStr;
+			return array ( $openReturn, $oStr );
 		}
 		else return false;
 	}
