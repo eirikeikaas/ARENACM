@@ -120,21 +120,24 @@ function updateExtraFields ()
 	{
 		var j = new bajax ();
 		var info = eds[a].area.id.split ( '_' );
-		j.openUrl ( 'admin.php?module=extensions&extension=editor&action=refreshfield', 'post', true );
-		j.addVar ( 'fieldid', info[1] );
-		j.addVar ( 'fieldtype', info[2] );
-		j.addVar ( 'field', info[3] );
-		j.field = eds[a];
-		j.onload = function ()
+		if ( info.length == 4 )
 		{
-			if ( this.getResponseText () == '<!--fail-->' )
+			j.openUrl ( 'admin.php?module=extensions&extension=editor&action=refreshfield', 'post', true );
+			j.addVar ( 'fieldid', info[1] );
+			j.addVar ( 'fieldtype', info[2] );
+			j.addVar ( 'field', info[3] );
+			j.field = eds[a];
+			j.onload = function ()
 			{
-				alert ( 'Kunne ikke hente felt informasjon.' );
-				return;
+				if ( this.getResponseText () == '<!--fail-->' )
+				{
+					alert ( 'Kunne ikke hente felt informasjon.' );
+					return;
+				}
+				this.field.getDocument ().body.innerHTML = this.getResponseText ();
 			}
-			this.field.getDocument ().body.innerHTML = this.getResponseText ();
+			j.send ();
 		}
-		j.send ();
 	}
 }
 
