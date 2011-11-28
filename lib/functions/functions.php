@@ -1425,6 +1425,7 @@ function arenaDebug ( $string = false )
 // Take "arena html" from admin and convert to displayable html --------------->
 function decodeArenaHTML_callback_objects ( $matches )
 {
+	// Fix flash movies
 	if ( strstr ( strtolower ( stripslashes ( $matches[1] ) ), 'type="movie"' ) )
 	{
 		$string = stripslashes ( $matches[1] );
@@ -1446,6 +1447,23 @@ function decodeArenaHTML_callback_objects ( $matches )
 		}
 		$string = '<object' . $string . '>' . stripslashes ( $matches[2] ) . '</object>';
 		return addslashes ( $string );
+	}
+	// Fix fieldobjects
+	else if ( strstr ( strtolower ( stripslashes ( $matches[1] ) ), 'type="fieldobject"' ) )
+	{
+		include_once ( 'lib/classes/dbObjects/dbContent.php' );
+		$string = stripslashes ( $matches[1] );
+		$string = preg_replace ( '/arenatype\=\"[^"]*?\"/i', '', $string );
+		$string = preg_replace ( '/style\=\"[^"]*?\"/i', '', $string );
+		$nm = preg_replace ( '/id\=\"([^"]*?)\"/i', '$1', $string );
+		list ( , $cid, $name ) = explode ( '__', $nm );
+		$c = new dbContent ();
+		if ( $c->load ( $cid ) )
+		{
+			$c->loadExtraFields ();
+			return '<span class="ArenaFieldObject" id="' . trim ( $nm ) . '">' . $c->{$name} . '</span>';
+		}
+		return '';
 	}
 	return '<span' . $matches[1] . '>' . $matches[2] . '</span>';
 }
@@ -1492,6 +1510,22 @@ function encodeArenaHTML_callback_objects ( $matches )
 }
 function encodeArenaHTML ( $string )
 {
+	// Flash
+	while ( preg_match ( '/\<object[\w\W]*?\>/i', $string ) )
+	{
+		$string = preg_replace_callback ( 
+			'/\<object([\w\W]*?)\>([\w\W]*?)\<\/object\>/', 
+			'encodeArenaHTML_callback_objects', 
+			$string
+		);
+	}
+	// Fix fieldobjects for display in ARENA
+	$string = preg_replace ( 
+		'/\<span\ class=\"ArenaFieldObject\".*id\=\"FieldObject\_\_([^"]*?)\"\>[\w\W]*?\<\/span\>/i', 
+		'<span arenatype="fieldobject" style="display: block; width: 400px; height: 100px; background: #c0c0c0 url(admin/gfx/icons/layout.png) no-repeat center center; border: 1px dotted #808080" id="FieldObject__$1">&nbsp;</span>', 
+		$string 
+	);
+	
 	// Remove empty tags
 	$elements = array ( 'h', 'span', 'strong', 'b', 'div' );
 	foreach ( $elements as $el )
@@ -1527,15 +1561,6 @@ function encodeArenaHTML ( $string )
 	$string = preg_replace ( '/\<meta[^>]*?\>/i', '', $string );
 	// Remove office paragraphs
 	$string = preg_replace ( '/\<o\:p\>([\w\W]*?)\<\/o\:p\>/i', '<p>$1</p>', $string );
-	// Flash
-	while ( preg_match ( '/\<object[\w\W]*?\>/i', $string ) )
-	{
-		$string = preg_replace_callback ( 
-			'/\<object([\w\W]*?)\>([\w\W]*?)\<\/object\>/', 
-			'encodeArenaHTML_callback_objects', 
-			$string
-		);
-	}
 	// Strip comments from inside paragraphs with OFFICE CRAP!
 	$string = preg_replace ( '/\<p\>\<!\-[\w\W]*?MsoNormal[\w\W]*?\<\/p\>/i', '<p></p>', $string );
 	// Remove empty paragraphs and replace with br's for easier composition

@@ -26,6 +26,7 @@ Rune Nilssen
 
 global $pluginTplDir;
 ob_clean ();
+i18nAddLocalePath ( 'lib/plugins/texteditor/locale' );
 switch ( $_REQUEST[ "pluginaction" ] )
 {
 	case 'showhtml':
@@ -47,6 +48,12 @@ switch ( $_REQUEST[ "pluginaction" ] )
 		break;
 	case 'getyoutube':
 		include ( 'lib/plugins/texteditor/actions/getyoutube.php' );
+		break;
+	case 'insertfieldobject':
+		include ( 'lib/plugins/texteditor/actions/insertfieldobject.php' );
+		break;
+	case 'getcontentfields':
+		include ( 'lib/plugins/texteditor/actions/getcontentfields.php' );
 		break;
 	case 'properties':
 		$tpl = new cPTemplate ( $pluginTplDir . '/properties.php' );
