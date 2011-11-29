@@ -217,6 +217,7 @@ function getLevelContent( $lid )
 						<td' . $drag . '>' . $row->Filename . '</td>
 						<td style="text-align: right"' . $drag . '>' . filesizetohuman ( $row->Filesize ) . '</td>
 						<td style="text-align: center"' . $drag . '>' . ArenaDate ( $row->DateModified, DATEFORMAT ) . '</td>
+						<td style="text-align: center"><button onclick="editLibrary' . ( $row->Type == 'Image' ? 'Image' : 'File' ) . '(' . $row->ID . ')" type="button"><img src="admin/gfx/icons/' . ( $row->Type == 'Image' ? 'image' : 'file' ) . '_edit.png"/> Endre</button></td>
 					</tr>
 				';
 				$im++;
@@ -236,7 +237,7 @@ function getLevelContent( $lid )
 		}
 		else
 		{
-			$tpl->contents = '<tr><td colspan="5">Ingen filer eller bilder finnes i mappen. ' . mysql_error () . '</td></tr>';
+			$tpl->contents = '<tr><td colspan="6">Ingen filer eller bilder finnes i mappen. ' . mysql_error () . '</td></tr>';
 			$tpl->nav = '';
 		}
 		return $tpl->render ( );
