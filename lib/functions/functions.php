@@ -1457,13 +1457,7 @@ function decodeArenaHTML_callback_objects ( $matches )
 		$string = preg_replace ( '/style\=\"[^"]*?\"/i', '', $string );
 		$nm = preg_replace ( '/id\=\"([^"]*?)\"/i', '$1', $string );
 		list ( , $cid, $name ) = explode ( '__', $nm );
-		$c = new dbContent ();
-		if ( $c->load ( $cid ) )
-		{
-			$c->loadExtraFields ();
-			return '<span class="ArenaFieldObject" id="' . trim ( $nm ) . '">' . $c->{$name} . '</span>';
-		}
-		return '';
+		return '<span class="ArenaFieldObject" id="' . trim ( $nm ) . '"></span>';
 	}
 	return '<span' . $matches[1] . '>' . $matches[2] . '</span>';
 }
