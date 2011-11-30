@@ -21,7 +21,6 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-
 // Pre
 $db =& dbObject::globalValue ( 'database' );
 $ocnt = new dbContent ( );
@@ -34,16 +33,14 @@ if ( !( $ocnt = $ocnt->findSingle ( ) ) )
 	$cnt->Language = $Session->CurrentLanguage;
 	$cnt->MenuTitle = 'Uten navn';
 	$cnt->Title = 'Uten navn';
-	$cnt->Parent = 0;
+	$cnt->Parent = '0';
 	$cnt->IsPublished = true;
 	$cnt->ContentType = 'extrafields';
 	$cnt->ContentGroups = 'Topp, Felt1, Felt2, Bunn';
 	$cnt->SystemName = 'root';
 	$cnt->save ( );
-	$cnt->ID = 0;
-	$cnt->copyPermissions ( $ocnt->ID );
 	$cnt->MainID = $cnt->ID;
-	$cnt->save ( );
+	$cnt->save ();
 	
 	// Make one extrafield for main content
 	$mainField = new dbObject ( 'ContentDataBig' );
@@ -55,31 +52,11 @@ if ( !( $ocnt = $ocnt->findSingle ( ) ) )
 	$mainField->ContentGroup = 'Felt1';
 	$mainField->save ( );
 	
-	// Make one extrafield for extra content
-	$mainField = new dbObject ( 'ContentDataBig' );
-	$mainField->Name = 'Ekstrafelt';
-	$mainField->Type = 'text';
-	$mainField->ContentID = $cnt->ID;
-	$mainField->ContentTable = 'ContentElement';
-	$mainField->IsVisible = '1';
-	$mainField->IsGlobal = '1';
-	$mainField->ContentGroup = 'Felt2';
-	$mainField->save ( );
-	
-	// Make one extrafield for footer
-	$mainField = new dbObject ( 'ContentDataSmall' );
-	$mainField->Name = 'Bunntekst';
-	$mainField->Type = 'varchar';
-	$mainField->ContentID = $cnt->ID;
-	$mainField->ContentTable = 'ContentElement';
-	$mainField->IsVisible = '1';
-	$mainField->IsGlobal = '1';
-	$mainField->SortOrder = '1';
-	$mainField->ContentGroup = 'Bunn';
-	$mainField->save ( );
-
-	// Work copy
+	// Make work copy
+	$pub = $cnt->ID;
 	$cnt->ID = 0;
+	$cnt->copyPermissions ( $ocnt->ID );
+	$cnt->MainID = $pub;
 	$cnt->save ( );
 	$cnt->copyExtraFields ( $cnt->MainID );
 	$cnt->copyPermissions ( $cnt->MainID );
