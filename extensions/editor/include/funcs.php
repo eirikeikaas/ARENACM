@@ -215,13 +215,13 @@ function editorStructure ( $currentcontent, $parent = 0, $depth = 0 )
 {
 	global $user, $Session;
 	
-	$content = new dbObject ( 'ContentElement' );
-	$content->addClause ( 'WHERE', 'MainID != ID AND Parent = ' . $parent . ' AND !IsTemplate AND !IsDeleted' );
-	$content->addClause ( 'WHERE', 'Language=' . $Session->CurrentLanguage );
-	$content->addClause ( 'ORDER BY', 'IsSystem ASC, SortOrder ASC, ID ASC' );
-	if ( $contents = $content->find ( ) )
+	$contents = new dbObject ( 'ContentElement' );
+	$contents->addClause ( 'WHERE', 'MainID != ID AND Parent = ' . $parent . ' AND !IsTemplate AND !IsDeleted' );
+	$contents->addClause ( 'WHERE', 'Language=' . $Session->CurrentLanguage );
+	$contents->addClause ( 'ORDER BY', 'IsSystem ASC, SortOrder ASC, ID ASC' );
+	
+	if ( $contents = $contents->find ( ) )
 	{
-		unset ( $content );
 		$ostr = '<ul' . ( $depth == 0 ? ' id="Structure"' : '' ) . '>';
 		$isSystem = false;
 		foreach ( $contents as $content )
@@ -277,7 +277,8 @@ function editorStructure ( $currentcontent, $parent = 0, $depth = 0 )
 				$ostr .= '</a>';
 			else $ostr .= '</span>';
 			
-			$ostr .= editorStructure ( $currentcontent, $content->MainID, $depth + 1 );
+			if ( $content->MainID )
+				$ostr .= editorStructure ( $currentcontent, $content->MainID, $depth + 1 );
 			$ostr .= '</li>';
 		}
 		$ostr .= '</ul>';
