@@ -1349,40 +1349,6 @@ function cleanHTMLElement ( $string, $level = 0 )
 {
 	if ( !ADMIN_ALLOWINLINESTYLE )
 	{
-		// Remove dangerous styles!
-		$illegals = array ( 
-			'font-weight', 'font-size', 'margin', 'border', 'padding', '-moz', 
-			'-webkit', '-o', '-khtml', 'line-height', '-apple', 'apple', 'mso',
-			'-mso'
-		);
-		foreach ( $illegals as $illegal )
-		{
-			if ( preg_match_all ( '/style\=\"([^"]*?)\"/i', stripslashes ( $string ), $matches ) )
-			{
-				foreach ( $matches[0] as $k=>$match )
-				{
-					$style = strtolower ( $matches[1][$k] );
-			
-					if ( strstr ( $style, $illegal ) )
-					{
-						$o = array ();
-						if ( $ar = explode ( ";", $style ) )
-						{
-							foreach ( $ar as $a )
-							{
-								$a = trim ( $a );
-								if ( substr ( $a, 0, strlen ( $illegal ) ) == $illegal )
-								{
-									continue;
-								}
-								else $o[] = $a;
-							}
-						}
-						$string = str_replace ( $style, implode ( ';', $o ), $string );
-					}
-				}
-			}			
-		}
 		$string = preg_replace ( "/(<font [^>]*>)/i", '', $string );
 	}
 	$string = preg_replace ( "/(<form [^>]*>)/i", '', $string );
@@ -1399,14 +1365,6 @@ function cleanHTMLElement ( $string, $level = 0 )
 		$string = '<tabl' . substr ( $string, 11, strlen ( $string ) - 11 );
 	else if ( substr ( $string, 0, 11 ) == '&nbsp;<span' )
 		$string = '<span' . substr ( $string, 11, strlen ( $string ) - 11 );
-	$string = preg_replace ( '/\<[a|p][^>]*\>[\ ]*\<\/[a|p]\>/', '', $string );
-	
-	// Always use paragraphs
-	$test = trim ( $string );
-	if ( $test{0} != '<' && strlen ( $test ) > 0 )
-	{
-		$string = '<p>' . "\n" . $string . "\n" . '</p>';
-	}
 	
 	$string = preg_replace ( '/([\w\W]*?)\&nbsp\;/i', '$1 ', $string );
 	
@@ -1463,10 +1421,14 @@ function decodeArenaHTML_callback_objects ( $matches )
 }
 function decodeArenaHTML ( $string )
 {
-	// Remove empty tags
+	// Specials
 	$string = preg_replace ( '/\<\!\-\-[\ ]{0,3}arenaform(.*?)\-\-\>/', '<form $1>', $string );
 	$string = preg_replace ( '/\<\!\-\-[\ ]{0,3}\/arenaform(.*?)\-\-\>/', '</form>', $string );
+	
+	// Correct breaks
 	$string = str_replace ( array ( '<br>', '<BR>' ), '<br/>', $string );
+	
+	// Remove empty tags
 	$singleTags = array ( 'area', 'param', 'img', 'br', 'hr', 'input' );
 	foreach ( $singleTags as $st )
 		$string = preg_replace ( '/(\<' . $st . ')(.*?)>/', '$1$2/>', $string );
@@ -1480,6 +1442,8 @@ function decodeArenaHTML ( $string )
 	// Remove body tags etc
 	$string = preg_replace ( '/\<[\/]{0,1}body[^>]*\>/i', '', $string );
 	$string = preg_replace ( '/\<[\/]{0,1}html[^>]*\>/i', '', $string );
+	
+	// Don't use b use strong
 	$string = preg_replace ( '/\<b\>/i', '<strong>', $string );
 	$string = preg_replace ( '/\<\/b\>/i', '<\/strong>', $string );
 	
@@ -1557,8 +1521,7 @@ function encodeArenaHTML ( $string )
 	$string = preg_replace ( '/\<o\:p\>([\w\W]*?)\<\/o\:p\>/i', '<p>$1</p>', $string );
 	// Strip comments from inside paragraphs with OFFICE CRAP!
 	$string = preg_replace ( '/\<p\>\<!\-[\w\W]*?MsoNormal[\w\W]*?\<\/p\>/i', '<p></p>', $string );
-	// Remove empty paragraphs and replace with br's for easier composition
-	$string = preg_replace ( array ( '/\<p\>\<\/p\>/i', '/\<p\>\<br[^>]*?\>\<\/p\>/i' ), '<br/>', $string );
+	
 	// Get external images
 	$rootfolder = dbImageFolder::getRootFolder ( );
 	if ( $allImages = preg_match_all ( "/\<img.*?src\=\"(.*?)\".*?\>/i", $string, $matches ) )

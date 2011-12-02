@@ -1,14 +1,35 @@
-#Structure ul, #Structure li
+#Structure li.current
 {
-	padding: 0;
-	margin: 0;
+	padding: 6px 6px 6px 0;
 }
-#Structure li
+#Structure li li.current
 {
-	margin: 2px 0 2px 10px;
-	list-style: square;
+	padding: 6px 6px 6px 24px;
 }
-#Structure li a.current
+#Structure li > ul
+{
+	margin-bottom: -6px;
+}
+#Structure li.current > a
 {
 	font-weight: bold;
+}
+#Structure li.current > span.Iconcurrent
+{
+	width: 16px;
+	height: 16px;
+	display: block;
+	float: left;
+	background: url(../../../admin/gfx/icons/bullet_green.png) 0px 2px no-repeat;
+}
+#Structure li.current > .Break
+{
+	clear: both;
+	height: 6px;
+	display: block;
+}
+
+.Collapsable
+{
+	overflow-x: visible;
 }
