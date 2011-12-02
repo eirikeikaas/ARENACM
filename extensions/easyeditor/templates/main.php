@@ -55,9 +55,10 @@
 				<h1>
 					<img src="admin/gfx/icons/book_open.png" style="float: left; margin: 0 4px 0 0" /> <?= i18n ( 'Pages' ) ?>
 				</h1>
-				<div class="Container" id="Structure" style="padding: 3px">
-					<div class="Container" style="padding: 8px 4px 8px 18px">
-					<?
+				<div class="Container" style="padding: 3px">
+					<div class="Container">
+						<div id="Structure" class="Collapsable">
+						<?
 						function __listLevels ( $p = '0' )
 						{
 							global $Session;
@@ -81,7 +82,7 @@
 									if ( $Session->AdminUser->checkPermission ( $row, 'Read', 'admin' ) )
 									{
 										$c = ($Session->EditorContentID == $row->ID) ? ' class="current"' : '';
-										$str .= '<li class="' . texttourl ( $row->MenuTitle ) . '">';
+										$str .= '<li class="' . texttourl ( $row->MenuTitle ) . ( $c ? ' current' : '' ) . '">';
 										$str .= '<a' . $c . ' href="admin.php?module=extensions&extension=easyeditor&cid=' . $row->ID . '">';
 										if ( !trim ( $row->MenuTitle ) ) $row->MenuTitle = i18n ( 'Unnamed' );
 										$str .= $row->MenuTitle . '</a>';
@@ -94,9 +95,13 @@
 							return $str;
 						}
 						return __listLevels ( );
-					?>
+						?>
+						</div>
 					</div>
 				</div>
+				<script>
+					makeCollapsable ( ge ( 'Structure' ) );
+				</script>
 				<?if ( $this->note ) { ?>
 				<div class="SpacerSmallColored"></div>
 				<h1>
@@ -215,32 +220,34 @@
 				?>
 				</div>
 				<?}?>
-				<div class="SpacerSmallColored"></div>
-				<div class="Container">
-					<table cellspacing="0" cellpadding="0" border="0" width="100%">
-						<tr>
-							<td>
-								<button type="button" onclick="savePage()">
-									<img src="admin/gfx/icons/disk.png"/> <?= i18n ( 'Save page' ) ?>
-								</button>
-								<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) && $this->page->Parent > 0 ) { ?>
-								<button type="button" onclick="DeletePage()">
-									<img src="admin/gfx/icons/page_white_delete.png"/> <?= i18n ( 'Delete page' ) ?>
-								</button>
-								<?}?>
-							</td>
-							<td align="right">
-								<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) ) { ?>
-								<button type="button" onclick="SubPage()">
-									<img src="admin/gfx/icons/page_white_add.png"/> <?= i18n ( 'Create subpage' ) ?>
-								</button>
-								<?}?>
-								<button type="button" onclick="UploadFile()">
-									<img src="admin/gfx/icons/attach.png"/> <?= i18n ( 'File upload' ) ?>
-								</button>
-							</td>
-						</tr>
-					</table>
+				<div id="BottomButtonsEasy">
+					<div class="SpacerSmallColored"></div>
+					<div class="Container">
+						<table cellspacing="0" cellpadding="0" border="0" width="100%">
+							<tr>
+								<td>
+									<button type="button" onclick="savePage()">
+										<img src="admin/gfx/icons/disk.png"/> <?= i18n ( 'Save page' ) ?>
+									</button>
+									<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) && $this->page->Parent > 0 ) { ?>
+									<button type="button" onclick="DeletePage()">
+										<img src="admin/gfx/icons/page_white_delete.png"/> <?= i18n ( 'Delete page' ) ?>
+									</button>
+									<?}?>
+								</td>
+								<td align="right">
+									<?if ( $GLOBALS['Session']->AdminUser->checkPermission ( $this->page, 'Write', 'admin' ) ) { ?>
+									<button type="button" onclick="SubPage()">
+										<img src="admin/gfx/icons/page_white_add.png"/> <?= i18n ( 'Create subpage' ) ?>
+									</button>
+									<?}?>
+									<button type="button" onclick="UploadFile()">
+										<img src="admin/gfx/icons/attach.png"/> <?= i18n ( 'File upload' ) ?>
+									</button>
+								</td>
+							</tr>
+						</table>
+					</div>
 				</div>
 			</td>
 		</tr>
