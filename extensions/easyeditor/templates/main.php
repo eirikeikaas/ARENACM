@@ -8,42 +8,48 @@
 		{
 			savefuncs.push ( func );
 		}
+		var saveProgress = 0;
 		
 		function savePage ()
 		{
 			for ( var a = 0; a < savefuncs.length; a++ )
 				savefuncs[a]();
 			
-			var j = new bajax ();
-			j.openUrl ( 'admin.php?module=extensions&extension=easyeditor&action=savepage', 'post', true );
-			j.addVar ( 'pageTitle', document.getElementById ( 'pageTitle' ).value );
-			if ( document.getElementsByTagName ( 'textarea' )[0] )
+			var areas = document.getElementsByTagName ( 'textarea' );
+			saveProgress = areas.length;
+			for ( var a = 0; a < areas.length; a++ )
 			{
-				j.addVar ( 'fieldData', document.getElementsByTagName ( 'textarea' )[0].value );
-				j.addVar ( 'bodyField', document.getElementsByTagName ( 'textarea' )[0].id );
-			}
-			j.addVar ( 'ID', document.getElementById ( 'pageID' ).value );
-			j.onload = function ()
-			{
-				var result = this.getResponseText ();
-				if ( result == 'ok' )
+				var j = new bajax ();
+				j.openUrl ( 'admin.php?module=extensions&extension=easyeditor&action=savepage', 'post', true );
+				j.addVar ( 'pageTitle', document.getElementById ( 'pageTitle' ).value );	
+				j.addVar ( 'fieldData', areas[a].value );
+				j.addVar ( 'bodyField', areas[a].id );
+				j.addVar ( 'ID', document.getElementById ( 'pageID' ).value );
+				j.onload = function ()
 				{
-					document.location.reload();
+					var result = this.getResponseText ();
+					if ( result == 'ok' )
+					{
+						saveProgress--;
+						if ( saveProgress <= 0 )
+						{
+							saveProgress = 0;
+							document.location.reload();
+						}
+					}
+					else if ( result == 'fail' )
+					{
+						alert ( '<?= i18n ( 'Could not save the page.' ) ?>' );
+						return false;
+					}
+					else
+					{
+						//alert ( result );
+					}
 				}
-				else if ( result == 'fail' )
-				{
-					alert ( '<?= i18n ( 'Could not save the page.' ) ?>' );
-					return false;
-				}
-				else
-				{
-					//alert ( result );
-				}	
-				
+				j.send ();
 			}
-			j.send ();
 		}
-		
 	</script>
 	
 	
