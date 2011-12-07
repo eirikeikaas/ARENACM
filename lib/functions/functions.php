@@ -1366,8 +1366,6 @@ function cleanHTMLElement ( $string, $level = 0 )
 	else if ( substr ( $string, 0, 11 ) == '&nbsp;<span' )
 		$string = '<span' . substr ( $string, 11, strlen ( $string ) - 11 );
 	
-	$string = preg_replace ( '/([\w\W]*?)\&nbsp\;/i', '$1 ', $string );
-	
 	return $string;
 }
 
