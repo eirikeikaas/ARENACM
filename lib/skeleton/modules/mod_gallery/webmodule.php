@@ -65,7 +65,11 @@ if ( $settings->currentMode == 'gallery' )
 					
 					$url = $image->getImageUrl ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' );
 					
-					$str .= '<a href="javascript:void(0)" onclick="showImage(this.getAttribute(\'link\'))" link="' . $fn . '"><img src="' . $url . '" width="' . $image->cachedWidth . '" height="' . $image->cachedHeight . '"/></a>';
+					$str .= '<a href="javascript:void(0)" onclick="showImage(this.getAttribute(\'link\'))" link="' . $fn . '">';
+					if ( $settings->ShowTitles ) $str .= '<p>' . $image->Title . '</p>';
+					$str .= '<img src="' . $url . '" width="' . $image->cachedWidth . '" height="' . $image->cachedHeight . '"/>';
+					$str .= '</a>';
+					
 					if ( ++$i >= $settings->ThumbColumns )
 					{
 						$str .= '<br/>';

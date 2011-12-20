@@ -9,7 +9,10 @@
 							</h2>
 							<div class="BlockContainer" style="padding: 2px">
 								<div id="gal_preview">
-									<div class="Container" style="background: url(<?= $this->preview ?>); padding: 2px">
+									<div class="Container" style="<?if ( !strstr ( $this->preview, '<img' ) ) { ?>background: url(<?= $this->preview ?>); <?}?>padding: 2px; overflow: hidden">
+										<?if ( strstr ( $this->preview, '<img' ) ) { ?>
+										<?= $this->preview ?>
+										<?}?>
 										<br style="clear: both"/>
 									</div>
 								</div>
@@ -110,6 +113,7 @@
 																}
 																return $str;
 															?>
+															</select>
 														</td>
 													</tr>
 													<tr>
@@ -128,6 +132,7 @@
 																}
 																return $str;
 															?>
+															</select>
 														</td>
 													</tr>
 													<tr>
@@ -144,6 +149,7 @@
 																}
 																return $str;
 															?>
+															</select>
 														</td>
 													</tr>
 												</table>
@@ -198,6 +204,12 @@
 															return $str;
 														?>
 														</select>
+													</td>
+												</tr>
+												<tr>
+													<td><strong>Vise titler</strong></td>
+													<td>
+														<input type="checkbox" id="galShowTitles_<?= $this->field->ID ?>"<?= $this->settings->ShowTitles?' checked="checked"':''?>/>
 													</td>
 												</tr>
 											</table>
@@ -346,7 +358,7 @@
 						// Add fields that can have duplicates
 						var dupFields = [ 
 							'ThumbWidth', 'ThumbHeight', 'ThumbColumns', 'DetailWidth', 'DetailHeight', 'SortMode', 'ArchiveMode', 'Recursion',
-							'Animated', 'Pause', 'Width', 'Height', 'Heading', 'ShowStyle', 'Speed'
+							'Animated', 'Pause', 'Width', 'Height', 'Heading', 'ShowStyle', 'Speed', 'ShowTitles'
 						];
 						if ( document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ) )
 						{

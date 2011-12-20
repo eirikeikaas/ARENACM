@@ -40,8 +40,8 @@
 	?>
 	<script type="text/javascript">
 		var gal = new arenaGallery ();
-		gal.galleryWidth = <?= $this->settings->Width ?>;
-		gal.galleryHeight = <?= $this->settings->Height ?>;
+		gal.galleryWidth = <?= $this->settings->Width > 0 ? $this->settings->Width : 'false' ?>;
+		gal.galleryHeight = <?= $this->settings->Height > 0 ? $this->settings->Height : 'false' ?>;
 		gal.galleryAnimated = <?= $this->settings->Animated == 1 ? '1' : '0' ?>;
 		gal.galleryShowStyle = '<?= $this->settings->ShowStyle ?>';
 		gal.galleryPause = <?= $this->settings->Pause >= 1 ? $this->settings->Pause : '2' ?>;
