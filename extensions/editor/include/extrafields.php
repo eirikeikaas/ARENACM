@@ -129,7 +129,11 @@ function renderExtraFields ( $obj )
 									$tpl = new cPTemplate ( "$extdir/templates/ext/extension.php" );
 									$extension = '';
 									if ( file_exists ( 'extensions/' . $field->DataString . '/adminmodule.php' ) )
+									{
+										$fieldObject = new dbObject ( "ContentData{$field->DataTable}" );
+										$fieldObject->load ( $field->ID );
 										include ( 'extensions/' . $field->DataString . '/adminmodule.php' );
+									}
 									else if ( file_exists ( 'extensions/' . $field->DataString . '/templates/websnippetconfig.php' ) )
 									{
 										$extension = new cPTemplate ( 'extensions/' . $field->DataString . '/templates/websnippetconfig.php' );
