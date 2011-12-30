@@ -132,9 +132,11 @@
 										</td>
 									</tr>
 								</table>
+								<!--
 								<button type="button" onclick="initializeImageSlice(<?= $this->image->ID ?>)">
 									<img src="admin/gfx/icons/application_view_gallery.png"/> Lag bildeutsnitt
 								</button>
+								-->
 								<?}?>
 							</td>
 						</tr>
