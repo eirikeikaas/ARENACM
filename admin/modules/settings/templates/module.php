@@ -125,7 +125,7 @@
 															<td>
 																<select name="Email_Transport">
 																<?
-																	$transports = array ( 'PhpMailer', 'PHP Native' );
+																	$transports = array ( 'PhpMailer', 'PHP Native', 'ARENA Enterprise' );
 																	foreach ( $transports as $t )
 																	{
 																		if ( $t == MAIL_TRANSPORT )
