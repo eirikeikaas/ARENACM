@@ -908,7 +908,8 @@ function mail_ ( $to, $subject, $message, $headers, $html = true )
 	}
 	else if ( defined ( 'MAIL_TRANSPORT' ) && MAIL_TRANSPORT == 'ARENA Enterprise' )
 	{
-		include_once ( 'extensions/arenaenterprise/classes/mailclass.php' );
+		if ( !class_exists ( 'eMail' ) )
+			include_once ( 'extensions/arenaenterprise/classes/mailclass.php' );
 		
 		if ( $html ) $ct = 'text/html; charset=utf8';
 		else $ct = 'text/plain; charset=utf8';
