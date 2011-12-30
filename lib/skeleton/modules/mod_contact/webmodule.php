@@ -28,7 +28,7 @@ $settings = CreateObjectFromString ( $field->DataMixed );
 
 if ( $_POST[ 'action' ] && $_SESSION[ 'last_contact_mailkey' ] != $_POST[ 'action' ] )
 {
-	if ( $_POST[ 'spamcontrol' ] != '4' && strtolower ( $_POST[ 'spamcontrol' ] ) != 'fire' )
+	if ( trim ( $_POST[ 'spamcontrol' ] ) != $_SESSION[ 'spam_answer' ] )
 	{
 		$module .= '<h1>' . i18n('Spam') . '</h1><p>'.i18n('Your message was identified as spam').'.</p><p><a href="' . $page->getUrl () . '">' . i18n ( 'Back' ) . '</a></p>';
 	} 
@@ -114,7 +114,12 @@ else
 		}
 	}
 	$str .= '</table>';
-	$str .= '<table><tr><td class="spam_control">' .i18n ( 'Spam control' ) . ' - ' . i18n ( 'What is sum of one plus three' ) . '?</td>';
+	
+	include_once ( 'lib/skeleton/modules/mod_contact/include/include.php' );
+	list ( $q, $a ) = generateSpamControl ();
+	$_SESSION[ 'spam_answer' ] = $a;
+	
+	$str .= '<table><tr><td class="spam_control">' .i18n ( 'Spam control' ) . ' - ' . $q . '</td>';
 	$str .= '<td class="spam_control"><input type="text" name="spamcontrol" value=""/></td></tr>';
 	
 	$module .= $settings->LeadinMessage;

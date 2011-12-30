@@ -906,6 +906,22 @@ function mail_ ( $to, $subject, $message, $headers, $html = true )
 		if ( $html ) $headers .= '; Content-type: text/html';
 		return mail ( $to, $subject, $message, $headers );
 	}
+	else if ( defined ( 'MAIL_TRANSPORT' ) && MAIL_TRANSPORT == 'ARENA Enterprise' )
+	{
+		include_once ( 'extensions/arenaenterprise/classes/mailclass.php' );
+		
+		if ( $html ) $ct = 'text/html; charset=utf8';
+		else $ct = 'text/plain; charset=utf8';
+		
+		$email = new eMail ();
+		$email->setHostInfo ( MAIL_SMTP_HOST, MAIL_USERNAME, MAIL_PASSWORD );
+		$email->setSubject ( $subject );
+		$email->setFrom ( MAIL_REPLYTO );
+		$email->addRecipient ( $to );
+		$email->addHeader ( "Content-type", $ct );
+		$email->setMessage ( $message );
+		return $email->send ();
+	}
 	
 	if ( !defined ( 'MAIL_USERNAME' ) )
 		ArenaDie ( 'No username defined for e-mail. Please check settings!' );
