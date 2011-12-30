@@ -40,9 +40,7 @@ class String
 		if ( is_object ( $this ) ) $this->string = $string;                                 // set $this->string if not called statically
 		return $string;
 	}
-
 }
-
 
 // Get base url with localized prefix (http://url.com/lang/)
 function getLocalizedBaseUrl ( )
@@ -911,7 +909,12 @@ function mail_ ( $to, $subject, $message, $headers, $html = true )
 		if ( !class_exists ( 'eMail' ) )
 			include_once ( 'extensions/arenaenterprise/classes/mailclass.php' );
 		
-		if ( $html ) $ct = 'text/html; charset=utf8';
+		if ( $headers ) 
+		{
+			$headers = explode ( ':', $headers );
+			$ct = trim ( $headers[1] ) . '; charset=utf8';
+		}
+		else if ( $html ) $ct = 'text/html; charset=utf8';
 		else $ct = 'text/plain; charset=utf8';
 		
 		$email = new eMail ();
