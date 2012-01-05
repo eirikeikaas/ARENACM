@@ -26,7 +26,7 @@ if ( $cnt->load ( $_REQUEST[ 'cid' ] ) )
 {
 	// Get info about this module and do some actions
 	// based on its type
-	$info = 'skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt';
+	$info = 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt';
 	if ( file_exists ( $info ) )
 	{
 		if ( $info = file_get_contents ( $info ) )

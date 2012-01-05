@@ -30,7 +30,7 @@ $setting->Key = $_REQUEST[ 'mod' ];
 if ( $setting->load ( ) )
 	$setting->delete ( );
 
-$info = file_get_contents ( 'skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt' );
+$info = file_get_contents ( 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt' );
 list ( $info, ) = explode ( "\n", $info );
 list ( , ,$moduletype, ) = explode ( '|', $info );
 if ( $moduletype == 'adminmodule' )

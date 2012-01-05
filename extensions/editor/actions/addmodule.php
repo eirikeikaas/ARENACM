@@ -38,7 +38,7 @@ if ( !trim ( $_REQUEST[ 'mod' ] ) )
  * Add the bloody thing
 **/
 ob_clean ( );
-$mod = 'skeleton/modules/' . $_REQUEST[ 'mod' ];
+$mod = 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ];
 if ( file_exists ( $mod ) && is_dir ( $mod ) )
 {
 	$setting = new dbObject ( 'Setting' );
@@ -46,7 +46,7 @@ if ( file_exists ( $mod ) && is_dir ( $mod ) )
 	$setting->Key = $_REQUEST[ 'mod' ];
 	$setting->load ( );
 	$setting->save ( );
-	$info = file_get_contents ( 'skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt' );
+	$info = file_get_contents ( 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt' );
 	list ( $info, ) = explode ( "\n", $info );
 	list ( , ,$moduletype, ) = explode ( '|', $info );
 	if ( $moduletype == 'adminmodule' )

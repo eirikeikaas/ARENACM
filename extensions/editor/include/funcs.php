@@ -26,7 +26,7 @@ function showAddedModules ( $cid )
 	global $Session;
 	$content = new dbContent ( );
 	$content->load ( $cid );
-	$path = BASE_DIR . '/skeleton/modules';
+	$path = BASE_DIR . '/lib/skeleton/modules';
 	$objs = new dbObject ( 'Setting' );
 	$objs->SettingType = 'ContentModule';
 	$objs->addClause ( 'ORDER BY', '`Key` ASC' );
@@ -56,7 +56,7 @@ function showAddedModules ( $cid )
 					
 				$str .= '<div class="AddedModule' . ( $checked ? ' active' : '' ) . '">';
 				$str .= '<table><tr><td>';
-				$str .= '<div class="Image"><img src="skeleton/modules/' . $ob->Key . '/module.png" width="100px" height="110px"></div>';
+				$str .= '<div class="Image"><img src="lib/skeleton/modules/' . $ob->Key . '/module.png" width="100px" height="110px"></div>';
 				$str .= '</td><td>';
 				$str .= '<h2>' . $info . '</h2>';
 				$str .= '<div class="Description"><p>' . $description . '</p></div>';
@@ -95,7 +95,7 @@ function showAddedModules ( $cid )
 function showFreeModules ()
 {
 	global $Session;
-	$path = BASE_DIR . '/skeleton/modules';
+	$path = BASE_DIR . '/lib/skeleton/modules';
 	$db =& dbObject::globalValue ( 'database' );
 	
 	if ( $Session->AdminUser->isSuperUser ( ) && ( $dir = opendir ( $path ) ) )
@@ -126,7 +126,7 @@ function showFreeModules ()
 			$info = explode ( '|', $info );
 			$str .= '<div class="BuyModule">';
 			$str .= '<table><tr><td>';
-			$str .= '<div class="Image"><img src="skeleton/modules/' . $file . '/module.png" width="100px" height="110px"></div>';
+			$str .= '<div class="Image"><img src="lib/skeleton/modules/' . $file . '/module.png" width="100px" height="110px"></div>';
 			$str .= '</td><td>';
 			$str .= '<h2>' . $info[ 0 ] . '</h2>';
 			$str .= '<div class="Description"><p>' . $description . '</p></div>';
@@ -144,7 +144,7 @@ function showFreeModules ()
 function showProModules ()
 {
 	global $Session, $corebase, $siteData;
-	$path = BASE_DIR . '/skeleton/modules';
+	$path = BASE_DIR . '/lib/skeleton/modules';
 	$db =& dbObject::globalValue ( 'database' );
 	
 	if ( $Session->AdminUser->isSuperUser ( ) && ( $dir = opendir ( $path ) ) )
@@ -192,7 +192,7 @@ function showProModules ()
 			$info = explode ( '|', $info );
 			$str .= '<div class="BuyModule">';
 			$str .= '<table><tr><td>';
-			$str .= '<div class="Image"><img src="skeleton/modules/' . 
+			$str .= '<div class="Image"><img src="lib/skeleton/modules/' . 
 				$file . '/module.png" width="100px" height="110px"></div>';
 			$str .= '</td><td>';
 			$str .= '<h2>' . $info[ 0 ] . '</h2>';
@@ -407,11 +407,11 @@ function contentButtons ( $contentid, $short = false )
 		{
 			foreach ( $objs as $obj )
 			{
-				if ( file_exists ( 'skeleton/modules/' . $obj->Key . '/editor_buttons.php' ) )
+				if ( file_exists ( 'lib/skeleton/modules/' . $obj->Key . '/editor_buttons.php' ) )
 				{
 					$buttonoutput =& $str;
 					$content =& $cnt;
-					include ( 'skeleton/modules/' . $obj->Key . '/editor_buttons.php' );
+					include ( 'lib/skeleton/modules/' . $obj->Key . '/editor_buttons.php' );
 				}
 			}
 		}

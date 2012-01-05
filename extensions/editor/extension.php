@@ -60,8 +60,8 @@ function safeFieldName ( $string )
 // Trap some bajax events 
 if ( $_GET[ 'bajaxrand' ] && $_GET[ 'module' ] != 'extensions' )
 {
-	if ( file_exists ( 'skeleton/modules/' . $_GET[ 'module' ] . '/module.php' ) )
-		include_once ( 'skeleton/modules/' . $_GET[ 'module' ] . '/module.php' );
+	if ( file_exists ( 'lib/skeleton/modules/' . $_GET[ 'module' ] . '/module.php' ) )
+		include_once ( 'lib/skeleton/modules/' . $_GET[ 'module' ] . '/module.php' );
 	die ( );
 }
 

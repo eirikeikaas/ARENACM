@@ -90,7 +90,7 @@ if ( $_REQUEST[ 'mod' ] )
 	else $fieldObject = $field = false; 
 	$cnt->loadExtraFields ( );
 	$content =& $cnt;
-	require ( 'skeleton/modules/' . $_REQUEST[ 'mod' ] . '/adminmodule.php' );
+	require ( 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ] . '/adminmodule.php' );
 	$_REQUEST[ 'mod' ] = $_REQUEST[ 'modaction' ] = '';
 }
 

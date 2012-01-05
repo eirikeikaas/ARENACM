@@ -32,14 +32,14 @@ if ( $objs = $objs->find() )
 	$mtpl = new cPTemplate ( 'admin/templates/module_tab.php' );
 	foreach ( $objs as $obj )
 	{
-		list ( $info, ) = explode ( "\n", file_get_contents ( 'skeleton/modules/' . $obj->Key . '/info.txt' ) );
+		list ( $info, ) = explode ( "\n", file_get_contents ( 'lib/skeleton/modules/' . $obj->Key . '/info.txt' ) );
 		list ( $name, , $type ) = explode ( '|', $info );
 		if ( $type == 'adminmodule' && $Session->AdminUser->isSuperUser ( ) && file_exists ( 'skeleton/modules/' . $obj->Key . '/moduleicon.png' ) )
 		{
 			if ( $_REQUEST[ 'module' ] == $obj->Key )
 			{
 				$modulename = $obj->Key;
-				$moduleDir = 'skeleton/modules/';
+				$moduleDir = 'lib/skeleton/modules/';
 			}
 			//else die ( $_REQUEST[ 'module' ] .'..' );
 			// Let the first module remain
