@@ -23,7 +23,6 @@ echo "Creating symlink:"
 ln -s /usr/local/arena2/admin
 ln -s /usr/local/arena2/lib
 ln -s /usr/local/arena2/web
-ln -s lib/skeleton
 ln -s web/index.php
 ln -s admin/admin.php
 ln -s lib/htaccess .htaccess
