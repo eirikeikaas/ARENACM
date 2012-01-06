@@ -23,6 +23,6 @@ Rune Nilssen
 $subquery[] = 	'SELECT ID, Title, Tags, ContentElementID, Leadin, ' .
 				'"BlogItem" AS DataTable, ' .
 				'"<BASE_URL><CONTENTELEMENT_PATH>/blogitem/<ID>_<TITLE_URLIFIED>.html" AS `Url`, ' .  
-				'"skeleton/modules/mod_blog/templates/web_searched_item.php" AS `Template` ' . 
+				'"lib/skeleton/modules/mod_blog/templates/web_searched_item.php" AS `Template` ' . 
 				'FROM BlogItem';
 ?>

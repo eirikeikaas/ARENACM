@@ -31,7 +31,7 @@ $lim = $fieldObject->DataInt ? $fieldObject->DataInt : 10;
 $pos = $_REQUEST[ 'blogpos' ] > 0 ? $_REQUEST[ 'blogpos' ] : '0';
 
 // Add language
-i18nAddLocalePath ( 'skeleton/modules/mod_blog/locale' );
+i18nAddLocalePath ( 'lib/skeleton/modules/mod_blog/locale' );
 
 // Check captcha
 if ( $_REQUEST[ 'checkcaptcha' ] )
@@ -80,7 +80,7 @@ if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matc
 {
 	$GLOBALS[ 'document' ]->addHeadScript ( 'lib/javascript/arena-lib.js' );
 	$GLOBALS[ 'document' ]->addHeadScript ( 'lib/javascript/bajax.js' );
-	$GLOBALS[ 'document' ]->addHeadScript ( 'skeleton/modules/mod_blog/javascript/web.js' );
+	$GLOBALS[ 'document' ]->addHeadScript ( 'lib/skeleton/modules/mod_blog/javascript/web.js' );
 	$bid = $matches[ 1 ];
 	$blog = new dbObject ( 'BlogItem' );
 	$blog->load ( $bid );
@@ -113,7 +113,7 @@ if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matc
 		die ( );
 	}
 	
-	$btpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog.php' );
+	$btpl = new cPTemplate ( 'lib/skeleton/modules/mod_blog/templates/web_blog.php' );
 	$btpl->blog =& $blog;
 	$btpl->cfgComments = $cfgComments;
 	$btpl->canComment = $canComment;
@@ -132,7 +132,7 @@ if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matc
 	
 		if ( $comments = $comment->find ( ) )
 		{
-			$ctpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog_comment.php' );
+			$ctpl = new cPTemplate ( 'lib/skeleton/modules/mod_blog/templates/web_blog_comment.php' );
 			$str = '';
 			foreach ( $comments as $comment )
 			{
@@ -167,7 +167,7 @@ else
 	
 	if ( $blogs = $blogs->find ( ) )
 	{
-		$btpl = new cPTemplate ( 'skeleton/modules/mod_blog/templates/web_blog_listed.php' );
+		$btpl = new cPTemplate ( 'lib/skeleton/modules/mod_blog/templates/web_blog_listed.php' );
 		$str = '';
 		if ( trim ( $cfgHeaderText ) )
 			$str .= '<h2 class="BlogListHeader">' . $cfgHeaderText . '</h2>';
