@@ -27,14 +27,14 @@ $db =& dbObject::globalValue ( 'database' );
 $p = new dbContent ( );
 if ( $p->load ( $_REQUEST[ 'pageid' ] ) )
 {
-	if ( $dir = opendir ( 'skeleton/modules' ) )
+	if ( $dir = opendir ( 'lib/skeleton/modules' ) )
 	{
 		while ( $file = readdir ( $dir ) )
 		{
 			if ( $file{0} == '.' ) continue;
 			if ( substr ( $file, 0, 4 ) == 'mod_' )
 			{
-				$info = file_get_contents ( 'skeleton/modules/' . $file . '/info.txt' );
+				$info = file_get_contents ( 'lib/skeleton/modules/' . $file . '/info.txt' );
 				$info = explode ( '|', $info );
 				
 				// Ahh simple is a module that can be used by easyeditor

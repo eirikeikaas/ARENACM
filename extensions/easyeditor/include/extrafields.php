@@ -34,7 +34,7 @@ function renderExtraField ( $field, $obj )
 	{
 		case 'contentmodule':
 			$tpl->load ( $extdir . '/templates/ext/contentmodule.php' );
-			if ( file_exists ( 'skeleton/modules/' . $field->DataString . '/adminmodule.php' ) )
+			if ( file_exists ( 'lib/skeleton/modules/' . $field->DataString . '/adminmodule.php' ) )
 			{
 				$content =& $obj;
 				$fieldObject = new dbObject ( "ContentData{$field->DataTable}" );
@@ -44,7 +44,7 @@ function renderExtraField ( $field, $obj )
 					$field =& $fieldObject;
 					$field->DataTable = $dataTable;
 				}
-				require ( 'skeleton/modules/' . $field->DataString . '/adminmodule.php' );
+				require ( 'lib/skeleton/modules/' . $field->DataString . '/adminmodule.php' );
 				$tpl->gui = $module;
 				$dataField = 'DataString';
 			}

@@ -42,7 +42,7 @@ function activateModule ( $pid, $mod )
 		}
 		
 		// Deactivate other modules
-		if ( $dir = opendir ( 'skeleton/modules' ) )
+		if ( $dir = opendir ( 'lib/skeleton/modules' ) )
 		{
 			while ( $file = readdir ( $dir ) )
 			{
@@ -50,7 +50,7 @@ function activateModule ( $pid, $mod )
 				if ( $file == $mod ) continue;
 				if ( substr ( $file, 0, 4 ) == 'mod_' )
 				{
-					$info = file_get_contents ( 'skeleton/modules/' . $file . '/info.txt' );
+					$info = file_get_contents ( 'lib/skeleton/modules/' . $file . '/info.txt' );
 					$info = explode ( '|', $info );
 					
 					// Ahh simple is a module that can be used by easyeditor
@@ -95,7 +95,7 @@ function activateModule ( $pid, $mod )
 		$db->query ( 'DELETE FROM `Setting` WHERE `Key`=' . $p->ID . ' AND SettingType LIKE "%_replaced"' );
 	
 	
-		$info = 'skeleton/modules/' . $mod . '/info.txt';
+		$info = 'lib/skeleton/modules/' . $mod . '/info.txt';
 		if ( file_exists ( $info ) )
 		{
 			$info = file_get_contents ( $info );
