@@ -1,6 +1,6 @@
 	<?
 	    $db_blog =& dbObject::globalValue('database');
-	    i18nAddLocalePath ( 'skeleton/modules/mod_blog_overview/locale');
+	    i18nAddLocalePath ( 'lib/skeleton/modules/mod_blog_overview/locale');
 		$pageids = array();
 	    $noOfArticles = array();
 		$this->blogoversikt = '';

@@ -26,10 +26,10 @@ global $document, $database;
 $document->addResource ( 'javascript', 'lib/javascript/arena-lib.js' );
 $document->addResource ( 'javascript', 'lib/javascript/bajax.js' );
 $document->addResource ( 'javascript', 'lib/javascript/blestbox.js' );
-$document->addResource ( 'javascript', 'skeleton/modules/mod_blog_overview/javascript/web.js' );
+$document->addResource ( 'javascript', 'lib/skeleton/modules/mod_blog_overview/javascript/web.js' );
 $db_blog =& dbObject::globalValue('database');
-$mtpldir = 'skeleton/modules/mod_blog_overview/templates/';
-i18nAddLocalePath ( 'skeleton/modules/mod_blog_overview/locale');
+$mtpldir = 'lib/skeleton/modules/mod_blog_overview/templates/';
+i18nAddLocalePath ( 'lib/skeleton/modules/mod_blog_overview/locale');
 
 // set up arrays to hold next and prev pos for navigation
 $posAr = $pageAr = Array();

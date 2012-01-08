@@ -22,8 +22,8 @@ Rune Nilssen
 *******************************************************************************/
 
 global $Session;
-i18nAddLocalePath ( 'skeleton/modules/mod_blog_overview/locale/' );
-$mtpldir = 'skeleton/modules/mod_blog_overview/templates/';
+i18nAddLocalePath ( 'lib/skeleton/modules/mod_blog_overview/locale/' );
+$mtpldir = 'lib/skeleton/modules/mod_blog_overview/templates/';
 $GLOBALS['document']->addResource('stylesheet', $mtpldir . '../css/admin.css');
 
 if (!$Session->mod_blogoversikt_initialized)
