@@ -64,37 +64,20 @@ $document->addHeadScript ( 'lib/javascript/gui.js' );
  * A site must always have one default language installed to
  * work!
 **/
-if ( intval ( $Session->AdminCurrentLanguage ) <= 0 )
+$lang = new dbObject ( 'Languages' );
+$lang->IsDefault = 1;
+if ( !$lang->load ( ) )
 {
-	$lang = new dbObject ( 'Languages' );
-	$lang->IsDefault = 1;
-	if ( !$lang->load ( ) )
-	{
-		$lang->Name = 'no';
-		$lang->NativeName = 'Norsk';
-		$lang->IsDefault = '1';
-		$lang->save ( );
-	}
-	$Session->Set ( 'AdminCurrentLanguage', $lang->ID );
-	$Session->Set ( 'AdminLanguage', &$lang );
-	$Session->Set ( 'AdminLanguageCode', $lang->Name );
+	$lang->Name = 'no';
+	$lang->NativeName = 'Norsk';
+	$lang->IsDefault = '1';
+	$lang->save ( );
 }
-else
+if ( !defined ( 'ADMIN_LANGUAGE' ) )
 {
-	$lang = new dbObject ( 'Languages' );
-	if ( $lang->load ( $Session->AdminCurrentLanguage ) )
-	{
-		$Session->Set ( 'AdminCurrentLanguage', $lang->ID );
-		$Session->Set ( 'AdminLanguage', &$lang );
-		$Session->Set ( 'AdminLanguageCode', $lang->Name );
-	}
-	else
-	{
-		$Session->Del ( 'AdminCurrentLanguage' );
-		header ( 'Location: admin.php' );
-		die ( );
-	}
+	define ( 'ADMIN_LANGUAGE', $lang->Name );
 }
+$Session->Set ( 'AdminLanguageCode', ADMIN_LANGUAGE );
 
 // TODO: change language
 
