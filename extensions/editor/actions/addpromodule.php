@@ -33,7 +33,7 @@ if ( !trim ( $_REQUEST[ 'mod' ] ) )
 /**
  * Add order to system
 **/
-$info = file_get_contents ( 'skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt' );
+$info = file_get_contents ( 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ] . '/info.txt' );
 $cols = explode ( '|', $info );
 $corebase->query ( "
 	INSERT INTO ProductOrder 
@@ -45,7 +45,7 @@ $corebase->query ( "
  * Add the bloody thing - commented out - arenacore will activate it
 **/
 ob_clean ( );
-$mod = 'skeleton/modules/' . $_REQUEST[ 'mod' ];
+$mod = 'lib/skeleton/modules/' . $_REQUEST[ 'mod' ];
 if ( file_exists ( $mod ) && is_dir ( $mod ) )
 {
 	$setting = new dbObject ( 'Setting' );

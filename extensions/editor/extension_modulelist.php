@@ -34,7 +34,7 @@ if ( $objs = $objs->find() )
 	{
 		list ( $info, ) = explode ( "\n", file_get_contents ( 'lib/skeleton/modules/' . $obj->Key . '/info.txt' ) );
 		list ( $name, , $type ) = explode ( '|', $info );
-		if ( $type == 'adminmodule' && $Session->AdminUser->isSuperUser ( ) && file_exists ( 'skeleton/modules/' . $obj->Key . '/moduleicon.png' ) )
+		if ( $type == 'adminmodule' && $Session->AdminUser->isSuperUser ( ) && file_exists ( 'lib/skeleton/modules/' . $obj->Key . '/moduleicon.png' ) )
 		{
 			if ( $_REQUEST[ 'module' ] == $obj->Key )
 			{
