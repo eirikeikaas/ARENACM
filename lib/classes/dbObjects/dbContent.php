@@ -925,7 +925,7 @@ class dbContent extends dbObject
 			case 'contentmodule':
 				if ( !$this->_editmode || ARENAMODE == 'web' )
 				{
-					$target = 'skeleton/modules/' . $fieldObject->DataString . '/webmodule.php';
+					$target = 'lib/skeleton/modules/' . $fieldObject->DataString . '/webmodule.php';
 					if ( file_exists ( $target ) )
 					{
 						$content =& $this;
