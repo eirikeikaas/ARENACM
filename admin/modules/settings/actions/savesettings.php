@@ -163,9 +163,9 @@ if ( $_POST[ 'SiteTitle' ] )
 	
 	
 	$str = implode ( "\n", $out );
-	$str = str_replace ( array ( '<?', '?>', '<?php' ), '', $str );
+	$str = str_replace ( array ( '<?php', '?>', '<?' ), '', $str );
 	$str = str_replace ( "\n\n", "\n", $str );
-	$str = "<?\n" . $str . "?>";
+	$str = "<?\n" . $str . "\n?>";
 	
 	if ( $f = fopen ( 'config.php', 'w+' ) )
 	{
