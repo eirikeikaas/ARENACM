@@ -33,11 +33,11 @@
 								{
 									foreach ( $settings as $setting )
 									{
-										if ( !file_exists ( 'skeleton/modules/' . $setting->Key . '/info.txt' ) )
+										if ( !file_exists ( 'lib/skeleton/modules/' . $setting->Key . '/info.txt' ) )
 											continue;
-										if ( !file_exists ( 'skeleton/modules/' . $setting->Key . '/websearch.php' ) )
+										if ( !file_exists ( 'lib/skeleton/modules/' . $setting->Key . '/websearch.php' ) )
 											continue;
-										$data = explode ( '|', file_get_contents ( 'skeleton/modules/' . $setting->Key . '/info.txt' ) );
+										$data = explode ( '|', file_get_contents ( 'lib/skeleton/modules/' . $setting->Key . '/info.txt' ) );
 										if ( in_array ( $setting->Key, $exts ) )
 											$s = ' selected="selected"';
 										else $s = '';

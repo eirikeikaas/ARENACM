@@ -21,8 +21,8 @@
 									$options = '<option value="texts">i tekstsider</option>';
 									foreach ( $keys as $key )
 									{
-										if ( file_exists ( 'skeleton/modules/' . $key . '/info.txt' ) )
-											$info = explode ( '|', file_get_contents ( 'skeleton/modules/' . $key . '/info.txt' ) );
+										if ( file_exists ( 'lib/skeleton/modules/' . $key . '/info.txt' ) )
+											$info = explode ( '|', file_get_contents ( 'lib/skeleton/modules/' . $key . '/info.txt' ) );
 										else if ( file_exists ( 'extensions/' . $key . '/info.csv' ) )
 											$info = explode ( '|', file_get_contents ( 'extensions/' . $key . '/info.csv' ) );
 										else continue;

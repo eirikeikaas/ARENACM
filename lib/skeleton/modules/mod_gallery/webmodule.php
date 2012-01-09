@@ -22,10 +22,10 @@ Rune Nilssen
 *******************************************************************************/
 
 global $document;
-$document->addResource ( 'stylesheet', 'skeleton/modules/mod_gallery/css/web.css' );
-$document->addResource ( 'javascript', 'skeleton/modules/mod_gallery/javascript/web.js' );
-$mtpldir = 'skeleton/modules/mod_gallery/templates/';
-i18nAddLocalePath ( 'skeleton/modules/mod_gallery/locale');
+$document->addResource ( 'stylesheet', 'lib/skeleton/modules/mod_gallery/css/web.css' );
+$document->addResource ( 'javascript', 'lib/skeleton/modules/mod_gallery/javascript/web.js' );
+$mtpldir = 'lib/skeleton/modules/mod_gallery/templates/';
+i18nAddLocalePath ( 'lib/skeleton/modules/mod_gallery/locale');
 $settings = CreateObjectFromString ( $field->DataMixed );
 if ( !$settings->ThumbWidth ) $settings->ThumbWidth = 80;
 if ( !$settings->ThumbHeight ) $settings->ThumbHeight = 60;
