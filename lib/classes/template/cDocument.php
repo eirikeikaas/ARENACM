@@ -57,6 +57,12 @@ class cDocument extends cPTemplate
 	{
 		global $TopMenuExtension;
 		
+		if ( $depth >= ($levels+1) || ( $parent == 0 && $depth >= $levels ) )
+		{
+			if ( $parent == 0 ) return '';
+			return array ( 0, '' );
+		}
+		
 		if ( $parent === 0 || $parent > 0 )
 		{
 			$page = new dbContent ( );
@@ -82,7 +88,6 @@ class cDocument extends cPTemplate
 				$pages[] = $subpage;
 			}
 		}
-		
 		if ( $pages )
 		{
 			if( ( $parent == 0 || $firstcall == true ) && !defined ( 'MENUROOTDRAWN' ) )
@@ -90,11 +95,11 @@ class cDocument extends cPTemplate
 				$oStr .= "<ul id=\"menuroot\" class=\"{$parent}\">";
 				define ( 'MENUROOTDRAWN', 1 );
 			}
-			else
-				$oStr .= "<ul>";
+			else $oStr .= "<ul>";
 			
 			$openReturn = false;
 			$depth++; // Inc depth before loop
+				
 			foreach ( $pages as $page )
 			{
 				$openInLoop = false;
@@ -131,7 +136,7 @@ class cDocument extends cPTemplate
 					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
 					if ( trim ( $s ) ) $oStr .= $s;
 				}
-				else if( $mode == 'FOLLOW' && $this->isUnderPage ( $page, $this->page ) )
+				else if ( $mode == 'FOLLOW' && $this->isUnderPage ( $page ) )
 				{
 					list ( $openInLoop, $s ) = $this->renderNavigation ( $page->ID, $levels - 1, $mode, false, $depth );
 					if ( $openInLoop ) 
@@ -203,30 +208,27 @@ class cDocument extends cPTemplate
 		return implode ( ' &raquo; ', $ret );
 	}
 	
-	function isUnderPage ( $page, $rootpage )
+	function isUnderPage ( $page )
 	{
 		global $Session;
-		if ( !$rootpage ) return;
-		
+
 		// Is same page
-		
 		if ( $page->Parent == 0 )
 			return true;
 			
-		if ( $rootpage->MainID == $page->MainID )
+		if ( $this->page->MainID == $page->MainID )
 		{
 			return true;
 		}
-		// Rootpage exists in page path
-		else if ( $page->MainID )
+		// First child
+		else if ( $this->page->MainID == $page->Parent )
 		{
-			if ( $rootpage && is_object ( $rootpage ) && method_exists ( $rootpage, 'getPath' ) )
-			{
-				$path = explode ( "/", $rootpage->getPath ( ) );
-				
-				if ( in_array ( $page->RouteName, $path ) )
-					return true;
-			}
+			return true;
+		}
+		// Same parent
+		else if ( $this->page->Parent == $page->Parent )
+		{
+			return true;
 		}
 		return false;
 	}
@@ -778,3 +780,5 @@ class cDocument extends cPTemplate
 		return $output;
 	}
 }
+
+?>
