@@ -114,24 +114,26 @@
 									</div>
 								</div>
 								<div class="SpacerSmallColored"></div>
-								<table class="Layout">
-									<tr>
-										<td style="vertical-align: middle">
-											<strong>Vises fra:</strong>
-										</td>
-										<td style="vertical-align: middle">
-											<?= dateToPulldowns ( 'DateFrom', $this->image->DateFrom ) ?>
-										</td>
-									</tr>
-									<tr>
-										<td style="vertical-align: middle">
-											<strong>Vises til:</strong>
-										</td>
-										<td style="vertical-align: middle">
-											<?= dateToPulldowns ( 'DateTo', $this->image->DateTo ) ?>
-										</td>
-									</tr>
-								</table>
+								<div class="Container">
+									<table class="Layout">
+										<tr>
+											<td style="vertical-align: middle">
+												<strong>Vises fra:</strong>
+											</td>
+											<td style="vertical-align: middle">
+												<?= dateToPulldowns ( 'DateFrom', $this->image->DateFrom ) ?>
+											</td>
+										</tr>
+										<tr>
+											<td style="vertical-align: middle">
+												<strong>Vises til:</strong>
+											</td>
+											<td style="vertical-align: middle">
+												<?= dateToPulldowns ( 'DateTo', $this->image->DateTo ) ?>
+											</td>
+										</tr>
+									</table>
+								</div>
 								<!--
 								<button type="button" onclick="initializeImageSlice(<?= $this->image->ID ?>)">
 									<img src="admin/gfx/icons/application_view_gallery.png"/> Lag bildeutsnitt
