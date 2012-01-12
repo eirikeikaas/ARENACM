@@ -1,4 +1,4 @@
-#GroupList
+#GroupList, #UnitList
 {
 	border: 1px solid #ccc;
 	background: #cfcfcf;
@@ -81,17 +81,22 @@ span.Group span, span.GroupActive span
 	cursor: pointer;
 }
 
-#GroupList
+#GroupList, #UnitList
 {
 	padding: 2px;
 	background: #fff;
 }
 
-#GroupList ul.Collapsable
+#GroupList ul.Collapsable, #UnitList ul.Collapsable
 {
 	margin: 0;
 }
+
 #groupEditTabs
 {
 	border-top: 1px solid transparent;
 }
+
+
+
+
