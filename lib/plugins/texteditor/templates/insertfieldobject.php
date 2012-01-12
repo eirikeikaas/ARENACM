@@ -27,7 +27,7 @@
 	<script>
 		<?= file_get_contents ( 'lib/plugins/texteditor/javascript/plugin.js' ) ?>
 	</script>
-	<button type="button" onclick="txInsertContentField ()">
+	<button type="button" onclick="window.txInsertContentField ()">
 		<img src="admin/gfx/icons/table_row_insert.png"/> <?= i18n ( 'Insert field' ) ?>
 	</button>
 	<button type="button" onclick="removeModalDialogue ( 'fieldobject' )">
