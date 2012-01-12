@@ -43,7 +43,7 @@ if ( !$info->load ( ) )
 // Oppgrader (liste over versioner)
 $versions = Array (
 	'1.99.1', '1.99.4', '1.99.5', '1.99.6', '1.99.7', '1.99.8', '1.99.9', 
-	'2.0.10', '2.0.12', '2.0.13', '2.0.14', '2.0.15'
+	'2.0.10', '2.0.12', '2.0.13', '2.0.14', '2.0.15', '2.0.16'
 );
 foreach ( $versions as $version )
 {
@@ -204,6 +204,21 @@ foreach ( $versions as $version )
 				if ( !$found )
 				{
 					ArenaDir ( 'Still no primary key on ObjectConnectionGroup!' );
+				}
+				break;
+			case '2.0.16':
+				$t = new cDatabaseTable ( 'WebCache' );
+				if ( !$t->load () )
+				{
+					$db->query ( '
+						CREATE TABLE `WebCache` (
+						 `ID` bigint(20) NOT NULL AUTO_INCREMENT,
+						 `UniqueName` varchar(255) DEFAULT NULL,
+						 `Date` datetime DEFAULT NULL,
+						 `Content` longtext,
+						 PRIMARY KEY (`ID`)
+						) 
+					' );
 				}
 				break;
 		}
