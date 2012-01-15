@@ -137,6 +137,19 @@ if ( $workcopy->load ( $_POST[ 'ID' ] ) )
 				$workcopy->DateModified 	= $modDate;
 				$workcopy->DatePublish 		= $modDate;
 				$workcopy->save ();
+				
+				// Go through publishhooks
+				if ( count ( $Session->EditorPublishHooks ) > 0 )
+				{
+					foreach ( $Session->EditorPublishHooks as $ph )
+					{
+						if ( !trim ( $ph ) ) continue;
+						if ( file_exists ( $ph ) )
+							include_once ( $ph );
+					}
+				}
+				$Session->Del ( 'EditorPublishHooks' );
+				
 				die ( 'ok' );
 			}
 		}
