@@ -93,15 +93,18 @@
 			AddSaveFunction ( function ( )
 			{
 				var out = new Array ( );
-				if ( document.getElementById ( 'mod_search_extensions' ).options )
+				if ( document.getElementById ( 'mod_search_extensions' ) )
 				{
-					var sels = document.getElementById ( 'mod_search_extensions' ).options;
-					if ( sels && sels.length )
+					if ( document.getElementById ( 'mod_search_extensions' ).options )
 					{
-						for ( var a = 0; a < sels.length; a++ )
+						var sels = document.getElementById ( 'mod_search_extensions' ).options;
+						if ( sels && sels.length )
 						{
-							if ( sels[ a ].selected )
-								out.push ( sels[ a ].value );
+							for ( var a = 0; a < sels.length; a++ )
+							{
+								if ( sels[ a ].selected )
+									out.push ( sels[ a ].value );
+							}
 						}
 					}
 				}
