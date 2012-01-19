@@ -91,5 +91,6 @@
 				ARENACM v<?= ARENA_VERSION ?> | <?= i18n ( 'ARENA CM is available under the' ) ?> <a href="http://www.mozilla.org/MPL/MPL-1.1.html" target="_bløank"><?= i18n ( 'MPL License' ) ?></a> | <a href="admin.php?module=settings&function=about">Om ARENA Enterprise</a>
 			</div>
 		</div>
+		<script> initToggleBoxes (document.body); </script>
 	</body>
 </html>
