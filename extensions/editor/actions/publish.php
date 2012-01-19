@@ -55,15 +55,17 @@ if ( $workcopy->load ( $_REQUEST[ 'cid' ] ) )
 			$published->save ( );
 			
 			// Go through publishhooks
-			if ( count ( $PublishHook ) > 0 )
+			if ( count ( $Session->EditorPublishHooks ) > 0 )
 			{
-				foreach ( $PublishHook as $ph )
+				foreach ( $Session->EditorPublishHooks as $ph )
 				{
 					if ( !trim ( $ph ) ) continue;
 					if ( file_exists ( $ph ) )
 						include_once ( $ph );
 				}
 			}
+			$Session->Del ( 'EditorPublishHooks' );
+			
 			die ( editorStructure ( $workcopy ) );
 		}
 	}

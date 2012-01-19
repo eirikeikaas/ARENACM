@@ -21,6 +21,12 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
+// Hook for when publishing (contains files)
+if ( !$Session->EditorPublishHooks )
+	$Session->Set ( 'EditorPublishHooks', array () );
+$GLOBALS[ 'PublishHooks' ] =& $Session->EditorPublishHooks; 
+$PublishHooks = &$GLOBALS[ 'PublishHooks' ];
+
 i18nAddLocalePath ( 'extensions/easyeditor/locale' );
 include_once ( 'extensions/easyeditor/include/i18n_javascript.php' );
 

@@ -24,9 +24,14 @@ Rune Nilssen
 /**
  * Simple content editor for ARENA2
 **/
-global $document; 
-$GLOBALS[ 'PublishHooks' ] = Array (); // Hook for when publishing (contains files)
+global $document, $Session; 
+
+// Hook for when publishing (contains files)
+if ( !$Session->EditorPublishHooks )
+	$Session->Set ( 'EditorPublishHooks', array () );
+$GLOBALS[ 'PublishHooks' ] =& $Session->EditorPublishHooks; 
 $PublishHooks = &$GLOBALS[ 'PublishHooks' ];
+
 if ( strstr ( strtolower ( $_SERVER[ 'HTTP_USER_AGENT' ] ), 'msie' ) )
 	$document->addResource ( 'stylesheet', 'extensions/editor/css/msie.css' );
 include_once ( 'lib/classes/dbObjects/dbContent.php' );
