@@ -270,6 +270,7 @@ switch ( $_REQUEST[ 'modaction' ] )
 			$blog->UserID = $GLOBALS[ 'user' ]->ID;
 		$blog->Leadin = decodeArenaHTML ( $blog->Leadin );
 		$blog->Body = decodeArenaHTML ( $blog->Body );
+		$blog->Title = str_replace ( '"', '&quot;', $blog->Title );
 		$blog->save ( );
 		
 		// Maintain publish queue
