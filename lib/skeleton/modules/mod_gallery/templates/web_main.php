@@ -27,10 +27,9 @@
 				{
 					foreach ( $images as $i )
 					{
-						$str .= '<a href="' . ( BASE_URL . 'upload/images-master/' . $i->Filename ) . '">';
 						$str .= '<img src="';
 						$str .= $i->getImageUrl ( $this->settings->Width, $this->settings->Height, 'framed' );
-						$str .= '" alt="' . str_replace ( array ( "\\n", "\\r" ), array ( "<br/>", "" ), $i->Description ) . '" title="' . $i->Title . '"/></a>';
+						$str .= '" alt="' . str_replace ( array ( "\\n", "\\r" ), array ( "<br/>", "" ), $i->Description ) . '" title="' . $i->Title . '"/>';
 					}
 				}
 			}
