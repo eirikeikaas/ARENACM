@@ -1468,6 +1468,16 @@ function decodeArenaHTML ( $string )
 	// Finally, remove empty o:p tags
 	$string = str_replace ( '<o:p></o:p>', '<p class="OfficeNamespace"></p>', $string );
 	
+	// Make sure there is room for a cursor before HTML
+	if ( 
+		substr ( strtolower ( $string ), 0, 9 ) == '&nbsp;<sp' ||
+		substr ( strtolower ( $string ), 0, 9 ) == '&nbsp;<ta' ||
+		substr ( strtolower ( $string ), 0, 9 ) == '&nbsp;<ob' 
+	)
+	{
+		$string = substr ( $string, 6, strlen ( $string ) - 6 );
+	}
+	
 	return cleanHTMLElement ( $string );
 }
 // Done "arena html" from admin and convert to displayable html ---------------<
@@ -1477,7 +1487,7 @@ function encodeArenaHTML_callback_objects ( $matches )
 	if ( !strstr ( $matches[1], 'scriptaccess' ) )
 		$extra = ' allowscriptaccess="always" allowfullscreen="true"';
 	else $extra = '';
-	$string = '&nbsp;<span arenatype="movie" style="!W!; !H!; display: block; border: 2px dotted #aaa; background: #ccc url(admin/gfx/arenaicons/page_flash_64.png) no-repeat center center"' . $matches[ 1 ] . ' ' . $extra . '>' . $matches[ 2 ] . '</span>&nbsp;';
+	$string = '<span arenatype="movie" style="!W!; !H!; display: block; border: 2px dotted #aaa; background: #ccc url(admin/gfx/arenaicons/page_flash_64.png) no-repeat center center"' . $matches[ 1 ] . ' ' . $extra . '>' . $matches[ 2 ] . '</span>&nbsp;';
 	preg_match ( '/width\=\"([^"]*)\"/i', $matches[1], $width );
 	preg_match ( '/height\=\"([^"]*)\"/i', $matches[1], $height );
 	$string = str_replace ( array ( '!W!', '!H!' ), array ( 'width:'.$width[1].'px', 'height:'.$height[1].'px' ), $string );
@@ -1586,6 +1596,13 @@ function encodeArenaHTML ( $string )
 			$i++;
 		}
 	}
+	
+	// Make sure there is room for a cursor before HTML
+	if ( substr ( $string, 0, 3 ) == '<sp' || substr ( $string, 0, 3 ) == '<ta' )
+	{
+		return '&nbsp;' . $string;
+	}
+	
 	return trim ( $string );
 }
 // Done TO "arena html" from web html --------------------------------------<

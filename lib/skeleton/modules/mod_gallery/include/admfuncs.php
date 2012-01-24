@@ -105,14 +105,9 @@ function listFolders ( $str, $field )
 
 function saveGalSettings ( $settings, $field )
 {
-	foreach ( $settings as $k=>$v )
-	{
-		if ( trim ( $k ) == "undefined"  ) continue;
-		$out[] = "$k\t$v";
-	}
 	$f = new dbObject ( 'ContentDataSmall' );
 	$f->load ( $field->ID );
-	$f->DataMixed = implode ( "\n", $out );
+	$f->DataMixed = CreateStringFromObject ( $settings );
 	$f->save ( );
 }
 

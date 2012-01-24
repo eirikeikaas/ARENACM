@@ -22,6 +22,8 @@ Rune Nilssen
 *******************************************************************************/
 
 global $document;
+$document->addResource ( 'javascript', 'lib/javascript/arena-lib.js' );
+$document->addResource ( 'javascript', 'lib/javascript/bajax.js' );
 $document->addResource ( 'stylesheet', 'lib/skeleton/modules/mod_gallery/css/web.css' );
 $document->addResource ( 'javascript', 'lib/skeleton/modules/mod_gallery/javascript/web.js' );
 $mtpldir = 'lib/skeleton/modules/mod_gallery/templates/';
@@ -32,6 +34,16 @@ if ( !$settings->ThumbHeight ) $settings->ThumbHeight = 60;
 if ( !$settings->ThumbColumns ) $settings->ThumbColumns = 4;
 if ( $settings->currentMode == 'gallery' )
 {
+	if ( isset ( $_REQUEST[ 'imagefunc' ] ) )
+	{
+		if ( $_REQUEST[ 'imagefunc' ] == 'getImageDescription' )
+		{
+			$i = new dbImage ( $_REQUEST[ 'id' ] );
+			$i->Description = str_replace ( "\n", '<br>', $i->Description );
+			die ( '<div class="ImageDescription"><span>' . $i->Description . '</span></div>' );
+		}
+	}
+	
 	$mtpl = new cPTemplate ( $mtpldir . 'web_gallery.php' );
 	$str = '';
 	if ( trim ( $settings->Heading ) )
@@ -65,7 +77,14 @@ if ( $settings->currentMode == 'gallery' )
 					
 					$url = $image->getImageUrl ( $settings->ThumbWidth, $settings->ThumbHeight, 'framed' );
 					
-					$str .= '<a href="javascript:void(0)" onclick="showImage(this.getAttribute(\'link\'))" link="' . $fn . '">';
+					if ( $settings->LightboxDescriptions )
+					{
+						$str .= '<a href="javascript:void(0)" onclick="showImage(this.getAttribute(\'link\'),this.getAttribute(\'imageid\'))" link="' . $fn . '" imageid="' . $image->ID . '">';
+					}
+					else
+					{
+						$str .= '<a href="javascript:void(0)" onclick="showImage(this.getAttribute(\'link\'))" link="' . $fn . '">';
+					}
 					if ( $settings->ShowTitles ) $str .= '<p>' . $image->Title . '</p>';
 					$str .= '<img src="' . $url . '" width="' . $image->cachedWidth . '" height="' . $image->cachedHeight . '"/>';
 					$str .= '</a>';

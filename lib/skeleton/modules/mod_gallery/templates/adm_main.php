@@ -212,6 +212,12 @@
 														<input type="checkbox" id="galShowTitles_<?= $this->field->ID ?>"<?= $this->settings->ShowTitles?' checked="checked"':''?>/>
 													</td>
 												</tr>
+												<tr>
+													<td><strong>Vise lightbox beskrivelser</strong></td>
+													<td>
+														<input type="checkbox" id="galLightboxDescriptions_<?= $this->field->ID ?>"<?= $this->settings->LightboxDescriptions?' checked="checked"':''?>/>
+													</td>
+												</tr>
 											</table>
 										</div>
 										<?}?>
@@ -357,8 +363,9 @@
 						
 						// Add fields that can have duplicates
 						var dupFields = [ 
-							'ThumbWidth', 'ThumbHeight', 'ThumbColumns', 'DetailWidth', 'DetailHeight', 'SortMode', 'ArchiveMode', 'Recursion',
-							'Animated', 'Pause', 'Width', 'Height', 'Heading', 'ShowStyle', 'Speed', 'ShowTitles'
+							'ThumbWidth', 'ThumbHeight', 'ThumbColumns', 'DetailWidth', 'DetailHeight', 
+							'SortMode', 'ArchiveMode', 'Recursion', 'Animated', 'Pause', 'Width', 'Height', 
+							'Heading', 'ShowStyle', 'Speed', 'ShowTitles', 'LightboxDescriptions'
 						];
 						if ( document.getElementById ( 'GalControl_<?= $this->currentMode ?>' ) )
 						{
