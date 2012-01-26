@@ -1,5 +1,5 @@
 			
-			<form method="post" action="<?= $this->content->getUrl ( ) ?>">
+			<form method="post" action="<?= $this->content->getUrl ( ) ?>" name="searchform">
 				<div class="Header">
 					<h2><?= $this->header ? $this->header : i18n ( $this->search_heading ) ?></h2>
 				</div>
