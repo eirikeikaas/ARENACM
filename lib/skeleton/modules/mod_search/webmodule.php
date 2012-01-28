@@ -29,7 +29,7 @@ list ( $search_heading, $search_keywords, $search_webpage, $search_extensions, $
 
 if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 {
-	$tpl = new cPTemplate ( 'lib/skeleton/modules/mod_search/templates/web_search.php' );
+	$tpl = new cPTemplate ( 'skeleton/modules/mod_search/templates/web_search.php' );
 	
 	$wheres = array ( );
 	if ( $keys = explode ( ',', $_REQUEST[ 'keywords' ] ) )
@@ -50,9 +50,9 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 	$subquery = array ( );
 	if ( $_REQUEST[ 'search_extension' ] )
 	{
-		if ( file_exists ( 'lib/skeleton/modules/' . $_REQUEST[ 'search_extension' ] . '/websearch.php' ) )
+		if ( file_exists ( 'skeleton/modules/' . $_REQUEST[ 'search_extension' ] . '/websearch.php' ) )
 		{
-			include ( 'lib/skeleton/modules/' . $_REQUEST[ 'search_extension' ] . '/websearch.php' );
+			include ( 'skeleton/modules/' . $_REQUEST[ 'search_extension' ] . '/websearch.php' );
 		}
 		else if ( file_exists ( 'extensions/' . $_REQUEST[ 'search_extension' ] . '/websearch.php' ) )
 		{
@@ -64,7 +64,7 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 				'SELECT ID, Title, MenuTitle AS Tags, ID AS `ContentElementID`, "" AS Leadin, ' .
 				'"ContentElement" AS DataTable, ' .
 				'"<BASE_URL><CONTENTELEMENT_PATH>/index.html" AS `Url`, ' .  
-				'"lib/skeleton/modules/mod_search/templates/web_searched_page.php" AS `Template` ' . 
+				'"skeleton/modules/mod_search/templates/web_searched_page.php" AS `Template` ' . 
 				'FROM ContentElement WHERE MainID = ID';
 		}
 	}
@@ -74,9 +74,9 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 		{
 			foreach ( $sets as $set )
 			{
-				if ( file_exists ( 'lib/skeleton/modules/' . $set . '/websearch.php' ) )
+				if ( file_exists ( 'skeleton/modules/' . $set . '/websearch.php' ) )
 				{
-					include ( 'lib/skeleton/modules/' . $set . '/websearch.php' );
+					include ( 'skeleton/modules/' . $set . '/websearch.php' );
 				}
 				else if ( file_exists ( 'extensions/' . $set . '/websearch.php' ) )
 				{
@@ -88,7 +88,7 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 				'SELECT ID, Title, MenuTitle AS Tags, ID AS `ContentElementID`, "" AS Leadin, ' .
 				'"ContentElement" AS DataTable, ' .
 				'"<BASE_URL><CONTENTELEMENT_PATH>/index.html" AS `Url`, ' .  
-				'"lib/skeleton/modules/mod_search/templates/web_searched_page.php" AS `Template` ' . 
+				'"skeleton/modules/mod_search/templates/web_searched_page.php" AS `Template` ' . 
 				'FROM ContentElement WHERE MainID = ID';
 	}
 	$count = count ( $subquery );
@@ -137,7 +137,7 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 		</div>
 		<div class="SearchBox Block">
 			' . $str . '
-			<div class="Block"><p><a href="' . $content->getUrl ( ) . '">' . i18n ( 'Back to search' ) . '</a></p><br/></div>
+			<div class="Block BackToSearch"><p><a href="' . $content->getUrl ( ) . '">' . i18n ( 'Back to search' ) . '</a></p><br/></div>
 		</div>
 		';
 		if ( $search_replacefield != '' )
@@ -154,7 +154,7 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 			<h2>' . i18n ( 'Search results' ) . '</h2>
 		</div>
 		<div class="SearchBox Block">
-			<div class="Block"><p>' . i18n ( 'Your search produced no results.' ) . '</p><p><a href="' . $content->getUrl ( ) . '">' . i18n ( 'Back to search' ) . '</a></p></div>
+			<div class="Block BackToSearch"><p>' . i18n ( 'Your search produced no results.' ) . '</p><p><a href="' . $content->getUrl ( ) . '">' . i18n ( 'Back to search' ) . '</a></p></div>
 		</div>
 		';
 		if ( $search_replacefield != '' )
@@ -168,7 +168,7 @@ if ( $_REQUEST[ 'keywords' ] && !$GLOBALS[ 'search_lock' ] )
 
 if ( !$moutput )
 {
-	$tpl = new cPTemplate ( 'lib/skeleton/modules/mod_search/templates/web_main.php' );
+	$tpl = new cPTemplate ( 'skeleton/modules/mod_search/templates/web_main.php' );
 	if ( !$fieldObject->DataMixed )
 	{
 		if ( !$search_heading ) $search_heading = 'Søk';
