@@ -47,8 +47,8 @@ if ( $_REQUEST[ 'checkcaptcha' ] )
 $cfg = explode ( "\t", $fieldObject->DataMixed );
 $cfgComments = $cfg[0];
 $cfgShowAuthor = $cfg[1];
-$cfgTaxbox = $cfg[2];
-$cfgTaxboxPlacement = $cfg[3];
+$cfgTagbox = $cfg[2];
+$cfgTagboxPlacement = $cfg[3];
 $cfgSearchbox = $cfg[4];
 $cfgDetailpage = $cfg[5];
 $cfgSourcepage = $cfg[6];
@@ -149,6 +149,40 @@ if ( preg_match ( '/.*?\/blogitem\/([0-9]*?)\_.*?/', $_REQUEST[ 'route' ], $matc
 // List all blogs
 else
 {
+	// List out tagbox
+	if ( $cfgTagbox )
+	{
+		$tags = '';
+		if ( $tagO = $GLOBALS[ 'database' ]->fetchObjectRows ( '
+			SELECT DISTINCT(b.Tags) c FROM BlogItem b WHERE b.ContentElementID=' . $sourcepage->MainID . '
+		' ) )
+		{
+			$options = array ();
+			foreach ( $tagO as $t )
+			{
+				$t = explode ( ',', str_replace ( ' ', ',', trim ( $t->c ) ) );
+				foreach ( $t as $st ) $options[$st] = $st;
+			}
+			if ( count ( $options ) )
+			{
+				$tags .= '<label>' . i18n ( 'Tagbox_Tags' ) . '<span>:</span></label>';
+				foreach ( $options as $t )
+				{
+					$tags .= '<a href="' . $sourcepage->getUrl () . '?tag=' . $t . '"><span>' . $t . '</span></a>, ';
+				}
+				$tags = substr ( $tags, 0, strlen ( $tags ) - 2 );
+			}
+		}
+		$o = new stdclass ();
+		$o->ContentGroup = $cfgTagboxPlacement;
+		$o->Name = 'Tagbox';
+		$o->Type = 'varchar';
+		$o->IsVisible = true;
+		$content->_extra_TagBox = '<div id="TagBox">' . $tags . '</div>';
+		$content->_field_TagBox = $o;
+		$content->TagBox = $content->_extra_TagBox;
+	}
+	
 	$blogs = new dbObject ( 'BlogItem' );
 	$blogs->addClause ( 'WHERE', 'ContentElementID=' . $sourcepage->MainID );
 	if ( $_REQUEST[ 'month' ] )
@@ -160,6 +194,11 @@ else
 	else
 	{
 		$blogs->addClause ( 'WHERE', 'IsPublished AND DatePublish <= NOW()' );
+	}
+	// Be mindful of the tags!
+	if ( $cfgTagbox && isset ( $_REQUEST[ 'tag' ] ) )
+	{
+		$blogs->addClause ( 'WHERE', 'Tags LIKE "' . $_REQUEST[ 'tag' ] . '"' );
 	}
 	$cnt = $blogs->findCount ( );
 	$blogs->addClause ( 'ORDER BY', 'DatePublish DESC, ID DESC' );
@@ -208,11 +247,14 @@ else
 		unset ( $str );
 		
 		// Navigation
+		if ( $cfgTagbox )
+			$tagOp = isset ( $_REQUEST['tag'] ) ? ( '&tag=' . $_REQUEST['tag'] ) : '';
+		else $tagOp = '';
 		$next = $prev = $sep = '';
 		if ( $pos > 0 )
-			$prev = '<a href="' . $content->getUrl ( ) . '?blogpos=' . ( $pos - $lim ) . '" class="Prev"><span>' . i18n ( 'Newer blogs' ) . '</span></a>';
+			$prev = '<a href="' . $content->getUrl ( ) . '?blogpos=' . ( $pos - $lim ) . $tagOp . '" class="Prev"><span>' . i18n ( 'Newer blogs' ) . '</span></a>';
 		if ( $pos + $lim < $cnt )
-			$next = '<a href="' . $content->getUrl ( ) . '?blogpos=' . ( $pos + $lim ) . '" class="Next"><span>' . i18n ( 'Older blogs' ) . '</span></a>';
+			$next = '<a href="' . $content->getUrl ( ) . '?blogpos=' . ( $pos + $lim ) . $tagOp . '" class="Next"><span>' . i18n ( 'Older blogs' ) . '</span></a>';
 		if ( $prev && $next ) 
 			$sep = ' <span class="Separator">&nbsp;</span> ';
 		else $sep = '';
