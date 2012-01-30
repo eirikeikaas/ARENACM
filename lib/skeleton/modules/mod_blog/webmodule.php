@@ -168,7 +168,10 @@ else
 				$tags .= '<label>' . i18n ( 'Tagbox_Tags' ) . '<span>:</span></label>';
 				foreach ( $options as $t )
 				{
-					$tags .= '<a href="' . $sourcepage->getUrl () . '?tag=' . $t . '"><span>' . $t . '</span></a>, ';
+					if ( isset ( $_REQUEST['tag'] ) && trim ( $t ) == $_REQUEST[ 'tag' ] )
+						$w = ' class="current"';
+					else $w = '';
+					$tags .= '<a href="' . $sourcepage->getUrl () . '?tag=' . $t . '"' . $w . '><span>' . $t . '</span></a>, ';
 				}
 				$tags = substr ( $tags, 0, strlen ( $tags ) - 2 );
 			}
