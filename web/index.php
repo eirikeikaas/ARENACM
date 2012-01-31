@@ -131,7 +131,7 @@ else if ( !$Session->HasUrlActivator )
 }
 else if ( $Session->HasUrlActivator )
 {
-	$search = str_replace ( 'www.', '', $_SERVER[ 'SERVER_NAME' ] );
+	$search = $_SERVER[ 'SERVER_NAME' ];
 	$lang = new dbObject ( 'Languages' );
 	$lang->addClause ( 'ORDER BY', 'IsDefault DESC' );
 	$lang->addClause ( 'WHERE', 'UrlActivator LIKE "%' . $search. '"' );
