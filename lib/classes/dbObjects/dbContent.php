@@ -1241,16 +1241,24 @@ class dbContent extends dbObject
 		$string = str_replace ( '<!--arenaform', '', $string );
 		$string = str_replace ( '-->>', '>', $string );
 		if ( strstr ( strtolower ( stripslashes ( $string ) ), 'class="arenafieldobject"' ) )
-		{
-			preg_match ( '/\<span\ class\=\"ArenaFieldObject\"\ id\=\"([^"]*?)\"/i', $string, $nm );
-			list ( , $cid, $name ) = explode ( '__', $nm[1] );
-			$c = new dbContent ();
-			if ( $c->load ( $cid ) )
-			{
-				$c->loadExtraFields ();
-				$string = preg_replace ( '/\<span\ class\=\"ArenaFieldObject\"[^>]*?\>[\w\W]*?\<\/span\>/i', $c->$name, $string );
-			}
-		}
+        {
+            preg_match ( '/\<span\ class\=\"ArenaFieldObject\"\ id\=\"([^"]*?)\"/i', $string, $nm );
+            list ( , $cid, $name ) = explode ( '__', $nm[1] );
+            $c = new dbContent ();
+            if ( $c->load ( $cid ) )
+            {
+                $c->loadExtraFields ();
+                $string = preg_replace ( '/\<span\ class\=\"ArenaFieldObject\"[^>]*?\>[\w\W]*?\<\/span\>/i', $c->$name, $string );
+                if ( $test = preg_split ( '/(\<div[^>]*?\>)/i', trim ( $string ), -1, PREG_SPLIT_DELIM_CAPTURE ) )
+                {
+                    $test[1] = '';
+                    $test = join ( '', $test );
+                    $test = preg_split ( '/(\<\/div[^>]*?\>)/i', $test, -1, PREG_SPLIT_DELIM_CAPTURE );
+                    array_pop ( $test ); array_pop ( $test );
+                    $string = trim ( join ( '', $test ) );
+                }
+            }
+        }
 		return $string;
 	}
 	
