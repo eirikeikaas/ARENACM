@@ -168,6 +168,7 @@ else
 				$tags .= '<label>' . i18n ( 'Tagbox_Tags' ) . '<span>:</span></label>';
 				foreach ( $options as $t )
 				{
+					if ( !trim ( $t ) ) continue;
 					if ( isset ( $_REQUEST['tag'] ) && trim ( $t ) == $_REQUEST[ 'tag' ] )
 						$w = ' class="current"';
 					else $w = '';
@@ -244,6 +245,16 @@ else
 			$btpl->sizeX = $cfgSizeX;
 			$btpl->sizeY = $cfgSizeY;
 			$btpl->hideDetails = $cfgHideDetails;
+			
+			// Show tags
+			$btpl->blogTags = '';
+			if ( $cfgTagboxPlacement )
+			{
+				$url = explode ( '?', $_REQUEST[ 'route' ] );
+				$url = $url[0];
+				$btpl->blogTags = preg_replace ( '/([a-zA-Z0-9]*)/i', '<a href="' . $url . '?tag=$1">$1</a>', $blog->Tags );
+			}
+			
 			$str .= $btpl->render ( );
 		}
 		$module = $str;
