@@ -8,7 +8,7 @@
 				<tr>
 					<td width="100%" style="vertical-align: top">
 						<h1>
-							<div style="float: right">
+							<div class="HeaderBox">
 								<button type="button" onclick="checkForm()">
 									<img src="admin/gfx/icons/<?= !$this->user->ID ? "user_add" : "disk" ?>.png" />
 								</button>
