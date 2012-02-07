@@ -1469,15 +1469,14 @@ function decodeArenaHTML ( $string )
 	$string = str_replace ( '<o:p></o:p>', '<p class="OfficeNamespace"></p>', $string );
 	
 	// Make sure there is room for a cursor before HTML
-	if ( 
-		substr ( strtolower ( $string ), 0, 9 ) == '&nbsp;<sp' ||
-		substr ( strtolower ( $string ), 0, 9 ) == '&nbsp;<ta' ||
-		substr ( strtolower ( $string ), 0, 9 ) == '&nbsp;<ob' 
-	)
+	if ( preg_match ( '/\&nbsp\;[\s\S]*?\<[s|t|o]{1}/i', $string, $matches ) )
 	{
-		$string = substr ( $string, 6, strlen ( $string ) - 6 );
+		if ( substr ( $string, 0, strlen ( $matches[0] ) ) == $matches[0] )
+		{
+			$remLen = strlen ( $matches[0] ) - 2;
+			$string = substr ( $string, $remLen, strlen ( $string ) - $remLen );
+		}
 	}
-	
 	return cleanHTMLElement ( $string );
 }
 // Done "arena html" from admin and convert to displayable html ---------------<
