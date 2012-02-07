@@ -1507,7 +1507,7 @@ function encodeArenaHTML ( $string )
 	}
 	// Fix fieldobjects for display in ARENA
 	$string = preg_replace ( 
-		'/\<span\ class=\"ArenaFieldObject\".*id\=\"FieldObject\_\_([^"]*?)\"\>[\w\W]*?\<\/span\>/i', 
+		'/\<span\ class=["]{0,1}ArenaFieldObject["]{0,1}.*id\=["]{0,1}FieldObject\_\_([^"]*?)["]{0,1}\>[\w\W]*?\<\/span\>/i', 
 		'<span arenatype="fieldobject" style="display: block; width: 400px; height: 100px; background: #c0c0c0 url(admin/gfx/icons/layout.png) no-repeat center center; border: 1px dotted #808080" id="FieldObject__$1">&nbsp;</span>', 
 		$string 
 	);
