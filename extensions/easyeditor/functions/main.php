@@ -32,8 +32,6 @@ if ( $_REQUEST[ 'cid' ] )
 }
 $page = new dbContent ( );
 $content =& $page;
-$fcount = GetSettingValue ( 'EasyEditor', 'FieldCount_' . $Session->EditorContentID );
-$fcount = $fcount > 1 ? $fcount : 1;
 
 if ( !( $page->load ( $Session->EditorContentID ) ) )
 {
@@ -45,6 +43,10 @@ if ( !( $page->load ( $Session->EditorContentID ) ) )
 	$page = $page->findSingle ();
 	$Session->Set ( 'EditorContentID', $page->ID );
 }
+
+$fcount = GetSettingValue ( 'EasyEditor', 'FieldCount_' . $page->MainID );
+$fcount = $fcount > 1 ? $fcount : 1;
+
 $document->addResource ( 'stylesheet', 'extensions/easyeditor/css/admin.css' );
 $etpl = new cPTemplate ( 'extensions/easyeditor/templates/main.php' );
 $etpl->page =& $page;
