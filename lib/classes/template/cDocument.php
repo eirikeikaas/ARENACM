@@ -133,7 +133,10 @@ class cDocument extends cPTemplate
 						$openReturn = true;
 					}
 					else $ex = '';
-					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
+					if ( $class )
+						$liClass = ' current';
+					else $liClass = '';
+					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}{$liClass}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
 					if ( trim ( $s ) ) $oStr .= $s;
 				}
 				else if ( $mode == 'FOLLOW' && $this->isUnderPage ( $page ) )
@@ -145,7 +148,10 @@ class cDocument extends cPTemplate
 						$openReturn = true;
 					}
 					else $ex = '';
-					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
+					if ( $class )
+						$liClass = ' current';
+					else $liClass = '';
+					$oStr .= "<li class=\"li_{$page->RouteName}{$ex}{$liClass}\"><a href=\"" . $link . "\"$class$t><span>" . $page->MenuTitle . "</span></a>";
 					if ( trim ( $s ) ) $oStr .= $s;
 				}
 				$oStr .= "</li>";
