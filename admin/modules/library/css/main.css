@@ -145,6 +145,12 @@ table.List tr:hover
 	box-sizing: border-box;
 }
 
+#FileEditContainer, #ImageEditContainer
+{
+	max-height: 600px;
+	overflow: auto;
+}
+
 /** Slice editor **/
 
 #SliceTop, #SliceLeft, #SliceRight, #SliceBottom, #SliceRect
