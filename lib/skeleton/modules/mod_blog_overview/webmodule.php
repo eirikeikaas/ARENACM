@@ -35,9 +35,141 @@ i18nAddLocalePath ( 'lib/skeleton/modules/mod_blog_overview/locale');
 $posAr = $pageAr = Array();
 if ($_REQUEST['bpos'])
 	$posAr= explode('_', $_REQUEST['bpos']);
+$str = '';
+if ( $pos <= 0 ) $pos = '0';
 
-if ($field->DataMixed)
+// New way ---------------------------------------------------------------------
+if ( strstr ( $field->DataMixed, '--Version 2.0--' ) )
 {
+	list ( , $mixed ) = explode ( '<!--Version 2.0-->', $field->DataMixed );
+	$globalConf = false;
+	if ( $mixed = explode ( '<!--separate-->', $mixed ) )
+	{
+		$i = 0;
+		foreach ( $mixed as $mix )
+		{
+			if ( $i++ == 0 )
+			{
+				$globalConf = CreateObjectFromString ( $mix );
+			}
+			else
+			{
+				$conf = CreateObjectFromString ( $mix );
+				if ( $conf->activated )
+				{
+					if ( $conf->listmode == 'full' )
+					{
+						$bpage = new dbContent ();
+						if ( !$bpage->load ( $conf->activated ) )
+							continue;
+			
+						if ( $blogs = $database->fetchObjectRows ( '
+							SELECT ID FROM BlogItem WHERE ContentElementID=\'' . $pages[$a] . '\' 
+							ORDER BY DateUpdated DESC, ID DESC
+							LIMIT ' . $conf->quantity . '
+						' ) )
+						{
+							$btpl = new cPTemplate ( $mtpldir . 'web_blog_w_ingress.php' );
+							foreach ( $blogs as $blog )
+							{
+								$bo = new dbObject ( 'BlogItem' ); 
+								$bo->load ( $blog->ID );
+								if ( 
+									$conf->leadinimagewidth > 0 && $conf->leadinimageheight > 0 && 
+									list ( $image, ) = $bo->getObjects ( 'ObjectType = Image' ) 
+								)
+								{
+									$i = new dbImage ( $image->ID );
+									$btpl->image = '<div class="OverviewImage">' . $i->getImageHTML ( 
+										$conf->leadinimagewidth, $conf->leadinimageheight, 'framed' 
+									) . '</div>';
+								}
+								else $btpl->image = '';
+								$btpl->blog = $bo;
+								$btpl->link = $bpage->getRoute () . '/blogitem/' . $bo->ID . '_' . texttourl ( $bo->Title ) . '.html';
+								$module .= $btpl->render ();
+							}
+						}
+					}
+					// List only titles and date
+					else 
+					{
+						$blogcontents = array();
+						
+						$blogs = new dbObject ('BlogItem');
+						$blogs->addClause( 'SELECT', 'ContentElementID, Title' );
+					
+						// Add search
+						if ( $_REQUEST[ 'keywords' ] )
+						{
+							$keys = explode ( ',', $_REQUEST[ 'keywords' ] );
+							foreach ( $keys as $key )
+							{
+								if ( !trim ( $key ) ) continue;
+								$wheres[] = "(Title LIKE \"%$key%\" OR Leadin LIKE \"%$key%\" OR Body LIKE \"%$key%\" OR Tags LIKE \"%$key%\")";
+							}
+							if ( count ( $wheres ) )
+								$blogs->addClause ( 'WHERE', '( ' . implode ( ' OR ', $wheres ) . ' )' );
+						}
+						
+						$blogs->addClause( 'WHERE', 'IsPublished AND DatePublish <= NOW() AND ContentElementID=' . $conf->activated );
+						$cnt = $blogs->findCount();
+						$amount = $conf->quantity;
+						$lim = $conf->quantity;
+						$blogs->addClause( 'ORDER BY', 'DateUpdated DESC, ID DESC' );
+						$blogs->addClause ( 'LIMIT', $pos . ',' . $lim );
+						$bpage = new dbObject( 'ContentElement' );
+						$bpage->load( $conf->activated );
+						
+						$num = 0;
+						if ( $blogs = $blogs->find() )
+						{
+							$str .= '<div class="Bold BlogListTitle">' . 
+								i18n ( $conf->heading ? $conf->heading : ( 'Blogarticles from the page' ) . $bpage->Title ) . ':</div>';
+							
+							foreach( $blogs as $blog )
+							{
+							    if ( !$blogcontents[$blog->ContentElementID] )
+							        $blogcontents[$blog->ContentElementID] = new dbContent ( $blog->ContentElementID );
+							    $botpl = new cPTemplate($mtpldir . 'web_blogoversiktlist.php');
+							    $botpl->num = ' Row' . ++$num;
+							    $botpl->cnt =& $blogcontents[$blog->ContentElementID];
+							    $botpl->blog =& $blog;
+							    $botpl->date = ArenaDate ( DATE_FORMAT, $blog->DatePublish );
+							    $str .= $botpl->render();
+							}
+			
+							// navigation
+							$nextPos = $prevPos = $posAr;
+							if ($pos > 0) $prevPos[$k] = $pos - $lim;
+							$prevPos = join('_', $prevPos);
+							if ($pos + $lim < $cnt) $nextPos[$k] = $pos + $lim;
+							$nextPos = join('_', $nextPos);
+			
+							$keys = $_REQUEST[ 'keywords' ] ? ( '&keywords=' . $_REQUEST[ 'keywords' ] ) : '';
+							$next = $prev = $sep = '';
+
+							if ($pos > 0)
+								$prev = '<a href="javascript:blog_navigate(\'' . $prevPos . $keys . '\')" class="Prev"><span>' . i18n ('Newer blogs') . '</span></a>';
+							if ($pos + $lim < $cnt)
+								$next = '<a href="javascript:blog_navigate(\'' . $nextPos . $keys . '\')" class="Next"><span>' . i18n ('Older blogs') . '</span></a>';
+							if ($prev && $next) 
+								$sep = ' <span class="Separator">&nbsp;</span> ';
+							else $sep = '';
+							if ($prev || $next)
+								$str .= '<div id="mod_blog_navigation"><hr/><p>' . $prev . $sep . $next . '</p></div>';
+					
+						}
+					}
+				}
+			}
+		}
+	}
+}
+// Old sad way -----------------------------------------------------------------
+else if ( $field->DataMixed )
+{
+    
     if (list($pages, $amounts, $navigations, $headings, $listmode, $imagesizex, $imagesizey ) = explode('#', $field->DataMixed))
     {
     	if ( !$listmode ) $listmode == 'titles';
@@ -45,15 +177,15 @@ if ($field->DataMixed)
 	    $amounts = explode('_', $amounts);
 	    if ( $headings = explode ( "\t\t", $headings ) )
 	        foreach ( $headings as $k=>$v ) $headings[$k] = str_replace ( "%hash%", "#", $v );
-	        
+	            
     	// Full listmode
 		if ( $listmode == 'full' )
 		{
 			$len = count ( $pages );
 			for ( $a = 0; $a < $len; $a++ )
 			{
-				$page = new dbContent ();
-				if ( !$page->load ( $pages[$a] ) )
+				$bpage = new dbContent ();
+				if ( !$bpage->load ( $pages[$a] ) )
 					continue;
 				
 				if ( $blogs = $database->fetchObjectRows ( '
@@ -73,7 +205,7 @@ if ($field->DataMixed)
 						}
 						else $btpl->image = '';
 						$btpl->blog = $bo;
-						$btpl->link = $page->getRoute () . '/blogitem/' . $bo->ID . '_' . texttourl ( $bo->Title ) . '.html';
+						$btpl->link = $bpage->getRoute () . '/blogitem/' . $bo->ID . '_' . texttourl ( $bo->Title ) . '.html';
 						$module .= $btpl->render ();
 					}
 				}
@@ -92,7 +224,6 @@ if ($field->DataMixed)
 					$posAr[$k] = 0;
 				}
 			}
-		
 		    for ($k = 0; $k < count($pages); $k++)
 		    {
 				$pos = $posAr[$k];
@@ -119,18 +250,19 @@ if ($field->DataMixed)
 		        $blogs->addClause('ORDER BY', 'DateUpdated DESC, ID DESC');
 				$blogs->addClause ( 'LIMIT', $pos . ',' . $lim );
 
+				$num = 0;
 		        if ($blogs = $blogs->find())
 		        {
-		            $page = new dbObject('ContentElement');
-		            $page->load($pages[$k]);
+		            $bpage = new dbObject('ContentElement');
+		            $bpage->load($pages[$k]);
 
 				
-		            $str .= '<div class="Bold BlogListTitle">' . i18n ( $hc ? $headings[$k] : 'Blogarticles from the page' ) . ( $hc ? '' : $page->Title ) . ':</div>';
+		            $str .= '<div class="Bold BlogListTitle Row' . ++$num . '">' . i18n ( $hc ? $headings[$k] : 'Blogarticles from the page' ) . ( $hc ? '' : $bpage->Title ) . ':</div>';
 		            foreach($blogs as $blog)
 		            {
 		                if ( !$blogcontents[$blog->ContentElementID] )
 		                    $blogcontents[$blog->ContentElementID] = new dbContent ( $blog->ContentElementID );
-		                $botpl = new cpTemplate($mtpldir . 'web_blogoversiktlist.php');
+		                $botpl = new cPTemplate($mtpldir . 'web_blogoversiktlist.php');
 		                $botpl->cnt =& $blogcontents[$blog->ContentElementID];
 		                $botpl->blog =& $blog;
 		                $botpl->date = ArenaDate ( DATE_FORMAT, $blog->DatePublish );

@@ -34,7 +34,9 @@ if (!$Session->mod_blogoversikt_initialized)
 switch($_REQUEST['modaction'])
 {
 	case 'new':
-		$mtpl = new cpTemplate($mtpldir . 'adm_blogoversikt.php');
+		if ( strstr ( $fieldObject->DataMixed, '--Version 2.0--' ) )
+			$mtpl = new cPTemplate ( $mtpldir . 'adm_blogoversikt_new.php' );
+		else $mtpl = new cPTemplate($mtpldir . 'adm_blogoversikt.php');
 		$mtpl->amounts =& $amounts;
 		$mtpl->datamixed = $field->DataMixed;
 		die ($mtpl->render());
@@ -42,15 +44,15 @@ switch($_REQUEST['modaction'])
 				
 	case 'executeadd':
 		$db =& dbObject::globalValue('database');
-		$blogpages = array();
-		$amounts = array();
-		if ($_POST['page'] && $_POST['amounts'])
+		if ( isset ( $_POST['mixed'] ) )
 		{
-			$datamixed = $_POST['page'] . '#' . $_POST['amounts'] . '#' . $_POST['nav'] . '#' . $_POST[ 'titles' ];
-			$datamixed .= '#' . $_POST['listmode'] . '#' . $_POST[ 'sizex' ] . '#' . $_POST[ 'sizey' ];
+			$field->DataMixed = '<!--Version 2.0-->'.
+				"listmode\t{$_POST['listmode']}\n" .
+				"leadinimagewidth\t{$_POST['leadinimagewidth']}\n" .
+				"leadinimageheight\t{$_POST['leadinimageheight']}" .
+				'<!--separate-->' .
+				$_POST[ 'mixed' ];
 		}
-		else $datamixed = 'empty!';
-		$field->DataMixed = $datamixed;
 		$field->save ();
 
 	case 'standard':

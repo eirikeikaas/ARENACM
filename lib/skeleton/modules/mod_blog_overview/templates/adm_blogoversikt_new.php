@@ -27,69 +27,70 @@
 <?
     $db =& dbObject::globalValue('database');
 
-    $blogids = array();
-    $noOfArticles = array();
-    $navigation = array();
-    
-    if ($this->datamixed)
-    {
-        $blogdata = explode('#', $this->datamixed);
-    
-        if (strstr($blogdata[0], '_')) $blogids = explode('_', $blogdata[0]);
-        else if ($blogdata[0]) $blogids[] = $blogdata[0];
-        
-        if (strstr($blogdata[1], '_')) $noOfArticles = explode('_', $blogdata[1]);
-        else if ($blogdata[1]) $noOfArticles[] = $blogdata[1];
-
-        if (strstr($blogdata[2], '_')) $navigation = explode('_', $blogdata[2]);
-        else if ($blogdata[2]) $navigation[] = $blogdata[2];
-        
-        if (strstr($blogdata[3], "\t\t")) $titles = explode ( "\t\t", $blogdata[ 3 ] );
-        else if ( $blogdata[3] ) $titles = Array ( $blogdata[ 3 ] );
-        
+    list ( , $mixed ) = explode ( '<!--Version 2.0-->', $this->datamixed );
+	$this->globalConf = false;
+	$this->conf = array ();
+	if ( $mixed = explode ( '<!--separate-->', $mixed ) )
+	{
+		$i = 0;
+		foreach ( $mixed as $mix )
+		{
+			if ( $i++ == 0 )
+			{
+				$this->globalConf = CreateObjectFromString ( $mix );
+			}
+			else
+			{
+				$this->conf[] = CreateObjectFromString ( $mix );
+			}
+		}
     }
 
     $q = 'SELECT c.* from ContentDataSmall e, ContentElement c WHERE e.DataString = "mod_blog" AND c.ID = c.mainID AND e.ContentID = c.mainID';
 
    	$str = '';
-    if ($blogpages = $db->fetchObjectRows($q))
+   	$num = 1;
+    if ( $blogpages = $db->fetchObjectRows($q) )
     {
         foreach ( $blogpages as $key=>$blogpage )
         {
-            $hit = false;
-            $nav = $navigation[ $key ];
-            if ( in_array( $blogpage->MainID, $blogids ) )
-            {
-                $hit = true;
-                $selected = array_search ( $blogpage->MainID, $blogids );
-                $amount = $noOfArticles[ $selected ];
-                $title = str_replace ( "%hash%", "#", count ( $titles ) ? $titles[ $selected ] : '' );
-            }
-            else 
-            {
-            	$title = ''; 
-            	$amount = 4;
-            }
-            
-            $str.= '
-            	<tr>
-            		<td>
-            			<input type="checkbox"' . ( $hit ? ' checked="checked"' : '' ) . ' id="blog_' . $blogpage->MainID . '">
-            			<span>' . $blogpage->Title . '   </span>
-            		</td>
-            		<td>
-            			<input type="text" id="blog_amount_' . $blogpage->MainID . '" class="BlogAntall" style="width: 30px" size="3" value="' . $amount . '">
-            		</td>
-            		<td>
-		        		<select id="navigateselect' . $blogpage->MainID . '" name="navigate">
-		        			<option ' . ($nav == 'on' ? 'selected ' : '') . 'value="on">P&aring</option><option ' . ($nav == 'off' ? 'selected ' : '') . 'value="off">Av</option>
-		        		</select>
-		        	</td>
-		        	<td>
-		        		<input type="text" value="' . trim ( $title ) . '" style="text-align: left" name="title_' . $blogpage->MainID . '">
-		        	</td>
-            	</tr>
-            ';
+        	$hit = false;
+        	$nav = 'no';
+        	$selected = false;
+        	$amount = 4;
+        	$title = '';
+        	foreach ( $this->conf as $cnf )
+        	{
+        		if ( $cnf->activated != $blogpage->MainID )
+        			continue;
+		        $hit = false;
+		        $nav = $cnf->navigation;
+	            $hit = true;
+	            $selected = true;
+	            $amount = $cnf->quantity;
+	            $title = $cnf->heading;
+	            break;
+	        }
+		        
+	        $str.= '
+		        	<tr>
+		        		<td>
+		        			<input type="checkbox"' . ( $hit ? ' checked="checked"' : '' ) . ' id="blog_' . $blogpage->MainID . '">
+		        			<span>' . $blogpage->Title . '   </span>
+		        		</td>
+		        		<td>
+		        			<input type="text" id="blog_amount_' . $blogpage->MainID . '" class="BlogAntall" style="width: 30px" size="3" value="' . $amount . '">
+		        		</td>
+		        		<td>
+				    		<select id="navigateselect' . $blogpage->MainID . '" name="navigate">
+				    			<option ' . ($nav == 'on' ? 'selected ' : '') . 'value="on">P&aring</option><option ' . ($nav == 'off' ? 'selected ' : '') . 'value="off">Av</option>
+				    		</select>
+				    	</td>
+				    	<td>
+				    		<input type="text" value="' . trim ( $title ) . '" style="text-align: left" name="title_' . $blogpage->MainID . '">
+				    	</td>
+		        	</tr>
+			';
         }
     }
     
@@ -108,7 +109,9 @@
 		<div class="SubContainer">
 			<select id="mod_blog_listmode">
 				<?
-					list ( , , , ,$listmode, $this->sizex, $this->sizey ) = explode ( '#', $this->datamixed );
+					$listmode = $this->globalConf->listmode;
+					$this->sizex = $this->globalConf->leadinimagewidth;
+					$this->sizey = $this->globalConf->leadinimageheight;
 					$str = '';
 					foreach ( array ( 'titles', 'full' ) as $mode )
 					{
