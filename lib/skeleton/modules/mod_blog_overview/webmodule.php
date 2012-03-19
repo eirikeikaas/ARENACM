@@ -125,7 +125,7 @@ if ( strstr ( $field->DataMixed, '--Version 2.0--' ) )
 						if ( $blogs = $blogs->find() )
 						{
 							$str .= '<div class="Bold BlogListTitle">' . 
-								i18n ( $conf->heading ? $conf->heading : ( 'Blogarticles from the page' ) . $bpage->Title ) . ':</div>';
+								i18n ( $conf->heading ? $conf->heading : ( 'Blogarticles from the page' ) . $bpage->Title . ':' ) . '</div>';
 							
 							foreach( $blogs as $blog )
 							{
