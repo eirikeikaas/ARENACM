@@ -65,7 +65,7 @@ function pmGetUsers ( $gid = false, $page = 0, $pluginid = '' )
 	global $Session;
 	$db =& dbObject::globalValue ( 'database' );
 	if ( $gid == '0' ) $gid = false;
-	$limit = 10;
+	$limit = 9;
 	
 	if ( !$Session->pmPos ) $Session->Set ( 'pmPos', 0 );
 	if ( $_REQUEST[ 'pmPos' ] ) $Session->Set ( 'pmPos', $_REQUEST[ 'pmPos' ] );
