@@ -26,10 +26,10 @@ if ( $_REQUEST[ 'bajaxrand' ] )
 	switch ( $_REQUEST[ 'action' ] )
 	{
 		case 'copypermissionstosubs':
-			include_once ( 'skeleton/modules/mod_permissions/actions/copypermissionstosubs.php' );
+			include_once ( 'lib/skeleton/modules/mod_permissions/actions/copypermissionstosubs.php' );
 			break;
 		case 'permissions':
-			include_once ( 'skeleton/modules/mod_permissions/actions/permissions.php' );
+			include_once ( 'lib/skeleton/modules/mod_permissions/actions/permissions.php' );
 			break;
 	}
 }
