@@ -26,7 +26,7 @@ Rune Nilssen
 function editLibraryImage( imageID )
 {
 	document.ModalSelection = false;
-	initModalDialogue ( 'EditLevel', 720, 520, modulepath + '&function=editimage&imageID=' + imageID );	
+	initModalDialogue ( 'EditLevel', 790, 520, modulepath + '&function=editimage&imageID=' + imageID );	
 } // end of applyContentActions
 
 
@@ -175,6 +175,6 @@ function checkImageUpload()
 function addLibraryImage()
 {
 	document.ModalSelection = false;
-	initModalDialogue ( 'EditLevel', 512, 390, modulepath + '&function=editimage&folderID=' + currentLibraryLevel );	
+	initModalDialogue ( 'EditLevel', 520, 390, modulepath + '&function=editimage&folderID=' + currentLibraryLevel );	
 } // end of addLibraryImage
 

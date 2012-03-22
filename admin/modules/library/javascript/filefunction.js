@@ -72,7 +72,7 @@ var txdoctitle = document.title;
 function editLibraryFile( fileID )
 {
 	document.ModalSelection = false;
-	initModalDialogue ( 'EditLevel', 780, 520, modulepath + '&function=editfile&fileID=' + fileID );	
+	initModalDialogue ( 'EditLevel', 790, 520, modulepath + '&function=editfile&fileID=' + fileID );	
 } // end of applyContentActions
 
 
