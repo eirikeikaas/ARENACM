@@ -82,7 +82,7 @@ function editLibraryFile( fileID )
 function addLibraryFile()
 {
 	document.ModalSelection = false;
-	initModalDialogue ( 'EditLevel', 480, 390, modulepath + '&function=editfile&folderID=' + currentLibraryLevel );	
+	initModalDialogue ( 'EditLevel', 540, 390, modulepath + '&function=editfile&folderID=' + currentLibraryLevel );	
 } // end of addLibraryFile
 
 /** ===========================================================================================================
