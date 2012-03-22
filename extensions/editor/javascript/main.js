@@ -802,7 +802,7 @@ function changeLanguage( id )
 
 function addField ( )
 {
-	initModalDialogue ( 'addfield', 400, 530, 'admin.php?module=extensions&extension=editor&action=dlg_addfield&cid=' + document.getElementById ( 'PageID' ).value, function ( ){ document.getElementById ( 'diaform' ).Name.focus ( ); } );
+	initModalDialogue ( 'addfield', 440, 530, 'admin.php?module=extensions&extension=editor&action=dlg_addfield&cid=' + document.getElementById ( 'PageID' ).value, function ( ){ document.getElementById ( 'diaform' ).Name.focus ( ); } );
 }
 
 function executeAddField ( )
@@ -859,7 +859,7 @@ function removeField ( fid, ft, dir )
 
 function editEditorField ( fid, ft )
 {
-	initModalDialogue ( 'editfield', 400, 530, 'admin.php?module=extensions&extension=editor&action=dlg_editfield&cid=' + document.getElementById ( 'PageID' ).value + '&ft=' + ft + '&fid=' + fid, function ( ){ document.getElementById ( 'diaform' ).Name.focus ( ); } );
+	initModalDialogue ( 'editfield', 440, 530, 'admin.php?module=extensions&extension=editor&action=dlg_editfield&cid=' + document.getElementById ( 'PageID' ).value + '&ft=' + ft + '&fid=' + fid, function ( ){ document.getElementById ( 'diaform' ).Name.focus ( ); } );
 }
 
 function executeEditField ( )
