@@ -110,10 +110,11 @@
 							}
 						}
 						closedir ( $dir );
-						$str = '<tr><td><p><strong>' . i18n ( 'Choose content group' ) . ':</strong></p></td><td><p><select name="ModuleName">' . $ostr . '</select></p></td></tr>';
+						$str = '<tr><td><p><strong>' . i18n ( 'Choose content group' ) . ':</strong></p></td><td><select name="ModuleName" style="margin-top: -4px">' . $ostr . '</select></td></tr>';
 						if ( $groups = explode ( ',', $this->content->ContentGroups ) )
 						{
 							$ostr = '';
+							$groups['__override__'] = i18n ( 'Module decides' );
 							foreach ( $groups as $group )
 							{
 								$group = trim ( $group );
@@ -132,7 +133,7 @@
 									}
 								}
 							}
-							$str .= '<tr><td><p><strong>Modulplassering:</strong></p></td><td><p>' . i18n ( 'Put in' ) . ' <select name="ModuleContentGroup">' . $ostr . '</select></p></td></tr>';
+							$str .= '<tr><td><p><strong>Modulplassering:</strong></p></td><td>' . i18n ( 'Put in' ) . ' <select name="ModuleContentGroup" style="margin-top: -4px">' . $ostr . '</select></td></tr>';
 						}
 						return $str;
 					}
