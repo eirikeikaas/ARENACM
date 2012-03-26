@@ -163,6 +163,22 @@ else
 	$tpl->ContentForm = '<iframe width="100%" height="500px" frameborder="no" border="0" resize="no" style="-moz-box-sizing: border-box; box-sizing: border-box; border: 2px solid #a00; -moz-border-radius: 3px;" scrolling="auto" src="' . $cnt->getUrl ( ) . '"></iframe><div class="Spacer"></div>';
 }
 
+// Look for expansions on the editor -------------------------------------------
+if ( $dir = opendir ( 'extensions' ) )
+{
+	while ( $file = readdir ( $dir ) )
+	{
+		if ( $file{0} == '.' || $file == 'editor' || $file == 'easyeditor' )
+			continue;
+		if ( file_exists ( "extensions/$file/editor_expansion.php" ) )
+		{
+			$content =& $cnt;
+			include ( "extensions/$file/editor_expansion.php" );
+		}
+	}
+	closedir ( $dir );
+}
+
 if ( !$Session->EditorDbCheck )
 {
 	$table = new cDatabaseTable ( 'Notes' );
@@ -180,5 +196,5 @@ if ( !$Session->EditorDbCheck )
 	}
 	$Session->set ( 'EditorDbCheck', 1 );
 }
-	
+
 ?>
