@@ -114,7 +114,7 @@
 						if ( $groups = explode ( ',', $this->content->ContentGroups ) )
 						{
 							$ostr = '';
-							$groups[] = array ( '__ovverride__', 'Module decides' );
+							$groups[] = array ( '__override__', 'Module decides' );
 							foreach ( $groups as $group )
 							{
 								$gkey = false;
