@@ -178,6 +178,12 @@ if ( $dir = opendir ( 'extensions' ) )
 	}
 	closedir ( $dir );
 }
+if ( !$tpl->toolExpansions )
+	$tpl->toolExpansions = '';
+if ( !$tpl->moduleTabExpansions )
+	$tpl->moduleTabExpansions = '';
+if ( !$tpl->moduleExpansions )
+	$tpl->moduleExpansions = '';
 
 if ( !$Session->EditorDbCheck )
 {
