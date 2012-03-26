@@ -356,6 +356,30 @@ function contentButtons ( $contentid, $short = false )
 	$cnt = new dbContent ( );
 	if ( $cnt->load ( $contentid ) )
 	{
+		if ( GetSettingValue ( 'ContentElementHideControls', $cnt->MainID ) )
+		{
+			// Allow preview and wrench short buttons
+			if ( $short == true )
+			{
+				if ( $user->isSuperUser ( ) )
+				{
+					$str .= '
+				<button type="button" onclick="advancedSettings ( )" title="' . i18n ( 'View advanced settings' ) . '">
+					<img src="admin/gfx/icons/wrench.png">
+					' . ( $short ? '' : ' ' . i18n ( 'Advanced' ) ) . '
+				</button>
+					';
+				}
+				$str .= '
+				<button type="button" onclick="previewPage ( )" title="' . i18n ( 'Show page preview' ) . '">
+					<img src="admin/gfx/icons/eye.png">
+					' . ( $short ? '' : i18n ( 'Preview' ) ) . '
+				</button>
+				';
+				return $str;
+			}
+			return '';
+		}
 		$org = new dbContent ( );
 		$org->load ( $cnt->MainID );
 		$str = '';
