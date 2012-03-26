@@ -416,6 +416,22 @@ function contentButtons ( $contentid, $short = false )
 			}
 		}
 		
+		if ( $dir = opendir ( 'extensions' ) )
+		{
+			while ( $file = readdir ( $dir ) )
+			{
+				if ( $file{0} == '.' || $file == 'editor' || $file == 'easyeditor' )
+					continue;
+				if ( file_exists ( "extensions/$file/editor_buttons.php" ) )
+				{
+					$buttonoutput =& $str;
+					$content =& $cnt;
+					include ( "extensions/$file/editor_buttons.php" );
+				}
+			}
+			closedir ( $dir );
+		}
+		
 		/** End check for extensions **/
 		
 		if ( $Session->AdminUser->checkPermission ( $cnt, 'Write', 'admin' ) )
