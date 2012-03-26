@@ -114,12 +114,18 @@
 						if ( $groups = explode ( ',', $this->content->ContentGroups ) )
 						{
 							$ostr = '';
-							$groups['__override__'] = i18n ( 'Module decides' );
+							$groups[] = array ( '__ovverride__', 'Module decides' );
 							foreach ( $groups as $group )
 							{
-								$group = trim ( $group );
-								$s = $grp == $group ? ' selected="selected"' : '';
-								$ostr .= '<option value="' . $group . '"' . $s . '>' . $group . '</option>';
+								$gkey = false;
+								if ( is_array ( $group ) )
+								{
+									$gkey = $group[0];
+									$group = $group[1];
+								}
+								else $group = trim ( $group );
+								$s = ( ( $gkey && $grp == $gkey ) || ( $grp == $group ) ) ? ' selected="selected"' : '';
+								$ostr .= '<option value="' . ( $gkey ? $gkey : $group ) . '"' . $s . '>' . ( $gkey ? i18n ( $group ) : $group ) . '</option>';
 								foreach ( $this->content as $k=>$v )
 								{
 									if ( substr ( $k, 0, 7 ) == '_extra_' )
