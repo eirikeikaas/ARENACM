@@ -39,6 +39,7 @@ if ( $_REQUEST[ 'bajaxrand' ] && $_REQUEST[ 'contenttype' ] )
 		$cnt->ContentTemplateID = $_REQUEST[ 'contenttemplateid' ];
 		$cnt->Template = $_REQUEST[ 'template' ] ? $_REQUEST[ 'template' ] : '';
 		$cnt->save ( );
+		SetSetting ( 'ContentElementHideControls', $cnt->MainID, $_REQUEST[ 'hidecontrols' ] == '1' ? '1' : '0' );
 		die ( 'ok' );
 	}
 	die ( 'fail' );

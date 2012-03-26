@@ -926,6 +926,7 @@ function executeAdvanced ( )
 	jax.addVar ( 'systemname', frm.SystemName.value );
 	jax.addVar ( 'contentgroups', frm.ContentGroups.value );
 	jax.addVar ( 'contenttemplateid', frm.ContentTemplateID.value );
+	jax.addVar ( 'hidecontrols', getRadioValue ( frm.HideControls ) );
 	if ( frm.Template )
 		jax.addVar ( 'template', frm.Template.value );
 	if ( frm.ModuleName )

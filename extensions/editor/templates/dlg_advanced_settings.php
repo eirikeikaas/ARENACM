@@ -12,12 +12,31 @@
 						</p>
 					</td>
 					<td>
-						<table class="LayoutVCenter">
+						<table>
 							<tr>
-								<td><?= i18n ( 'Yes' ) ?></td>
-								<td><input type="radio" name="IsPublished" value="1"<?= $this->content->IsPublished ? ' checked="checked"' : '' ?>></td>
-								<td><?= i18n ( 'No' ) ?></td>
-								<td><input type="radio" name="IsPublished" value="0"<?= !$this->content->IsPublished ? ' checked="checked"' : '' ?>></td>
+								<td>
+									<table class="LayoutVCenter">
+										<tr>
+											<td><?= i18n ( 'Yes' ) ?></td>
+											<td><input type="radio" name="IsPublished" value="1"<?= $this->content->IsPublished ? ' checked="checked"' : '' ?>></td>
+											<td><?= i18n ( 'No' ) ?></td>
+											<td><input type="radio" name="IsPublished" value="0"<?= !$this->content->IsPublished ? ' checked="checked"' : '' ?>></td>
+										</tr>
+									</table>
+								</td>
+								<td style="border-left: 1px solid #cccccc">
+									<table cellspacing="0" cellspacing="0">
+										<tr>
+											<td style="padding: 2px">
+												&nbsp;<?= i18n ( 'Hide controls?' ) ?>
+											</td>
+											<td style="padding: 2px"><?= i18n ( 'Yes' ) ?></td>
+											<td style="padding: 2px"><input type="radio" name="HideControls" value="1"<?= GetSettingValue ( 'ContentElementHideControls', $this->content->MainID ) ? ' checked="checked"' : '' ?>/></td>
+											<td style="padding: 2px"><?= i18n ( 'No' ) ?></td>
+											<td style="padding: 2px"><input type="radio" name="HideControls" value="0"<?= !GetSettingValue ( 'ContentElementHideControls', $this->content->MainID ) ? ' checked="checked"' : '' ?>/></td>
+										</tr>
+									</table>
+								</td>
 							</tr>
 						</table>
 					</td>
