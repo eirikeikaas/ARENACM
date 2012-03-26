@@ -107,7 +107,7 @@ if ( !$tpl->page->DateCreated )
 $db =& $cnt->getDatabase ( );
 if ( $notes = $db->fetchObjectRow ( 'SELECT * FROM Notes WHERE ContentTable="ContentElement" AND ContentID=' . $cnt->ID ) )
 	$tpl->Notes =& stripslashes ( $notes->Notes );
-else $tpl->notes = '';
+else $tpl->Notes = '';
 
 if ( $Session->AdminUser->checkPermission ( $cnt, 'Write', 'admin' ) )
 {
