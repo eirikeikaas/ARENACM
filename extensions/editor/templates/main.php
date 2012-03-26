@@ -35,7 +35,7 @@
 					<div id="pageNotes" class="page" style="padding: 8px">
 						<h2><?= i18n ( 'Your notes on this page' ) ?>:</h2>
 						<textarea id="PageNotes"><?= $this->Notes ?></textarea>
-						<?= isset ( $this->tools ) ? $this->tools : '' ?>
+						<?= $this->toolExpansions ?>
 					</div>
 					<div id="pageModuleShop" class="page" style="padding: 4px">
 						<div id="EditorModuleTabs">
@@ -46,6 +46,7 @@
 							<div class="tab" id="tabModulesAvailable">
 								<img src="admin/gfx/icons/star.png"> <?= i18n ( 'Free modules' ) ?>
 							</div>
+							<?= $this->moduleTabExpansions ?>
 							<!--
 							<div class="tab" id="tabModulesPro">
 								<img src="admin/gfx/icons/money.png"> <?= i18n ( 'Module shop' ) ?>
@@ -58,6 +59,7 @@
 							<div class="page" id="pageModulesAvailable">
 								<?= showFreeModules ( ) ?>
 							</div>
+							<?= $this->moduleExpansions ?>
 							<!--<div class="page" id="pageModulesPro">
 								<?= showProModules ( ) ?>
 							</div>-->
