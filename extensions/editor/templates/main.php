@@ -88,6 +88,7 @@
 				<input type="hidden" id="PageID" value="<?= $this->page->ID ?>">
 				<input type="hidden" id="PageUrl" value="<?= $this->page->getUrl ( ) ?>">
 				<div class="Container" id="ContentForm" style="padding-top: <?= MarginSize ?>px">
+					<?if ( !GetSettingValue ( 'ContentElementHideControls', $this->page->MainID ) ) { ?>
 					<table class="LayoutColumns">
 						<tr>
 							<td>
@@ -104,6 +105,11 @@
 						</tr>
 					</table>
 					<div class="SpacerSmallColored"></div>
+					<?}?>
+					<?if ( GetSettingValue ( 'ContentElementHideControls', $this->page->MainID ) ) { ?>
+					<input type="hidden" value="<?= $this->page->MenuTitle ?>" size="40" id="MenuTitle">
+					<input type="hidden" value="<?= $this->page->Title ?>" size="40" id="Title">
+					<?}?>
 					<div id="ContentFields">
 						<?= $this->ContentForm ?>
 					</div>
