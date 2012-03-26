@@ -312,6 +312,12 @@ switch ( $_REQUEST[ 'mode' ] )
 							list ( $e, $v ) = explode ( "\t", $c );
 							if ( $e == 'ExtensionName' )
 								$page->extension = $v;
+							else if ( $e == 'ExtensionContentGroup' && $v == '__override__' )
+							{
+								include_once ( 'extensions/' . $page->extension . '/webmodule.php' );
+								$page = false;
+								echo $module;
+							}
 						}
 						if ( file_exists ( 'extensions/' . $page->extension . '/webmodule_preparse.php' ) )
 							include_once ( 'extensions/' . $page->extension . '/webmodule_preparse.php' );
@@ -337,7 +343,12 @@ switch ( $_REQUEST[ 'mode' ] )
 						if ( $e == 'ExtensionName' )
 						{
 							$page->extension = $v;
-							break;
+						}
+						else if ( $e == 'ExtensionContentGroup' && $v == '__override__' )
+						{
+							include_once ( 'extensions/' . $page->extension . '/webmodule.php' );
+							$page = false;
+							echo $module;
 						}
 					}
 					if ( file_exists ( 'extensions/' . $page->extension . '/webmodule_preparse.php' ) )
