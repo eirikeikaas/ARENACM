@@ -140,7 +140,7 @@
 				</strong>
 			</td>
 			<td>
-				<input id="txTableBorderWidth" type="text" size="20" value="">
+				<input id="txTableBorderWidth" type="text" size="10" value="">
 			</td>
 		</tr>
 		<tr>
@@ -150,7 +150,19 @@
 				</strong>
 			</td>
 			<td>
-				<input id="txTablePadding" type="text" size="20" value="">
+				<input id="txTablePadding" type="text" size="10" value="">
+			</td>
+		</tr>
+	</table>
+	<table id="txTableDataProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
+		<tr>
+			<td style="width: 140px">
+				<strong>
+					Padding størrelse
+				</strong>
+			</td>
+			<td>
+				<input id="txTableDataPadding" type="text" size="10" value="">
 			</td>
 		</tr>
 	</table>
@@ -182,7 +194,13 @@
 			tp.style.left = 'auto';
 			break;
 		case 'th':		nn = 'tabell header felt'; break;
-		case 'td':		nn = 'tabell felt'; break;
+		case 'td':		nn = 'tabell felt'; 
+			var tp = document.getElementById ( 'txTableDataProps' );
+			tp.style.position = 'relative';
+			tp.style.visibility = 'visible';
+			tp.style.top = 'auto';
+			tp.style.left = 'auto';
+			break;
 		case 'a':		nn = 'lenke'; break;
 		case 'em':		nn = 'uthevet tekst'; break;
 		case 'strong':	nn = 'fet tekst'; break;
@@ -221,6 +239,10 @@
 		document.getElementById ( 'txTableBorderWidth' ).value = node.getAttribute ( 'cellspacing' );
 		document.getElementById ( 'txTablePadding' ).value = node.getAttribute ( 'cellpadding' );
 	}
+	else if ( nn == 'tabell felt' )
+	{
+		document.getElementById ( 'txTableDataPadding' ).value = node.style.padding;
+	}
 	else if ( nn == 'bilde' )
 	{
 		document.getElementById ( 'txAltText' ).value = node.getAttribute ( 'alt' );
@@ -240,7 +262,7 @@
 	
 	
 	if ( node.style.background )
-		document.getElementById ( 'txBackground' ).value = node.style.background;
+		document.getElementById ( 'txBackground' ).value = ( node.style.background + "" ).split ( 'undefined' ).join ( '' ).split ( 'initial' ).join ( '' ).split ( ' ' ).join ( '' );
 	
 	if ( node.className )
 		document.getElementById ( 'txClassName' ).value = node.className;
@@ -249,7 +271,7 @@
 	if ( node.style.width )
 		document.getElementById ( 'txWidth' ).value = node.style.width;
 	if ( node.style.color )
-		document.getElementById ( 'txColor' ).value = node.style.color;
+		document.getElementById ( 'txColor' ).value = ( node.style.color + "" ).split ( 'undefined' ).join ( '' ).split ( 'initial' ).join ( '' ).split ( ' ' ).join ( '' );
 	if ( node.id )
 		document.getElementById ( 'txID' ).value = node.id;
 	if ( node.style.float || node.align )
@@ -328,6 +350,13 @@
 			bp = bp.split ( 'px' ).join ( '' );
 			node.setAttribute ( 'cellspacing', bw ? ( bw + 'px' ) : '' );
 			node.setAttribute ( 'cellpadding', bp ? ( bp + 'px' ) : '' );
+		}
+		if ( document.getElementById ( 'txTableDataProps' ).style.visibility == 'visible' )
+		{
+			var pd = document.getElementById ( 'txTableDataPadding' ).value;
+			pd = pd.split ( 'px' ).join ( '' );
+			if ( pd.length && parseInt ( pd ) >= 0 )
+				node.style.padding = parseInt ( pd ) + 'px';
 		}
 		if ( document.getElementById ( 'txImageProperties' ).style.display == '' )
 		{
