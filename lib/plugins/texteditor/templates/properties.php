@@ -115,9 +115,32 @@
 			<td>
 				<select id="txFontType">
 					<option value="normal">Standard</option>
-					<option value="Times New Roman">Times new roman</option>
 					<option value="Verdana">Verdana</option>
 					<option value="Arial">Arial</option>
+					<option value="Times New Roman">Times new roman</option>
+					<option value="Monospace">Monospace</option>
+					<option value="Calibri">Calibri</option>
+					<option value="Courier">Courier</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<strong>
+					Skrift størrelse:
+				</strong>
+			</td>
+			<td>
+				<select id="txFontSize">
+					<option value="8px">8</option>
+					<option value="10px">10</option>
+					<option value="12px">12</option>
+					<option value="14px">14</option>
+					<option value="16px">16</option>
+					<option value="18px">18</option>
+					<option value="22px">22</option>
+					<option value="32px">32</option>
+					<option value="48px">48</option>
 				</select>
 			</td>
 		</tr>
@@ -233,6 +256,16 @@
 			else opts[ a ].selected = false;
 		}
 	}
+	if ( node.style.fontSize )
+	{
+		var opts = document.getElementById ( 'txFontSize' ).options;
+		for ( var a = 0; a < opts.length; a++ )
+		{
+			if ( opts[ a ].value == node.style.fontSize )
+				opts[ a ].selected = 'selected';
+			else opts[ a ].selected = false;
+		}
+	}
 	
 	if ( nn == 'tabell' )
 	{
@@ -323,6 +356,7 @@
 	{
 		// font fam
 		node.style.fontFamily = ( document.getElementById ( 'txFontType' ).value != 'normal' ) ? document.getElementById ( 'txFontType' ).value : '';
+		node.style.fontSize = document.getElementById ( 'txFontSize' ).value;
 		node.style.verticalAlign = document.getElementById ( 'txVAlign' ).value;
 		node.className = document.getElementById ( 'txClassName' ).value;
 		node.style.width = ( document.getElementById ( 'txWidth' ).value != '' ) ? document.getElementById ( 'txWidth' ).value : '';
