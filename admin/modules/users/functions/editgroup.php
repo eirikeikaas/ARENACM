@@ -65,7 +65,7 @@ if ( $dir = opendir ( $path ) )
 				
 				$name = strtoupper ( $file{0} ) . substr ( $file, 1, strlen ( $file ) - 1 );
 				$ostr .= '<h2 class="BlockHead">"';
-				$ostr .= '<div style="float: right; margin-top: -16px">Tilgang: ';
+				$ostr .= '<div style="float: right;">Tilgang: ';
 				$ostr .= '<input type="hidden" name="' . $file . '_Access" value="' . $settings->Access . '" id="' . $file . '_Access"/>';
 				$ostr .= '<input type="checkbox"' . ( $settings->Access ? ' checked="checked"' : '' ) . ' onchange="document.getElementById ( \'' . $file . '_Access\' ).value = this.checked ? \'1\' : \'0\'"/>';
 				$ostr .= '</div>';
