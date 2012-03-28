@@ -216,8 +216,8 @@ function getLevelContent( $lid )
 						<td' . $drag . '>' . $row->Title . '</td>
 						<td' . $drag . '>' . $row->Filename . '</td>
 						<td style="text-align: right"' . $drag . '>' . filesizetohuman ( $row->Filesize ) . '</td>
-						<td style="text-align: center"' . $drag . '>' . ArenaDate ( $row->DateModified, DATEFORMAT ) . '</td>
-						<td style="text-align: center"><button onclick="editLibrary' . ( $row->Type == 'Image' ? 'Image' : 'File' ) . '(' . $row->ID . ')" type="button"><img src="admin/gfx/icons/' . ( $row->Type == 'Image' ? 'image' : 'page' ) . '_edit.png"/> Endre</button></td>
+						<td style="text-align: center; width: 150px"' . $drag . '>' . ArenaDate ( $row->DateModified, DATEFORMAT ) . '</td>
+						<td style="text-align: center; width: 70px"><button onclick="editLibrary' . ( $row->Type == 'Image' ? 'Image' : 'File' ) . '(' . $row->ID . ')" type="button" style="display: block"><img src="admin/gfx/icons/' . ( $row->Type == 'Image' ? 'image' : 'page' ) . '_edit.png"/> Endre</button></td>
 					</tr>
 				';
 				$im++;
