@@ -798,6 +798,31 @@ class cDocument extends cPTemplate
 				"\t\t<meta http-equiv=\"pragma\" content=\"no-cache\"/>\n"
 			);
 			$output = str_replace ( "</title>", "</title>\n" . implode ( $metas ), $output );
+			$test = explode ( '</title>', $output );
+			$test = explode ( '</head>', trim ( $test[1] ) );
+			$test = explode ( "\n", trim ( $test[0] ) );
+			$outBase = array ();
+			$outCss = array ();
+			$outScript = array ();
+			$outOther = array ();
+			foreach ( $test as $t )
+			{
+				if ( !( $t = trim ( $t ) ) ) continue;
+				if ( strstr ( $t, '<script' ) && strstr ( $t, '</script>' ) ) $outScript[] = $t;
+				else if ( strstr ( $t, 'rel="stylesheet' ) ) $outCss[] = $t;
+				else if ( strstr ( $t, '<base' ) ) $outBase[] = $t;
+				else $outOther[] = $t;
+			}
+			$GLOBALS[ 'tmpheaders' ] = implode ( "\n\t\t", array_merge ( $outBase, $outCss, $outOther, $outScript ) );
+			$output = preg_replace_callback ( 
+				'/\<\/title\>([\w|\W]*?)\<\/head\>/i', 
+				create_function (
+					'$matches',
+					'return "</title>\n\t\t{$GLOBALS[\'tmpheaders\']}\n\t</head>";'
+				),
+				$output
+			);
+			unset ( $GLOBALS[ 'tmpheaders' ] );
 		}
 		$bdata .= implode ( "\n", $this->sBottomData );
 		$output = str_replace ( '</body>', $bdata . "\n\t</body>", $output );
