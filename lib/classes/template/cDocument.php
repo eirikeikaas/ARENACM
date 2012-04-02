@@ -763,6 +763,24 @@ class cDocument extends cPTemplate
             if ( file_exists ( BASE_DIR . '/favicon.ico' ) )
                 $this->sHeadData[] = "\t\t<link rel=\"shortcut icon\" href=\"/favicon.ico\"/>";
                 
+			// On sHeadData, first list css, then javascript
+			$outBase = array ();
+			$outCss = array ();
+			$outOther = array ();
+			foreach ( $this->sHeadData as $d )
+			{
+				if ( strstr ( $d, 'rel="stylesheet' ) )
+				{
+					$outCss[] = $d;
+				}
+				else if ( strstr ( $d, '<base' ) )
+				{
+					$outBase[] = $d;
+				}
+				else $outOther[] = $d;
+			}
+			$this->sHeadData = array_merge ( $outBase, $outCss, $outOther );
+			
 			$top .= implode ( "\n", $this->sHeadData );
 			$bottom = implode ( "\n", $this->sBottomData );
 			
@@ -771,6 +789,7 @@ class cDocument extends cPTemplate
 				return $output;
 			// Else business as usual
 			$output = str_replace ( '</head>', "\n{$top}\n\t</head>", $output );
+			$output = str_replace ( "</title>\n\t\n", "</title>\n", $output );
 		}
 		else
 		{

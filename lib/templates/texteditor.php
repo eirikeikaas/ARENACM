@@ -8,7 +8,7 @@
 		<?= stripslashes ( $_REQUEST['extra'] ) ?>
 		<meta http-equiv="content-type" content="text/xhtml; charset=UTF-8"/>
 	</head>
-	<body onload="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) document.body.contentEditable='true';" onmouseup="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) return false" onselectstart="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) return false"  onclick="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) return false" oncontextmenu="return false">
+	<body onload="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) document.body.contentEditable='true';" onmouseup="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) return false" onselectstart="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) return false"  onclick="if ( navigator.userAgent.indexOf ( 'MSIE' ) >= 0 ) return false" oncontextmenu="return false" class="ArenaEditor">
 		Laster inn...
 	</body>
 </html>
