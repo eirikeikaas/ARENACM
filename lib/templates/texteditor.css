@@ -12,20 +12,10 @@ body
 	padding: 0px;
 }
 
-th, td, div, p
-{
-	font-size: 11px;
-	line-height: 15px;
-}
-
 a
 {
 	color: #2A6DA5;
 	text-decoration: underline;
-}
-a:hover
-{
-	color: #5F2220;
 }
 
 table
@@ -39,39 +29,5 @@ table td
 	border-left: 1px dotted black;
 	border-top: 1px dotted black;
 	padding: 2px;
-}
-
-h1, h2, h3, h4, h5, h6, p
-{
-	margin: 0 0 8px 0;
-}
-
-img
-{
-	margin: 10px;
-}
-
-img:active
-{
-	outline: 2px dotted #f00;
-}
-img:focus
-{
-	outline: 2px dotted #a00;
-}
-
-ul
-{
-	margin: 0; 
-	padding: 0;
-}
-ul li
-{
-	margin: 0 0 0 20px;
-	padding: 0;
-}
-ul ul
-{
-	margin: 0 0 0 10px;
 }
 
