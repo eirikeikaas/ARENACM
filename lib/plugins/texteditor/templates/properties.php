@@ -3,189 +3,212 @@
 </h1>
 
 <div class="SubContainer">
-	<table>
+	<table cellspacing="0" cellpadding="0" border="0">
 		<tr>
-			<td style="width: 140px">
-				<strong>
-					Felt ID:
-				</strong>
+			<td width="50%" style="vertical-align: top; padding-right: 4xc;">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td style="width: 111px">
+							<strong>
+								Felt ID:
+							</strong>
+						</td>
+						<td>
+							<input id="txID" type="text" size="25" value="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Klasse navn:
+							</strong>
+						</td>
+						<td>
+							<input id="txClassName" type="text" size="25" value="">
+						</td>
+					</tr>
+					<tr id="txImageProperties">
+						<td>
+							<strong>
+								ALT tekst:
+							</strong>
+						</td>
+						<td>
+							<input id="txAltText" type="text" size="25" value="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Velg innebygget klasse:
+							</strong>
+						</td>
+						<td>
+							<select onchange="ge ( 'txClassName' ).value = this.value" id="builtinclass">
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Bredde:
+							</strong>
+						</td>
+						<td>
+							<input id="txWidth" type="text" size="25" value="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Høyde:
+							</strong>
+						</td>
+						<td>
+							<input id="txHeight" type="text" size="25" value="">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Elementflyt:
+							</strong>
+						</td>
+						<td id="txElementFloat">
+							<img name="left" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_left.png"/>
+							<img name="right" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_right.png"/>
+							<img name="center" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_center.png"/>
+							<img name="none" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/shape_square.png"/>
+							<input type="hidden" value="" id="txFloat"/>
+						</td>
+					</tr>
+				</table>
 			</td>
-			<td>
-				<input id="txID" type="text" size="25" value="">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Klasse navn:
-				</strong>
-			</td>
-			<td>
-				<input id="txClassName" type="text" size="25" value="">
-			</td>
-		</tr>
-		<tr id="txImageProperties">
-			<td>
-				<strong>
-					ALT tekst:
-				</strong>
-			</td>
-			<td>
-				<input id="txAltText" type="text" size="25" value="">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Velg innebygget klasse:
-				</strong>
-			</td>
-			<td>
-				<select onchange="document.getElementById ( 'txClassName' ).value = this.value" id="builtinclass">
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Bredde:
-				</strong>
-			</td>
-			<td>
-				<input id="txWidth" type="text" size="25" value="">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Høyde:
-				</strong>
-			</td>
-			<td>
-				<input id="txHeight" type="text" size="25" value="">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Vertikal posisjon:
-				</strong>
-			</td>
-			<td>
-				<select id="txVAlign">
-					<option value="">Ingen</option>
-					<option value="middle">Midten</option>
-					<option value="top">Topp</option>
-					<option value="bottom">Bunn</option>
-					<option value="baseline">På linje</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Tekstflyting:
-				</strong>
-			</td>
-			<td>
-				<select id="txFloat">
-					<option value="">Ingen</option>
-					<option value="left">Venstre</option>
-					<option value="center">Sentrert</option>
-					<option value="right">Høyre</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Bakgrunn:
-				</strong>
-			</td>
-			<td>
-				<input id="txBackground" type="text" size="25" value="">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Skrift type:
-				</strong>
-			</td>
-			<td>
-				<select id="txFontType">
-					<option value="normal">Standard</option>
-					<option value="Verdana">Verdana</option>
-					<option value="Arial">Arial</option>
-					<option value="Times New Roman">Times new roman</option>
-					<option value="Monospace">Monospace</option>
-					<option value="Calibri">Calibri</option>
-					<option value="Courier">Courier</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Skrift størrelse:
-				</strong>
-			</td>
-			<td>
-				<select id="txFontSize">
-					<option value="8px">8</option>
-					<option value="10px">10</option>
-					<option value="12px">12</option>
-					<option value="14px">14</option>
-					<option value="16px">16</option>
-					<option value="18px">18</option>
-					<option value="22px">22</option>
-					<option value="32px">32</option>
-					<option value="48px">48</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<strong>
-					Tekstfarge:
-				</strong>
-			</td>
-			<td>
-				<input id="txColor" type="text" size="25" value="">
-			</td>
-		</tr>
-	</table>
-	<table id="txTableProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
-		<tr>
-			<td style="width: 140px">
-				<strong>
-					Ramme størrelse
-				</strong>
-			</td>
-			<td>
-				<input id="txTableBorderWidth" type="text" size="10" value="">
-			</td>
-		</tr>
-		<tr>
-			<td style="width: 140px">
-				<strong>
-					Felt marg
-				</strong>
-			</td>
-			<td>
-				<input id="txTablePadding" type="text" size="10" value="">
-			</td>
-		</tr>
-	</table>
-	<table id="txTableDataProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
-		<tr>
-			<td style="width: 140px">
-				<strong>
-					Padding størrelse
-				</strong>
-			</td>
-			<td>
-				<input id="txTableDataPadding" type="text" size="10" value="">
+			<td style="vertical-align: top; padding-left: 4px; border-left: 1px solid #cccccc">
+				<table cellspacing="0" cellpadding="0" border="0">
+					<tr>
+						<td>
+							<strong>
+								Vertikal posisjon:
+							</strong>
+						</td>
+						<td>
+							<select id="txVAlign">
+								<option value="">Ingen</option>
+								<option value="middle">Midten</option>
+								<option value="top">Topp</option>
+								<option value="bottom">Bunn</option>
+								<option value="baseline">På linje</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Bakgrunn:
+							</strong>
+						</td>
+						<td>
+							<input id="txBackground" type="text" size="25" value=""/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Skrift type:
+							</strong>
+						</td>
+						<td>
+							<select id="txFontType">
+								<option value="normal">Standard</option>
+								<option value="Verdana">Verdana</option>
+								<option value="Arial">Arial</option>
+								<option value="Times New Roman">Times new roman</option>
+								<option value="Monospace">Monospace</option>
+								<option value="Calibri">Calibri</option>
+								<option value="Courier">Courier</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Skrift størrelse:
+							</strong>
+						</td>
+						<td>
+							<select id="txFontSize">
+								<option value="8px">8</option>
+								<option value="10px">10</option>
+								<option value="11px">11</option>
+								<option value="12px">12</option>
+								<option value="14px">14</option>
+								<option value="16px">16</option>
+								<option value="18px">18</option>
+								<option value="22px">22</option>
+								<option value="32px">32</option>
+								<option value="48px">48</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>Skrift justering:</strong>
+						</td>
+						<td id="txJustification">
+							<img name="left" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_left.png"/>
+							<img name="right" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_right.png"/>
+							<img name="center" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_center.png"/>
+							<img name="justify" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_justify.png"/>
+							<img name="none" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/shape_square.png"/>
+							<input type="hidden" value="" id="txTextAlign"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<strong>
+								Tekstfarge:
+							</strong>
+						</td>
+						<td>
+							<input id="txColor" type="text" size="25" value="">
+						</td>
+					</tr>
+				</table>
+				<table id="txTableProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
+					<tr>
+						<td style="width: 111px">
+							<strong>
+								Ramme størrelse:
+							</strong>
+						</td>
+						<td>
+							<input id="txTableBorderWidth" type="text" size="10" value="">
+						</td>
+					</tr>
+					<tr>
+						<td style="width: 111px">
+							<strong>
+								Felt marg:
+							</strong>
+						</td>
+						<td>
+							<input id="txTablePadding" type="text" size="10" value="">
+						</td>
+					</tr>
+				</table>
+				<table id="txTableDataProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
+					<tr>
+						<td style="width: 111px">
+							<strong>
+								Padding:
+							</strong>
+						</td>
+						<td>
+							<input id="txTableDataPadding" type="text" size="10" value="">
+						</td>
+					</tr>
+				</table>
 			</td>
 		</tr>
 	</table>
@@ -196,7 +219,7 @@
 	var ed = texteditor.get( texteditor.activeEditorId );
 	var node = ed._propertiesNodeType == 'parentnode' ?
 		ed._propertiesParentNode : ed._propertiesNode;
-	var it = document.getElementById ( 'txImageProperties' ).style.display = 'none'; 
+	var it = ge ( 'txImageProperties' ).style.display = 'none'; 
 		
 	var nodename = node.nodeName.toLowerCase ( );
 	
@@ -210,7 +233,7 @@
 		case 'h6':		nn = 'overskrift'; break;
 		case 'table':   
 			nn = 'tabell'; 
-			var tp = document.getElementById ( 'txTableProps' );
+			var tp = ge ( 'txTableProps' );
 			tp.style.position = 'relative';
 			tp.style.visibility = 'visible';
 			tp.style.top = 'auto';
@@ -218,7 +241,7 @@
 			break;
 		case 'th':		nn = 'tabell header felt'; break;
 		case 'td':		nn = 'tabell felt'; 
-			var tp = document.getElementById ( 'txTableDataProps' );
+			var tp = ge ( 'txTableDataProps' );
 			tp.style.position = 'relative';
 			tp.style.visibility = 'visible';
 			tp.style.top = 'auto';
@@ -232,7 +255,7 @@
 		case 'u':		nn = 'understreket tekst'; break;
 		case 'img':
 			nn = 'bilde'; 
-			var it = document.getElementById ( 'txImageProperties' );
+			var it = ge ( 'txImageProperties' );
 			it.style.display = '';
 			break;
 		case 'ul':		nn = 'unummerert liste'; break;
@@ -242,13 +265,13 @@
 		default:		nn = 'element';	break;
 	}
 	
-	document.getElementById ( 'texteditornode' ).innerHTML = nn;
+	ge ( 'texteditornode' ).innerHTML = nn;
 	
 	// Init ---------------------------------------------
 	// Font family
 	if ( node.style.fontFamily )
 	{
-		var opts = document.getElementById ( 'txFontType' ).options;
+		var opts = ge ( 'txFontType' ).options;
 		for ( var a = 0; a < opts.length; a++ )
 		{
 			if ( opts[ a ].value == node.style.fontFamily )
@@ -256,12 +279,15 @@
 			else opts[ a ].selected = false;
 		}
 	}
-	if ( node.style.fontSize )
+	var fs = node.style.fontSize ? node.style.fontSize : 
+		computedStyle ( node ).fontSize;
+	if ( parseInt ( fs ) > 0 )
 	{
-		var opts = document.getElementById ( 'txFontSize' ).options;
+		fs = parseInt ( fs ) + 'px';
+		var opts = ge ( 'txFontSize' ).options;
 		for ( var a = 0; a < opts.length; a++ )
 		{
-			if ( opts[ a ].value == node.style.fontSize )
+			if ( opts[ a ].value == fs )
 				opts[ a ].selected = 'selected';
 			else opts[ a ].selected = false;
 		}
@@ -269,22 +295,22 @@
 	
 	if ( nn == 'tabell' )
 	{
-		document.getElementById ( 'txTableBorderWidth' ).value = node.getAttribute ( 'cellspacing' );
-		document.getElementById ( 'txTablePadding' ).value = node.getAttribute ( 'cellpadding' );
+		ge ( 'txTableBorderWidth' ).value = node.getAttribute ( 'cellspacing' );
+		ge ( 'txTablePadding' ).value = node.getAttribute ( 'cellpadding' );
 	}
 	else if ( nn == 'tabell felt' )
 	{
-		document.getElementById ( 'txTableDataPadding' ).value = node.style.padding;
+		ge ( 'txTableDataPadding' ).value = node.style.padding;
 	}
 	else if ( nn == 'bilde' )
 	{
-		document.getElementById ( 'txAltText' ).value = node.getAttribute ( 'alt' );
+		ge ( 'txAltText' ).value = node.getAttribute ( 'alt' );
 	}
 	
 	// Vertical align
 	if ( node.style.verticalAlign )
 	{
-		var opts = document.getElementById ( 'txVAlign' ).options;
+		var opts = ge ( 'txVAlign' ).options;
 		for ( var a = 0; a < opts.length; a++ )
 		{
 			if ( opts[ a ].value == node.style.verticalAlign )
@@ -294,32 +320,69 @@
 	}
 	
 	
-	if ( node.style.background )
-		document.getElementById ( 'txBackground' ).value = ( node.style.background + "" ).split ( 'undefined' ).join ( '' ).split ( 'initial' ).join ( '' ).split ( ' ' ).join ( '' );
+	if ( node.style.backgroundColor )
+	{
+		ge ( 'txBackground' ).value = node.style.backgroundColor;
+	}
 	
 	if ( node.className )
-		document.getElementById ( 'txClassName' ).value = node.className;
+		ge ( 'txClassName' ).value = node.className;
 	if ( node.style.height )
-		document.getElementById ( 'txHeight' ).value = node.style.height;
+		ge ( 'txHeight' ).value = node.style.height;
 	if ( node.style.width )
-		document.getElementById ( 'txWidth' ).value = node.style.width;
+		ge ( 'txWidth' ).value = node.style.width;
 	if ( node.style.color )
-		document.getElementById ( 'txColor' ).value = ( node.style.color + "" ).split ( 'undefined' ).join ( '' ).split ( 'initial' ).join ( '' ).split ( ' ' ).join ( '' );
+		ge ( 'txColor' ).value = node.style.color;
 	if ( node.id )
-		document.getElementById ( 'txID' ).value = node.id;
-	if ( node.style.float || node.align )
+		ge ( 'txID' ).value = node.id;
+		
+	function txElementFloat ( mode )
 	{
-		var val = node.align = node.align ? node.align : node.style.float;
-		var opts = document.getElementById ( 'txFloat' ).options;
-		for ( var a = 0; a < opts.length; a++ )
+		mode = mode ? mode.toLowerCase () : 'none';
+		var eles = ge ( 'txElementFloat' ).getElementsByTagName ( 'img' );
+		var found = false;
+		for ( var a = 0; a < eles.length; a++ )
 		{
-			if ( opts[ a ].value == val )
-				opts[ a ].selected = 'selected';
-			else opts[ a ].selected = false;
+			if ( eles[a].name == mode || ( a == eles.length - 1 && !found ) )
+			{
+				found = true;
+				eles[a].style.border = '1px solid black';
+			}
+			else eles[a].style.border = 'none';
+			eles[a].onclick = function () { txElementFloat ( this.name ); }
 		}
+		ge ( 'txFloat' ).value = mode;
 	}
+	if ( nodename == 'td' || nodename == 'table' || nodename == 'img' || nodename == 'th' )
+		txElementFloat ( node.getAttribute ? node.getAttribute ( 'align' ) : node.align );
+	else
+	{
+		txElementFloat ( node.style.float ? node.style.float : 
+			( computedStyle ( node ).float ? computedStyle ( node ).float : 'none' ) );
+	}
+	
+	function txTextAlign ( mode )
+	{
+		mode = mode ? mode.toLowerCase () : 'none';
+		var eles = ge ( 'txJustification' ).getElementsByTagName ( 'img' );
+		var found = false;
+		for ( var a = 0; a < eles.length; a++ )
+		{
+			if ( eles[a].name == mode || ( a == eles.length - 1 && !found ) )
+			{
+				found = true;
+				eles[a].style.border = '1px solid black';
+			}
+			else eles[a].style.border = 'none';
+			eles[a].onclick = function () { txTextAlign ( this.name ); }
+		}
+		ge ( 'txTextAlign' ).value = mode;
+	}
+	txTextAlign ( node.style.textAlign ? node.style.textAlign : 
+		( computedStyle ( node ).textAlign ? computedStyle ( node ).textAlign : 'none' ) );
+	
 	var classes = texteditor.customCssClasses;
-	var css_select = document.getElementById ( 'builtinclass' );
+	var css_select = ge ( 'builtinclass' );
 	var opts = '<option value="">Velg:</option>'; 
 	var s = '';
 	for ( var a = 0; a < classes.length; a++ )
@@ -341,6 +404,194 @@
 		bg = '#' + toHex ( bg[ 0 ] ) + toHex ( bg[ 1 ] ) + toHex ( bg[ 2 ] );
 	}
 	
+	ge ( 'propertiesExecuteBtn' ).onclick = function ( )
+	{
+		// font fam
+		node.style.fontFamily = ( ge ( 'txFontType' ).value != 'normal' ) ? ge ( 'txFontType' ).value : '';
+		node.style.width = ( ge ( 'txWidth' ).value != '' ) ? ge ( 'txWidth' ).value : '';
+		node.style.height = ( ge ( 'txHeight' ).value != '' ) ? ge ( 'txHeight' ).value : '';
+		try { node.style.fontSize = ge ( 'txFontSize' ).value; } catch ( e ) {};
+		try { node.style.verticalAlign = ge ( 'txVAlign' ).value; } catch ( e ) {};
+		try { node.className = ge ( 'txClassName' ).value; } catch ( e ){};
+		try { node.style.backgroundColor = ge ( 'txBackground' ).value;	} catch ( e ){};
+		try { node.style.color = ge ( 'txColor' ).value; } catch ( e ){};
+		if ( ge ( 'txFloat' ).value )
+		{
+			if ( nodename == 'img' || nodename == 'td' || nodename == 'table' || nodename == 'th' )
+			{
+				node.setAttribute ( 'align', ge ( 'txFloat' ).value );
+			}
+			else node.style.float = ge ( 'txFloat' ).value;
+		}
+		else 
+		{
+			node.align = '';
+			node.style.float = '';
+		}
+		if ( ge ( 'txTextAlign' ).value )
+		{
+			try { node.style.textAlign = ge ( 'txTextAlign' ).value; } catch ( e ) {};
+		}
+		else 
+		{
+			node.style.textAlign = '';
+		}
+		// TABLE properties
+		if ( ge ( 'txTableProps' ).style.visibility == 'visible' )
+		{
+			var bw = ge ( 'txTableBorderWidth' ).value;
+			bw = bw.split ( 'px' ).join ( '' );
+			var bp = ge ( 'txTablePadding' ).value;
+			bp = bp.split ( 'px' ).join ( '' );
+			node.setAttribute ( 'cellspacing', bw ? ( bw + 'px' ) : '' );
+			node.setAttribute ( 'cellpadding', bp ? ( bp + 'px' ) : '' );
+		}
+		if ( ge ( 'txTableDataProps' ).style.visibility == 'visible' )
+		{
+			var pd = ge ( 'txTableDataPadding' ).value;
+			pd = pd.split ( 'px' ).join ( '' );
+			if ( pd.length && parseInt ( pd ) >= 0 )
+				node.style.padding = parseInt ( pd ) + 'px';
+		}
+		if ( ge ( 'txImageProperties' ).style.display == '' )
+		{
+			node.setAttribute ( 'alt', ge ( 'txAltText' ).value );
+		}
+		node.id = ge ( 'txID' ).value;
+		var ed = texteditor.get ( texteditor.activeEditorId );
+		ed.area.value = ed.getContent ( );
+		
+		// end
+		removeModalDialogue ( 'elementproperties' );
+	}
+	
+	// Simple colorbox implementation
+	function initColorBox ( valuefield )
+	{
+		if ( !valuefield ) return;
+		if ( valuefield.inited ) return;
+		valuefield.inited = true;
+		var d = document.createElement ( 'div' );
+		d.className = 'ColorBoxForm';
+		d.style.position = 'relative';
+		d.style.height = getElementHeight ( valuefield ) + 'px';
+		var p = document.createElement ( 'div' );
+		p.className = 'ColorBoxPreview';
+		p.style.border = '1px solid #cccccc';
+		p.style.borderRadius = '3px';
+		p.style.width = '20%';
+		p.style.position = 'absolute';
+		p.style.right = '0px';
+		p.style.top = '0px';
+		p.style.height = getElementHeight ( valuefield ) - 2 + 'px';
+		valuefield.style.width = '75%';
+		valuefield.style.position = 'absolute';
+		valuefield.style.left = '0px';
+		valuefield.style.top = '0px';
+		if ( valuefield.parentNode.replaceChild )
+			valuefield.parentNode.replaceChild ( d, valuefield );
+		else
+		{
+			var p = valuefield.parentNode;
+			p.insertBefore ( d, valuefield );
+			p.removeChild ( valuefield );
+		}
+		d.appendChild ( valuefield );
+		d.appendChild ( p );
+		valuefield.preview = p;
+		valuefield.onchange = function ()
+		{
+			try
+			{
+				this.preview.style.backgroundColor = this.value;
+			}
+			catch ( e ) { }
+		}
+		valuefield.onblur = function ()
+		{ this.onchange (); }
+		valuefield.onkeyup = function ()
+		{ this.onchange (); }
+		valuefield.onchange();
+	}
+	
+	if ( ge ( 'txBackground' ) ) initColorBox ( ge ( 'txBackground' ) );
+	if ( ge ( 'txColor' ) ) initColorBox ( ge ( 'txColor' ) );
+	
+	function initSizeWidget ( valuefield )
+	{
+		if ( !valuefield ) return;
+		if ( valuefield.inited ) return;
+		valuefield.inited = true;
+		var d = document.createElement ( 'div' );
+		d.className = 'SizeBoxForm';
+		d.style.position = 'relative';
+		d.style.height = getElementHeight ( valuefield ) + 'px';
+		var up = document.createElement ( 'div' );
+		var down = document.createElement ( 'div' );
+		var ar = [ up, down ];
+		for ( var a = 0; a < 2; a++ )
+		{
+			var u = ar[a];
+			u.className = 'ColorBoxPreview';
+			u.style.border = '1px solid #cccccc';
+			u.style.background = '#c0c0c0';
+			u.style.borderRadius = '3px';
+			u.style.width = '16px'; u.style.height = Math.floor ( ( getElementHeight ( valuefield ) - 2 ) * 0.5 ) + 'px';
+			u.style.position = 'absolute';
+			u.style.left = getElementWidth ( valuefield ) - 18 + 'px';
+			u.style.top = a == 0 ? '0px' : u.style.height;
+			u.innerHTML = '<img src="admin/gfx/icons/bullet_arrow_' + ( a == 0 ? "up" : "down" ) + '.png">';
+		}
+		valuefield.style.width = getElementWidth ( valuefield ) - 20 + 'px';
+		if ( valuefield.parentNode.replaceChild )
+			valuefield.parentNode.replaceChild ( d, valuefield );
+		else
+		{
+			var p = valuefield.parentNode;
+			p.insertBefore ( d, valuefield );
+			p.removeChild ( valuefield );
+		}
+		d.appendChild ( valuefield );
+		d.appendChild ( up ); d.appendChild ( down );
+		up.vf = valuefield;
+		down.vf = valuefield;
+		up.onclick = function ()
+		{
+			var sign = 'px';
+			if ( isNaN ( parseInt ( this.vf.value ) ) )
+				this.vf.value = '0';
+			if ( this.vf.value.indexOf ( '%' ) > 0 )
+				sign = '%';
+			this.vf.value = ( parseInt ( this.vf.value ) + 1 ) + sign;
+		}
+		down.onclick = function ()
+		{
+			var sign = 'px';
+			if ( isNaN ( parseInt ( this.vf.value ) ) )
+				this.vf.value = '0';
+			if ( this.vf.value.indexOf ( '%' ) > 0 )
+				sign = '%';
+			this.vf.value = ( parseInt ( this.vf.value ) - 1 ) + sign;
+		}
+		up.style.cursor = isIE ? 'hand' : 'pointer';
+		down.style.cursor = isIE ? 'hand' : 'pointer';
+		//valuefield.onchange = function ()
+		//{
+		//	try
+		//	{
+		//		this.preview.style.backgroundColor = this.value;
+		//	}
+		//	catch ( e ) { }
+		//}
+		//valuefield.onblur = function ()
+		//{ this.onchange (); }
+		//valuefield.onkeyup = function ()
+		//{ this.onchange (); }
+		//valuefield.onchange();
+	}
+	
+	if ( ge ( 'txWidth' ) ) initSizeWidget ( ge ( 'txWidth' ) );
+	if ( ge ( 'txHeight' ) ) initSizeWidget ( ge ( 'txHeight' ) );
 </script>
 
 <div class="SpacerSmallColored"></div>
@@ -350,58 +601,3 @@
 <button type="button" onclick="removeModalDialogue ( 'elementproperties' )">
 	<img src="admin/gfx/icons/cancel.png"/> Avbryt
 </button>
-
-<script>
-	document.getElementById ( 'propertiesExecuteBtn' ).onclick = function ( )
-	{
-		// font fam
-		node.style.fontFamily = ( document.getElementById ( 'txFontType' ).value != 'normal' ) ? document.getElementById ( 'txFontType' ).value : '';
-		node.style.fontSize = document.getElementById ( 'txFontSize' ).value;
-		node.style.verticalAlign = document.getElementById ( 'txVAlign' ).value;
-		node.className = document.getElementById ( 'txClassName' ).value;
-		node.style.width = ( document.getElementById ( 'txWidth' ).value != '' ) ? document.getElementById ( 'txWidth' ).value : '';
-		node.style.height = ( document.getElementById ( 'txHeight' ).value != '' ) ? document.getElementById ( 'txHeight' ).value : '';
-		node.style.background = document.getElementById ( 'txBackground' ).value;	
-		node.style.color = document.getElementById ( 'txColor' ).value;
-		if ( document.getElementById ( 'txFloat' ).value )
-		{
-			if ( nodename == 'img' )
-				node.align = document.getElementById ( 'txFloat' ).value;
-			node.style.float = document.getElementById ( 'txFloat' ).value;
-		}
-		else 
-		{
-			node.align = '';
-			node.style.float = '';
-		}
-		
-		// TABLE properties
-		if ( document.getElementById ( 'txTableProps' ).style.visibility == 'visible' )
-		{
-			var bw = document.getElementById ( 'txTableBorderWidth' ).value;
-			bw = bw.split ( 'px' ).join ( '' );
-			var bp = document.getElementById ( 'txTablePadding' ).value;
-			bp = bp.split ( 'px' ).join ( '' );
-			node.setAttribute ( 'cellspacing', bw ? ( bw + 'px' ) : '' );
-			node.setAttribute ( 'cellpadding', bp ? ( bp + 'px' ) : '' );
-		}
-		if ( document.getElementById ( 'txTableDataProps' ).style.visibility == 'visible' )
-		{
-			var pd = document.getElementById ( 'txTableDataPadding' ).value;
-			pd = pd.split ( 'px' ).join ( '' );
-			if ( pd.length && parseInt ( pd ) >= 0 )
-				node.style.padding = parseInt ( pd ) + 'px';
-		}
-		if ( document.getElementById ( 'txImageProperties' ).style.display == '' )
-		{
-			node.setAttribute ( 'alt', document.getElementById ( 'txAltText' ).value );
-		}
-		
-		node.id = document.getElementById ( 'txID' ).value;
-		var ed = texteditor.get ( texteditor.activeEditorId );
-		ed.area.value = ed.getContent ( );
-		
-		// end
-		removeModalDialogue ( 'elementproperties' )
-	}
-</script>
