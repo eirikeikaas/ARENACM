@@ -408,8 +408,12 @@
 	{
 		// font fam
 		node.style.fontFamily = ( ge ( 'txFontType' ).value != 'normal' ) ? ge ( 'txFontType' ).value : '';
-		node.style.width = ( ge ( 'txWidth' ).value != '' ) ? ge ( 'txWidth' ).value : '';
-		node.style.height = ( ge ( 'txHeight' ).value != '' ) ? ge ( 'txHeight' ).value : '';
+		var tw = ( ge ( 'txWidth' ).value != '' ) ? ge ( 'txWidth' ).value : '';
+		if ( tw.length && tw.indexOf ( 'px' ) <= 0 && tw.indexOf ( '%' ) < 0 ) tw += 'px'; 
+		node.style.width = tw;
+		var th = ( ge ( 'txHeight' ).value != '' ) ? ge ( 'txHeight' ).value : '';
+		if ( th.length && th.indexOf ( 'px' ) <= 0 && th.indexOf ( '%' ) < 0  ) th += 'px';
+		node.style.height = th;
 		try { node.style.fontSize = ge ( 'txFontSize' ).value; } catch ( e ) {};
 		try { node.style.verticalAlign = ge ( 'txVAlign' ).value; } catch ( e ) {};
 		try { node.className = ge ( 'txClassName' ).value; } catch ( e ){};
