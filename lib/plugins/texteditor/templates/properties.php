@@ -3,212 +3,251 @@
 </h1>
 
 <div class="SubContainer">
-	<table cellspacing="0" cellpadding="0" border="0">
+	<table cellspacing="0" cellpadding="0" border="0" width="100%">
 		<tr>
-			<td width="50%" style="vertical-align: top; padding-right: 4xc;">
-				<table cellspacing="0" cellpadding="0" border="0">
-					<tr>
-						<td style="width: 111px">
-							<strong>
-								Felt ID:
-							</strong>
-						</td>
-						<td>
-							<input id="txID" type="text" size="25" value="">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Klasse navn:
-							</strong>
-						</td>
-						<td>
-							<input id="txClassName" type="text" size="25" value="">
-						</td>
-					</tr>
-					<tr id="txImageProperties">
-						<td>
-							<strong>
-								ALT tekst:
-							</strong>
-						</td>
-						<td>
-							<input id="txAltText" type="text" size="25" value="">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Velg innebygget klasse:
-							</strong>
-						</td>
-						<td>
-							<select onchange="ge ( 'txClassName' ).value = this.value" id="builtinclass">
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Bredde:
-							</strong>
-						</td>
-						<td>
-							<input id="txWidth" type="text" size="25" value="">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Høyde:
-							</strong>
-						</td>
-						<td>
-							<input id="txHeight" type="text" size="25" value="">
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Elementflyt:
-							</strong>
-						</td>
-						<td id="txElementFloat">
-							<img name="left" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_left.png"/>
-							<img name="right" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_right.png"/>
-							<img name="center" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_center.png"/>
-							<img name="none" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/shape_square.png"/>
-							<input type="hidden" value="" id="txFloat"/>
-						</td>
-					</tr>
-				</table>
+			<td width="50%" style="vertical-align: top; padding-right: 8px;">
+				<h4>Teknisk informasjon:</h4>
+				<div class="SubContainer">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td style="width: 100px">
+								<strong>
+									Felt ID:
+								</strong>
+							</td>
+							<td>
+								<input id="txID" type="text" size="20" value="">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Klasse navn:
+								</strong>
+							</td>
+							<td>
+								<input id="txClassName" type="text" size="20" value="">
+							</td>
+						</tr>
+						<tr id="txImageProperties">
+							<td>
+								<strong>
+									ALT tekst:
+								</strong>
+							</td>
+							<td>
+								<input id="txAltText" type="text" size="25" value="">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Klassenavn:
+								</strong>
+							</td>
+							<td>
+								<select onchange="ge ( 'txClassName' ).value = this.value" id="builtinclass">
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<h4>
+					Dimensjoner:
+				</h4>
+				<div class="SubContainer">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td style="width: 100px">
+								<strong>
+									Bredde:
+								</strong>
+							</td>
+							<td>
+								<input id="txWidth" type="text" size="20" value="">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Høyde:
+								</strong>
+							</td>
+							<td>
+								<input id="txHeight" type="text" size="20" value="">
+							</td>
+						</tr>
+					</table>
+				</div>
+				<h4>
+					Bildebakgrunn:
+				</h4>
+				<div class="SubContainer">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td style="width: 100px">
+								<strong>
+									Bakgrunn:
+								</strong>
+							</td>
+							<td>
+								<input id="txBackgroundImage" type="text" size="20" value="">
+							</td>
+						</tr>
+					</table>
+				</div>
 			</td>
-			<td style="vertical-align: top; padding-left: 4px; border-left: 1px solid #cccccc">
-				<table cellspacing="0" cellpadding="0" border="0">
-					<tr>
-						<td>
-							<strong>
-								Vertikal posisjon:
-							</strong>
-						</td>
-						<td>
-							<select id="txVAlign">
-								<option value="">Ingen</option>
-								<option value="middle">Midten</option>
-								<option value="top">Topp</option>
-								<option value="bottom">Bunn</option>
-								<option value="baseline">På linje</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Bakgrunn:
-							</strong>
-						</td>
-						<td>
-							<input id="txBackground" type="text" size="25" value=""/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Skrift type:
-							</strong>
-						</td>
-						<td>
-							<select id="txFontType">
-								<option value="normal">Standard</option>
-								<option value="Verdana">Verdana</option>
-								<option value="Arial">Arial</option>
-								<option value="Times New Roman">Times new roman</option>
-								<option value="Monospace">Monospace</option>
-								<option value="Calibri">Calibri</option>
-								<option value="Courier">Courier</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Skrift størrelse:
-							</strong>
-						</td>
-						<td>
-							<select id="txFontSize">
-								<option value="8px">8</option>
-								<option value="10px">10</option>
-								<option value="11px">11</option>
-								<option value="12px">12</option>
-								<option value="14px">14</option>
-								<option value="16px">16</option>
-								<option value="18px">18</option>
-								<option value="22px">22</option>
-								<option value="32px">32</option>
-								<option value="48px">48</option>
-							</select>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>Skrift justering:</strong>
-						</td>
-						<td id="txJustification">
-							<img name="left" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_left.png"/>
-							<img name="right" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_right.png"/>
-							<img name="center" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_center.png"/>
-							<img name="justify" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_justify.png"/>
-							<img name="none" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/shape_square.png"/>
-							<input type="hidden" value="" id="txTextAlign"/>
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<strong>
-								Tekstfarge:
-							</strong>
-						</td>
-						<td>
-							<input id="txColor" type="text" size="25" value="">
-						</td>
-					</tr>
-				</table>
-				<table id="txTableProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
-					<tr>
-						<td style="width: 111px">
-							<strong>
-								Ramme størrelse:
-							</strong>
-						</td>
-						<td>
-							<input id="txTableBorderWidth" type="text" size="10" value="">
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 111px">
-							<strong>
-								Felt marg:
-							</strong>
-						</td>
-						<td>
-							<input id="txTablePadding" type="text" size="10" value="">
-						</td>
-					</tr>
-				</table>
-				<table id="txTableDataProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px">
-					<tr>
-						<td style="width: 111px">
-							<strong>
-								Padding:
-							</strong>
-						</td>
-						<td>
-							<input id="txTableDataPadding" type="text" size="10" value="">
-						</td>
-					</tr>
-				</table>
+			<td style="vertical-align: top; padding-left: 8px; border-left: 1px solid #cccccc">
+				<h4>
+					Posisjonering og marg:
+				</h4>
+				<div class="SubContainer">
+					<table id="txTableProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px" cellspacing="0" cellpadding="0" width="100%">
+						<tr>
+							<td style="width: 121px">
+								<strong>
+									Ramme størrelse:
+								</strong>
+							</td>
+							<td>
+								<input id="txTableBorderWidth" type="text" size="10" value="">
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 121px">
+								<strong>
+									Felt marg:
+								</strong>
+							</td>
+							<td>
+								<input id="txTablePadding" type="text" size="10" value="">
+							</td>
+						</tr>
+					</table>
+					<table id="txTableDataProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px" cellspacing="0" cellpadding="0" width="100%">
+						<tr>
+							<td style="width: 121px">
+								<strong>
+									Padding:
+								</strong>
+							</td>
+							<td>
+								<input id="txTableDataPadding" type="text" size="10" value="">
+							</td>
+						</tr>
+					</table>
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td style="width: 121px;">
+								<strong>
+									Elementflyt:
+								</strong>
+							</td>
+							<td id="txElementFloat">
+								<img name="left" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_left.png"/>
+								<img name="right" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_right.png"/>
+								<img name="center" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_center.png"/>
+								<img name="none" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/shape_square.png"/>
+								<input type="hidden" value="" id="txFloat"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Vertikal posisjon:
+								</strong>
+							</td>
+							<td>
+								<select id="txVAlign">
+									<option value="">Ingen</option>
+									<option value="middle">Midten</option>
+									<option value="top">Topp</option>
+									<option value="bottom">Bunn</option>
+									<option value="baseline">På linje</option>
+								</select>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<h4>
+					Farger og tekstvalg:
+				</h4>
+				<div class="SubContainer">
+					<table cellspacing="0" cellpadding="0" border="0" width="100%">
+						<tr>
+							<td style="width: 121px">
+								<strong>
+									Bakgrunn:
+								</strong>
+							</td>
+							<td>
+								<input id="txBackground" type="text" size="25" value=""/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Skrift type:
+								</strong>
+							</td>
+							<td>
+								<select id="txFontType">
+									<option value="normal">Standard</option>
+									<option value="Verdana">Verdana</option>
+									<option value="Arial">Arial</option>
+									<option value="Times New Roman">Times new roman</option>
+									<option value="Monospace">Monospace</option>
+									<option value="Calibri">Calibri</option>
+									<option value="Courier">Courier</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Skrift størrelse:
+								</strong>
+							</td>
+							<td>
+								<select id="txFontSize">
+									<option value="8px">8</option>
+									<option value="10px">10</option>
+									<option value="11px">11</option>
+									<option value="12px">12</option>
+									<option value="14px">14</option>
+									<option value="16px">16</option>
+									<option value="18px">18</option>
+									<option value="22px">22</option>
+									<option value="32px">32</option>
+									<option value="48px">48</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>Skrift justering:</strong>
+							</td>
+							<td id="txJustification">
+								<img name="left" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_left.png"/>
+								<img name="right" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_right.png"/>
+								<img name="center" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_center.png"/>
+								<img name="justify" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/text_align_justify.png"/>
+								<img name="none" style="cursor: hand; cursor: pointer" src="admin/gfx/icons/shape_square.png"/>
+								<input type="hidden" value="" id="txTextAlign"/>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<strong>
+									Tekstfarge:
+								</strong>
+							</td>
+							<td>
+								<input id="txColor" type="text" size="25" value="">
+							</td>
+						</tr>
+					</table>
+				</div>
 			</td>
 		</tr>
 	</table>
@@ -324,6 +363,14 @@
 	{
 		ge ( 'txBackground' ).value = node.style.backgroundColor;
 	}
+	if ( node.style.backgroundImage )
+	{
+		var bgi = ( node.style.backgroundImage + "" );
+		bgi = bgi.split ( 'url(' );
+		if ( bgi.length > 1 )
+			bgi = bgi[1].split ( ')' )[0].split ( '\'' ).join ( '' ).split ( '"' ).join ( '' );
+		ge ( 'txBackgroundImage' ).value = bgi;
+	}
 	
 	if ( node.className )
 		ge ( 'txClassName' ).value = node.className;
@@ -418,6 +465,7 @@
 		try { node.style.verticalAlign = ge ( 'txVAlign' ).value; } catch ( e ) {};
 		try { node.className = ge ( 'txClassName' ).value; } catch ( e ){};
 		try { node.style.backgroundColor = ge ( 'txBackground' ).value;	} catch ( e ){};
+		try { node.style.backgroundImage = 'url("'+ge('txBackgroundImage').value+'")'; } catch ( e ){};
 		try { node.style.color = ge ( 'txColor' ).value; } catch ( e ){};
 		if ( ge ( 'txFloat' ).value )
 		{
