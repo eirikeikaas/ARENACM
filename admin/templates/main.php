@@ -14,9 +14,7 @@
 		<?if ( GetSettingValue ( 'ARENA_Usersettings_' . $GLOBALS[ 'Session' ]->AdminUser->ID, 'ResourceFriendlyCSS' ) != '1' ) { ?>
 		<link rel="stylesheet" href="admin/css/admin.css" />
 		<?}?>
-		<!--[if IE 7]>
-		<link rel="stylesheet" href="admin/css/workarounds_ie7.css" />
-		<![endif]-->
+		<!--[if IE 7]><link rel="stylesheet" href="admin/css/workarounds_ie7.css" /><![endif]-->
 		<script type="text/javascript">
 			var CookieDomain = "<?= BASE_URL ?>";
 		</script>
