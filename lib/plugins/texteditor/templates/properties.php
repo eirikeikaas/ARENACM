@@ -87,7 +87,7 @@
 						<tr>
 							<td style="width: 100px">
 								<strong>
-									Bakgrunn:
+									Lenke:
 								</strong>
 							</td>
 							<td>
