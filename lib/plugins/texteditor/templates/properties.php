@@ -102,6 +102,43 @@
 					Posisjonering og marg:
 				</h4>
 				<div class="SubContainer">
+					<table id="txPositionProps" cellspacing="0" cellpadding="0" width="100%">
+						<tr>
+							<td style="width: 121px">
+								<strong>
+									Posisjonering:
+								</strong>
+							</td>
+							<td>
+								<select id="txPosition">
+									<option value="static">Statisk</option>
+									<option value="relative">Relativ</option>
+									<option value="absolute">Absolutt</option>
+									<option value="fixed">Fast</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td style="width: 121px">
+								<strong>
+									Koordinater:
+								</strong>
+							</td>
+							<td>
+								<table cellspacing="0" cellpadding="0" border="0" width="100%">
+									<tr>
+										<td width="50%">
+											<input type="text" style="width: 80px" size="4" id="txCoordX" value="0"/>
+										</td>
+										<td style="text-align: center">,&nbsp;</td>
+										<td width="50%">
+											<input type="text" style="width: 80px" size="4" id="txCoordY" value="0"/>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
 					<table id="txTableProps" style="visibility: hidden; position: absolute; top: -1000px; left: -1000px" cellspacing="0" cellpadding="0" width="100%">
 						<tr>
 							<td style="width: 121px">
@@ -346,6 +383,14 @@
 		ge ( 'txAltText' ).value = node.getAttribute ( 'alt' );
 	}
 	
+	// Position
+	if ( node.style.position )
+		ge ( 'txPosition' ).value = node.style.position;
+	if ( node.style.top )
+		ge ( 'txCoordY' ).value = node.style.top;
+	if ( node.style.left )
+		ge ( 'txCoordX' ).value = node.style.left;
+	
 	// Vertical align
 	if ( node.style.verticalAlign )
 	{
@@ -465,7 +510,12 @@
 		try { node.style.verticalAlign = ge ( 'txVAlign' ).value; } catch ( e ) {};
 		try { node.className = ge ( 'txClassName' ).value; } catch ( e ){};
 		try { node.style.backgroundColor = ge ( 'txBackground' ).value;	} catch ( e ){};
-		try { node.style.backgroundImage = 'url("'+ge('txBackgroundImage').value+'")'; } catch ( e ){};
+		var bgi = ge('txBackgroundImage').value;
+		if ( bgi.indexOf ( '.jpg' ) > 0 || bgi.indexOf ( '.png' ) > 0 || bgi.indexOf ( '.gif' ) > 0 )
+		{
+			try { node.style.backgroundImage = 'url("'+bgi+'")'; } catch ( e ){};
+		}
+		else try { node.style.backgroundImage = ''; } catch ( e ){};
 		try { node.style.color = ge ( 'txColor' ).value; } catch ( e ){};
 		if ( ge ( 'txFloat' ).value )
 		{
@@ -488,6 +538,7 @@
 		{
 			node.style.textAlign = '';
 		}
+		
 		// TABLE properties
 		if ( ge ( 'txTableProps' ).style.visibility == 'visible' )
 		{
@@ -513,6 +564,13 @@
 		var ed = texteditor.get ( texteditor.activeEditorId );
 		ed.area.value = ed.getContent ( );
 		
+		// Position
+		node.style.position = ge ( 'txPosition' ).value;
+		var cx = ge ( 'txCoordX' ).value;
+		var cy = ge ( 'txCoordY' ).value;
+		node.style.top = cy.indexOf ( 'px' ) > 0 || cy.indexOf ( '%' ) > 0 ? cy : (cy+'px');
+		node.style.left = cx.indexOf ( 'px' ) > 0 || cx.indexOf ( '%' ) > 0 ? cx : (cx+'px');
+		
 		// end
 		removeModalDialogue ( 'elementproperties' );
 	}
@@ -523,6 +581,8 @@
 	if ( ge ( 'txColor' ) ) GuiColorBox ( ge ( 'txColor' ) );
 	if ( ge ( 'txWidth' ) ) GuiSizeWidget ( ge ( 'txWidth' ) );
 	if ( ge ( 'txHeight' ) ) GuiSizeWidget ( ge ( 'txHeight' ) );
+	if ( ge ( 'txCoordY' ) ) GuiSizeWidget ( ge ( 'txCoordY' ) );
+	if ( ge ( 'txCoordX' ) ) GuiSizeWidget ( ge ( 'txCoordX' ) );
 </script>
 
 <div class="SpacerSmallColored"></div>
