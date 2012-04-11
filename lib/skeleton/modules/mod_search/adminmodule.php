@@ -21,7 +21,7 @@ Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen,
 Rune Nilssen
 *******************************************************************************/
 
-$moddir = 'skeleton/modules/mod_search';
+$moddir = 'lib/skeleton/modules/mod_search';
 
 switch ( $_REQUEST[ 'modaction' ] )
 {
