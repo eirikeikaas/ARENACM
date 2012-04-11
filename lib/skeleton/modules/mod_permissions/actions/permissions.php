@@ -25,7 +25,7 @@ $tpl = new cPTemplate ();
 switch ( $_REQUEST[ 'type' ] )
 {
 	case 'ContentElement':
-		$tpl->load (  'skeleton/modules/mod_permissions/templates/permissions.php' );
+		$tpl->load (  'lib/skeleton/modules/mod_permissions/templates/permissions.php' );
 		$tpl->content = ':D';
 		break;
 	default:
