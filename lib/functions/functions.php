@@ -1381,11 +1381,14 @@ function cleanHTMLElement ( $string, $level = 0 )
 	$string = str_replace ( '="' . BASE_URL, '="', $string );
 	$string = preg_replace ( '/(\<span.*?apple\-[^"]*\"[^>]*?\>)(.*?)(\<\/span\>)/i', '$2', $string );
 	
-	if ( substr ( $string, 0, 11 ) == '&nbsp;<tabl' )
+	if ( preg_match ( '/\&nbsp\;\<tabl/i', substr ( $string, 0, 11 ), $matches ) )
 		$string = '<tabl' . substr ( $string, 11, strlen ( $string ) - 11 );
-	else if ( substr ( $string, 0, 11 ) == '&nbsp;<span' )
+	if ( preg_match ( '/\&nbsp\;\<span/i', substr ( $string, 0, 11 ), $matches ) )
 		$string = '<span' . substr ( $string, 11, strlen ( $string ) - 11 );
-	
+	if ( preg_match ( '/\<br\>\<tabl/i', substr ( $string, 0, 9 ), $matches ) )
+		$string = '<tabl' . substr ( $string, 9, strlen ( $string ) - 9 );
+	if ( preg_match ( '/\<br\/\>\<tabl/i', substr ( $string, 0, 10 ), $matches ) )
+		$string = '<tabl' . substr ( $string, 10, strlen ( $string ) - 10 );
 	return $string;
 }
 
