@@ -35,13 +35,13 @@
 						</h2>
 						<p>
 							Logg inn med ditt brukernavn og passord under. Vennligst ta kontakt med
-							<a href="http://www.ideverket.no" target="_blank">Idéverket</a> hvis du
+							<a href="<?= ARENA_COMPANY_WEB ?>" target="_blank"><?= ARENA_COMPANY_NAME ?></a> hvis du
 							ønsker support.
 						</p>
 						
 						<div id="LoginForm">
 							<p>
-								For support, send e-post til: <a href="mailto:post@ideverket.no">post@ideverket.no</a>
+								For support, send e-post til: <a href="mailto:<?= ARENA_COMPANY_SUPPORT ?>"><?= ARENA_COMPANY_SUPPORT ?></a>
 							</p>
 							<div class="Box" class="Username">
 								<p>
