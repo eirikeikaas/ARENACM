@@ -19,10 +19,16 @@
 # Contributor(s): Hogne Titlestad, Thomas Wollburg, Inge Jørgensen, Ola Jensen, 
 # Rune Nilssen
 
+if [ -z "$1" ]; then
+  ARENAPATH="/usr/local/arena2"
+else
+  ARENAPATH=$1
+fi
+
 echo "Creating symlink:"
-ln -s /usr/local/arena2/admin
-ln -s /usr/local/arena2/lib
-ln -s /usr/local/arena2/web
+ln -s $ARENAPATH/admin
+ln -s $ARENAPATH/lib
+ln -s $ARENAPATH/web
 ln -s web/index.php
 ln -s admin/admin.php
 ln -s lib/htaccess .htaccess
@@ -39,13 +45,13 @@ chmod -R 777 upload
 echo "extensions folder"
 mkdir "extensions"
 echo "editor extension"
-ln -s /usr/local/arena2/extensions/editor extensions/editor
+ln -s $ARENAPATH/extensions/editor extensions/editor
 echo "Done."
 echo "Setting up config file"
 echo "<? define ( SITE_ID, 'My site' ); define ( NEWEDITOR, 'true' ); ?>" > config.php
 chmod 777 config.php
 echo "Making installer available."
-cp /usr/local/arena2/install.php .
+cp $ARENAPATH/install.php .
 
 
 
